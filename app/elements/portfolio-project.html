@@ -1,0 +1,90 @@
+<dom-module id='portfolio-project'>
+  <template>
+    <style>
+      ul{
+        list-style: none;
+      }
+      .project_sub_text{
+        font-size:12px;
+        color:gray;
+      }
+      .hover{
+        background-color: red;
+      }
+
+    </style>
+    <li class="mdl-list__item" style='cursor:pointer;padding:0px;margin:0px;'>
+      <div class="mdl-grid"  style='padding-top:0px;margin-top:0px;'>
+        <div class="mdl-cell mdl-cell--12-col" style='padding-top:0px;margin-top:0px;'>
+          <div class-name='divider_{{svg}}' style='text-align:left;padding-top:10px;' on-tap="clickUserElement" on-mouseenter='onHovered' on-mouseleave='onUnHovered'>
+              <div class='mdl-grid' style='padding:0px; margin:0px;text-align:right;'>
+                <div class='mdl-cell mdl-cell--11-col mdl-cell--7-col-tablet mdl-cell--3-col-phone' style='height:42px;padding:0px; margin:0px;text-align:left;'>
+                  <span data-page="{{svg}}" style='text-align:left;'><b>{{item.name}}</b></span>
+                </div>
+
+                <div class='mdl-cell mdl-cell--1-col' style='display:{{hovered}};'>
+                  <img src='/images/launch.png' style='margin:0px;padding:0px;'/>
+                </div>
+              </div>
+
+            <div class='project_sub_text'>
+              {{item.country}}
+            </div>
+            <div class='project_sub_text'>
+              {{to_mil(item.amount)}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </template>
+</dom-module>
+
+<script>
+
+  function cleanToMil(num) {
+    if(num >= 1000000){
+      num =  Math.max( Math.round((num/1000000) * 10) / 10, 0 ).toFixed(1);
+      num =  num  % 1 === 0 ? parseInt(num) : num;
+      return "$" + num + "M";
+    }else{
+      num = Math.round((num/1000))    // num =  Math.max( Math.round((num/100000) * 10) / 10, 0 ).toFixed(0);
+      num = num  % 1 === 0 ? parseInt(num) : num;
+      return "$" + num + "K";
+    }
+  }
+
+  Polymer({
+    is: 'portfolio-project',
+
+    properties: {
+      svg: {
+        value: '',
+        notify: true
+      },
+
+      hovered: {
+        value: 'none'
+      }
+    },
+
+    to_mil: function(num){
+      return(cleanToMil(num.replace(/\$|,/g, '')))
+    },
+
+    onHovered: function(e) {
+      this.$$('li').classList.add('mdl-shadow--8dp');
+      this.hovered = 'block';
+    },
+
+    onUnHovered: function(e) {
+      this.$$('li').classList.remove('mdl-shadow--8dp');
+      this.hovered = 'none';
+    },
+
+    clickUserElement:function(){
+      clickUserElement(this.item, this.svg);
+    }
+  });
+
+</script>

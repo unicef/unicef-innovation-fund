@@ -1,0 +1,227 @@
+<dom-module id='dashboard-top'>
+  <template>
+    <style>
+      /*:host{
+        display: block;
+      }
+
+      :host([active]) {
+        display: block;
+      }*/
+
+    </style>
+    <iron-media-query query="(min-width: 600px)" query-matches="{{wide}}"></iron-media-query>
+    <section class='mdl-layout__tab-panel is-active' id='scroll-dashboard'>
+      <div class='mdl-grid'>
+        <div class="mdl-layout-spacer"></div>
+        <dashboard-cards></dashboard-cards>
+        <div class="mdl-layout-spacer"></div>
+      </div>
+
+      <template is="dom-if" if="{{wide}}">
+        <div class='dashboard-ribbon'>
+          &nbsp;
+        </div>
+      </template>
+        <div class='demo-ribbon'>
+        <dashboard-business></dashboard-business>
+        <template is="dom-if" if="{{wide}}">
+          <dashboard-stories></dashboard-stories>
+        </template>
+        <br /><br />
+      </div>
+    </section>
+
+    <!-- For when user clicks on project. Data per project fetched and visualized in modal. -->
+    <!-- <firebase-document id='fire_for_git_commits' location="" log='true' data="{{gitDataSet}}" use-hash-as-path></firebase-document> -->
+
+    <!-- <firebase-document
+      id='fire_for_git_commits'
+      app-name="test"
+      data="{{gitDataSet}}">
+    </firebase-document> -->
+
+    <firebase-document
+      id='fire_for_modal'
+      app-name="test"
+      data="{{dataSet}}">
+    </firebase-document>
+
+    <!-- <firebase-document
+      id='fire_for_iogt_modal'
+      app-name="test"
+      data="{{iogt_dataSet}}">
+    </firebase-document> -->
+
+    <firebase-document
+      id='geo_for_modal'
+      app-name="test"
+      data="{{geoDataSet}}">
+    </firebase-document>
+    <!-- <firebase-document log='true' data="{{about_innovation_fund}}" location="https://innovation-fund.firebaseio.com/content/about_innovation_fund" use-hash-as-path></firebase-document> -->
+
+  </template>
+</dom-module>
+<script>
+
+//ureport
+function ureportUpdated(dataSet) {
+
+  if(Object.keys(dataSet).length < 1){
+    $('#card_linechart').css('display','none');
+    return;
+  }
+
+  // This function gets called twice for some reason
+  $('#card_linechart').css('display','block');
+  ary = [ ];
+
+  dataSet.forEach(function(e, i){
+    e[0] = humanize_label(e[0])
+    if(i > 0){
+      e[1] += dataSet[i-1][1]
+    }
+    ary.unshift(e);
+  });
+  ary.unshift([ 'Month', 'New users' ]);
+  var country = $('#portfolio_project_country').text();
+  var kind = $('#portfolio_project_kind').text()
+  var color = $('#portfolio_project_color').text()
+
+  var labels = dataSet.map(function(e){
+    return e[0];
+  });
+
+  var points = dataSet.map(function(e){
+    return e[1];
+  });
+
+  label = "Number of registered users"// + document.getElementById('portfolio_project_country').innerHTML;
+  data = data_for_linechart(label, labels, points, color);
+  document.getElementById('modal_linechart').setAttribute('data', JSON.stringify(data))
+  // document.getElementById('iogt_linechart').setAttribute('data', JSON.stringify(data))
+};
+
+function projectUpdatedGit(dataSet) {
+  if(Object.keys(dataSet).length < 1){return;}
+  var country = $('#portfolio_project_country').text();
+  var kind = $('#portfolio_project_kind').text();
+  var color = 'rgba(255, 143, 171, 0.2)';
+  points_labels = gitPointsAndLabels(dataSet)
+  var labels = points_labels.labels;
+  var points = points_labels.points;
+  label = "Number of git commits"//document.getElementById('portfolio_project_country').innerHTML + " ";
+  data = data_for_linechart(label, labels, points, color);
+  document.getElementById('modal_linechart').setAttribute('data', JSON.stringify(data))
+};
+
+function iogtUpdated(dataSet) {
+  if(Object.keys(dataSet).length < 1){
+    $('#card_linechart').css('display','none');
+    return;
+  }
+
+  ary = [ ];
+  dataSet.forEach(function(e, i){
+    e[0] = humanize_label(e[0])
+    if(i > 0){
+      e[1] += dataSet[i-1][1]
+    }
+    ary.unshift(e);
+  });
+  ary.unshift([ 'Month', 'New users' ]);
+  var country = $('#portfolio_project_country').text();
+  var kind = $('#portfolio_project_kind').text()
+  var color = $('#portfolio_project_color').text()
+
+  var labels = dataSet.map(function(e){
+    return e[0];
+  });
+
+  var points = dataSet.map(function(e){
+    return e[1];
+  });
+
+  label = "Number of registered users"// + document.getElementById('portfolio_project_country').innerHTML;
+  data = data_for_linechart(label, labels, points, color);
+  document.getElementById('modal_linechart').setAttribute('data', JSON.stringify(data))
+  document.getElementById('iogt_linechart').setAttribute('data', JSON.stringify(data))
+};
+
+Polymer({
+  is: 'dashboard-top',
+  properties: {
+    active: {
+      type: Boolean,
+      value: false,
+      reflectToAttribute: true
+    },
+
+    dataSet:{
+      type: Object,
+      observer: '_handle_data_for_line_chart',
+      notify: true
+    },
+
+    // iogt_dataSet:{
+    //   type: Object,
+    //   observer: '_iogtUpdated',
+    //   notify: true
+    // },
+
+    gitDataSet:{
+      type: Object,
+      observer: '_projectUpdatedGit',
+      notify: true
+    },
+
+    geoDataSet:{
+      type: Object,
+      observer: '_projectUpdatedGeo',
+      notify: true
+    }
+  },
+
+  _handle_data_for_line_chart(dataSet){
+    var kind = $('#portfolio_project_kind').text();
+    if(kind.match(/ureport/)){
+      ureportUpdated(dataSet);
+    }else if(kind.match(/github/)){
+      projectUpdatedGit(dataSet);
+    }else{
+      iogtUpdated(dataSet);
+    }
+  },
+
+
+  _projectUpdatedGeo(newUsers) {
+    if(Object.keys(newUsers).length < 1){return;}
+
+    var kind = $('#portfolio_project_kind').text()
+
+    var data = [["Country", "New Users"]]
+    var num;
+    Object.keys(newUsers).forEach(
+      function(e){
+        num = 0
+        Object.keys(newUsers[e].months).forEach(function(m){
+          num = num + parseInt(newUsers[e].months[m].value.totalsForAllResults['ga:newUsers'])
+        })
+
+        var first = e.split('-')[0].match(/iogt/) ? e.split('-')[1] : e.split('-')[0];
+        data.push(
+          [
+            first,
+            num
+          ]
+        )
+      }
+    );
+
+    drawGeoChart(data);
+  }
+
+
+})
+
+</script>

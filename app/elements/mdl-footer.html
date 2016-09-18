@@ -1,0 +1,138 @@
+<dom-module id='mdl-footer'>
+  <template>
+    <style>
+      img{
+        width:100px;
+        list-style: none;
+      }
+      .img_share{
+        width:30px;
+      }
+      .share{
+        padding:5px;
+        margin:5px;
+        max-width:30px;
+      }
+      ul{
+        list-style: none;
+        padding-left:0;
+      }
+      .footer_area .one_third{
+        width:200px;
+      }
+      .footer_area[wide-layout] .one_third{
+        width:400px;
+      }
+      .footer_area .sponsor{
+        width:200px;
+      }
+    </style>
+    <iron-media-query query="(min-width: 600px)" query-matches="{{wide}}"></iron-media-query>
+    <firebase-document
+      app-name="test"
+      path='/content/footer_text'
+      data="{{footer_text}}">
+    </firebase-document>
+
+    <firebase-document
+      app-name="test"
+      path='/content/footer_donor_text'
+      data="{{footer_donor_text}}">
+    </firebase-document>
+
+    <div class="footer_area" wide-layout$="{{wide}}">
+      <footer class='mdl-mini-footer' style='background-color:white;'>
+        <div class='mdl-mini-footer--left-section'>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+              UNICEF INNOVATION FUND
+            </div>
+          </div>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+              <div class='one_third' id='footer_text'>
+              {{footer_text}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class='mdl-mini-footer--center-section'>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+                SUPPORTERS & INVESTORS
+            </div>
+          </div>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+              <div class='one_third'>
+                {{footer_donor_text}}
+              </div>
+            </div>
+          </div>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+              <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--12-col" >
+                  <a target='_blank' href='http://um.dk/en'>
+                    <img class='sponsor' src="../images/sponsors/danida_logo.jpg">
+                  </a>
+                  <a target='_blank' href='http://www.disney.com'>
+                    <img class='sponsor' style='width:100px;' src="../images/sponsors/disney_red.png">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='mdl-mini-footer--right-section'>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col" style='text-align: left;'>
+              <span>
+                SHARE
+              </span>
+
+            </div>
+          </div>
+          <div class="mdl-grid" style='text-align:left;'>
+            <div class="mdl-cell mdl-cell--12-col" >
+
+              <div class="mdl-grid" style='padding:0px;margin:0px;'>
+                <div class="mdl-cell mdl-cell--6-col share" style='margin:0px 5px 0px 0px;'>
+                  <a target='_blank' href='http://static1.squarespace.com/static/5696a456c647ad1998f5126b/t/56abf4b822482e393fe61b37/1454109884675/facebook.png?format=100w'>
+                    <img src='/images/share/facebook.png' class='img_share' />
+                  </a>
+                </div>
+                <div class="mdl-cell mdl-cell--6-col share" style='margin:0px 0px 0px 10px;'>
+                  <a target='_blank' href='https://twitter.com/UNICEFinnovate'>
+                    <img src='/images/share/twitter.png' class='img_share' />
+                  </a>
+                </div>
+              </div>
+
+          </div>
+        </div>
+      </footer>
+    </div>
+    <div id='testito'>
+
+    </div>
+  </template>
+
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'mdl-footer',
+    properties:{
+      footer_text: {
+        value: String,
+        observer: 'interpolate_footer_text'
+      }
+    },
+    interpolate_footer_text: function(text){
+      this.$.footer_text.innerHTML = text;
+    }
+
+  })
+</script>

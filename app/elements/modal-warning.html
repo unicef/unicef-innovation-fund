@@ -1,0 +1,108 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-styles/typography.html">
+
+<dom-module id="modal-warning">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      span {
+        @apply(--paper-font-body1);
+      }
+    </style>
+    <section onclick="clickHandler(event)">
+      <paper-button id='warning_button' data-dialog="actions" style='display:none;'>dialog with actions</paper-button>
+      <paper-dialog id="actions"
+
+      style='border-radius:5px;text-algign: center'
+      withBackdrop='false'
+
+      entry-animation="scale-up-animation"
+      exit-animation="fade-out-animation"
+      with-backdrop>
+
+
+        <p>
+          <div class='mdl-grid' style='width:600px;margin: auto;'>
+            <div class='mdl-cell mdl-cell--3-col' style='text-align:center;vertical-align:middle;' >
+              <img src='/images/chrome.png' style='width:150px;vertical-align:middle;margin:auto; ' />
+            </div>
+            <div class='mdl-cell mdl-cell--9-col'>
+              <p>
+                <div style='font-size:18px;'>
+                  This website only works in Google Chrome
+                </div>
+                <div style='font-size:12px;color:gray;'>
+                  More browser compatibility soon.
+                </div>
+              </p>
+              <div style='max-width:100px;'>
+                {{user_agent}}
+              </div>
+              <a target='_blank' href='https://www.google.com/chrome/browser/'>
+                <img src='/images/download_google_chrome.png' style='width:60%;' />
+              </a>
+            </div>
+          </div>
+        </p>
+        <div class="buttons" style='position:absolute; top:10px;right:10px;'>
+          <paper-button dialog-confirm autofocus><img src='/images/close.svg' style='width:20px;cursor:pointer;' /></paper-button>
+        </div>
+      </paper-dialog>
+    </section>
+  </template>
+
+  <script>
+    function clickHandler(e) {
+      var button = e.target;
+      while (!button.hasAttribute('data-dialog') && button !== document.body) {
+        button = button.parentElement;
+      }
+      if (!button.hasAttribute('data-dialog')) {
+        return;
+      }
+      var id = button.getAttribute('data-dialog');
+      var dialog = document.getElementById(id);
+      if (dialog) {
+        dialog.open();
+      }
+    }
+
+
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'modal-warning',
+
+        properties: {
+          items: {
+            type: Array,
+            notify: true
+          }
+        },
+
+        ready: function() {
+          this.user_agent = navigator.userAgent;
+           if(navigator.userAgent.indexOf("Chrome") === -1 ){
+            // alert('hi')
+            //  this.$.warning_button.click();
+            this.$.actions.open();
+          }
+        }
+      });
+    })();
+  </script>
+</dom-module>

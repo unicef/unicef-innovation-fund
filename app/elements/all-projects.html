@@ -1,0 +1,106 @@
+<dom-module id='all-projects'>
+
+  <template>
+    <style>
+      .projects-card {
+        border-radius: 15px;
+        background-color:white;
+      }
+
+      :host{
+        display: block;
+      }
+
+      :host([active]) {
+        display: block;
+      }
+    </style>
+
+    <div class='hello_holder'>
+      <hello-all-projects all_projects_cloud_content="{{content.all_projects_cloud_content}}" style='position:relative:bottom:30px;'></hello-all-projects>
+      <div style='height:120px;'>
+      </div>
+
+      <iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query>
+      <iron-media-query full query="print" query-matches="{{print}}"></iron-media-query>
+      <template is="dom-if" if="{{!wide}}">
+        <br />
+        <br />
+      </template>
+      <firebase-document
+        app-name="test"
+        path="content"
+        data="{{content}}">
+      </firebase-document>
+
+      <div class="mdl-grid" style='max-width:1200px;'>
+        <div class="projects-card content-column mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-cell--top">
+          <portfolio-projects content="{{content.youth_engagement}}" phrase='Products For Youth' fb='ureport' svg="youth_engagement" rgb='255, 204, 51, 0.2'>
+          </portfolio-projects>
+        </div>
+        <div class="projects-card content-column mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-cell--top">
+          <portfolio-projects content="{{content.real_time_info}}" phrase='Real-time Information' svg="real_time_information" rgb='255, 204, 51, 0.2'>
+          </portfolio-projects>
+        </div>
+        <div class="projects-card content-column mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-cell--top">
+          <portfolio-projects content="{{content.infrastructure}}" phrase='Infrastructure' fb='iogt'  svg="infrastructure"   rgb='255, 204, 51, 0.2'>
+          </portfolio-projects>
+        </div>
+        <div class="projects-card content-column mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-cell--top">
+          <portfolio-projects content="{{content.knowledge_p}}" phrase='Knowledge Products' fb='iogt'  svg="knowledge_products"   rgb='255, 204, 51, 0.2'>
+          </portfolio-projects>
+        </div>
+      </div>
+    </div>
+  </template>
+</dom-module>
+
+<script>
+
+  Polymer({
+    is: 'all-projects',
+    properties: {
+      svg: {
+        value: '',
+        notify: true
+      },
+      url: {
+        value: '/stats'
+      },
+      active: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+      }
+    },
+
+    prepare: function(svg, featured, dataSet){
+
+      if(Object.keys(dataSet) == 0){return;}
+      // var color = ''
+      // if(svg == 'youth_engagement') {
+      //   color = "rgba(255, 204, 51, 0.2)";
+      // }else if(svg == 'real_time_information') {
+      //   color = "rgba(255, 143, 171, 0.2)";
+      // }else{
+      //   color = "rgba(133, 214, 133, 0.2)";
+      // }
+
+      if (svg == 'youth_engagement'){
+        return prepareUreport(dataSet, featured, "rgba(255, 204, 51, 0.2)")
+      }else if(svg == 'real_time_information'){
+        return prepareGitCommits(dataSet, featured, "rgba(255, 143, 171, 0.2)");
+      }else{
+        return prepareIOGT(dataSet, featured, "rgba(133, 214, 133, 0.2)")
+      }
+    },
+
+    _financial: function(data, kind){
+      return [data.totals[kind], data.spents[kind]]
+    },
+
+    _computeClasses: function(wide) {
+       return (!wide) ? 'layout vertical': 'layout';
+    }
+  })
+</script>

@@ -1,0 +1,296 @@
+
+<dom-module id='portfolio-card'>
+  <template>
+    <style>
+      .pc_left{
+        padding-left:20px;
+        padding-right:20px;
+        margin: 0 auto;
+        height:40px;
+      }
+
+      .card_title {
+         height: 30px;
+         line-height: 30px;
+         padding-left:5px;
+       }
+
+    </style>
+
+    <style is="custom-style">
+      :root {
+        --paper-tooltip: {
+          font-size: 14px;
+          width:auto;
+        };
+      }
+    </style>
+
+    <iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query>
+    <iron-media-query full query="print" query-matches="{{print}}"></iron-media-query>
+
+
+    <div class$="{{_computeClass(wide)}}">
+      <div class='top_container_in_card'>
+        <div class$="edge_{{svg}}" style='height:20px;'>
+        </div>
+        <br />
+        <img src="/images/icons/{{svg}}.svg" width=100 style='padding-left:15px;'>
+        <p class$="portfolio_card_title {{svg}}">
+          <div class='mdl-grid' style='text-align: center; '>
+            <div class='mdl-cell mdl-cell--10-col title_card' style='text-align: left;'>
+              <span class$='portfolio_card_title {{svg}}' >{{phrase}}</span>
+            </div>
+            <div class='mdl-cell mdl-cell--2-col' style='margin:0px;padding:0px;display: inline-block; vertical-align: middle; height:100% ;'>
+              <!-- <paper-icon-button style="color:#0099ff; background-color:white;" class='information-tooltip' id="id_2" icon="info" alt="go back"></paper-icon-button> -->
+
+              <img src='/images/information.png' style='position:relative; top:5px;'id="id_2" />
+            </div>
+          </div>
+          <div >
+            <paper-tooltip  class="custom" for="id_2" offset="0">{{db_tooltip}}</paper-tooltip>
+          </div>
+        </p>
+      </div>
+      <hr />
+      <div style='width: 90%;margin: 0 auto; background-color:white;  text-align:center;'>
+        <span class$='amount {{svg}}'>
+          {{to_mil(progress.1)}}
+        </span>
+        <div class='amount_invested'>
+          <span class='invested'>INVESTED</span>
+        </div>
+
+          <progress-bar total="[[progress.0]]" spent="{{progress.1}}" svg="{{svg}}"></progress-bar>
+
+          {{to_mil(progress.0)}}
+        <div class='amount_invested'>
+          <span>AVAILABLE</span>
+        </div>
+
+      </div>
+
+      <br>
+      <br>
+      <div class$='featured {{svg}}'>
+        FEATURED
+      </div>
+      <br>
+      <div class='featured_project_name pc_left'>
+        {{featured}}
+      </div>
+
+      <div class='featured_project_blurb pc_left'  on-tap="clickUserElement"
+        style='max-height:70px;min-height:70px;cursor:pointer;display:{{display_content}}'>
+          {{featured_content}}
+          <div style='text-align:left;'>
+              <img src='/images/launch.png' style='width:18px;'/>
+          </div>
+
+      </div>
+
+      <div style='min-height:170px;'>
+      </div
+      <div style='width:100%; text-align:center;'>
+        <hr style='width:90%; height:100%;margin:auto;' />
+      </div>
+      <div style='height:20px;'>
+      </div>
+      <div class='growth_rate pc_left'>
+        {{chart_description}}
+      </div>
+      <chart-line  data="[[prepare(svg, featured, dataSet)]]" style='width:95%; font-size:30px;padding-left:5px;'></chart-line>
+      <!-- <geo-ureport></geo-ureport> -->
+    </div>
+    <firebase-document
+      app-name="test"
+      path="/content/{{tooltip_target}}"
+      data="{{db_tooltip}}">
+    </firebase-document>
+
+    <firebase-document
+      app-name="test"
+      path="{{location_featured_content}}"
+      data="{{featured_content}}">
+    </firebase-document>
+
+    <firebase-document
+      app-name="test"
+      path="/portfolio_projects/{{svg}}/projects_hash/{{featured_slug}}"
+      data="{{featured_project}}">
+    </firebase-document>
+
+    <firebase-document
+      app-name="test"
+      path="{{location_featured_data}}"
+      data="{{dataSet}}">
+    </firebase-document>
+
+  </template>
+
+</dom-module>
+
+<script>
+
+  // Prepare IOGT data for line chart.
+  // Show user growth over time.
+  function prepareIOGT(dataSet, featured, color){
+    var labels = dataSet.map(function(ary){return ary[0]});
+    var points = dataSet.map(function(ary){return ary[1]});
+
+    points.map(function(e, i){
+      if(i > 0){
+        points[i] += points[i-1]
+      }
+    });
+
+    return {
+      labels: humanize_labels(labels.slice(Math.max(labels.length - 10, 1))),
+      datasets:[{
+        label: featured,
+        backgroundColor: color,
+        borderColor:"rgba(255,255,255)",
+        pointBackgroundColor:"rgba(2255,255,255)",
+        pointBorderColor:"#fff",
+        pointHoverBackgroundColor:"#fff",
+        pointHoverBorderColor:"rgba(220,220,220,1)",
+        data:points.slice(Math.max(points.length - 10, 1))
+      }]}
+  }
+
+  function prepareGitCommits(dataSet, featured, color){
+    points_labels = gitPointsAndLabels(dataSet)
+    return {labels: points_labels.labels, datasets:[{
+      label: featured,
+      backgroundColor: color,
+      borderColor:"rgba(255,255,255)",
+      pointBackgroundColor:"rgba(2255,255,255)",
+      pointBorderColor:"#fff",
+      pointHoverBackgroundColor:"#fff",
+      pointHoverBorderColor:"rgba(220,220,220,1)",
+      data:points_labels.points
+    }]}
+  };
+
+  Polymer({
+    is: 'portfolio-card',
+
+    handle_response: function(request){
+      this.data = request.detail.response
+    },
+    clickUserElement:function(){
+
+      clickUserElement(this.featured_project, this.svg);
+    },
+
+  properties: {
+
+      chart_description: {
+        type: String,
+        notify: true
+      },
+
+      svg: {
+        value: '',
+        notify: true
+      },
+
+      featured_source: {
+        value: '',
+        notify: true
+      },
+
+      featured_slug: { // This is the project for the modal
+        value: '',
+        notify: true,
+      },
+
+      location_featured_data: {
+        type: String,
+        computed: "_computeLocation(featured_source)"
+      },
+
+
+      location_featured_content: {
+        type: String,
+        computed: "_computeLocation('content/featured_',  svg)"
+      },
+
+      featured: {
+        value: '',
+        notify: true
+      },
+
+      featured_content: {
+        observer: '_content_arrived'
+      },
+
+      phrase: {
+        value: '',
+        notify: true
+      },
+
+      display_content: {
+        value: 'none'
+      },
+
+      url: {
+        computed: 'computeUrl(svg)'
+      }
+    },
+
+    _content_arrived: function(obj){
+      if(Object.keys(obj).length > 0){
+        this.display_content = 'block';
+      }
+
+    },
+
+    // target is 'svg' which is one of the portfolio names
+    _computeLocation: function(route, target) {
+
+      route = target ? route + target : route
+      // Special case for mom connect.
+      // Does not have it's own root node in firebase
+      if(route == 'mom_connect'){
+        return '/git/rapidpro_immu'
+      }
+       return route;
+    },
+
+    prepare: function(svg, featured, dataSet){
+      if(Object.keys(dataSet) == 0){return;}
+      // var color = ''
+      // if(svg == 'youth_engagement') {
+      //   color = "rgba(255, 204, 51, 0.2)";
+      // }else if(svg == 'real_time_information') {
+      //   color = "rgba(255, 143, 171, 0.2)";
+      // }else{
+      //   color = "rgba(133, 214, 133, 0.2)";
+      // }
+
+      if (svg == 'youth_engagement'){
+        return prepareUreport(dataSet, featured, "rgba(255, 204, 51, 0.2)")
+      }else if(svg == 'real_time_information'){
+        return prepareGitCommits(dataSet, featured, "rgba(255, 143, 171, 0.2)");
+      }else{
+        return prepareIOGT(dataSet, featured, "rgba(133, 214, 133, 0.2)")
+      }
+    },
+
+    to_mil: function(num){
+      return(cleanToMil(num))
+    },
+
+    computeUrl: function(svg){
+      if(svg){return "/line_chart/" + svg}
+    },
+
+    _computeClass: function(wide) {
+       return (!wide) ? 'screen_narrow': 'screen_wide';
+    }
+  })
+
+
+
+</script>

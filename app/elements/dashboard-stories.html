@@ -1,0 +1,148 @@
+<dom-module id='dashboard-stories'>
+  <template style='width:900px;'>
+    <style>
+      img{
+        width:350px;
+        height:210px;
+      }
+      .demo-card-square{
+        border-radius:15px;
+        min-height:300px;
+        margin:auto;
+      }
+      .itemz{
+        border-radius:15px;
+        height:375px;
+        text-align:center;
+      }
+      .featured_blog_posts{
+        font-weight:300;
+        font-size:28px;
+        color:#ffffff;
+      }
+      .story_title{
+        font-weight:400px;
+        font-size:14px;
+      }
+    </style>
+    <iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query>
+    <iron-media-query full query="print" query-matches="{{print}}"></iron-media-query>
+
+    <div class="content-grid mdl-grid">
+      <div class="mdl-cell mdl-cell--3-col" style='text-align:left;padding-left:20px;'>
+        <span class='featured_blog_posts'>Featured Blog Posts</span>
+      </div>
+      <div class="mdl-cell mdl-cell--6-col"></div>
+      <div class="mdl-cell mdl-cell--3-col" style='text-align:right;padding-right:30px;'>
+          <i id='prev' class="material-icons" style="background-color:#3366cc; color:white; cursor:pointer;">chevron_left</i>
+          <i id='next' class="material-icons" style="background-color:#3366cc; color:white;cursor:pointer;">chevron_right</i>
+      </div>
+    </div>
+    <div class='mdl-grid'>
+      <div class='mdl-cell--12-col mdl-cell--6-col-tablet'>
+        <div class="owl-carousel">
+          <div class="itemz" >
+            <h4>
+              <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                <img src="{{story1.thumbnail_images.medium_large.url}}"/>
+                <div class="mdl-card__supporting-text">
+                  <div class="mdl-card__title-text story_title">{{story1.title}}</div>
+                </div>
+              </div>
+            </h4>
+          </div>
+          <div class="itemz">
+            <h4 >
+              <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                <img src="{{story2.thumbnail_images.medium_large.url}}" />
+                <div class="mdl-card__supporting-text">
+                  <div class="mdl-card__title-text story_title">{{story2.title}}</div>
+                </div>
+              </div>
+            </h4>
+          </div>
+          <div class="itemz">
+            <h4>
+              <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                <img src="{{story3.thumbnail_images.medium_large.url}}" />
+                <div class="mdl-card__supporting-text">
+                  <div class="mdl-card__title-text story_title">{{story3.title}}</div>
+                </div>
+              </div>
+            </h4>
+          </div>
+          <div class="itemz">
+            <h4>
+              <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                <img src="{{story4.thumbnail_images.medium_large.url}}" />
+                <div class="mdl-card__supporting-text">
+                  <div class="mdl-card__title-text story_title">{{story4.title}}</div>
+                </div>
+              </div>
+            </h4>
+          </div>
+          <div class="itemz">
+            <h4>
+              <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                <img src="{{story5.thumbnail_images.medium_large.url}}" />
+                <div class="mdl-card__supporting-text">
+                  <div class="mdl-card__title-text story_title">{{story5.title}}</div>
+                </div>
+              </div>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <firebase-document
+      app-name="test"
+      path='stories'
+      data="{{stories}}">
+    </firebase-document>
+
+  </template>
+
+</dom-module>
+
+<script>
+
+  $(document).ready(function() {
+    setTimeout(function(){
+
+      var owl = $('.owl-carousel');
+
+      owl.owlCarousel({
+          //loop: true,
+          margin: 10,
+          nav: true,
+      });
+
+      $('#next').on('click', function () {
+          owl.trigger('next.owl.carousel', [500]);
+      });
+      $('#prev').on('click', function () {
+          owl.trigger('prev.owl.carousel', [500]);
+      });
+    }, 1000)
+  });
+
+  Polymer({
+    is: 'dashboard-stories',
+
+    properties: {
+
+      stories: {
+        observer: 'handle_stories'
+      }
+    },
+
+    handle_stories: function(stories){
+      this.story1 = stories[0];
+      this.story2 = stories[1];
+      this.story3 = stories[2];
+      this.story4 = stories[3];
+      this.story5 = stories[4];
+    }
+  });
+</script>

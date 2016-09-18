@@ -1,0 +1,298 @@
+/*
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/
+
+html, body {
+  background: #EDEDED;
+  font-family: 'Source Sans Pro';
+  color: #333;
+}
+
+.top_container_in_card{
+  min-height:200px;
+}
+
+
+.menu-item{
+  cursor:pointer;
+}
+
+.cloud_page_title{
+  color: #ffffff;
+  font-size:34px;
+  font-weight:lighter;
+}
+
+#portfolio_project_description{
+  color:#333333;
+  font-size:15px;
+  text-align:left;
+  width:650px;
+}
+
+.about_cloud_title{
+  font-weight:500;
+  font-size:18px
+}
+
+.about_cloud_content{
+  margin-top:20px;
+  font-weight:400;
+  font-size: 14px;
+  line-height: 25px;
+  color: #666666;
+}
+.cloud_text_box{
+  text-align:left;
+}
+.about_innovation_fund_title{
+  font-weight:bold;
+}
+
+.paper-header {
+  height: 60px;
+  font-size: 16px;
+  line-height: 60px;
+  padding: 0 10px;
+  color: white;
+  transition: height 0.2s;
+}
+
+h1{
+  font-family: Source Sans Pro 24pt Regular;
+}
+
+h2{
+  font-family: Source Sans Pro 18pt Regular;
+}
+
+h3{
+  font-family: Source Sans Pro 18pt Regular;
+}
+
+h4{
+  font-family: Source Sans Pro 14pt Regular;
+}
+
+legend{
+  font-family: Source Sans Pro 14pt Regular;
+}
+
+.blue paper-toolbar {
+  background: #FFF;
+  color:#3366cc;
+/*        border-bottom: solid blue 1px;*/
+}
+paper-tab{
+  width:100px;
+}
+
+
+
+
+/*      paper-material {
+  border-radius: 2px;
+  height: 100%;
+  padding: 16px 0 16px 0;
+  width: calc(98.66% - 16px);
+  margin: 0px auto;
+  background: white;
+
+}     */
+
+.amount_invested{
+  text-align: center;
+  font-weight:500;
+  font-size:12px;
+}
+
+.amount{
+  text-align: center;
+  font-size:28px;
+  font-weight:normal;
+}
+
+.amount .youth_engagement{
+  color: #ffcc33;
+}
+
+.amount .youth_engagement{
+  color: #ff3366;
+}
+
+.amount .youth_engagement{
+  color: #66cc66;
+}
+
+.total{
+  text-align: center;
+  font-weight:400;
+  font-size:24px;
+}
+.featured_project_name{
+  font-weight:400;
+  font-size:14px;
+  color: #333333;
+}
+.featured_project_blurb{
+  font-weight:400;
+  font-size:14px;
+  color: #666666;
+}
+.portfolio{
+  margin: 20px;
+}
+
+.portfolio_card_title{
+  font-weight:400;
+  font-size:20px;
+  position:relative;
+}
+
+.divider_youth_engagement{
+  border-top: solid 2px #ffcc33;
+}
+.divider_real_time_information{
+  border-top: solid 2px #ff3366;
+}
+.divider_infrastructure{
+  border-top: solid 2px #66cc66;
+}
+.divider_knowledge_products{
+  border-top: solid 2px #33cccc;
+}
+
+.youth_engagement{
+  color: #ffcc33;
+}
+.real_time_information{
+  color: #ff3366;
+}
+.infrastructure{
+  color: #66cc66;
+}
+
+.knowledge_products{
+  background-color: #33cccc;
+}
+
+.progress-youth_engagement{
+  border-color: #ffcc33;
+}
+.progress-real_time_information{
+  border-color: #ff3366;
+}
+.progress-infrastructure{
+  border-color: #66cc66;
+}
+
+.modal_top_youth_engagement{
+  background-color:#ffcc33;
+}
+.modal_top_knowledge_products{
+  background-color:#33cccc;
+}
+.modal_top_real_time_information{
+  background-color:#ff3366;
+}
+
+.modal_top_infrastructure{
+  background-color:#66cc66;
+}
+
+.dashboard-ribbon {
+  height:230px;
+  padding:0px;
+  margin:0px;
+  background: url(../images/map_link.png) no-repeat;
+  background-size:100%;
+}
+
+.demo-ribbon {
+  width: 100%;
+  background-color: #3366cc;
+  flex-shrink: 0;
+  padding-top:100px;
+  color:white;
+}
+
+.about-ribbon {
+  width: 100%;
+  /*background: url('../images/India-UNI144890 copy.jpg') no-repeat;*/
+  background-color: #333333;
+  flex-shrink: 0;
+  padding-top:100px;
+  color:white;
+  height:100px;
+}
+
+.all_projects-ribbon {
+  width: 100%;
+  background-color: #3366cc;
+  flex-shrink: 0;
+  padding-top:100px;
+  color:white;
+  height:100px;
+}
+
+.edge_youth_engagement{
+  background-color:#ffcc33;
+}
+
+.edge_real_time_information{
+  background-color:#ff3366;
+}
+
+.edge_infrastructure{
+  background-color:#66cc66;
+}
+
+.edge_knowledge_products{
+  background-color: #33cccc;
+}
+
+.growth_rate{
+  font-weight:500;
+  font-size:12px;
+}
+
+.featured{
+  width:90px;
+  text-align:center;
+  font-size:12px;
+  padding:5px;
+  font-weight: 500;
+  color:black;
+}
+.featured.youth_engagement{
+  background-color:#ffe28a;
+}
+
+.featured.real_time_information{
+  background-color:#ffa3ba;
+}
+
+.featured.infrastructure{
+  background-color:#afe4af;
+}
+
+.scrubber-youth_engagement{
+  background-color: #ffcc33;
+}
+.scrubber-real_time_information{
+  background-color: #ff3366;
+}
+.scrubber-infrastructure{
+  background-color: #66cc66;
+}
+
+.story_slug{
+  font-size:16px;
+  color:#0099FF;
+  font-weight:500;
+}

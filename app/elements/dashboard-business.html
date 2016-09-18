@@ -1,0 +1,67 @@
+<dom-module id='dashboard-business'>
+  <style>
+    .svg_wide{
+      width:500px;
+    }
+
+    .svg_narrow{
+      width:200px;
+    }
+
+    .text_wide{
+      font-size:24px; color:white; width:700px;margin: 0 auto;
+    }
+
+    .text_narrow{
+      font-size:12px; color:white; width:300px;margin: 0 auto;
+    }
+    .busyness_text{
+      font-weight:400;
+      font-size:22px;
+      color: #ffffff;
+      line-height: 30px;
+    }
+  </style>
+
+  <template style='width:900px;'>
+    <iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query>
+    <iron-media-query full query="print" query-matches="{{print}}"></iron-media-query>
+
+    <firebase-document
+      id='fire_business'
+      app-name="test"
+      path='content/db_blog_intro_2'
+      data="{{business_text}}">
+    </firebase-document>
+
+    <div style='text-align:center; width:100%; '>
+      <img src='/images/dashboard_intro.svg' class$="{{_computeClass(wide)}}">
+      <br>
+      <br>
+      <div class$="{{_computeTextClass(wide)}}" >
+        <span class='busyness_text'>
+          {{business_text}}
+        </span>
+
+      </div>
+    </div>
+
+
+  </template>
+
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'dashboard-business',
+
+    _computeClass: function(wide) {
+       return (!wide) ? 'svg_narrow': 'svg_wide';
+    },
+    _computeTextClass: function(wide) {
+       return (!wide) ? 'text_narrow': 'text_wide';
+    }
+
+
+  })
+</script>
