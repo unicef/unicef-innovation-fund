@@ -1,3 +1,9 @@
+### Quick start
+- git clone git@github.com:unicef/unicef-innovation-fund.git
+- cd unicef-innovation-fund
+- npm install -g gulp bower && npm install && bower install
+- gulp serve
+
 ![](https://cloud.githubusercontent.com/assets/110953/7877439/6a69d03e-0590-11e5-9fac-c614246606de.png)
 ## Polymer Starter Kit
 
