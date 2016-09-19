@@ -7,6 +7,10 @@
 ## Data Source
 Data is served to browsers from a [Firebase](firebase.google.com)  account using [Polymerfire](https://github.com/firebase/polymerfire). Credentials are set in the firebase-app tag in app/index.html.
 
+
+## [Documentation](https://docs.google.com/presentation/d/1HbaZBWy66uNeN2QR21K9LZ1WvLyM8hGFpEEAK4GxuS0/edit#slide=id.g1364efe171_0_1)
+
+
 ## Polymer Starter Kit
 
 > A starting point for building web applications with Polymer 1.0
