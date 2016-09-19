@@ -4,7 +4,9 @@
 - npm install -g gulp bower && npm install && bower install
 - gulp serve
 
-![](https://cloud.githubusercontent.com/assets/110953/7877439/6a69d03e-0590-11e5-9fac-c614246606de.png)
+## Data Source
+Data is served to browsers from a [Firebase](firebase.google.com)  account using [Polymerfire](https://github.com/firebase/polymerfire). Credentials are set in the firebase-app tag in app/index.html.
+
 ## Polymer Starter Kit
 
 > A starting point for building web applications with Polymer 1.0
