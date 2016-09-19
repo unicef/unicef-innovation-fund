@@ -10,6 +10,7 @@
       }*/
 
     </style>
+
     <iron-media-query query="(min-width: 600px)" query-matches="{{wide}}"></iron-media-query>
     <section class='mdl-layout__tab-panel is-active' id='scroll-dashboard'>
       <div class='mdl-grid'>
@@ -32,33 +33,17 @@
       </div>
     </section>
 
-    <!-- For when user clicks on project. Data per project fetched and visualized in modal. -->
-    <!-- <firebase-document id='fire_for_git_commits' location="" log='true' data="{{gitDataSet}}" use-hash-as-path></firebase-document> -->
-
-    <!-- <firebase-document
-      id='fire_for_git_commits'
-      app-name="test"
-      data="{{gitDataSet}}">
-    </firebase-document> -->
-
     <firebase-document
       id='fire_for_modal'
       app-name="test"
       data="{{dataSet}}">
     </firebase-document>
 
-    <!-- <firebase-document
-      id='fire_for_iogt_modal'
-      app-name="test"
-      data="{{iogt_dataSet}}">
-    </firebase-document> -->
-
     <firebase-document
       id='geo_for_modal'
       app-name="test"
       data="{{geoDataSet}}">
     </firebase-document>
-    <!-- <firebase-document log='true' data="{{about_innovation_fund}}" location="https://innovation-fund.firebaseio.com/content/about_innovation_fund" use-hash-as-path></firebase-document> -->
 
   </template>
 </dom-module>
@@ -163,12 +148,6 @@ Polymer({
       notify: true
     },
 
-    // iogt_dataSet:{
-    //   type: Object,
-    //   observer: '_iogtUpdated',
-    //   notify: true
-    // },
-
     gitDataSet:{
       type: Object,
       observer: '_projectUpdatedGit',
@@ -192,7 +171,6 @@ Polymer({
       iogtUpdated(dataSet);
     }
   },
-
 
   _projectUpdatedGeo(newUsers) {
     if(Object.keys(newUsers).length < 1){return;}
