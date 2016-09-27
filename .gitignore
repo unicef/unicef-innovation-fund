@@ -1,6 +1,3 @@
-firebase.json
-.firebaserc
-database.rules.json
 node_modules
 dist
 bower_components

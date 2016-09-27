@@ -1,5 +1,5 @@
 
-### Quick start with Vagrant
+## Quick start with Vagrant
 > Requires Vagrant, Ansible and VirtualBox
 
 **Run it with virtualbox**
@@ -16,14 +16,22 @@
 3. `run`
 4. `open browser on localhost:5000`
 
-### Quick start without Vagrant
+## Quick start without Vagrant
 - git clone git@github.com:unicef/unicef-innovation-fund.git
 - cd unicef-innovation-fund
-- npm install -g gulp bower && npm install && bower install
+- sudo npm install -g gulp bower && npm install && bower install
 - gulp serve
 
 ## Data Source
 Data is served to browsers from a [Firebase](firebase.google.com)  account using [Polymerfire](https://github.com/firebase/polymerfire). Credentials are set in the firebase-app tag in app/index.html.
+
+## Firebase deployment
+> Deploy to [staging server](https://innovation-fund2.firebaseapp.com/) hosted on [Firebase](firebase.google.com)
+
+> Requires Google account with access to Firebase project
+
+- sudo npm install -g firebase-tools
+- firebase deploy
 
 
 ## Please see this [slide deck](https://docs.google.com/presentation/d/1HbaZBWy66uNeN2QR21K9LZ1WvLyM8hGFpEEAK4GxuS0/edit#slide=id.g1364efe171_0_1) for web component details.
