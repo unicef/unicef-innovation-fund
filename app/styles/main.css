@@ -296,3 +296,95 @@ paper-tab{
   color:#0099FF;
   font-weight:500;
 }
+
+.container {
+    max-width: 580px;
+    text-align: center;
+}
+
+.container--wide {
+    max-width: 1200px;
+}
+
+.header {
+    text-align: center;
+}
+
+.header--gray {
+    background-color: #333333;
+}
+
+.header__title {
+    color: #FFFFFF;
+    font-size: 34px;
+    font-weight: lighter;
+    line-height: 243px; /*Center text vertically*/
+    margin: 0;
+}
+
+.button--big {
+    float: left;
+    height: 250px;
+    width: 50%;
+}
+
+.button--white {
+    background-color: #FFFFFF;
+}
+
+.section__header {
+    color: #0097D8;
+}
+
+.section__description {
+    color: #727272;
+}
+
+.section__submit {
+    background-color: #0097D8;
+    color: #FFFFFF !important; /* Overwrite MDL default style */
+}
+
+.section__submit:hover {
+    background-color: #77C2E2;
+}
+
+.section__break {
+    border-top: 2px solid #727272;
+}
+
+.section__subheader {
+    color: #33B9B9;
+}
+
+.section__icon {
+    width: 25%;
+}
+
+.faq__name {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.faq__link {
+    float: right;
+    text-decoration: none;
+}
+
+.faq__description {
+    text-align: left;
+}
+
+.faq__list {
+    list-style-type: none;
+    padding: 0;
+}
+
+@media (max-width: 640px) {
+    .button--big {
+        display: block;
+        float: none;
+        width: 100%;
+    }
+}
