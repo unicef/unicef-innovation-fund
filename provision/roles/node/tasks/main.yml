@@ -1,10 +1,7 @@
 ---
-- name: install git and system packages needed by nodejs
-  apt: name={{ item }} state=present
+- name: install git
   become: yes
-  with_items:
-      - libzmq-dev
-      - git-all
+  apt: name=git-all state=latest
 
 - name: download new version of nodejs
   become: yes
@@ -25,16 +22,13 @@
 
 - name: install gulp and bower
   become: yes
-  shell: npm install -g {{ item }}
+  npm: name={{ item }} global=yes
   with_items:
     - gulp
     - bower
 
 - name: install npm dependencies
-  npm:
-    path: "{{ document_root }}"
+  npm: path={{ project_path }}
 
 - name: install bower dependencies
-  shell: bower install --config.interactive=false
-  args:
-    chdir: "{{ document_root }}"
+  bower: path={{ project_path }}

@@ -7,4 +7,4 @@ bower_components
 .tmp
 .publish/
 .vagrant
-provision/playbook.retry
+*.retry

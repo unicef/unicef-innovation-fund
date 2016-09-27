@@ -5,12 +5,11 @@
   with_items:
     - ruby
     - ruby-dev
-    - make
   tags: packages
 
 - name: Install tmuxinator
   become: yes
-  command: gem install tmuxinator
+  gem: name=tmuxinator user_install=no
 
 - name: Create tmuxinator directory
   file:

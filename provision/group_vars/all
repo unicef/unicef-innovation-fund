@@ -1,3 +1,2 @@
 project_name: innovationfund
-document_root: /vagrant
-project_path: "{{ document_root }}/app"
+project_path: "{{ document_root }}"

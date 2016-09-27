@@ -1,11 +1,11 @@
 # ~/.tmuxinator/{{ project_name }}.yml
 
 name: {{ project_name }}
-root: {{ document_root }}
+root: {{ project_path }}
 
 windows:
   - gulp:
-      root: {{ document_root }}
+      root: {{ project_path }}
       panes:
         - gulp serve
   - shell: cd .
