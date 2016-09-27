@@ -1,4 +1,22 @@
-### Quick start
+
+### Quick start with Vagrant
+> Requires Vagrant, Ansible and VirtualBox
+
+**Run it with virtualbox**
+
+1. `vagrant up`
+2. `vagrant ssh`
+3. `run`
+4. `open browser on localhost:5000`
+
+**Run it with LXC**
+
+1. `vagrant up --provider=lxc`
+2. `vagrant ssh`
+3. `run`
+4. `open browser on localhost:5000`
+
+### Quick start without Vagrant
 - git clone git@github.com:unicef/unicef-innovation-fund.git
 - cd unicef-innovation-fund
 - npm install -g gulp bower && npm install && bower install

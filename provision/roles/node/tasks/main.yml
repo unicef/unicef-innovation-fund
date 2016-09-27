@@ -1,0 +1,40 @@
+---
+- name: install git and system packages needed by nodejs
+  apt: name={{ item }} state=present
+  become: yes
+  with_items:
+      - libzmq-dev
+      - git-all
+
+- name: download new version of nodejs
+  become: yes
+  get_url:
+    url: http://deb.nodesource.com/setup_6.x
+    dest: /tmp/node_setup_6.x
+    mode: 0755
+
+- name: add node.js repository
+  become: yes
+  shell: /tmp/node_setup_6.x
+
+- name: install new version of nodejs
+  become: yes
+  apt:
+    name: nodejs
+    state: latest
+
+- name: install gulp and bower
+  become: yes
+  shell: npm install -g {{ item }}
+  with_items:
+    - gulp
+    - bower
+
+- name: install npm dependencies
+  npm:
+    path: "{{ document_root }}"
+
+- name: install bower dependencies
+  shell: bower install --config.interactive=false
+  args:
+    chdir: "{{ document_root }}"
