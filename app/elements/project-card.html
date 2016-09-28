@@ -1,0 +1,89 @@
+
+<dom-module id='project-card'>
+  <template>
+    <style>
+
+      :host {
+        height: 100%;
+      }
+
+      ul{
+        list-style: none;
+      }
+
+      .project-card__container {
+        opacity: 0.33;
+        transition: opacity .175s ease-out;
+        background-color: #fff;
+        height: 100%;
+        cursor: pointer;
+      }
+
+      .project-card__container.is-active {
+        opacity: 1;
+      }
+
+      .project-card__body {
+        padding: 16px;
+      }
+
+      .project-card__title {
+        margin-top: 16px;
+      }
+
+      .project-card__icon {
+        width:100px;
+        height:100%
+      }
+
+    </style>
+
+    <div class$="project-card__container mdl-shadow--4dp {{ _isActiveClass(selected, svg) }}">
+      <div class-name="project-card__edge edge edge--{{svg}}"></div>
+      <div class="project-card__body">
+        <img class="project-card__icon" src="/images/icons/{{svg}}.svg" />
+        <div style='project-card__content'>
+          <h4 class="project-card__title">{{phrase}}</h4>
+          <span>{{content}}</span>
+        </div>
+      </div>
+    </div>
+  </template>
+</dom-module>
+
+<script>
+
+  Polymer({
+    is: 'project-card',
+    handle_response: function(request){
+      this.data = request.detail.response
+    },
+    properties: {
+      content: {
+        type: String,
+        value: ""
+      },
+      svg: {
+        value: '',
+        notify: true
+      },
+      phrase: {
+        value: '',
+        notify: true
+      },
+      selected: {
+        type: String,
+        notify: true
+      }
+    },
+    listeners: {
+      'tap': '_handleTap'
+    },
+    _handleTap: function(e){
+      this.set('selected', this.svg);
+    },
+    _isActiveClass: function(selected, svg) {
+      return selected == svg ? 'is-active' : ''
+    }
+  })
+</script>

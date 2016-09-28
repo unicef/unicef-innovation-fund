@@ -124,7 +124,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
 
         _htmlChanged: function (neo) {
-          console.log(neo)
           // WARNING: potential XSS vulnerability if `html` comes from an untrusted source
           if(  document.getElementById('about')){
             document.getElementById('about').innerHTML = neo;
