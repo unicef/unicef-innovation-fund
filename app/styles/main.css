@@ -298,12 +298,12 @@ paper-tab{
 }
 
 .container {
-    max-width: 580px;
+    max-width: 1150px;
     text-align: center;
 }
 
 .container--wide {
-    max-width: 1200px;
+    max-width: 1920px;
 }
 
 .header {
@@ -316,15 +316,23 @@ paper-tab{
 
 .header__title {
     color: #FFFFFF;
-    font-size: 34px;
+    font-size: 2.4rem;
     font-weight: lighter;
     line-height: 243px; /*Center text vertically*/
     margin: 0;
 }
 
+.button:hover {
+    background-color: #FFFFFF;
+    box-shadow: 2px 2px 10px 0 #999999;
+    z-index: 1;
+}
+
 .button--big {
     float: left;
-    height: 250px;
+    font-size: 3.2rem;
+    height: 320px;
+    text-transform: none;
     width: 50%;
 }
 
@@ -332,17 +340,40 @@ paper-tab{
     background-color: #FFFFFF;
 }
 
+.button--text-blue {
+    color: #0097D8;
+}
+
+.button--text-violet {
+    color: #2B3880;
+}
+
 .section__header {
     color: #0097D8;
+    font-size: 3.5rem;
+    letter-spacing: 0.08rem;
+    line-height: 4rem;
 }
 
 .section__description {
     color: #727272;
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.75;
+    letter-spacing: 0.11rem;
+    margin: 2.5rem;
 }
 
 .section__submit {
     background-color: #0097D8;
     color: #FFFFFF !important; /* Overwrite MDL default style */
+    font-size: 1.75rem;
+    font-weight: 400;
+    height: inherit;
+    letter-spacing: 0.15rem;
+    margin-top: 1.1rem;
+    padding: 1.2rem 8.5rem;
+    text-transform: none;
 }
 
 .section__submit:hover {
@@ -351,37 +382,78 @@ paper-tab{
 
 .section__break {
     border-top: 2px solid #727272;
+    margin: 4.8rem 0 5.9rem;
 }
 
 .section__subheader {
     color: #33B9B9;
+    font-size: 3.7rem;
+    font-weight: 300;
+    letter-spacing: 0.05rem;
+    margin-bottom: 3rem;
 }
 
 .section__icon {
-    width: 25%;
+    width: 22%;
+}
+
+.section__link {
+    text-decoration: none;
 }
 
 .faq__name {
-    font-size: 16px;
+    font-size: 1.4rem;
     font-weight: 600;
+    margin: 1.3rem 0;
     text-align: left;
 }
 
 .faq__link {
     float: right;
+    font-weight: 400;
     text-decoration: none;
 }
 
 .faq__description {
+    font-size: 1.35rem;
+    line-height: 1.4;
+    letter-spacing: 0.094rem;
+    margin-bottom: 4.1rem;
     text-align: left;
+}
+
+.faq__description--no-bottom-margin {
+    margin-bottom: 0;
 }
 
 .faq__list {
     list-style-type: none;
+    margin: 0 0 6rem;
     padding: 0;
 }
 
-@media (max-width: 640px) {
+.js-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.js-hidden {
+    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+}
+
+.mdl-grid {
+    transition: visibility 0.5s, opacity 0.5s, max-height 0.5s;
+}
+@media (max-width: 1120px) {
+    .button--big {
+        font-size: 2rem;
+        height: 250px;
+    }
+}
+
+@media (max-width: 680px) {
     .button--big {
         display: block;
         float: none;

@@ -7,27 +7,27 @@
             <h2 class="header__title">Submit</h2>
         </header>
 
-        <div class="mdl-grid">
+        <div class="mdl-grid js-visible" data-target="main">
             <div class="mdl-layout-spacer"></div>
             <div class="container--wide mdl-cell mdl-cell--12-col">
-                <button class="button button--big button--white mdl-button mdl-js-button mdl-js-ripple-effect" data-display="office">I am from a country office</button>
-                <button class="button button--big button--white mdl-button mdl-js-button mdl-js-ripple-effect" data-display="startup">I am from a startup</button>
+                <button id="go-office" class="button button--big button--white button--text-blue mdl-button mdl-js-button mdl-js-ripple-effect" data-display="office">I am from a country office</button>
+                <button id="go-startup" class="button button--big button--white button--text-violet mdl-button mdl-js-button mdl-js-ripple-effect" data-display="startup">I am from a startup</button>
             </div>
             <div class="mdl-layout-spacer"></div>
         </div>
 
-        <div class="mdl-grid" data-target="office">
+        <div class="mdl-grid js-hidden" data-target="office">
             <div class="mdl-layout-spacer"></div>
             <div class="container mdl-cell mdl-cell--12-col">
                 <h3 class="section__header">I am from a country office</h3>
-                <p class="section__description">The deadline for submissions to the Innovation Fund has now passed. Please follow us on Twitter @unicefinnovate, where we will share updates about the Fund and future application opportunities.</p>
+                <p class="section__description">The deadline for submissions to the Innovation Fund has now passed. Please follow us on Twitter <a href="https://twitter.com/unicefinnovate" class="section__link">@unicefinnovate</a>, where we will share updates about the Fund and future application opportunities.</p>
                 <p class="section__description">If you submitted an Expression of Interest in the last round (closed on 26 February 2016), only selected companies/institutions have been contacted with information about next steps. Thank you for your submission nd interest in the Innovation Fund.</p>
-                <button class="section__submit mdl-button mdl-js-button mdl-js-ripple-effect">Submit</button>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit mdl-button mdl-js-button mdl-js-ripple-effect">Submit</a>
 
                 <hr class="section__break">
 
                 <h3 class="section__subheader">Resources</h3>
-                <img src="../images/icons/resources.png" alt="" class="section__icon">
+                <img src="../images/icons/resources.png" alt="Resources" class="section__icon">
 
                 <h4 class="faq__name">Short Background Note<a href="https://drive.google.com/file/d/0BwC3tr7jXADzNXJTNzk4d01qams/view?usp=sharing" class="faq__link">Download</a></h4>
                 <p class="faq__description">The Innovation Fund allows UNICEF to quickly assess, fund and scale open-source solutions that have been developed by companies in new and emerging markets. The Innovation Fund supports the generation of open source, public goods that address the most pressing challenges facing children. The Innovation Fund brings together models of financing and methodologies used by Venture Capital funds and the principles of UNICEF'S award winning  Innovation Unit. </p>
@@ -44,7 +44,7 @@
 
                 <h4 class="faq__name">Answers to Questions Submitted about the REOI (Updated regularly)<a href="https://drive.google.com/file/d/0ByoMQXaBGCJ9ZFo4ZHM1NkF2REk/view" class="faq__link">Download</a></h4>
 
-                <h4 class="faq__name">Press release<a href="https://drive.google.com/file/d/0BwC3tr7jXADzb2duWkhLN0duelk/view?usp=sharing" class="faq__link">Download</a></h4>
+                <h4 class="faq__name faq__description--no-bottom-margin">Press release<a href="https://drive.google.com/file/d/0BwC3tr7jXADzb2duWkhLN0duelk/view?usp=sharing" class="faq__link">Download</a></h4>
                 <ul class="faq__description faq__list">
                     <li>English</li>
                     <li>French</li>
@@ -54,7 +54,7 @@
                 <hr class="section__break">
 
                 <h3 class="section__subheader">FAQs</h3>
-                <img src="" alt="" class="section__icon">
+                <img src="../images/icons/resources.png" alt="FAQ" class="section__icon">
 
                 <h4 class="faq__name">Lorem Ipsum Dolor</h4>
                 <p class="faq__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam porro id eveniet neque, cupiditate quos! Ex atque consectetur alias, quis labore eius, officiis quibusdam commodi quas reiciendis reprehenderit harum vero.</p>
@@ -62,11 +62,11 @@
             <div class="mdl-layout-spacer"></div>
         </div>
 
-        <div class="mdl-grid" data-target="startup">
+        <div class="mdl-grid js-hidden" data-target="startup">
             <div class="mdl-layout-spacer"></div>
             <div class="container mdl-cell mdl-cell--12-col">
                 <h3 class="section__header">I am from a startup</h3>
-                <p class="section__description">The deadline for submissions to the Innovation Fund has now passed. Please follow us on Twitter @unicefinnovate, where we will share updates about the Fund and future application opportunities.</p>
+                <p class="section__description">The deadline for submissions to the Innovation Fund has now passed. Please follow us on Twitter <a href="https://twitter.com/unicefinnovate" class="section__link">@unicefinnovate</a>, where we will share updates about the Fund and future application opportunities.</p>
                 <p class="section__description">If you submitted an Expression of Interest in the last round (closed on 26 February 2016), only selected companies/institutions have been contacted with information about next steps. Thank you for your submission nd interest in the Innovation Fund.</p>
 
                 <hr class="section__break">
@@ -102,7 +102,26 @@
     </template>
     <script>
         Polymer({
-            is: "submit-page"
+            is: "submit-page",
+            listeners: {
+                'go-office.tap': 'changeSection',
+                'go-startup.tap': 'changeSection'
+            },
+            changeSection: function (event) {
+                var target = event.target.dataset.display;
+
+                var destination = document.querySelector("[data-target='" + target + "']");
+                var mainSection = document.querySelector("[data-target='main']");
+
+                var visibleClass = "js-visible";
+                var hiddenClass = "js-hidden";
+
+                mainSection.classList.remove(visibleClass);
+                mainSection.classList.add(hiddenClass);
+
+                destination.classList.remove(hiddenClass);
+                destination.classList.add(visibleClass);
+            }
         })
     </script>
 </dom-module>
