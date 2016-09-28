@@ -1,8 +1,9 @@
 ---
-- name: Install additional packages
+- name: Install tmux and ruby
   apt: name={{ item }} state=present
   become: yes
   with_items:
+    - tmux
     - ruby
     - ruby-dev
   tags: packages
