@@ -59,9 +59,7 @@
         </div>
         <div class="project-list mdl-grid">
           <template is="dom-repeat" id='templateProjects' items="{{projects}}">
-            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
-              <portfolio-project data={{projectsData}} index={{index}} svg={{selected}} item={{item}}></portfolio-project>
-            </div>
+            <portfolio-project class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone" data={{projectsData}} index={{index}} svg={{selected}} item={{item}}></portfolio-project>
           </template>
         </div>
       </div>

@@ -7,6 +7,12 @@
         display: inline-block;
         width: 100%;
         position: relative;
+        transition: all .175s ease-in;
+      }
+
+      :host.is-expanded {
+        height: 300px;
+        width: 100%;
       }
 
       ul{
@@ -15,11 +21,13 @@
 
       .portfolio-project__content {
         line-height: 1.5;
+        height: 100%;
       }
 
       .portfolio-project__container {
         transition: box-shadow .175s ease-in;
         cursor: pointer;
+        height: 100%;
       }
 
       .portfolio-project__sub-text {
@@ -48,6 +56,13 @@
         opacity: 1;
       }
 
+      .portfolio-project__data {
+        overflow: hidden;
+        width: 0px;
+        height: 0px;
+        transition: all .175s ease-in;
+      }
+
     </style>
 
     <div class-name='divider divider--{{svg}} portfolio-project__container mdl-shadow--4dp' on-tap="clickUserElement" on-mouseenter='onHovered' on-mouseleave='onUnHovered'>
@@ -64,6 +79,9 @@
         <div class='portfolio-project__sub-text'>
           {{to_mil(item.amount)}}
         </div>
+      </div>
+      <div class="portfolio-project__data">
+        ABC
       </div>
     </div>
 
@@ -107,7 +125,9 @@
     },
 
     clickUserElement:function(){
-      clickUserElement(this.item, this.svg);
+      var project = $(this);
+      project.toggleClass('is-expanded');
+      //clickUserElement(this.item, this.svg);
     }
   });
 
