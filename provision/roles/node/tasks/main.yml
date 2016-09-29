@@ -28,7 +28,9 @@
     - bower
 
 - name: install npm dependencies
-  npm: path={{ project_path }}
+  shell: npm install
+  args:
+    chdir: {{ project_path }}
 
 - name: install bower dependencies
   bower: path={{ project_path }}
