@@ -13,11 +13,14 @@
     "polymerfire": "firebase/polymerfire#^0.9.2",
     "Chart.js": "^2.1.6",
     "chart-elements": "^3.0.2",
-    "iron-media-query": "PolymerElements/iron-media-query#^1.0.8"
-
+    "iron-media-query": "PolymerElements/iron-media-query#^1.0.8",
+    "firebase": "^3.4.0"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
   },
-  "ignore": []
+  "ignore": [],
+  "resolutions": {
+    "firebase": "^3.4.0"
+  }
 }

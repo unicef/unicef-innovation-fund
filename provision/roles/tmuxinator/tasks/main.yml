@@ -1,0 +1,34 @@
+---
+- name: Install tmux and ruby
+  apt: name={{ item }} state=present
+  become: yes
+  with_items:
+    - tmux
+    - ruby
+    - ruby-dev
+  tags: packages
+
+- name: Install tmuxinator
+  become: yes
+  gem: name=tmuxinator user_install=no
+
+- name: Create tmuxinator directory
+  file:
+    path: "~/.tmuxinator/"
+    state: directory
+
+- name: Create tmuxinator config
+  template:
+    src: "tmuxinator.conf.jinja2"
+    dest: "~/.tmuxinator/{{ project_name }}.yml"
+
+- name: Enable mouse support in tmux
+  template:
+    src: "tmux.conf.jinja2"
+    dest: "~/.tmux.conf"
+
+- name: Add run command
+  lineinfile:
+    regexp: alias run
+    line: alias run="tmuxinator start {{ project_name }}"
+    dest: ~/.bashrc
