@@ -298,16 +298,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script>
     var scope = document.querySelector('template[is="dom-bind"]');
     scope.selected = 0;
+    scope.page_id = '';
     window.addEventListener('WebComponentsReady', function(e) {
       $('paper-tabs paper-tab').click(function(){
         $('#mainContainer').scrollTop(0);
-        scope.selected = $('paper-tabs paper-tab').index(this)
+        scope.selected = $('paper-tabs paper-tab').index(this);
+        scope.page_id = this.id;
         // Update css settings per tab
         page_change(this.id);
       });
 
       $('.app-menu .menu-item').click(function(){
-        scope.selected = $('.app-menu .menu-item').index(this)
+        scope.selected = $('.app-menu .menu-item').index(this);
+        scope.page_id = this.id;
         // Update css settings per tab
         page_change(this.id);
       });
@@ -315,6 +318,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     });
 
     function page_change(page_id) {
+      $(document).trigger('page-changed', page_id);
+
       ar = ['dashboard', 'all_projects', 'about']
       ar.forEach(function(e){
         $('#mainToolbar').removeClass(e);
