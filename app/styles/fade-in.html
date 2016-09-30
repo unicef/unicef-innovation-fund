@@ -1,0 +1,32 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="style-fade-in">
+  <template>
+    <style id="fade-in">
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
+
+      .fade-in {
+        opacity: 0;
+        animation: fade-in;
+        animation-duration: 0.25s;
+        animation-fill-mode: forwards;
+      }
+
+      .fade-in.page__header-title {
+        animation-delay: 0.5s;
+      }
+
+      .fade-in.page__header-content {
+        animation-delay: 0.85s;
+      }
+    </style>
+  </template>
+</dom-module>

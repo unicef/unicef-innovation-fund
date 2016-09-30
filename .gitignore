@@ -1,7 +1,8 @@
-node_modules
-dist
-bower_components
+node_modules/
+dist/
+bower_components/
 .tmp
 .publish/
-.vagrant
+.vagrant/
 *.retry
+.idea/

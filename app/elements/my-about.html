@@ -11,19 +11,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-styles/typography.html">
 
-<dom-module id="my-about">
+<dom-module id="my-about" >
   <template bind>
-    <style>
+    <style include="style-fade-in">
       .about_vertical_space{
         height:80px;
       }
-      /*:host {
-        display: block;
+
+      .about__section.fade-in:first-of-type {
+        animation-delay: 0.85s;
       }
 
-      span {
-        @apply(--paper-font-body1);
-      }*/
+      .about__section.fade-in:nth-of-type(2) {
+        animation-delay: 0.9s;
+      }
+
+      .about__section.fade-in:nth-of-type(3) {
+        animation-delay: 0.95s;
+      }
     </style>
     <div class='hello_holder'>
       <hello-about></hello-about>
@@ -40,7 +45,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </firebase-document>
 
 
-      <div class='mdl-grid' style='position:relative;top:0px;padding:0px;'>
+      <div class='mdl-grid about__section fade-in' style='position:relative;top:0px;padding:0px;'>
         <div class="mdl-layout-spacer" ></div>
         <div class="mdl-cell--bottom mdl-cell--10-col" style='width:600px;border-radius:15px;padding:0px;'>
           <div class='mdl-grid' style='padding:0px;width:100%;'>
@@ -58,7 +63,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div class="mdl-layout-spacer"></div>
       </div>
 
-      <div class='mdl-grid' style='position:relative;top:0px;padding:0px;'>
+      <div class='mdl-grid about__section fade-in' style='position:relative;top:0px;padding:0px;'>
         <div class="mdl-layout-spacer" ></div>
         <div class="mdl-cell--bottom mdl-cell--10-col" style='width:600px;border-radius:15px;padding:0px;'>
           <div class='mdl-grid' style='padding:0px;width:100%;'>
@@ -71,8 +76,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div class="mdl-layout-spacer"></div>
       </div>
 
-
-      <div class='mdl-grid' style='position:relative;top:0px;padding:0px;'>
+      <div class='mdl-grid about__section fade-in' style='position:relative;top:0px;padding:0px;'>
         <div class="mdl-layout-spacer" ></div>
         <div class="mdl-cell--bottom mdl-cell--10-col" style='width:600px;border-radius:15px;padding:0px;'>
           <div class='mdl-grid' style='padding:0px;width:100%;'>
@@ -84,26 +88,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
         <div class="mdl-layout-spacer"></div>
       </div>
-      <div class='about_vertical_space'>
-      </div>
-
-
-
-      <!-- <div class="mdl-grid" style='border:solid red 2px;'>
-        <div class="mdl-cell mdl-cell--2-col">
-        </div>
-        <div class="mdl-cell mdl-cell--8-col" style='text-align:left;'>
-          <br /><br /><br /><br />
-          <p class='about_innovation_fund_title'>
-            {{about_innovation_fund_title}}
-          </p>
-          <span id='about'>
-            {{about_innovation_fund}}
-          </span>
-        </div>
-        <div class="mdl-cell mdl-cell--2-col">
-        </div>
-      </div> -->
+      <div class='about_vertical_space'></div>
     </div>
   </template>
 
