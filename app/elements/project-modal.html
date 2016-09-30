@@ -18,6 +18,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
 
+      progress-bubble {
+        display: inline-block;
+        color: black;
+        text-shadow: none;
+        --progress-bubble-stroke-color: #ffe28a;
+        --progress-bubble-stroke-linecap: butt;
+        --progress-bubble-bg-stroke-color: rgb(186, 185, 185);
+        --progress-bubble-background: transparent;
+        --progress-bubble-reflection-display: none;
+      }
+
       .card_text{
         font-size:13px;
       }
@@ -47,7 +58,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <paper-dialog-scrollable>
             <div id="card_linechart">
                 <div class="mdl-grid" id='card_linechart'>
-                    <div class="mdl-cell mdl-cell--7-col mdl-cell--7-col-tablet mdl-cell--3-col-phone">
+                    <div class="mdl-cell mdl-cell--7-col mdl-cell--8-col-tablet">
+                        <paper-button dialog-confirm autofocus class="featured__close mdl-cell--hide-desktop">
+                            <img style='cursor:pointer;width:20px;height:20px;' src='../images/close.svg'/>
+                        </paper-button>
                         <div class='' style='text-align:left;'>
                             <span id='portfolio_project_name' style='font-size:18px;'> </span>
                             (<span id='portfolio_project_country' style='display:inline;'> </span>)
@@ -55,8 +69,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         <chart-line id='modal_linechart' style='width:100%;margin:auto;' ></chart-line>
                     </div>
 
-                    <div class="featured__details mdl-cell mdl-cell--5-col">
-                        <paper-button dialog-confirm autofocus class="featured__close">
+                    <div class="featured__details mdl-cell mdl-cell--5-col mdl-cell--8-col-tablet">
+                        <paper-button dialog-confirm autofocus class="featured__close mdl-cell--hide-tablet">
                             <img style='cursor:pointer;width:20px;height:20px;' src='../images/close.svg'/>
                         </paper-button>
                         <h3 class="featured__name">Description</h3>
@@ -64,7 +78,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         <a id='project_link' class="featured__link" target='_blank' style='display:none;'></a>
                         <hr class="featured__divider">
                         <progress-bubble id="progressBar" value="8" max="10">
-                            <strong>80%</strong>
+                            <strong>$70K</strong>
                         </progress-bubble>
                         <strong class="featured__name">Invested</strong>
                         <hr class="feature__divider">

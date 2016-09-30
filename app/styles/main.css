@@ -307,8 +307,9 @@ paper-tab{
 }
 
 .featured__name {
+    font-size: 2rem;
     font-weight: 600;
-    text-transform: uppercase;
+    margin-left: 2rem;
 }
 
 .featured__description {
@@ -328,3 +329,11 @@ paper-tab{
 }
 
 .featured__option {}
+
+@media (max-width: 840px) {
+    .featured__details {
+        float: left;
+        border-left: none;
+        padding-left: 0;
+    }
+}

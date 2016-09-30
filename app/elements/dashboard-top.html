@@ -84,6 +84,7 @@ function ureportUpdated(dataSet) {
   label = "Number of registered users"// + document.getElementById('portfolio_project_country').innerHTML;
   data = data_for_linechart(label, labels, points, color);
   document.getElementById('modal_linechart').setAttribute('data', JSON.stringify(data))
+  document.getElementById('svgCircle').style.stroke = 'color';
   // document.getElementById('iogt_linechart').setAttribute('data', JSON.stringify(data))
 };
 
@@ -97,6 +98,7 @@ function projectUpdatedGit(dataSet) {
   var points = points_labels.points;
   label = "Number of git commits"//document.getElementById('portfolio_project_country').innerHTML + " ";
   data = data_for_linechart(label, labels, points, color);
+  document.getElementById('svgCircle').style.stroke = '#ffa3ba';
   document.getElementById('modal_linechart').setAttribute('data', JSON.stringify(data))
 };
 
