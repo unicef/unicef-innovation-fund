@@ -29,6 +29,10 @@
         transform: translateX(-16px);
       }
 
+      .project-list__item.is-hidden {
+        display: none;
+      }
+
       .project-list:not(.is-loaded) .project-list__item {
         /* used !important to override style attribute */
         transition-delay: 0s !important;
@@ -43,6 +47,10 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
+      }
+
+      .project-filter.is-hidden {
+        display: none;
       }
 
       .page--yellow paper-range-slider {
@@ -117,24 +125,26 @@
                 <h2 class="project-info__value">{{ _getProjectInfoValue(projects) }}</h2>
               </div>
               <div class="mdl-layout-spacer"></div>
-              <div class="project-filter project-filter--yellow mdl-cell--4-col mdl-cell">
+              <div class$="project-filter project-filter--yellow mdl-cell--4-col mdl-cell {{ _showFiltersClass(projects) }}">
+
+                <!-- amount filter -->
                 <paper-dropdown-menu class="project-filter__menu" label="Amount" on-paper-dropdown-close="_amountFilterClosed">
                   <paper-listbox id="amountFilterListbox" class="dropdown-content">
                     <paper-item>${{ filterAmountMin }}-${{ filterAmountMax }}</paper-item>
                     <paper-item on-tap="_onAmountFilterTap">
-                      <span class="project-filter__slider-value">10</span>
-                      <paper-range-slider class="slider" id="amountFilter" pin step='1' min='10' max='200' value-min='10' value-max='200'></paper-range-slider>
-                      <span class="project-filter__slider-value">200</span>
+                      <paper-range-slider class="slider" id="amountFilter" step='10000'></paper-range-slider>
                     </paper-item>
                   </paper-listbox>
                 </paper-dropdown-menu>
+                <!-- amount filter -->
+
               </div>
             </div>
           </div>
         </div>
         <div class="project-list mdl-grid">
           <template is="dom-repeat" id='templateProjects' items="{{projects}}">
-            <portfolio-project class="project-list__item mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone" data={{projectsData}} index={{index}} svg={{selected}} item={{item}}></portfolio-project>
+              <portfolio-project class$="project-list__item mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone {{ _getFilterClass(item, filterAmountMin, filterAmountMax) }}" data={{projectsData}} index={{index}} svg={{selected}} item={{item}}></portfolio-project>
           </template>
         </div>
       </div>
@@ -221,6 +231,8 @@
         var projectList = this.querySelector('.project-list');
         projectList.classList.remove('is-loaded');
 
+        this._setAmountMinMax(obj);
+
         //Timeout waits for transition to finish
         setTimeout((function(){
           this.projects = obj;
@@ -267,6 +279,28 @@
       return false;
     },
 
+    _setAmountMinMax(elements) {
+      var values = elements.map((function(item){
+        return this._getIntFromAmount(item.amount);
+      }).bind(this));
+
+      var min = Math.min.apply(null, values);
+      var max = Math.max.apply(null, values);
+
+      //Dividing by 1000 to assure slider is working properly
+      this.$.amountFilter.setMin(min);
+      this.$.amountFilter.setMax(max);
+      this.$.amountFilter.setValues(min,max);
+
+      this.filterAmountMin = min;
+      this.filterAmountMax = max;
+      this.$.amountFilterListbox.select(null);
+    },
+
+    _getIntFromAmount(value) {
+      return parseInt(value.replace(/\$|\,/g, ''));
+    },
+
     _getColorClass(selected) {
       switch (selected) {
         case 'real_time_information':
@@ -284,6 +318,21 @@
       this.querySelectorAll('.project-filter__menu, .slider').forEach(function(item){
         item.updateStyles();
       });
+    },
+
+    _showFiltersClass(projects) {
+      if (projects && projects.length > 1) {
+        return '';
+      }
+      return 'is-hidden';
+    },
+
+    _getFilterClass(item, filterAmountMin, filterAmountMax) {
+      var amount = this._getIntFromAmount(item.amount);
+      if ((filterAmountMin && filterAmountMax) && (amount < filterAmountMin || amount > filterAmountMax)) {
+        return 'is-hidden';
+      }
+      return '';
     }
   })
 </script>
