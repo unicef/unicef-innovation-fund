@@ -63,7 +63,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         <div id='portfolio_project_description' class="featured__description" style='font-size:13px;'> </div>
                         <a id='project_link' class="featured__link" target='_blank' style='display:none;'></a>
                         <hr class="featured__divider">
-                        <progress-bubble value="8" max="10">
+                        <progress-bubble id="progressBar" value="8" max="10">
                             <strong>80%</strong>
                         </progress-bubble>
                         <strong class="featured__name">Invested</strong>
@@ -115,6 +115,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         properties: {
 
         },
+
+        ready: function(){
+          this.$.animated.addEventListener('iron-overlay-opened', (function(){
+            this.$.progressBar.redraw();
+          }).bind(this));
+        }
 
       });
     })();
