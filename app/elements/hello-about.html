@@ -1,23 +1,15 @@
 <dom-module id="hello-about">
   <template>
-    <style is="custom-style">
-      /*.hello_ap{
-        display:none;
-      }
-
-      .hello_ap.all_projects{
-        display:inline;
-      }*/
-    </style>
-      <header class='page__header page__header--dark'>
-        <div class='mdl-grid container' style='position:relative;'>
-          <div class="mdl-layout-spacer"></div>
-          <div class="mdl-cell mdl-cell--10-col">
-            <h1 class='page__header-title'>About</h1>
-          </div>
-          <div class="mdl-layout-spacer"></div>
+    <style is="custom-style" include="style-fade-in"></style>
+    <header class='page__header page__header--dark'>
+      <div class='mdl-grid container' style='position:relative;'>
+        <div class="mdl-layout-spacer"></div>
+        <div class="mdl-cell mdl-cell--10-col">
+          <h1 class='page__header-title fade-in'>About</h1>
         </div>
-      </header>
+        <div class="mdl-layout-spacer"></div>
+      </div>
+    </header>
   </template>
   <script>
     Polymer({

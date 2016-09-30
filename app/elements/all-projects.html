@@ -1,7 +1,7 @@
 <dom-module id='all-projects'>
 
   <template>
-    <style>
+    <style include="style-fade-in">
       :host{
         display: block;
       }
@@ -10,17 +10,25 @@
         display: block;
       }
 
+      .page__content.fade-in {
+        animation-delay: 1s;
+      }
+
       .project-info {
         background-color: #fff;
         padding: 16px;
       }
 
-      .project-info__title {
-
+      .project-info.fade-in {
+        animation-delay: 1.1s;
       }
 
       .project-list {
         margin-top: -16px;
+      }
+
+      .project-list.fade-in {
+        animation-delay: 1.2s;
       }
 
       .project-list__item {
@@ -105,7 +113,7 @@
 
     <div class$='page {{ _getColorClass(selected) }}'>
       <hello-all-projects all_projects_cloud_content="{{content.all_projects_cloud_content}}"></hello-all-projects>
-      <div class="page__content">
+      <div class="page__content fade-in">
         <div class="mdl-grid">
           <div class="content-column mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
             <project-card selected={{selected}} content="{{content.youth_engagement}}" phrase='Products For Youth' fb='ureport' svg="youth_engagement" rgb='255, 204, 51, 0.2'></project-card>
@@ -119,7 +127,7 @@
           <div class="content-column mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
             <project-card selected={{selected}} content="{{content.knowledge_p}}" phrase='Knowledge Products' fb='iogt'  svg="knowledge_products"   rgb='255, 204, 51, 0.2'></project-card>
           </div>
-          <div class="project-info mdl-cell mdl-cell--12-col mdl-shadow--4dp">
+          <div class="project-info mdl-cell mdl-cell--12-col mdl-shadow--4dp fade-in">
             <div class="mdl-grid mdl-grid--no-spacing">
               <div class="mdl-cell--4-col mdl-cell">
                 <h2 class="project-info__value">{{ _getProjectInfoValue(projects) }}</h2>
@@ -142,7 +150,7 @@
             </div>
           </div>
         </div>
-        <div class="project-list mdl-grid">
+        <div class="project-list mdl-grid fade-in">
           <template is="dom-repeat" id='templateProjects' items="{{projects}}">
               <portfolio-project class$="project-list__item mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone {{ _getFilterClass(item, filterAmountMin, filterAmountMax) }}" data={{projectsData}} index={{index}} svg={{selected}} item={{item}}></portfolio-project>
           </template>
