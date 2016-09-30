@@ -23,6 +23,64 @@
         margin-top: -16px;
       }
 
+      .project-list__item {
+        opacity: 0;
+        transition: all .175s ease-in;
+        transform: translateX(-16px);
+      }
+
+      .project-list:not(.is-loaded) .project-list__item {
+        /* used !important to override style attribute */
+        transition-delay: 0s !important;
+      }
+
+      .project-list.is-loaded .project-list__item {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .project-filter {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .page--yellow paper-range-slider {
+        --paper-range-slider-active-color: #ffcc33;
+        --paper-range-slider-pin-color: #ffcc33;
+        --paper-range-slider-knob-color: #ffcc33;
+      }
+      .page--yellow paper-dropdown-menu {
+        --primary-color: #ffcc33;
+      }
+
+      .page--red paper-range-slider {
+        --paper-range-slider-active-color: #ff3366;
+        --paper-range-slider-pin-color: #ff3366;
+        --paper-range-slider-knob-color: #ff3366;
+      }
+      .page--red paper-dropdown-menu {
+        --primary-color: #ff3366;
+      }
+
+      .page--green paper-range-slider {
+        --paper-range-slider-active-color: #66cc66;
+        --paper-range-slider-pin-color: #66cc66;
+        --paper-range-slider-knob-color: #66cc66;
+      }
+      .page--green paper-dropdown-menu {
+        --primary-color: #66cc66;
+      }
+
+      .page--blue paper-range-slider {
+        --paper-range-slider-active-color: #33cccc;
+        --paper-range-slider-pin-color: #33cccc;
+        --paper-range-slider-knob-color: #33cccc;
+      }
+      .page--blue paper-dropdown-menu {
+        --primary-color: #33cccc;
+      }
+
     </style>
 
     <firebase-document
@@ -37,7 +95,7 @@
       data="{{ projectsData }}">
     </firebase-document>
 
-    <div class='page'>
+    <div class$='page {{ _getColorClass(selected) }}'>
       <hello-all-projects all_projects_cloud_content="{{content.all_projects_cloud_content}}"></hello-all-projects>
       <div class="page__content">
         <div class="mdl-grid">
@@ -54,19 +112,35 @@
             <project-card selected={{selected}} content="{{content.knowledge_p}}" phrase='Knowledge Products' fb='iogt'  svg="knowledge_products"   rgb='255, 204, 51, 0.2'></project-card>
           </div>
           <div class="project-info mdl-cell mdl-cell--12-col mdl-shadow--4dp">
-            <h2 class="project-info__value">{{ _getProjectInfoValue(projects) }}</h2>
+            <div class="mdl-grid mdl-grid--no-spacing">
+              <div class="mdl-cell--4-col mdl-cell">
+                <h2 class="project-info__value">{{ _getProjectInfoValue(projects) }}</h2>
+              </div>
+              <div class="mdl-layout-spacer"></div>
+              <div class="project-filter project-filter--yellow mdl-cell--4-col mdl-cell">
+                <paper-dropdown-menu class="project-filter__menu" label="Amount" on-paper-dropdown-close="_amountFilterClosed">
+                  <paper-listbox id="amountFilterListbox" class="dropdown-content">
+                    <paper-item>${{ filterAmountMin }}-${{ filterAmountMax }}</paper-item>
+                    <paper-item on-tap="_onAmountFilterTap">
+                      <span class="project-filter__slider-value">10</span>
+                      <paper-range-slider class="slider" id="amountFilter" pin step='1' min='10' max='200' value-min='10' value-max='200'></paper-range-slider>
+                      <span class="project-filter__slider-value">200</span>
+                    </paper-item>
+                  </paper-listbox>
+                </paper-dropdown-menu>
+              </div>
+            </div>
           </div>
         </div>
         <div class="project-list mdl-grid">
           <template is="dom-repeat" id='templateProjects' items="{{projects}}">
-            <portfolio-project class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone" data={{projectsData}} index={{index}} svg={{selected}} item={{item}}></portfolio-project>
+            <portfolio-project class="project-list__item mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone" data={{projectsData}} index={{index}} svg={{selected}} item={{item}}></portfolio-project>
           </template>
         </div>
       </div>
     </div>
   </template>
 </dom-module>
-
 <script>
 
   var projectCards = [
@@ -82,7 +156,8 @@
       selected: {
         type: String,
         value: projectCards[0].key,
-        notify: true
+        notify: true,
+        observer: '_selectedChange'
       },
       svg: {
         value: '',
@@ -110,12 +185,46 @@
       projectCards: {
         type: Array,
         value: projectCards
+      },
+      filterAmountMin: {
+        type: Number,
+        value: null
+      },
+      filterAmountMax: {
+        type: Number,
+        value: null
       }
     },
 
-    _assignProjects: function(obj){
+    ready: function(){
+      var stagger = 25;
+      var projectList = this.querySelector('.project-list');
+
+      this.$.templateProjects.addEventListener('dom-change', (function(){
+        var projectItems = this.querySelectorAll('.project-list__item');
+        projectItems.forEach(function(item, key){
+          item.style.transitionDelay = (key*stagger)+'ms';
+        });
+
+        //This line is used to force DOM redraw
+        $(projectList).hide().show(0);
+
+        projectList.classList.add('is-loaded');
+      }).bind(this));
+
+      this._initFilters();
+    },
+
+    _assignProjects: function(obj, oldObj){
       if(Object.keys(obj).length > 0){
-        this.projects = obj;
+        //Used to stagger item transition
+        var projectList = this.querySelector('.project-list');
+        projectList.classList.remove('is-loaded');
+
+        //Timeout waits for transition to finish
+        setTimeout((function(){
+          this.projects = obj;
+        }).bind(this), 350);
       }
     },
 
@@ -136,6 +245,45 @@
 
     _getProjectContent(content, key) {
       return content[key];
+    },
+
+    _initFilters() {
+      this.$.amountFilter.addEventListener('updateValues', (function(e){
+        this.filterAmountMin = this.$.amountFilter.valueMin;
+        this.filterAmountMax = this.$.amountFilter.valueMax;
+        this.$.amountFilterListbox.select(null);
+      }).bind(this));
+    },
+
+    _amountFilterClosed(e) {
+      if (this.filterAmountMin && this.filterAmountMax) {
+        this.$.amountFilterListbox.selectIndex(0);
+      }
+    },
+
+    _onAmountFilterTap(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    },
+
+    _getColorClass(selected) {
+      switch (selected) {
+        case 'real_time_information':
+          return 'page--red';
+        case 'infrastructure':
+          return 'page--green';
+        case 'knowledge_products':
+          return 'page--blue';
+        default:
+          return 'page--yellow';
+      }
+    },
+
+    _selectedChange(e) {
+      this.querySelectorAll('.project-filter__menu, .slider').forEach(function(item){
+        item.updateStyles();
+      });
     }
   })
 </script>

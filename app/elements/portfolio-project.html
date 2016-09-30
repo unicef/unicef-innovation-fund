@@ -56,13 +56,6 @@
         opacity: 1;
       }
 
-      .portfolio-project__data {
-        overflow: hidden;
-        width: 0px;
-        height: 0px;
-        transition: all .175s ease-in;
-      }
-
     </style>
 
     <div class-name='divider divider--{{svg}} portfolio-project__container mdl-shadow--4dp' on-tap="clickUserElement" on-mouseenter='onHovered' on-mouseleave='onUnHovered'>
@@ -79,9 +72,6 @@
         <div class='portfolio-project__sub-text'>
           {{to_mil(item.amount)}}
         </div>
-      </div>
-      <div class="portfolio-project__data">
-        ABC
       </div>
     </div>
 
@@ -125,9 +115,7 @@
     },
 
     clickUserElement:function(){
-      var project = $(this);
-      project.toggleClass('is-expanded');
-      //clickUserElement(this.item, this.svg);
+      clickUserElement(this.item, this.svg);
     }
   });
 

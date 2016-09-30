@@ -339,6 +339,14 @@ paper-tab{
   padding: 32px;
 }
 
+.project-filter__menu #contentWrapper.iron-dropdown > * {
+  overflow: visible;
+}
+
+.slider .pin.expand.paper-slider > #sliderKnob.paper-slider > #sliderKnobInner.paper-slider::after {
+  transform: scale(1) translate(0, -21px);
+}
+
 @media only screen and (max-width: 1200px) {
   .page__content {
     padding: 0;
