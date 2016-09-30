@@ -13,7 +13,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <dom-module id="project-modal">
   <template>
-    <style>
+    <style is="custom-style">
       :host {
         display: block;
       }
@@ -38,24 +38,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         exit-animation="fade-out-animation"
         with-backdrop>
 
-        <div id='modal-top' style='margin:0px;padding:0px;height:20px;border-top-left-radius:5px;border-top-right-radius:5px;'></div>
-        <div style='padding-top:0px;margin-top:0px;background-color:#EDEDED;'>
-          <div class='mdl-grid'>
-            <div class='mdl-cell mdl-cell--11-col mdl-cell--7-col-tablet mdl-cell--3-col-phone' style='text-align:left;'>
-              <span id='portfolio_project_name' style='font-size:18px;'> </span>
-              (<span id='portfolio_project_country' style='display:inline;'> </span>)
-            </div>
-            <div class='mdl-cell mdl-cell--1-col' style='text-align:right;'>
-              <paper-button dialog-confirm autofocus >
-                <img style='cursor:pointer;width:20px;height:20px;' src='../images/close.svg'/>
-              </paper-button>
-
-            </div>
-          </div>
-
-
-        </div>
-
         <span id='portfolio_project_kind' style='display:none;'> </span>
 
         <span id='portfolio_project_color' style='display:none;'> </span>
@@ -63,28 +45,39 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <span id='portfolio_project_amount' style='display:none;'> </span>
 
         <paper-dialog-scrollable>
-          <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col">
-              <div class="demo-card-event mdl-card mdl-shadow--4dp" style='width:100%;margin:auto;' >
-                <div class="mdl-card__title mdl-card--expand card_text" style='width:100%;margin:auto;'>
-                  <div id='portfolio_project_description' style='font-size:13px;'> </div>
-                </div>
-                <div class="mdl-card__supporting-text card_text" style='width:100%;text-align:left;'>
-                  <a id='project_link' target='_blank' style='display:none;'></a>
-                </div>
-              </div>
-            </div>
-          </div>
+            <div id="card_linechart">
+                <div class="mdl-grid" id='card_linechart'>
+                    <div class="mdl-cell mdl-cell--7-col mdl-cell--7-col-tablet mdl-cell--3-col-phone">
+                        <div class='' style='text-align:left;'>
+                            <span id='portfolio_project_name' style='font-size:18px;'> </span>
+                            (<span id='portfolio_project_country' style='display:inline;'> </span>)
+                        </div>
+                        <chart-line id='modal_linechart' style='width:100%;margin:auto;' ></chart-line>
+                    </div>
 
-          <div class="mdl-grid" id='card_linechart' style='display:none;'>
-            <div class="mdl-cell mdl-cell--12-col">
-              <div class="demo-card-event mdl-card mdl-shadow--4dp" style='width:100%;margin:auto;' >
-                <div class="mdl-card__title mdl-card--expand" style='width:100%;margin:auto;'>
-                  <chart-line id='modal_linechart' style='width:100%;margin:auto;' ></chart-line>
+                    <div class="featured__details mdl-cell mdl-cell--5-col">
+                        <paper-button dialog-confirm autofocus class="featured__close">
+                            <img style='cursor:pointer;width:20px;height:20px;' src='../images/close.svg'/>
+                        </paper-button>
+                        <h3 class="featured__name">Description</h3>
+                        <div id='portfolio_project_description' class="featured__description" style='font-size:13px;'> </div>
+                        <a id='project_link' class="featured__link" target='_blank' style='display:none;'></a>
+                        <hr class="featured__divider">
+                        <progress-bubble value="8" max="10">
+                            <strong>80%</strong>
+                        </progress-bubble>
+                        <strong class="featured__name">Invested</strong>
+                        <hr class="feature__divider">
+                        <strong class="featured__number">0</strong> <strong>users</strong>
+                        <select name="" id="" class="featured__select">
+                            <option value="Option 1" class="featured__option">Option 1</option>
+                            <option value="Option 2" class="featured__option">Option 2</option>
+                            <option value="Option 3" class="featured__option">Option 3</option>
+                        </select>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
+
           <span id='card-iogt' style='padding:0px;display:none;'>
             <div class="mdl-grid">
               <div class="mdl-cell mdl-cell--12-col" >

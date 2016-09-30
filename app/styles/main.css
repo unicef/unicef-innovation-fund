@@ -32,7 +32,6 @@ html, body {
   color:#333333;
   font-size:15px;
   text-align:left;
-  width:650px;
 }
 
 .about_cloud_title{
@@ -296,3 +295,36 @@ paper-tab{
   color:#0099FF;
   font-weight:500;
 }
+
+.featured__details {
+    border-left: 1px solid black;
+    padding-left: 20px;
+}
+
+.featured__close {
+    display: block;
+    text-align: right;
+}
+
+.featured__name {
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.featured__description {
+    font-weight: 500;
+}
+
+.featured__link {}
+
+.featured__number {
+    font-size: 4rem;
+}
+
+.featured__select {
+    background-color: transparent;
+    float: right;
+    padding: 0.25rem;
+}
+
+.featured__option {}
