@@ -330,8 +330,8 @@ paper-tab{
 
 .button--big {
     float: left;
-    font-size: 3.2rem;
-    height: 320px;
+    font-size: 1.2rem;
+    height: 252px;
     text-transform: none;
     width: 50%;
 }
@@ -350,29 +350,34 @@ paper-tab{
 
 .section__header {
     color: #0097D8;
-    font-size: 3.5rem;
+    font-size: 3rem;
     letter-spacing: 0.08rem;
     line-height: 4rem;
+    margin-bottom: 3rem;
 }
 
 .section__description {
     color: #727272;
-    font-size: 1.35rem;
-    font-weight: 600;
-    line-height: 1.75;
+    font-size: 1.2rem;
+    font-weight: 900;
+    line-height: 1.45;
     letter-spacing: 0.11rem;
     margin: 2.5rem;
+}
+
+.section__user-email {
+    margin-top: 3.7rem;
 }
 
 .section__submit {
     background-color: #0097D8;
     color: #FFFFFF !important; /* Overwrite MDL default style */
-    font-size: 1.75rem;
+    font-size: 1.6rem;
     font-weight: 400;
     height: inherit;
-    letter-spacing: 0.15rem;
+    letter-spacing: 0.05rem;
     margin-top: 1.1rem;
-    padding: 1.2rem 8.5rem;
+    padding: 1rem 3.2rem;
     text-transform: none;
 }
 
@@ -401,11 +406,44 @@ paper-tab{
     text-decoration: none;
 }
 
+.section__back {
+    background-color: transparent;
+    border: none;
+    float: left;
+    font-size: 2rem;
+    text-decoration: underline;
+    text-transform: uppercase;
+}
+
+.section__input {
+    background-color: transparent;
+    border: 1px solid #0097D8;
+    display: block;
+    font-size: 1.7rem;
+    font-style: italic;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.section__confirm-email {
+    background-color: #BABCBD;
+    border: none;
+    color: #000000;
+    font-size: 1.7rem;
+    margin-top: 2.5rem;
+    padding: 1rem 8.2rem;
+}
+
 .faq__name {
     font-size: 1.4rem;
     font-weight: 600;
     margin: 1.3rem 0;
     text-align: left;
+}
+
+.faq__image {
+    margin-top: 3rem;
+    width: 100%;
 }
 
 .faq__link {
@@ -420,16 +458,6 @@ paper-tab{
     letter-spacing: 0.094rem;
     margin-bottom: 4.1rem;
     text-align: left;
-}
-
-.faq__description--no-bottom-margin {
-    margin-bottom: 0;
-}
-
-.faq__list {
-    list-style-type: none;
-    margin: 0 0 6rem;
-    padding: 0;
 }
 
 .js-visible {
