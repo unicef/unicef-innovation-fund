@@ -296,3 +296,7 @@ paper-tab{
   color:#0099FF;
   font-weight:500;
 }
+
+.mdl-grid {
+    transition: visibility 0.5s, opacity 0.5s, max-height 0.5s;
+}
