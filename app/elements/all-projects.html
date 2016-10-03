@@ -13,6 +13,8 @@
       .project-info {
         background-color: #fff;
         padding: 16px;
+        position: relative;
+        z-index: 1;
       }
 
       .project-list {
@@ -48,6 +50,10 @@
 
       .project-filter.is-hidden {
         display: none;
+      }
+
+      .project-filter__menu {
+        margin-right: 16px;
       }
 
       .page--yellow paper-range-slider {
@@ -140,7 +146,16 @@
               </div>
               <div class="mdl-layout-spacer"></div>
               <div class$="project-filter project-filter--yellow mdl-cell--4-col mdl-cell {{ _showFiltersClass(projects) }}">
-
+                <!-- region filter -->
+                <paper-dropdown-menu id="regionFilter" class="project-filter__menu" label="Region">
+                  <paper-listbox id="regionFilterListbox" class="dropdown-content" attr-for-selected="value">
+                    <paper-item value="">All regions</paper-item>
+                    <template is="dom-repeat" id='regionItems' items="{{_getUniqueRegions(projects)}}">
+                      <paper-item value="{{item}}">{{item}}</paper-item>
+                    </template>
+                  </paper-listbox>
+                </paper-dropdown-menu>
+                <!-- region filter -->
                 <!-- amount filter -->
                 <paper-dropdown-menu class="project-filter__menu" label="Amount" on-paper-dropdown-close="_amountFilterClosed">
                   <paper-listbox id="amountFilterListbox" class="dropdown-content">
@@ -151,14 +166,13 @@
                   </paper-listbox>
                 </paper-dropdown-menu>
                 <!-- amount filter -->
-
               </div>
             </div>
           </div>
         </div>
         <div class="project-list mdl-grid">
           <template is="dom-repeat" id='templateProjects' items="{{projects}}">
-              <portfolio-project class$="project-list__item mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone {{ _getFilterClass(item, filterAmountMin, filterAmountMax) }}" data={{projectsData}} index={{index}} svg={{selected}} item={{item}}></portfolio-project>
+              <portfolio-project class$="project-list__item mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone {{ _getFilterClass(item, filterAmountMin, filterAmountMax, filterRegion) }}" data={{projectsData}} index={{index}} svg={{selected}} item={{item}}></portfolio-project>
           </template>
         </div>
       </div>
@@ -217,14 +231,16 @@
       filterAmountMax: {
         type: Number,
         value: null
+      },
+      filterRegion: {
+        type: String,
+        value: null
       }
     },
 
     ready: function(){
       var stagger = 25;
       var projectList = this.querySelector('.project-list');
-
-
 
       this.$.templateProjects.addEventListener('dom-change', (function(){
         var projectItems = this.querySelectorAll('.project-list__item');
@@ -264,6 +280,7 @@
         projectList.classList.remove('is-loaded');
 
         this._setAmountMinMax(obj);
+        this._resetFilters();
 
         //Timeout waits for transition to finish
         setTimeout((function(){
@@ -292,11 +309,17 @@
     },
 
     _initFilters() {
+      var that = this;
+
       this.$.amountFilter.addEventListener('updateValues', (function(e){
         this.filterAmountMin = this.$.amountFilter.valueMin;
         this.filterAmountMax = this.$.amountFilter.valueMax;
         this.$.amountFilterListbox.select(null);
       }).bind(this));
+
+      this.$.regionFilterListbox.addEventListener('iron-select', function(e){
+        that.filterRegion = this.selected;
+      });
     },
 
     _amountFilterClosed(e) {
@@ -359,12 +382,37 @@
       return 'is-hidden';
     },
 
-    _getFilterClass(item, filterAmountMin, filterAmountMax) {
+    _getFilterClass(item, filterAmountMin, filterAmountMax, filterRegion) {
       var amount = this._getIntFromAmount(item.amount);
       if ((filterAmountMin && filterAmountMax) && (amount < filterAmountMin || amount > filterAmountMax)) {
         return 'is-hidden';
       }
+
+      if (filterRegion && filterRegion != item.country) {
+        return 'is-hidden';
+      }
+
       return '';
+    },
+
+    _getUniqueRegions(projects) {
+      var uniqueRegions = [];
+      projects.forEach(function(project){
+        if(uniqueRegions.indexOf(project.country) < 0) {
+          uniqueRegions.push(project.country);
+        }
+      });
+      uniqueRegions.sort(function(a, b){
+        if(a < b) return -1;
+        if(a > b) return 1;
+        return 0;
+      });
+      return uniqueRegions;
+    },
+
+    _resetFilters() {
+      this.filterRegion = null;
+      this.$.regionFilterListbox.select(null);
     }
   })
 </script>

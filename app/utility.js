@@ -1,5 +1,4 @@
 function clickUserElement(proj, portfolio_name){
-  console.log(proj);
   var kind = '';
   $('#card_linechart').css('display','none');
   $('#card-iogt').css('display','none');
