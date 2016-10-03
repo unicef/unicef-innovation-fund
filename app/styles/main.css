@@ -337,3 +337,7 @@ paper-tab{
         padding-left: 0;
     }
 }
+
+.circullar-progress #svgCircle.progress-bubble {
+  transition: stroke-dashoffset .35s ease-in;
+}

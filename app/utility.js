@@ -1,5 +1,4 @@
 function clickUserElement(proj, portfolio_name){
-  console.log(proj);
   var kind = '';
   $('#card_linechart').css('display','none');
   $('#card-iogt').css('display','none');
@@ -55,6 +54,11 @@ function clickUserElement(proj, portfolio_name){
   $('#modal-top').addClass("modal_top_" + portfolio_name);
 
   document.getElementById('modal_ureport').click();
+
+  //Pass project data to modal
+  proj.portfolio_name = portfolio_name;
+  $(document.getElementById('animated')).data('project', proj);
+
   // alert(JSON.stringify(data))
 }
 
@@ -297,7 +301,9 @@ function clickHandler(e) {
   if (!button.hasAttribute('data-dialog')) {
     return;
   }
+
   var id = button.getAttribute('data-dialog');
+
   var dialog = document.getElementById(id);
   if (dialog) {
     dialog.open();

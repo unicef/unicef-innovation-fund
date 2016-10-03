@@ -36,6 +36,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         @apply(--paper-font-body1);
       }
     </style>
+
+    <firebase-document
+      app-name="test"
+      path="/budget"
+      data="{{financials}}">
+    </firebase-document>
+
     <div>
       <div data-dialog="animated" id='modal_ureport' onclick="clickHandler(event)"></div>
 
@@ -77,8 +84,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         <div id='portfolio_project_description' class="featured__description" style='font-size:13px;'> </div>
                         <a id='project_link' class="featured__link" target='_blank' style='display:none;'></a>
                         <hr class="featured__divider">
-                        <progress-bubble id="progressBar" value="8" max="10">
-                            <strong>$70K</strong>
+                        <progress-bubble class="circullar-progress" id="progressBar" value="{{ _getProjectAmount(project) }}" max="{{ _getPortfolioBudget(project, financials) }}">
+                            <strong>{{ _getProjectAmountString(project) }}</strong>
                         </progress-bubble>
                         <strong class="featured__name">Invested</strong>
                         <hr class="feature__divider">
@@ -128,12 +135,45 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         properties: {
 
+          project: {
+            type: Object,
+            value: null
+          }
+
         },
 
         ready: function(){
           this.$.animated.addEventListener('iron-overlay-opened', (function(){
+            this.project = $(this.$.animated).data('project');
             this.$.progressBar.redraw();
           }).bind(this));
+        },
+
+        _getProjectAmount(project) {
+          if (!project) {
+            return 0;
+          }
+
+          var amount = parseInt(project.amount.replace(/\$|\,/g, ''));
+          return amount;
+        },
+
+        _getProjectAmountString(project) {
+          if (!project) {
+            return '';
+          }
+
+          var amount = this._getProjectAmount(project);
+          return cleanToMil(amount);
+        },
+
+        _getPortfolioBudget(project, financials) {
+          if (!project || !project.portfolio_name || !financials) {
+            return 0;
+          }
+
+          var budget = financials.totals[project.portfolio_name];
+          return budget;
         }
 
       });
