@@ -30,7 +30,7 @@
 - name: install npm dependencies
   shell: npm install
   args:
-    chdir: {{ project_path }}
+    chdir: "{{ project_path }}"
 
 - name: install bower dependencies
   bower: path={{ project_path }}
