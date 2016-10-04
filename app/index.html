@@ -130,11 +130,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         background-color:#3366CB;
       }
 
-      #mainToolbar.about{
+      #mainToolbar.about, #mainToolbar.submit{
         background-color:#333333;
       }
 
-      .about{
+      .about, .submit{
         background-color:#333333;
       }
 
@@ -207,6 +207,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <!-- <iron-icon icon="info"></iron-icon> -->
               <span>&nbsp;&nbsp;ABOUT</span>
             </p>
+
+            <p class='menu-item' id='submit'>
+              <!-- <iron-icon icon="info"></iron-icon> -->
+              <span>&nbsp;&nbsp;SUBMIT</span>
+            </p>
           </paper-menu>
         </paper-scroll-header-panel>
 
@@ -226,6 +231,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-tab id='dashboard'>DASHBOARD</paper-tab>
                 <paper-tab id='all_projects'>ALL PROJECTS</paper-tab>
                 <paper-tab id='about'>ABOUT</paper-tab>
+                <paper-tab id='submit'>SUBMIT</paper-tab>
               </paper-tabs>
             </div>
 
@@ -249,6 +255,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               </neon-animatable>
               <neon-animatable>
                 <my-about></my-about>
+              </neon-animatable>
+              <neon-animatable>
+                <submit-page></submit-page>
               </neon-animatable>
             </neon-animated-pages>
 
@@ -298,7 +307,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script>
     var scope = document.querySelector('template[is="dom-bind"]');
     scope.selected = 0;
-    
+
     window.addEventListener('WebComponentsReady', function(e) {
       $('paper-tabs paper-tab').click(function(){
         $('#mainContainer').scrollTop(0);
@@ -318,9 +327,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     });
 
     function page_change(page_id) {
-      $(document).trigger('page-changed', page_id);
 
-      ar = ['dashboard', 'all_projects', 'about']
+      $(document).trigger('page-changed', page_id);
+      ar = ['dashboard', 'all_projects', 'about', 'submit']
+
       ar.forEach(function(e){
         $('#mainToolbar').removeClass(e);
         $('#drawer').removeClass(e);

@@ -18,6 +18,10 @@ html, body {
   margin: 0 auto;
 }
 
+.mdl-grid {
+  transition: visibility 0.5s, opacity 0.5s, max-height 0.5s;
+}
+
 .top_container_in_card{
   min-height:200px;
 }
