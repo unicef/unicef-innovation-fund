@@ -13,6 +13,10 @@ html, body {
   color: #333;
 }
 
+.mdl-grid {
+  transition: visibility 0.5s, opacity 0.5s, max-height 0.5s;
+}
+
 .top_container_in_card{
   min-height:200px;
 }
@@ -296,6 +300,7 @@ paper-tab{
   font-weight:500;
 }
 
+<<<<<<< HEAD
 .featured__details {
     border-left: 1px solid black;
     padding-left: 20px;
