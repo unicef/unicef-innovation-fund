@@ -15,6 +15,69 @@
          padding-left:5px;
        }
 
+       circular-progress {
+         display: inline-block;
+       }
+
+       .portfolio-card__progress {
+         text-align: center;
+       }
+
+       .portfolio-card__progress-info {
+         position: relative;
+         margin-bottom: 6px;
+       }
+
+       .portfolio-card__progress-info::before {
+         display: inline-block;
+         content: '';
+         width: 1px;
+         height: 14px;
+         background-color: #ffcc33;
+         position: absolute;
+         left: 50%;
+         bottom: -16px;
+       }
+
+       .portfolio-card__progress-info--real_time_information::before {
+         background-color: #ff3366;
+       }
+
+       .portfolio-card__progress-info--infrastructure::before {
+         background-color: #66cc66;
+       }
+
+       .portfolio-card__progress-info--knowledge_products::before {
+         background-color: #33cccc;
+       }
+
+       .portfolio-card__progress-subtitle, .portfolio-card__progress-info {
+         text-transform: uppercase;
+         font-size: 12px;
+         color: #333333;
+         line-height: 1.1em;
+       }
+
+       .portfolio-card__progress-subtitle {
+         margin-top: 0.3em;
+         margin-bottom: -0.5em;
+       }
+
+       progress-bubble.circular-progress__bubble--real_time_information {
+         --progress-bubble-stroke-color: #ff3366;
+         color: #ff3366;
+       }
+
+       progress-bubble.circular-progress__bubble--infrastructure {
+         --progress-bubble-stroke-color: #66cc66;
+         color: #66cc66;
+       }
+
+       progress-bubble.circular-progress__bubble--knowledge_products {
+         --progress-bubble-stroke-color: #33cccc;
+         color: #33cccc;
+       }
+
     </style>
 
     <style is="custom-style">
@@ -53,21 +116,16 @@
         </p>
       </div>
       <hr />
-      <div style='width: 90%;margin: 0 auto; background-color:white;  text-align:center;'>
-        <span class$='amount {{svg}}'>
-          {{to_mil(progress.1)}}
-        </span>
-        <div class='amount_invested'>
-          <span class='invested'>INVESTED</span>
+
+      <div class="portfolio-card__progress">
+        <div class$="portfolio-card__progress-info portfolio-card__progress-info--{{ svg }}">
+          {{ _getProgressValue(progress.0) }}<br/>
+          available
         </div>
-
-          <progress-bar total="[[progress.0]]" spent="{{progress.1}}" svg="{{svg}}"></progress-bar>
-
-          {{to_mil(progress.0)}}
-        <div class='amount_invested'>
-          <span>AVAILABLE</span>
-        </div>
-
+        <circular-progress id="progressBar" value="[[ progress.1 ]]" max="[[ progress.0 ]]" type="[[ svg ]]">
+            {{ _getProgressValue(progress.1) }}
+            <span class="portfolio-card__progress-subtitle">Invested</span>
+        </circular-progress>
       </div>
 
       <br>
@@ -288,6 +346,10 @@
 
     _computeClass: function(wide) {
        return (!wide) ? 'screen_narrow': 'screen_wide';
+    },
+
+    _getProgressValue(value) {
+      return cleanToMil(value);
     }
   })
 

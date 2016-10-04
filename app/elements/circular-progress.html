@@ -1,0 +1,64 @@
+
+<dom-module id='circular-progress'>
+  <template>
+    <style>
+
+
+
+      progress-bubble {
+        width: 120px;
+        height: 120px;
+        text-shadow: none;
+        --progress-bubble-stroke-color: #ffcc33;
+        --progress-bubble-stroke-linecap: round;
+        --progress-bubble-bg-stroke-color: rgb(186, 185, 185);
+        --progress-bubble-background: transparent;
+        --progress-bubble-reflection-display: none;
+        color: #ffcc33;
+      }
+
+      progress-bubble.circular-progress__bubble--real_time_information {
+        --progress-bubble-stroke-color: #ff3366;
+        color: #ff3366;
+      }
+
+      progress-bubble.circular-progress__bubble--infrastructure {
+        --progress-bubble-stroke-color: #66cc66;
+        color: #66cc66;
+      }
+
+      progress-bubble.circular-progress__bubble--knowledge_products {
+        --progress-bubble-stroke-color: #33cccc;
+        color: #33cccc;
+      }
+
+    </style>
+
+    <div class="circular-progress__container">
+      <progress-bubble stroke-width="10" class$="circular-progress__bubble circular-progress__bubble--{{type}}" id="circularProgress" value="[[value]]" max="[[max]]"><content></content></progress-bubble>
+    </div>
+
+  </template>
+</dom-module>
+
+<script>
+
+  Polymer({
+    is: 'circular-progress',
+    properties: {
+      max: {
+        type: Number,
+        value: 0
+      },
+      value: {
+        type: Number,
+        value: 0
+      },
+      type: {
+        type: String,
+        value: null
+      }
+    }
+  });
+
+</script>
