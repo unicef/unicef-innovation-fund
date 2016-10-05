@@ -27,29 +27,56 @@
       .project__switch {
           cursor: pointer;
           display: inline-block;
+          font-size: 0.85rem;
           list-style-type: none;
+          margin-right: 2.5rem;
           transition: all 0.5s;
+          text-transform: uppercase;
       }
 
       .project__section {
         transition: all 0.5s ease-in-out;
       }
 
-      @media (max-width: 768px) {
+      @media (max-width: 840px) {
+        .project__header {
+            background-color: #F1F2F2;
+            box-shadow: 0 -10px 0 0 var(--portfolio-card-lead-color);
+            margin: 10px 0 0;
+            padding-bottom: 0.6rem;
+            padding-top: 1rem;
+        }
+
+        .project__title {
+            font-size: 1.35rem;
+            margin: 0;
+        }
+
         .is-active {
             box-shadow: 0 2px 0 0 var(--portfolio-card-lead-color);
         }
+
         .js-active {
           opacity: 1;
           position: relative;
           transform: translateY(0);
           visibility: visible;
         }
+
         .js-hidden {
           opacity: 0;
           position: absolute;
           transform: translateY(10%);
           visibility: hidden;
+        }
+
+        [data-content="description"] > *:not(.project__description) {
+            display: none;
+        }
+
+        .project__section {
+            padding-bottom: 2rem;
+            padding-top: 2rem;
         }
       }
     </style>
@@ -59,7 +86,8 @@
 
 
     <div class$="{{_computeClass(wide)}}">
-        <ul class="mdl-layout__cell mdl-cell--hide-desktop">
+        <ul class="mdl-layout__cell mdl-cell--hide-desktop project__header">
+            <h2 class="project__title">{{featured}}</h2>
             <li on-tap="toggleSection" class="project__switch is-active" data-active="description" data-hide="graph">Description</li>
             <li on-tap="toggleSection" class="project__switch" data-active="graph" data-hide="description">Graph</li>
         </ul>
@@ -113,7 +141,7 @@
             {{featured}}
           </div>
 
-          <div class='featured_project_blurb pc_left'  on-tap="clickUserElement"
+          <div class='featured_project_blurb pc_left project__description'  on-tap="clickUserElement"
             style='cursor:pointer;display:{{display_content}}'>
               {{featured_content}}
               <div style='text-align:left;'>
