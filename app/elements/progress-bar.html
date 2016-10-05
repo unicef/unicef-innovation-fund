@@ -65,7 +65,6 @@
       },
 
       computeProgressLength: function(total, spent, bar_size){
-        console.log(total + " " + spent)
         var windowsize = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         percent = (spent / (total * 10)) * 1000
         return (percent / 100) * bar_size

@@ -1,42 +1,80 @@
 <dom-module id='portfolio-project'>
   <template>
     <style>
+
+      :host {
+        background-color: #fff;
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        transition: all .175s ease-in;
+      }
+
+      :host.is-expanded {
+        height: 300px;
+        width: 100%;
+      }
+
       ul{
         list-style: none;
       }
-      .project_sub_text{
-        font-size:12px;
+
+      .portfolio-project__content {
+        line-height: 1.5;
+        height: 100%;
+      }
+
+      .portfolio-project__container {
+        transition: box-shadow .175s ease-in;
+        cursor: pointer;
+        height: 100%;
+      }
+
+      .portfolio-project__sub-text {
         color:gray;
       }
-      .hover{
-        background-color: red;
+
+      .portfolio-project__name {
+        text-align: left;
+        margin: 0;
+        padding: 0;
+      }
+
+      .portfolio-project__content {
+        padding: 32px 16px;
+      }
+
+      .portfolio-project__icon {
+        position: absolute;
+        top: 17px;
+        right: 16px;
+        opacity: 0;
+        transition: opacity .175s ease-out;
+      }
+
+      :host:hover .portfolio-project__icon {
+        opacity: 1;
       }
 
     </style>
-    <li class="mdl-list__item" style='cursor:pointer;padding:0px;margin:0px;'>
-      <div class="mdl-grid"  style='padding-top:0px;margin-top:0px;'>
-        <div class="mdl-cell mdl-cell--12-col" style='padding-top:0px;margin-top:0px;'>
-          <div class-name='divider_{{svg}}' style='text-align:left;padding-top:10px;' on-tap="clickUserElement" on-mouseenter='onHovered' on-mouseleave='onUnHovered'>
-              <div class='mdl-grid' style='padding:0px; margin:0px;text-align:right;'>
-                <div class='mdl-cell mdl-cell--11-col mdl-cell--7-col-tablet mdl-cell--3-col-phone' style='height:42px;padding:0px; margin:0px;text-align:left;'>
-                  <span data-page="{{svg}}" style='text-align:left;'><b>{{item.name}}</b></span>
-                </div>
 
-                <div class='mdl-cell mdl-cell--1-col' style='display:{{hovered}};'>
-                  <img src='/images/launch.png' style='margin:0px;padding:0px;'/>
-                </div>
-              </div>
-
-            <div class='project_sub_text'>
-              {{item.country}}
-            </div>
-            <div class='project_sub_text'>
-              {{to_mil(item.amount)}}
-            </div>
-          </div>
+    <div class-name='divider divider--{{svg}} portfolio-project__container mdl-shadow--4dp' on-tap="clickUserElement" on-mouseenter='onHovered' on-mouseleave='onUnHovered'>
+      <div class="portfolio-project__content">
+        <div class="portfolio-project__icon">
+          <i class="material-icons">&#xE56B;</i>
+        </div>
+        <div class='portfolio-project__name'>
+          <span data-page="{{svg}}"><b>{{item.name}}</b></span>
+        </div>
+        <div class='portfolio-project__sub-text'>
+          {{item.country}}
+        </div>
+        <div class='portfolio-project__sub-text'>
+          {{to_mil(item.amount)}}
         </div>
       </div>
-    </li>
+    </div>
+
   </template>
 </dom-module>
 
@@ -61,10 +99,6 @@
       svg: {
         value: '',
         notify: true
-      },
-
-      hovered: {
-        value: 'none'
       }
     },
 
@@ -73,13 +107,11 @@
     },
 
     onHovered: function(e) {
-      this.$$('li').classList.add('mdl-shadow--8dp');
-      this.hovered = 'block';
+      this.$$('.portfolio-project__container').classList.add('mdl-shadow--8dp');
     },
 
     onUnHovered: function(e) {
-      this.$$('li').classList.remove('mdl-shadow--8dp');
-      this.hovered = 'none';
+      this.$$('.portfolio-project__container').classList.remove('mdl-shadow--8dp');
     },
 
     clickUserElement:function(){

@@ -1,322 +1,299 @@
 <dom-module id="submit-page">
-    <template>
-        <style is="custom-style">
-            .container {
-                max-width: 1150px;
-                text-align: center;
-            }
+  <template>
+    <style is="custom-style">
+    .container {
+      max-width: 1150px;
+      text-align: center;
+    }
+    
+    .container--wide {
+      max-width: 1920px;
+    }
+    
+    .button:hover {
+      background-color: #FFFFFF;
+      box-shadow: 2px 2px 10px 0 #999999;
+      z-index: 1;
+    }
+    
+    .button--big {
+      float: left;
+      font-size: 1.2rem;
+      height: 252px;
+      text-transform: none;
+      width: 50%;
+    }
+    
+    .button--white {
+      background-color: #FFFFFF;
+    }
+    
+    .button--text-blue {
+      color: #0097D8;
+    }
+    
+    .button--text-violet {
+      color: #2B3880;
+    }
+    
+    .section__header {
+      color: #0097D8;
+      font-size: 3rem;
+      letter-spacing: 0.08rem;
+      line-height: 4rem;
+      margin-bottom: 3rem;
+    }
+    
+    .section__description {
+      color: #727272;
+      font-size: 1.2rem;
+      font-weight: 900;
+      line-height: 1.45;
+      letter-spacing: 0.11rem;
+      margin: 2.5rem;
+    }
+    
+    .section__user-email {
+      margin-top: 3.7rem;
+    }
+    
+    .section__submit {
+      background-color: #0097D8;
+      color: #FFFFFF !important;
+      /* Overwrite MDL default style */
+      font-size: 1.6rem;
+      font-weight: 400;
+      height: inherit;
+      letter-spacing: 0.05rem;
+      margin-top: 1.1rem;
+      padding: 1rem 3.2rem;
+      text-transform: none;
+    }
+    
+    .section__submit:hover {
+      background-color: #77C2E2;
+    }
+    
+    .section__break {
+      border-top: 2px solid #727272;
+      margin: 4.8rem 0 5.9rem;
+    }
+    
+    .section__subheader {
+      color: #33B9B9;
+      font-size: 3.7rem;
+      font-weight: 300;
+      letter-spacing: 0.05rem;
+      margin-bottom: 3rem;
+    }
+    
+    .section__icon {
+      width: 22%;
+    }
+    
+    .section__link {
+      text-decoration: none;
+    }
+    
+    .section__back {
+      background-color: transparent;
+      border: none;
+      float: left;
+      font-size: 2rem;
+      text-decoration: underline;
+      text-transform: uppercase;
+    }
+    
+    .section__input {
+      background-color: transparent;
+      border: 1px solid #0097D8;
+      display: block;
+      font-size: 1.7rem;
+      font-style: italic;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    
+    .section__confirm-email {
+      background-color: #BABCBD;
+      border: none;
+      color: #000000;
+      font-size: 1.7rem;
+      margin-top: 2.5rem;
+      padding: 1rem 8.2rem;
+    }
+    
+    .faq__name {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin: 1.3rem 0;
+      text-align: left;
+    }
+    
+    .faq__image {
+      margin-top: 3rem;
+      width: 100%;
+    }
+    
+    .faq__link {
+      float: right;
+      font-weight: 400;
+      text-decoration: none;
+    }
+    
+    .faq__description {
+      font-size: 1.35rem;
+      line-height: 1.4;
+      letter-spacing: 0.094rem;
+      margin-bottom: 4.1rem;
+      text-align: left;
+    }
+    
+    .js-visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .js-hidden {
+      opacity: 0;
+      visibility: hidden;
+      max-height: 0;
+    }
 
-            .container--wide {
-                max-width: 1920px;
-            }
-
-            .header {
-                text-align: center;
-            }
-
-            .header--gray {
-                background-color: #333333;
-            }
-
-            .header__title {
-                color: #FFFFFF;
-                font-size: 2.4rem;
-                font-weight: lighter;
-                line-height: 243px; /*Center text vertically*/
-                margin: 0;
-            }
-
-            .button:hover {
-                background-color: #FFFFFF;
-                box-shadow: 2px 2px 10px 0 #999999;
-                z-index: 1;
-            }
-
-            .button--big {
-                float: left;
-                font-size: 1.2rem;
-                height: 252px;
-                text-transform: none;
-                width: 50%;
-            }
-
-            .button--white {
-                background-color: #FFFFFF;
-            }
-
-            .button--text-blue {
-                color: #0097D8;
-            }
-
-            .button--text-violet {
-                color: #2B3880;
-            }
-
-            .section__header {
-                color: #0097D8;
-                font-size: 3rem;
-                letter-spacing: 0.08rem;
-                line-height: 4rem;
-                margin-bottom: 3rem;
-            }
-
-            .section__description {
-                color: #727272;
-                font-size: 1.2rem;
-                font-weight: 900;
-                line-height: 1.45;
-                letter-spacing: 0.11rem;
-                margin: 2.5rem;
-            }
-
-            .section__user-email {
-                margin-top: 3.7rem;
-            }
-
-            .section__submit {
-                background-color: #0097D8;
-                color: #FFFFFF !important; /* Overwrite MDL default style */
-                font-size: 1.6rem;
-                font-weight: 400;
-                height: inherit;
-                letter-spacing: 0.05rem;
-                margin-top: 1.1rem;
-                padding: 1rem 3.2rem;
-                text-transform: none;
-            }
-
-            .section__submit:hover {
-                background-color: #77C2E2;
-            }
-
-            .section__break {
-                border-top: 2px solid #727272;
-                margin: 4.8rem 0 5.9rem;
-            }
-
-            .section__subheader {
-                color: #33B9B9;
-                font-size: 3.7rem;
-                font-weight: 300;
-                letter-spacing: 0.05rem;
-                margin-bottom: 3rem;
-            }
-
-            .section__icon {
-                width: 22%;
-            }
-
-            .section__link {
-                text-decoration: none;
-            }
-
-            .section__back {
-                background-color: transparent;
-                border: none;
-                float: left;
-                font-size: 2rem;
-                text-decoration: underline;
-                text-transform: uppercase;
-            }
-
-            .section__input {
-                background-color: transparent;
-                border: 1px solid #0097D8;
-                display: block;
-                font-size: 1.7rem;
-                font-style: italic;
-                margin: 0 auto;
-                padding: 1rem;
-            }
-
-            .section__confirm-email {
-                background-color: #BABCBD;
-                border: none;
-                color: #000000;
-                font-size: 1.7rem;
-                margin-top: 2.5rem;
-                padding: 1rem 8.2rem;
-            }
-
-            .faq__name {
-                font-size: 1.4rem;
-                font-weight: 600;
-                margin: 1.3rem 0;
-                text-align: left;
-            }
-
-            .faq__image {
-                margin-top: 3rem;
-                width: 100%;
-            }
-
-            .faq__link {
-                float: right;
-                font-weight: 400;
-                text-decoration: none;
-            }
-
-            .faq__description {
-                font-size: 1.35rem;
-                line-height: 1.4;
-                letter-spacing: 0.094rem;
-                margin-bottom: 4.1rem;
-                text-align: left;
-            }
-
-            .js-visible {
-                opacity: 1;
-                visibility: visible;
-            }
-
-            .js-hidden {
-                opacity: 0;
-                visibility: hidden;
-                max-height: 0;
-            }
-
-            @media (max-width: 1120px) {
-                .button--big {
-                    font-size: 2rem;
-                    height: 250px;
-                }
-            }
-
-            @media (max-width: 920px) {
-                .section__back {
-                    float: none;
-                }
-            }
-
-            @media (max-width: 680px) {
-                .button--big {
-                    display: block;
-                    float: none;
-                    width: 100%;
-                }
-            }
-        </style>
-
-        <header class="header header--gray">
-            <h2 class="header__title">Submit</h2>
-        </header>
-
-        <div class="mdl-grid js-visible" data-target="main">
-            <div class="mdl-layout-spacer"></div>
-            <div class="container--wide mdl-cell mdl-cell--12-col">
-                <button on-tap="changeSection" class="button button--big button--white button--text-blue mdl-button mdl-js-button mdl-js-ripple-effect" data-display="office" data-hide="main">Submissions by UNICEF country offices</button>
-                <button on-tap="changeSection" class="button button--big button--white button--text-violet mdl-button mdl-js-button mdl-js-ripple-effect" data-display="startup" data-hide="main">Submissions by start-ups</button>
-            </div>
-            <div class="mdl-layout-spacer"></div>
+    button.fade-in{
+        animation-delay: 0.525s !important;
+    }
+    
+    @media (max-width: 1120px) {
+      .button--big {
+        font-size: 2rem;
+        height: 250px;
+      }
+    }
+    
+    @media (max-width: 920px) {
+      .section__back {
+        float: none;
+      }
+    }
+    
+    @media (max-width: 680px) {
+      .button--big {
+        display: block;
+        float: none;
+        width: 100%;
+      }
+    }
+    </style>
+    <style is="custom-style" include="style-fade-in"></style>
+    <header class='page__header page__header--dark'>
+      <div class='mdl-grid container' style='position:relative;'>
+        <div class="mdl-layout-spacer"></div>
+        <div class="mdl-cell mdl-cell--10-col">
+          <h1 class='page__header-title fade-in'>Submit</h1>
         </div>
+        <div class="mdl-layout-spacer"></div>
+      </div>
+    </header>
+    <div class="mdl-grid js-visible" data-target="main">
+      <div class="mdl-layout-spacer"></div>
+      <div class="container--wide mdl-cell mdl-cell--12-col">
+        <button on-tap="changeSection" class="button button--big button--white button--text-blue mdl-button mdl-js-button mdl-js-ripple-effect fade-in" data-display="office" data-hide="main">Submissions by UNICEF country offices</button>
+        <button on-tap="changeSection" class="button button--big button--white button--text-violet mdl-button mdl-js-button mdl-js-ripple-effect fade-in" data-display="startup" data-hide="main">Submissions by start-ups</button>
+      </div>
+      <div class="mdl-layout-spacer"></div>
+    </div>
+    <div class="mdl-grid js-hidden" data-target="office">
+      <div class="mdl-layout-spacer"></div>
+      <div class="container mdl-cell mdl-cell--12-col">
+        <button on-tap="changeSection" class="section__back" id="back-from-office" data-display="main" data-hide="office">Back</button>
+        <h3 class="section__header">UNICEF Country Offices</h3>
+        <p class="section__description">If You are a UNICEF country office, please enter your email address to continue</p>
+        <form is="iron-form" class="section__form" on-submit="submitEmail">
+          <input type="email" placeholder="email@unicef.org" class="section__input">
+          <button type="submit" class="section__confirm-email" data-display="office-submited" data-hide="office">Continue</button>
+        </form>
+      </div>
+      <div class="mdl-layout-spacer"></div>
+    </div>
+    <div class="mdl-grid js-hidden" data-target="office-submited">
+      <div class="mdl-layout-spacer"></div>
+      <div class="container mdl-cell mdl-cell--12-col">
+        <button on-tap="changeSection" class="section__back" data-display="main" data-hide="office-submited">Back</button>
+        <h3 class="section__header">UNICEF Country Offices</h3>
+        <strong class="section__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi est ducimus, nemo laborum esse repellat accusamus, repudiandae officia neque voluptatum id. Facilis iste odit eligendi perspiciatis, sed hic nesciunt maiores?</strong>
+        <p class="section__user-email"></p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit mdl-button mdl-js-button mdl-js-ripple-effect">Submission Form</a>
+        <hr class="section__break">
+        <h3 class="section__subheader">TBD</h3>
+        <h4 class="faq__name">Short Background Note<a href="https://drive.google.com/file/d/0BwC3tr7jXADzNXJTNzk4d01qams/view?usp=sharing" class="faq__link">Download</a></h4>
+        <p class="faq__description">The Innovation Fund allows UNICEF to quickly assess, fund and scale open-source solutions that have been developed by companies in new and emerging markets. The Innovation Fund supports the generation of open source, public goods that address the most pressing challenges facing children. The Innovation Fund brings together models of financing and methodologies used by Venture Capital funds and the principles of UNICEF'S award winning Innovation Unit. </p>
+        <h4 class="faq__name">List of Programme Countries<a href="http://www.unicefinnovationfund.org/programme-countries" class="faq__link">Download</a></h4>
+        <p class="faq__description">This is a list of programme countries who are eligible to submit a project to the Innovation Fund. </p>
+        <h4 class="faq__name">Innovation Principles<a href="http://www.unicefstories.org/principles/" class="faq__link">Download</a></h4>
+        <p class="faq__description">The following set of principles represents a concerted effort by donors to capture the most important lessons learned by the development community in the implementation of technology-enabled programs. Having evolved from a previous set of implementer precepts endorsed by over 300 organizations, these principles seek to serve as a set of living guidelines that are meant to inform, but not dictate, the design of technology-enabled development programs.</p>
+        <h4 class="faq__name">Previous UNICEF Request for Expression of Interest (REOI)<a href="https://drive.google.com/file/d/0B6-5qW-9eN2bUG9nOVA2eGpyU0k/view" class="faq__link">Download</a></h4>
+        <h4 class="faq__name">Frequently Asked Questions (FAQs) about the Request for Expression of Interest (REOI)<a href="http://www.unicefinnovationfund.org/submission-faqs" class="faq__link">Download</a></h4>
+        <img src="https://placehold.it/800x64" alt="" class="faq__image">
+      </div>
+      <div class="mdl-layout-spacer"></div>
+    </div>
+    <div class="mdl-grid js-hidden" data-target="startup">
+      <div class="mdl-layout-spacer"></div>
+      <div class="container mdl-cell mdl-cell--12-col">
+        <button on-tap="changeSection" class="section__back" data-display="main" data-hide="startup">Back</button>
+        <h3 class="section__header">STARTUP</h3>
+        <p class="section__description">The next call for submissions from start-ups and academic institutions is planned for December 2016. Please follow us on Twitter <a href="https://twitter.com/unicefinnovate" class="section__link">@unicefinnovate</a>, where we will share updates about the Fund and future submission opportunities and deadlines.</p>
+        <p class="section__description">If you submitted an Expression of Interest in the last round (closed on 26 February 2016), only selected companies/institutions have been contacted with information about next steps. Thank you for your submission nd interest in the Innovation Fund.</p>
+        <hr class="section__break">
+        <h3 class="section__subheader">Resources</h3>
+        <img src="../images/icons/resources.png" alt="" class="section__icon">
+        <h4 class="faq__name">Short Background Note<a href="https://drive.google.com/file/d/0BwC3tr7jXADzNXJTNzk4d01qams/view?usp=sharing" class="faq__link">Download</a></h4>
+        <p class="faq__description">The Innovation Fund allows UNICEF to quickly assess, fund and scale open-source solutions that have been developed by companies in new and emerging markets. The Innovation Fund supports the generation of open source, public goods that address the most pressing challenges facing children. The Innovation Fund brings together models of financing and methodologies used by Venture Capital funds and the principles of UNICEF'S award winning Innovation Unit. </p>
+        <h4 class="faq__name">Innovation Principles<a href="http://www.unicefstories.org/principles/" class="faq__link">Download</a></h4>
+        <p class="faq__description">The following set of principles represents a concerted effort by donors to capture the most important lessons learned by the development community in the implementation of technology-enabled programs. Having evolved from a previous set of implementer precepts endorsed by over 300 organizations, these principles seek to serve as a set of living guidelines that are meant to inform, but not dictate, the design of technology-enabled development programs.</p>
+      </div>
+      <div class="mdl-layout-spacer"></div>
+    </div>
+  </template>
+  <script>
+  Polymer({
+    is: "submit-page",
+    listeners: {
+      'iron-form-submit': 'submitEmail'
+    },
+    toggleVisible: function(toHide, toShow) {
+      var visibleClass = "js-visible";
+      var hiddenClass = "js-hidden";
 
-        <div class="mdl-grid js-hidden" data-target="office">
-            <div class="mdl-layout-spacer"></div>
-            <div class="container mdl-cell mdl-cell--12-col">
-                <button on-tap="changeSection" class="section__back" id="back-from-office" data-display="main" data-hide="office">Back</button>
-                <h3 class="section__header">UNICEF Country Offices</h3>
-                <p class="section__description">If You are a UNICEF country office, please enter your email address to continue</p>
-                <form is="iron-form" class="section__form" on-submit="submitEmail">
-                    <input type="email" placeholder="email@unicef.org" class="section__input">
-                    <button type="submit" class="section__confirm-email" data-display="office-submited" data-hide="office">Continue</button>
-                </form>
-            </div>
-            <div class="mdl-layout-spacer"></div>
-        </div>
+      toHide.classList.remove(visibleClass);
+      toHide.classList.add(hiddenClass);
 
-        <div class="mdl-grid js-hidden" data-target="office-submited">
-            <div class="mdl-layout-spacer"></div>
-            <div class="container mdl-cell mdl-cell--12-col">
-                <button on-tap="changeSection" class="section__back" data-display="main" data-hide="office-submited">Back</button>
-                <h3 class="section__header">UNICEF Country Offices</h3>
-                <strong class="section__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi est ducimus, nemo laborum esse repellat accusamus, repudiandae officia neque voluptatum id. Facilis iste odit eligendi perspiciatis, sed hic nesciunt maiores?</strong>
-                <p class="section__user-email"></p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit mdl-button mdl-js-button mdl-js-ripple-effect">Submission Form</a>
+      toShow.classList.remove(hiddenClass);
+      toShow.classList.add(visibleClass);
+    },
+    changeSection: function(event) {
+      var hide = event.target.dataset.hide;
+      var target = event.target.dataset.display;
 
-                <hr class="section__break">
+      var toHide = this.$$("[data-target='" + hide + "']");
+      var toShow = this.$$("[data-target='" + target + "']");
 
-                <h3 class="section__subheader">TBD</h3>
+      this.toggleVisible(toHide, toShow);
+    },
+    submitEmail: function(event) {
+      event.preventDefault();
+      var emailAddress = this.$$(".section__input").value;
 
-                <h4 class="faq__name">Short Background Note<a href="https://drive.google.com/file/d/0BwC3tr7jXADzNXJTNzk4d01qams/view?usp=sharing" class="faq__link">Download</a></h4>
-                <p class="faq__description">The Innovation Fund allows UNICEF to quickly assess, fund and scale open-source solutions that have been developed by companies in new and emerging markets. The Innovation Fund supports the generation of open source, public goods that address the most pressing challenges facing children. The Innovation Fund brings together models of financing and methodologies used by Venture Capital funds and the principles of UNICEF'S award winning  Innovation Unit. </p>
+      this.$$(".section__user-email").innerHTML = emailAddress;
 
-                <h4 class="faq__name">List of Programme Countries<a href="http://www.unicefinnovationfund.org/programme-countries" class="faq__link">Download</a></h4>
-                <p class="faq__description">This is a list of programme countries who are eligible to submit a project to the Innovation Fund. </p>
+      var submitButton = this.$$('.section__confirm-email');
 
-                <h4 class="faq__name">Innovation Principles<a href="http://www.unicefstories.org/principles/" class="faq__link">Download</a></h4>
-                <p class="faq__description">The following set of principles represents a concerted effort by donors to capture the most important lessons learned by the development community in the implementation of technology-enabled programs. Having evolved from a previous set of implementer precepts endorsed by over 300 organizations, these principles seek to serve as a set of living guidelines that are meant to inform, but not dictate, the design of technology-enabled development programs.</p>
+      var toHide = this.$$("[data-target='" + submitButton.dataset.hide + "']");
+      var toShow = this.$$("[data-target='" + submitButton.dataset.display + "']");
 
-                <h4 class="faq__name">Previous UNICEF Request for Expression of Interest (REOI)<a href="https://drive.google.com/file/d/0B6-5qW-9eN2bUG9nOVA2eGpyU0k/view" class="faq__link">Download</a></h4>
-
-                <h4 class="faq__name">Frequently Asked Questions (FAQs) about the Request for Expression of Interest (REOI)<a href="http://www.unicefinnovationfund.org/submission-faqs" class="faq__link">Download</a></h4>
-
-                <img src="https://placehold.it/800x64" alt="" class="faq__image">
-
-            </div>
-            <div class="mdl-layout-spacer"></div>
-        </div>
-
-        <div class="mdl-grid js-hidden" data-target="startup">
-            <div class="mdl-layout-spacer"></div>
-            <div class="container mdl-cell mdl-cell--12-col">
-                <button on-tap="changeSection" class="section__back" data-display="main" data-hide="startup">Back</button>
-                <h3 class="section__header">STARTUP</h3>
-                <p class="section__description">The next call for submissions from start-ups and academic institutions is planned for December 2016. Please follow us on Twitter <a href="https://twitter.com/unicefinnovate" class="section__link">@unicefinnovate</a>, where we will share updates about the Fund and future submission opportunities and deadlines.</p>
-                <p class="section__description">If you submitted an Expression of Interest in the last round (closed on 26 February 2016), only selected companies/institutions have been contacted with information about next steps. Thank you for your submission nd interest in the Innovation Fund.</p>
-
-                <hr class="section__break">
-
-                <h3 class="section__subheader">Resources</h3>
-
-                <img src="../images/icons/resources.png" alt="" class="section__icon">
-
-                <h4 class="faq__name">Short Background Note<a href="https://drive.google.com/file/d/0BwC3tr7jXADzNXJTNzk4d01qams/view?usp=sharing" class="faq__link">Download</a></h4>
-                <p class="faq__description">The Innovation Fund allows UNICEF to quickly assess, fund and scale open-source solutions that have been developed by companies in new and emerging markets. The Innovation Fund supports the generation of open source, public goods that address the most pressing challenges facing children. The Innovation Fund brings together models of financing and methodologies used by Venture Capital funds and the principles of UNICEF'S award winning  Innovation Unit. </p>
-
-                <h4 class="faq__name">Innovation Principles<a href="http://www.unicefstories.org/principles/" class="faq__link">Download</a></h4>
-                <p class="faq__description">The following set of principles represents a concerted effort by donors to capture the most important lessons learned by the development community in the implementation of technology-enabled programs. Having evolved from a previous set of implementer precepts endorsed by over 300 organizations, these principles seek to serve as a set of living guidelines that are meant to inform, but not dictate, the design of technology-enabled development programs.</p>
-            </div>
-            <div class="mdl-layout-spacer"></div>
-        </div>
-    </template>
-    <script>
-        Polymer({
-            is: "submit-page",
-            listeners: {
-                'iron-form-submit': 'submitEmail'
-            },
-            toggleVisible: function (toHide, toShow) {
-                var visibleClass = "js-visible";
-                var hiddenClass = "js-hidden";
-
-                toHide.classList.remove(visibleClass);
-                toHide.classList.add(hiddenClass);
-
-                toShow.classList.remove(hiddenClass);
-                toShow.classList.add(visibleClass);
-            },
-            changeSection: function (event) {
-                var hide = event.target.dataset.hide;
-                var target = event.target.dataset.display;
-
-                var toHide = this.$$("[data-target='" + hide + "']");
-                var toShow = this.$$("[data-target='" + target + "']");
-
-                this.toggleVisible(toHide, toShow);
-            },
-            submitEmail: function (event) {
-                event.preventDefault();
-                var emailAddress = this.$$(".section__input").value;
-
-                this.$$(".section__user-email").innerHTML = emailAddress;
-
-                var submitButton = this.$$('.section__confirm-email');
-
-                var toHide = this.$$("[data-target='" + submitButton.dataset.hide + "']");
-                var toShow = this.$$("[data-target='" + submitButton.dataset.display + "']");
-
-                this.toggleVisible(toHide, toShow);
-            }
-        })
-    </script>
+      this.toggleVisible(toHide, toShow);
+    }
+  })
+  </script>
 </dom-module>

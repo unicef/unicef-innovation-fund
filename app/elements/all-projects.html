@@ -1,12 +1,7 @@
 <dom-module id='all-projects'>
 
   <template>
-    <style>
-      .projects-card {
-        border-radius: 15px;
-        background-color:white;
-      }
-
+    <style include="style-fade-in">
       :host{
         display: block;
       }
@@ -14,52 +9,194 @@
       :host([active]) {
         display: block;
       }
+
+      .project-info {
+        background-color: #fff;
+        padding: 16px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .project-list {
+        min-height: 143px;
+        margin-top: -16px;
+      }
+
+      .project-list__item {
+        opacity: 0;
+        transition: all .175s ease-in;
+        transform: translateX(-16px);
+      }
+
+      .project-list__item.is-hidden {
+        display: none;
+      }
+
+      .project-list:not(.is-loaded) .project-list__item {
+        /* used !important to override style attribute */
+        transition-delay: 0s !important;
+      }
+
+      .project-list.is-loaded .project-list__item {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .project-filter {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .project-filter.is-hidden {
+        display: none;
+      }
+
+      .project-filter__menu {
+        margin-right: 16px;
+      }
+
+      .page--yellow paper-range-slider {
+        --paper-range-slider-active-color: #ffcc33;
+        --paper-range-slider-pin-color: #ffcc33;
+        --paper-range-slider-knob-color: #ffcc33;
+      }
+      .page--yellow paper-dropdown-menu {
+        --primary-color: #ffcc33;
+      }
+
+      .page--red paper-range-slider {
+        --paper-range-slider-active-color: #ff3366;
+        --paper-range-slider-pin-color: #ff3366;
+        --paper-range-slider-knob-color: #ff3366;
+      }
+      .page--red paper-dropdown-menu {
+        --primary-color: #ff3366;
+      }
+
+      .page--green paper-range-slider {
+        --paper-range-slider-active-color: #66cc66;
+        --paper-range-slider-pin-color: #66cc66;
+        --paper-range-slider-knob-color: #66cc66;
+      }
+      .page--green paper-dropdown-menu {
+        --primary-color: #66cc66;
+      }
+
+      .page--blue paper-range-slider {
+        --paper-range-slider-active-color: #33cccc;
+        --paper-range-slider-pin-color: #33cccc;
+        --paper-range-slider-knob-color: #33cccc;
+      }
+      .page--blue paper-dropdown-menu {
+        --primary-color: #33cccc;
+      }
+
+      .content-column:nth-child(1) {
+        animation-delay: 550ms;
+      }
+      .content-column:nth-child(2) {
+        animation-delay: 575ms;
+      }
+      .content-column:nth-child(3) {
+        animation-delay: 600ms;
+      }
+      .content-column:nth-child(4) {
+        animation-delay: 625ms;
+      }
+
+      .project-info.fade-in {
+        animation-delay: 650ms;
+      }
+
     </style>
 
-    <div class='hello_holder'>
-      <hello-all-projects all_projects_cloud_content="{{content.all_projects_cloud_content}}" style='position:relative:bottom:30px;'></hello-all-projects>
-      <div style='height:120px;'>
-      </div>
+    <firebase-document
+      app-name="test"
+      path="content"
+      data="{{content}}">
+    </firebase-document>
 
-      <iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query>
-      <iron-media-query full query="print" query-matches="{{print}}"></iron-media-query>
-      <template is="dom-if" if="{{!wide}}">
-        <br />
-        <br />
-      </template>
-      <firebase-document
-        app-name="test"
-        path="content"
-        data="{{content}}">
-      </firebase-document>
+    <firebase-document
+      app-name="test"
+      path="{{ location }}"
+      data="{{ projectsData }}">
+    </firebase-document>
 
-      <div class="mdl-grid" style='max-width:1200px;'>
-        <div class="projects-card content-column mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-cell--top">
-          <portfolio-projects content="{{content.youth_engagement}}" phrase='Products For Youth' fb='ureport' svg="youth_engagement" rgb='255, 204, 51, 0.2'>
-          </portfolio-projects>
+    <div class$='page {{ _getColorClass(selected) }}'>
+      <hello-all-projects all_projects_cloud_content="{{content.all_projects_cloud_content}}"></hello-all-projects>
+      <div class="page__content">
+        <div class="mdl-grid">
+          <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+            <project-card selected={{selected}} content="{{content.youth_engagement}}" phrase='Products For Youth' fb='ureport' svg="youth_engagement" rgb='255, 204, 51, 0.2'></project-card>
+          </div>
+          <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+            <project-card selected={{selected}} content="{{content.real_time_info}}" phrase='Real-time Information' svg="real_time_information" rgb='255, 204, 51, 0.2'></project-card>
+          </div>
+          <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+            <project-card selected={{selected}} content="{{content.infrastructure}}" phrase='Infrastructure' fb='iogt'  svg="infrastructure"   rgb='255, 204, 51, 0.2'></project-card>
+          </div>
+          <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+            <project-card selected={{selected}} content="{{content.knowledge_p}}" phrase='Knowledge Products' fb='iogt'  svg="knowledge_products"   rgb='255, 204, 51, 0.2'></project-card>
+          </div>
+          <div id="projectInfo" class="project-info fade-in mdl-cell mdl-cell--12-col mdl-shadow--4dp">
+            <div class="mdl-grid mdl-grid--no-spacing">
+              <div class="mdl-cell--4-col mdl-cell">
+                <h2 class="project-info__value">{{ _getProjectInfoValue(projects) }}</h2>
+              </div>
+              <div class="mdl-layout-spacer"></div>
+              <div class$="project-filter project-filter--yellow mdl-cell--4-col mdl-cell {{ _showFiltersClass(projects) }}">
+                <!-- region filter -->
+                <paper-dropdown-menu id="regionFilter" class="project-filter__menu" label="Region">
+                  <paper-listbox id="regionFilterListbox" class="dropdown-content" attr-for-selected="value">
+                    <paper-item value="">All regions</paper-item>
+                    <template is="dom-repeat" id='regionItems' items="{{_getUniqueRegions(projects)}}">
+                      <paper-item value="{{item}}">{{item}}</paper-item>
+                    </template>
+                  </paper-listbox>
+                </paper-dropdown-menu>
+                <!-- region filter -->
+                <!-- amount filter -->
+                <paper-dropdown-menu class="project-filter__menu" label="Amount" on-paper-dropdown-close="_amountFilterClosed">
+                  <paper-listbox id="amountFilterListbox" class="dropdown-content">
+                    <paper-item>${{ filterAmountMin }}-${{ filterAmountMax }}</paper-item>
+                    <paper-item on-tap="_onAmountFilterTap">
+                      <paper-range-slider class="slider" id="amountFilter" step='10000'></paper-range-slider>
+                    </paper-item>
+                  </paper-listbox>
+                </paper-dropdown-menu>
+                <!-- amount filter -->
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="projects-card content-column mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-cell--top">
-          <portfolio-projects content="{{content.real_time_info}}" phrase='Real-time Information' svg="real_time_information" rgb='255, 204, 51, 0.2'>
-          </portfolio-projects>
-        </div>
-        <div class="projects-card content-column mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-cell--top">
-          <portfolio-projects content="{{content.infrastructure}}" phrase='Infrastructure' fb='iogt'  svg="infrastructure"   rgb='255, 204, 51, 0.2'>
-          </portfolio-projects>
-        </div>
-        <div class="projects-card content-column mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-cell--top">
-          <portfolio-projects content="{{content.knowledge_p}}" phrase='Knowledge Products' fb='iogt'  svg="knowledge_products"   rgb='255, 204, 51, 0.2'>
-          </portfolio-projects>
+        <div class="project-list mdl-grid">
+          <template is="dom-repeat" id='templateProjects' items="{{projects}}">
+              <portfolio-project class$="project-list__item mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone {{ _getFilterClass(item, filterAmountMin, filterAmountMax, filterRegion) }}" data={{projectsData}} index={{index}} svg={{selected}} item={{item}}></portfolio-project>
+          </template>
         </div>
       </div>
     </div>
   </template>
 </dom-module>
-
 <script>
+
+  var projectCards = [
+    { label: 'Products For Youth', key: 'youth_engagement', svg: 'youth_engagement' },
+    { label: 'Real-time Information', key: 'real_time_info', svg: 'real_time_information' },
+    { label: 'Infrastructure', key: 'infrastructure', svg: 'infrastructure' },
+    { label: 'Knowledge Products', key: 'knowledge_p', svg: 'knowledge_products' }
+  ];
 
   Polymer({
     is: 'all-projects',
     properties: {
+      selected: {
+        type: String,
+        value: projectCards[0].key,
+        notify: true,
+        observer: '_selectedChange'
+      },
       svg: {
         value: '',
         notify: true
@@ -71,27 +208,84 @@
         type: Boolean,
         value: false,
         reflectToAttribute: true
+      },
+      location: {
+        type: String,
+        computed: '_computeLocation(selected)'
+      },
+      projectsData:{
+        type: Object,
+        observer: '_assignProjects'
+      },
+      projects: {
+        type: Array
+      },
+      projectCards: {
+        type: Array,
+        value: projectCards
+      },
+      filterAmountMin: {
+        type: Number,
+        value: null
+      },
+      filterAmountMax: {
+        type: Number,
+        value: null
+      },
+      filterRegion: {
+        type: String,
+        value: null
       }
     },
 
-    prepare: function(svg, featured, dataSet){
+    ready: function(){
+      var stagger = 25;
+      var projectList = this.querySelector('.project-list');
 
-      if(Object.keys(dataSet) == 0){return;}
-      // var color = ''
-      // if(svg == 'youth_engagement') {
-      //   color = "rgba(255, 204, 51, 0.2)";
-      // }else if(svg == 'real_time_information') {
-      //   color = "rgba(255, 143, 171, 0.2)";
-      // }else{
-      //   color = "rgba(133, 214, 133, 0.2)";
-      // }
+      this.$.templateProjects.addEventListener('dom-change', (function(){
+        var projectItems = this.querySelectorAll('.project-list__item');
+        projectItems.forEach(function(item, key){
+          item.style.transitionDelay = (key*stagger)+'ms';
+        });
 
-      if (svg == 'youth_engagement'){
-        return prepareUreport(dataSet, featured, "rgba(255, 204, 51, 0.2)")
-      }else if(svg == 'real_time_information'){
-        return prepareGitCommits(dataSet, featured, "rgba(255, 143, 171, 0.2)");
-      }else{
-        return prepareIOGT(dataSet, featured, "rgba(133, 214, 133, 0.2)")
+        //This line is used to force DOM redraw
+        $(projectList).hide().show(0);
+
+        //If All projects tab is active
+        var scope = document.querySelector('template[is="dom-bind"]');
+        if (scope.page_id == 'all_projects') {
+          projectList.classList.add('is-loaded');
+        }
+
+      }).bind(this));
+
+      $(document).on('page-changed', function(e, page_id){
+        if (page_id != 'all_projects') {
+          projectList.classList.remove('is-loaded');
+        } else {
+          //Reveal project items on tab switch
+          setTimeout(function(){
+            projectList.classList.add('is-loaded');
+          }, 675);
+        }
+      });
+
+      this._initFilters();
+    },
+
+    _assignProjects: function(obj, oldObj){
+      if(Object.keys(obj).length > 0){
+        //Used to stagger item transition
+        var projectList = this.querySelector('.project-list');
+        projectList.classList.remove('is-loaded');
+
+        this._setAmountMinMax(obj);
+        this._resetFilters();
+
+        //Timeout waits for transition to finish
+        setTimeout((function(){
+          this.projects = obj;
+        }).bind(this), 350);
       }
     },
 
@@ -99,8 +293,126 @@
       return [data.totals[kind], data.spents[kind]]
     },
 
-    _computeClasses: function(wide) {
-       return (!wide) ? 'layout vertical': 'layout';
+    _computeLocation: function(route) {
+       return "portfolios/" + route + '/projects';
+    },
+
+    _getProjectInfoValue: function(projects) {
+      if (!projects.length) {
+        return '';
+      }
+      return projects.length + ' project' + (projects.length > 1 ? 's' : '');
+    },
+
+    _getProjectContent: function(content, key) {
+      return content[key];
+    },
+
+    _initFilters: function() {
+      var that = this;
+
+      this.$.amountFilter.addEventListener('updateValues', (function(e){
+        this.filterAmountMin = this.$.amountFilter.valueMin;
+        this.filterAmountMax = this.$.amountFilter.valueMax;
+        this.$.amountFilterListbox.select(null);
+      }).bind(this));
+
+      this.$.regionFilterListbox.addEventListener('iron-select', function(e){
+        that.filterRegion = this.selected;
+      });
+    },
+
+    _amountFilterClosed: function(e) {
+      if (this.filterAmountMin && this.filterAmountMax) {
+        this.$.amountFilterListbox.selectIndex(0);
+      }
+    },
+
+    _onAmountFilterTap: function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    },
+
+    _setAmountMinMax: function(elements) {
+      var values = elements.map((function(item){
+        return this._getIntFromAmount(item.amount);
+      }).bind(this));
+
+      var min = Math.min.apply(null, values);
+      var max = Math.max.apply(null, values);
+
+      //Dividing by 1000 to assure slider is working properly
+      this.$.amountFilter.setMin(min);
+      this.$.amountFilter.setMax(max);
+      this.$.amountFilter.setValues(min,max);
+
+      this.filterAmountMin = min;
+      this.filterAmountMax = max;
+      this.$.amountFilterListbox.select(null);
+    },
+
+    _getIntFromAmount: function(value) {
+      return parseInt(value.replace(/\$|\,/g, ''));
+    },
+
+    _getColorClass: function(selected) {
+      switch (selected) {
+        case 'real_time_information':
+          return 'page--red';
+        case 'infrastructure':
+          return 'page--green';
+        case 'knowledge_products':
+          return 'page--blue';
+        default:
+          return 'page--yellow';
+      }
+    },
+
+    _selectedChange: function(e) {
+      this.querySelectorAll('.project-filter__menu, .slider').forEach(function(item){
+        item.updateStyles();
+      });
+    },
+
+    _showFiltersClass: function(projects) {
+      if (projects && projects.length > 1) {
+        return '';
+      }
+      return 'is-hidden';
+    },
+
+    _getFilterClass: function(item, filterAmountMin, filterAmountMax, filterRegion) {
+      var amount = this._getIntFromAmount(item.amount);
+      if ((filterAmountMin && filterAmountMax) && (amount < filterAmountMin || amount > filterAmountMax)) {
+        return 'is-hidden';
+      }
+
+      if (filterRegion && filterRegion != item.country) {
+        return 'is-hidden';
+      }
+
+      return '';
+    },
+
+    _getUniqueRegions: function(projects) {
+      var uniqueRegions = [];
+      projects.forEach(function(project){
+        if(uniqueRegions.indexOf(project.country) < 0) {
+          uniqueRegions.push(project.country);
+        }
+      });
+      uniqueRegions.sort(function(a, b){
+        if(a < b) return -1;
+        if(a > b) return 1;
+        return 0;
+      });
+      return uniqueRegions;
+    },
+
+    _resetFilters: function() {
+      this.filterRegion = null;
+      this.$.regionFilterListbox.select(null);
     }
   })
 </script>
