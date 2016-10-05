@@ -13,6 +13,11 @@ html, body {
   color: #333;
 }
 
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .mdl-grid {
   transition: visibility 0.5s, opacity 0.5s, max-height 0.5s;
 }
@@ -20,7 +25,6 @@ html, body {
 .top_container_in_card{
   min-height:200px;
 }
-
 
 .menu-item{
   cursor:pointer;
@@ -30,6 +34,9 @@ html, body {
   color: #ffffff;
   font-size:34px;
   font-weight:lighter;
+  margin-bottom: 1em;
+  display: block;
+  text-align: center;
 }
 
 #portfolio_project_description{
@@ -51,7 +58,7 @@ html, body {
   color: #666666;
 }
 .cloud_text_box{
-  text-align:left;
+  text-align: center;
 }
 .about_innovation_fund_title{
   font-weight:bold;
@@ -66,24 +73,9 @@ html, body {
   transition: height 0.2s;
 }
 
-h1{
-  font-family: Source Sans Pro 24pt Regular;
-}
-
-h2{
-  font-family: Source Sans Pro 18pt Regular;
-}
-
-h3{
-  font-family: Source Sans Pro 18pt Regular;
-}
-
-h4{
-  font-family: Source Sans Pro 14pt Regular;
-}
-
-legend{
-  font-family: Source Sans Pro 14pt Regular;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Source Sans Pro';
+  font-weight: 400;
 }
 
 .blue paper-toolbar {
@@ -157,17 +149,32 @@ paper-tab{
   position:relative;
 }
 
-.divider_youth_engagement{
-  border-top: solid 2px #ffcc33;
+.divider {
+  position: relative;
 }
-.divider_real_time_information{
-  border-top: solid 2px #ff3366;
+
+.divider::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8px;
+  height: 2px;
+  transition: background .35s ease-out;
 }
-.divider_infrastructure{
-  border-top: solid 2px #66cc66;
+
+.divider--youth_engagement::after {
+  background-color: #ffcc33;
 }
-.divider_knowledge_products{
-  border-top: solid 2px #33cccc;
+.divider--real_time_information::after {
+  background-color: #ff3366;
+}
+.divider--infrastructure::after {
+  background-color: #66cc66;
+}
+.divider--knowledge_products::after {
+  background-color: #33cccc;
 }
 
 .youth_engagement{
@@ -238,24 +245,28 @@ paper-tab{
   width: 100%;
   background-color: #3366cc;
   flex-shrink: 0;
-  padding-top:100px;
+  padding:100px 0 50px;
   color:white;
-  height:100px;
+  height: auto;
 }
 
-.edge_youth_engagement{
+.edge {
+  height: 20px;
+}
+
+.edge--youth_engagement{
   background-color:#ffcc33;
 }
 
-.edge_real_time_information{
+.edge--real_time_information{
   background-color:#ff3366;
 }
 
-.edge_infrastructure{
+.edge--infrastructure{
   background-color:#66cc66;
 }
 
-.edge_knowledge_products{
+.edge--knowledge_products{
   background-color: #33cccc;
 }
 
@@ -340,4 +351,45 @@ paper-tab{
         border-left: none;
         padding-left: 0;
     }
+}
+
+.page__header {
+  padding: 50px 0;
+  color: #fff;
+  text-align: center;
+}
+
+.page__header--blue {
+  background-color: #3366cc;
+}
+
+.page__header--dark {
+  background-color: #333333;
+}
+
+.page__header-title {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 200;
+  margin: 0 0 0.33em;
+  letter-spacing: 0.01em;
+}
+
+.page__header-content, .page__header-content p {
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 1.5;
+}
+
+.page__content {
+  padding: 32px;
+}
+
+.slider .pin.expand.paper-slider > #sliderKnob.paper-slider > #sliderKnobInner.paper-slider::after {
+  transform: scale(1) translate(0, -21px);
+}
+
+@media only screen and (max-width: 1200px) {
+  .page__content {
+    padding: 0;
+  }
 }
