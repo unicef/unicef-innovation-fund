@@ -74,6 +74,10 @@ function cleanToMil(num) {
   }
 }
 
+function amountToInt(string) {
+  return parseInt(string.replace(/\$|\,/g, ''));
+}
+
 function prepareUreport(dataSet, featured, color){
 
     months = {}
@@ -136,7 +140,7 @@ function prepare(svg, featured, dataSet){
   }
 }
 
-function data_for_linechart(label, labels, points, color){
+function getDataForLineChart(label, labels, points, color){
   return {
   labels: labels,
   datasets: [
@@ -266,20 +270,6 @@ function gitPointsAndLabels(dataSet){
 
   return {points: points, labels: labels}
 }
-
-function cleanToMil(num) {
-  if(num >= 1000000){
-    num =  Math.max( Math.round((num/1000000) * 10) / 10, 0 ).toFixed(1);
-    num =  num  % 1 === 0 ? parseInt(num) : num;
-    return "$" + num + "M";
-  }else{
-
-    num = Math.round((num/1000))    // num =  Math.max( Math.round((num/100000) * 10) / 10, 0 ).toFixed(0);
-    num = num  % 1 === 0 ? parseInt(num) : num;
-    return "$" + num + "K";
-  }
-}
-
 
 function formalize(term) {
   return term.replace(/_/g, ' ');

@@ -241,10 +241,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </div>
           </paper-toolbar>
 
-          <project-modal></project-modal>
-
           <!-- Main Content -->
           <div class="content">
+            <project-view id="projectView"></project-view>
+
             <modal-warning></modal-warning>
             <neon-animated-pages style='z-index:0;' class="flex" selected="[[selected]]"  exit-animation="fade-out-animation" entry-animation="slide-from-left-animation">
               <neon-animatable id='my_dashboard'>

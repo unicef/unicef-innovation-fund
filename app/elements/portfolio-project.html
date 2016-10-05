@@ -16,7 +16,7 @@
     <li class="mdl-list__item" style='cursor:pointer;padding:0px;margin:0px;'>
       <div class="mdl-grid"  style='padding-top:0px;margin-top:0px;'>
         <div class="mdl-cell mdl-cell--12-col" style='padding-top:0px;margin-top:0px;'>
-          <div class-name='divider_{{svg}}' style='text-align:left;padding-top:10px;' on-tap="clickUserElement" on-mouseenter='onHovered' on-mouseleave='onUnHovered'>
+          <div class-name='divider_{{svg}}' style='text-align:left;padding-top:10px;' on-tap="_handleTap" on-mouseenter='onHovered' on-mouseleave='onUnHovered'>
               <div class='mdl-grid' style='padding:0px; margin:0px;text-align:right;'>
                 <div class='mdl-cell mdl-cell--11-col mdl-cell--7-col-tablet mdl-cell--3-col-phone' style='height:42px;padding:0px; margin:0px;text-align:left;'>
                   <span data-page="{{svg}}" style='text-align:left;'><b>{{item.name}}</b></span>
@@ -82,8 +82,8 @@
       this.hovered = 'none';
     },
 
-    clickUserElement:function(){
-      clickUserElement(this.item, this.svg);
+    _handleTap: function(e){
+      
     }
   });
 

@@ -138,7 +138,7 @@
         {{featured}}
       </div>
 
-      <div class='featured_project_blurb pc_left'  on-tap="clickUserElement"
+      <div class='featured_project_blurb pc_left'  on-tap="_handleTap"
         style='max-height:70px;min-height:70px;cursor:pointer;display:{{display_content}}'>
           {{featured_content}}
           <div style='text-align:left;'>
@@ -236,12 +236,16 @@
     handle_response: function(request){
       this.data = request.detail.response
     },
-    clickUserElement:function(){
 
-      clickUserElement(this.featured_project, this.svg);
+    _handleTap:function(){
+      var project = this.featured_project;
+      var projectType = this.svg;
+      var projectView = Polymer.dom(document.getElementById('projectView'));
+      projectView.node.project = project;
+      projectView.node.type = projectType;
     },
 
-  properties: {
+    properties: {
 
       chart_description: {
         type: String,
