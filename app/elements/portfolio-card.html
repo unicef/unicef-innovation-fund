@@ -241,8 +241,11 @@
       var project = this.featured_project;
       var projectType = this.svg;
       var projectView = Polymer.dom(document.getElementById('projectView'));
+      var projectModal = Polymer.dom(document.getElementById('projectModal'));
+
       projectView.node.project = project;
       projectView.node.type = projectType;
+      projectModal.node.open();
     },
 
     properties: {

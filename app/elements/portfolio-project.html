@@ -8,11 +8,17 @@
         width: 100%;
         position: relative;
         transition: all .175s ease-in;
+        margin-bottom: 0;
+        height: 130px;
+        --portfolio-project-expanded-height: 336px;
+        position: relative;
+        bottom: 0;
+
       }
 
       :host.is-expanded {
-        height: 300px;
-        width: 100%;
+        margin-bottom: var(--portfolio-project-expanded-height);
+        bottom: -8px;
       }
 
       ul{
@@ -57,8 +63,8 @@
       }
 
     </style>
-    
-    <div class-name='divider divider--{{svg}} portfolio-project__container mdl-shadow--4dp' on-tap="clickUserElement" on-mouseenter='onHovered' on-mouseleave='onUnHovered'>
+
+    <div class-name='divider divider--{{svg}} portfolio-project__container mdl-shadow--4dp' on-tap="_handleTap" on-mouseenter='_onMouseEnter' on-mouseleave='_onMouseLeave'>
       <div class="portfolio-project__content">
         <div class="portfolio-project__icon">
           <i class="material-icons">&#xE56B;</i>
@@ -80,18 +86,6 @@
 
 <script>
 
-  function cleanToMil(num) {
-    if(num >= 1000000){
-      num =  Math.max( Math.round((num/1000000) * 10) / 10, 0 ).toFixed(1);
-      num =  num  % 1 === 0 ? parseInt(num) : num;
-      return "$" + num + "M";
-    }else{
-      num = Math.round((num/1000))    // num =  Math.max( Math.round((num/100000) * 10) / 10, 0 ).toFixed(0);
-      num = num  % 1 === 0 ? parseInt(num) : num;
-      return "$" + num + "K";
-    }
-  }
-
   Polymer({
     is: 'portfolio-project',
 
@@ -106,16 +100,67 @@
       return(cleanToMil(num.replace(/\$|,/g, '')))
     },
 
-    onHovered: function(e) {
+    _onMouseEnter: function(e) {
       this.$$('.portfolio-project__container').classList.add('mdl-shadow--8dp');
     },
 
-    onUnHovered: function(e) {
+    _onMouseLeave: function(e) {
       this.$$('.portfolio-project__container').classList.remove('mdl-shadow--8dp');
     },
 
     _handleTap: function(e){
+      var that = this;
+      var projectViewContainer = document.querySelector('#projectListProjectViewContainer');
 
+      if (!this.classList.contains('is-expanded')) {
+        var expandedProjects = document.querySelectorAll('portfolio-project.is-expanded');
+        if (expandedProjects && expandedProjects.length) {
+          var count = 0;
+          that.classList.add('is-expanded');
+          projectViewContainer.classList.remove('is-active');
+          expandedProjects.forEach(function(project){
+            project.deactivate(function(){
+              count++;
+              if (count == expandedProjects.length) {
+                that.expandProjectView(that);
+              }
+            });
+          });
+        } else {
+          this.classList.add('is-expanded');
+          this.expandProjectView(this);
+        }
+
+      } else {
+        this.deactivate();
+        projectViewContainer.classList.remove('is-active');
+      }
+    },
+    deactivate: function(callback) {
+      var projectViewContainer = document.querySelector('#projectListProjectViewContainer');
+      this.classList.remove('is-expanded');
+      var removeProjectViewClass;
+      removeProjectViewClass = (function(){
+        if (typeof callback == 'function') {
+          callback();
+        }
+
+        this.removeEventListener('transitionend', removeProjectViewClass);
+      }).bind(this);
+      this.addEventListener('transitionend', removeProjectViewClass);
+    },
+    expandProjectView: function(relativeElement) {
+      var projectViewContainer = document.querySelector('#projectListProjectViewContainer');
+      var projectView = document.querySelector('#projectListProjectView');
+      var posY = $(relativeElement).position().top + $(relativeElement).height() - 8;
+      var posX = $(relativeElement).position().left + $(relativeElement).width() / 2;
+      $(projectViewContainer).css({top: posY, 'transform-origin': posX+'px -130px'});
+
+      $('html, body').animate({scrollTop: $(relativeElement).offset().top});
+      console.log($(relativeElement).offset().top);
+      projectView.project = this.item;
+      projectView.type = this.svg;
+      projectViewContainer.classList.add('is-active');
     }
   });
 
