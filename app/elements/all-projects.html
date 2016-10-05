@@ -297,18 +297,18 @@
        return "portfolios/" + route + '/projects';
     },
 
-    _getProjectInfoValue(projects) {
+    _getProjectInfoValue: function(projects) {
       if (!projects.length) {
         return '';
       }
       return projects.length + ' project' + (projects.length > 1 ? 's' : '');
     },
 
-    _getProjectContent(content, key) {
+    _getProjectContent: function(content, key) {
       return content[key];
     },
 
-    _initFilters() {
+    _initFilters: function() {
       var that = this;
 
       this.$.amountFilter.addEventListener('updateValues', (function(e){
@@ -322,19 +322,19 @@
       });
     },
 
-    _amountFilterClosed(e) {
+    _amountFilterClosed: function(e) {
       if (this.filterAmountMin && this.filterAmountMax) {
         this.$.amountFilterListbox.selectIndex(0);
       }
     },
 
-    _onAmountFilterTap(e) {
+    _onAmountFilterTap: function(e) {
       e.preventDefault();
       e.stopPropagation();
       return false;
     },
 
-    _setAmountMinMax(elements) {
+    _setAmountMinMax: function(elements) {
       var values = elements.map((function(item){
         return this._getIntFromAmount(item.amount);
       }).bind(this));
@@ -352,11 +352,11 @@
       this.$.amountFilterListbox.select(null);
     },
 
-    _getIntFromAmount(value) {
+    _getIntFromAmount: function(value) {
       return parseInt(value.replace(/\$|\,/g, ''));
     },
 
-    _getColorClass(selected) {
+    _getColorClass: function(selected) {
       switch (selected) {
         case 'real_time_information':
           return 'page--red';
@@ -369,20 +369,20 @@
       }
     },
 
-    _selectedChange(e) {
+    _selectedChange: function(e) {
       this.querySelectorAll('.project-filter__menu, .slider').forEach(function(item){
         item.updateStyles();
       });
     },
 
-    _showFiltersClass(projects) {
+    _showFiltersClass: function(projects) {
       if (projects && projects.length > 1) {
         return '';
       }
       return 'is-hidden';
     },
 
-    _getFilterClass(item, filterAmountMin, filterAmountMax, filterRegion) {
+    _getFilterClass: function(item, filterAmountMin, filterAmountMax, filterRegion) {
       var amount = this._getIntFromAmount(item.amount);
       if ((filterAmountMin && filterAmountMax) && (amount < filterAmountMin || amount > filterAmountMax)) {
         return 'is-hidden';
@@ -395,7 +395,7 @@
       return '';
     },
 
-    _getUniqueRegions(projects) {
+    _getUniqueRegions: function(projects) {
       var uniqueRegions = [];
       projects.forEach(function(project){
         if(uniqueRegions.indexOf(project.country) < 0) {
@@ -410,7 +410,7 @@
       return uniqueRegions;
     },
 
-    _resetFilters() {
+    _resetFilters: function() {
       this.filterRegion = null;
       this.$.regionFilterListbox.select(null);
     }
