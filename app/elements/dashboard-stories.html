@@ -24,6 +24,12 @@
         font-weight:400px;
         font-size:14px;
       }
+
+      @media (max-width: 1040px) {
+          :host {
+              display: none;
+          }
+      }
     </style>
     <iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query>
     <iron-media-query full query="print" query-matches="{{print}}"></iron-media-query>
@@ -39,7 +45,7 @@
       </div>
     </div>
     <div class='mdl-grid'>
-      <div class='mdl-cell--12-col mdl-cell--6-col-tablet'>
+      <div class='mdl-cell--12-col'>
         <div class="owl-carousel">
           <div class="itemz" >
             <h4>

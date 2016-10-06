@@ -3,8 +3,8 @@
   <template>
     <style>
       .pc_left{
-        padding-left:20px;
-        padding-right:20px;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
         margin: 0 auto;
       }
 
@@ -38,12 +38,20 @@
         transition: all 0.5s ease-in-out;
       }
 
+
+      @media (min-width: 840px) {
+          .project__section:last-of-type {
+              padding-top: 170px;
+          }
+      }
+
       @media (max-width: 840px) {
         .project__header {
             background-color: #F1F2F2;
             box-shadow: 0 -10px 0 0 var(--portfolio-card-lead-color);
             margin: 10px 0 0;
             padding-bottom: 0.6rem;
+            padding-left: 1.5rem;
             padding-top: 1rem;
         }
 
@@ -152,9 +160,7 @@
       </div>
 
       <div data-content="graph" class="project__section js-hidden">
-        <div style='min-height:170px;'>
-        </div>
-        <div style='width:100%; text-align:center;'>
+        <div class="mdl-cell--hide-tablet mdl-cell--hide-phone" style='width:100%; text-align:center;'>
           <hr style='width:90%; height:100%;margin:auto;' />
         </div>
         <div style='height:20px;'>
