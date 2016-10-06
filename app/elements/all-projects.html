@@ -118,7 +118,6 @@
         opacity: 0;
         z-index: -1;
         transition: transform 0.175s ease-in, opacity 0.175s ease-in, visibility 0s linear 0.175s, z-index 0s linear 0.175s;
-        height: 320px;
         transform: scale(0, 0);
       }
 
@@ -321,6 +320,7 @@
 
         this._setAmountMinMax(obj);
         this._resetFilters();
+        this._hideExpandedProjects();
 
         //Timeout waits for transition to finish
         setTimeout((function(){
@@ -453,6 +453,13 @@
     _resetFilters: function() {
       this.filterRegion = null;
       this.$.regionFilterListbox.select(null);
+    },
+
+    _hideExpandedProjects: function() {
+      var expandedProjects = document.querySelectorAll('portfolio-project.is-expanded');
+      if (expandedProjects.length) {
+        expandedProjects[0].deactivate();
+      }
     }
   })
 </script>

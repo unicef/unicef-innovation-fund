@@ -113,6 +113,8 @@
       }
 
       .project-view__chart {
+        max-width: 600px;
+        margin: 0 auto;
         padding-right: 16px;
       }
 
@@ -174,8 +176,8 @@
           </template>
           <div class="project-view__divider"></div>
           <div class="project-view__amount"><span class="project-view__amount-value">[[ _getProjectAmount(project) ]]</span> invested</div>
-          <div class="project-view__divider"></div>
           <template is="dom-if" if="[[ _getAdditionalInfo(chartData) ]]">
+            <div class="project-view__divider"></div>
             <div class="project-view__additional"><span class="project-view__additional-value">[[ _getAdditionalInfo(chartData) ]]</span><span>users</span></div>
           </template>
         </div>
@@ -217,6 +219,11 @@
             notify: true
           }
         },
+        ready: function(){
+          this.addEventListener('dom-change', function(){
+            this._onDomChange();
+          });
+        },
         _getProjectName: function(project) {
           var name = project.name;
           if (project.country) {
@@ -237,10 +244,9 @@
           return cleanToMil(amountToInt(project.amount));
         },
         _getChartDataPath: function(project) {
-          this.$.geoChart.innerHTML = '';
-          this.$.geoChart.classList.remove('is-active');
+          this.chartData = {};
 
-          if (!project.slug) {
+          if (!project || !project.slug) {
             return null;
           }
 
@@ -256,7 +262,11 @@
           return null;
         },
         _getGeoDataPath: function(project) {
-          if (!project.slug) {
+          this.geoData = [];
+          this.$.geoChart.innerHTML = '';
+          this.$.geoChart.classList.remove('is-active');
+
+          if (!project || !project.slug) {
             return null;
           }
 
@@ -289,21 +299,20 @@
           return true;
         },
         _getMainColClass: function(chartData, geoData) {
-          if ((!chartData || !Object.keys(chartData).length) && (!geoData || geoData.length)) {
+          if ((!chartData || !Object.keys(chartData).length) && (!geoData || !geoData.length)) {
             return 'mdl-cell--12-col';
           } else {
             return 'mdl-cell--8-col';
           }
         },
         _getDescColClass: function(chartData, geoData) {
-          if ((!chartData || !Object.keys(chartData).length) && (!geoData || geoData.length)) {
+          if ((!chartData || !Object.keys(chartData).length) && (!geoData || !geoData.length)) {
             return 'mdl-cell--12-col';
           } else {
             return 'mdl-cell--4-col';
           }
         },
         _handleChartData: function(data) {
-          this.chartData = {};
 
           if (!Array.isArray(data)) {
             return this._handleGitChartData(data);
@@ -325,7 +334,6 @@
           this.chartData = getDataForLineChart(label, labels, points, color);
         },
         _handleGeoData: function(geoData) {
-          this.geoData = [];
 
           if (Object.keys(geoData).length < 1) {
             return;
@@ -382,6 +390,7 @@
           var chart = new google.visualization.GeoChart(element);
           element.classList.add('is-active');
           chart.draw(ary, options);
+          this._onDomChange();
         },
         _getAdditionalInfo: function(chartData) {
           if (!chartData || !chartData.datasets || !chartData.datasets.length) {
@@ -395,6 +404,11 @@
             return value;
           } else {
             return null;
+          }
+        },
+        _onDomChange: function() {
+          if (typeof this.onDomChange == 'function') {
+            this.onDomChange();
           }
         }
       });
