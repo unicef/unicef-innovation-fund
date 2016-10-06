@@ -283,9 +283,9 @@
 
       this.$.templateProjects.addEventListener('dom-change', (function(){
         var projectItems = this.querySelectorAll('.project-list__item');
-        projectItems.forEach(function(item, key){
-          item.style.transitionDelay = (key*stagger)+'ms';
-        });
+        for (var i = 0; i < projectItems.length; i++) {
+            projectItems[i].style.transitionDelay = (i*stagger)+'ms';
+        }
 
         //This line is used to force DOM redraw
         $(projectList).hide().show(0);
@@ -410,9 +410,10 @@
     },
 
     _selectedChange: function(e) {
-      this.querySelectorAll('.project-filter__menu, .slider').forEach(function(item){
-        item.updateStyles();
-      });
+        var menuFilter = this.querySelectorAll('.project-filter__menu, .slider');
+        for (var i = 0; i < menuFilter.length; i++) {
+            menuFilter[i].updateStyles();
+        }
     },
 
     _showFiltersClass: function(projects) {
@@ -437,11 +438,11 @@
 
     _getUniqueRegions: function(projects) {
       var uniqueRegions = [];
-      projects.forEach(function(project){
-        if(uniqueRegions.indexOf(project.country) < 0) {
-          uniqueRegions.push(project.country);
-        }
-      });
+      for (var i = 0; i < projects.length; i++) {
+          if(uniqueRegions.indexOf(projects[i].country) < 0) {
+              uniqueRegions.push(projects[i].country);
+          }
+      }
       uniqueRegions.sort(function(a, b){
         if(a < b) return -1;
         if(a > b) return 1;
