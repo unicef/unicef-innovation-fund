@@ -3,11 +3,14 @@
   <template>
     <style>
 
-
+      :host {
+        --progress-bubble-width: 120px;
+        --progress-bubble-height: 120px;
+      }
 
       progress-bubble {
-        width: 120px;
-        height: 120px;
+        width: var(--progress-bubble-width);
+        height: var(--progress-bubble-height);
         text-shadow: none;
         --progress-bubble-stroke-color: #ffcc33;
         --progress-bubble-stroke-linecap: round;
@@ -58,6 +61,9 @@
         type: String,
         value: null
       }
+    },
+    redraw: function() {
+      this.$.circularProgress.redraw();
     }
   });
 
