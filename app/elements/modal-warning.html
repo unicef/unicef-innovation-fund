@@ -95,6 +95,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
 
         ready: function() {
+            navigator.detectBrowser= (function(){
+                var temp;
+                var detectedBrowser;
+
+                var userAgent= navigator.userAgent;
+                var browserData = userAgent.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+
+                if(/trident/i.test(browserData[1])){
+                    temp=  /\brv[ :]+(\d+)/g.exec(userAgent) || [];
+                    return 'IE '+(temp[1] || '');
+                }
+
+                if(browserData[1] === 'Chrome'){
+                    temp = userAgent.match(/\b(OPR|Edge)\/(\d+)/);
+                    if(temp !== null) return temp.slice(1).join(' ').replace('OPR', 'Opera');
+                }
+
+                detectedBrowser = browserData[2] ? [browserData[1], browserData[2]]: [navigator.appName, navigator.appVersion, '-?'];
+                return detectedBrowser;
+            })();
           this.user_agent = navigator.userAgent;
            if(navigator.userAgent.indexOf("Chrome") === -1 ){
             // alert('hi')
