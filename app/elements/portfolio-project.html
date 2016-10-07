@@ -115,14 +115,15 @@
         var expandedProjects = document.querySelectorAll('portfolio-project.is-expanded');
         if (expandedProjects && expandedProjects.length) {
           var count = 0;
-          expandedProjects.forEach(function(project){
+          for(var i = 0; i < expandedProjects.length; i++){
+            var project = expandedProjects[i];
             project.deactivate(function(){
               count++;
               if (count == expandedProjects.length) {
                 that.expandProjectView(that);
               }
             });
-          });
+          }
         } else {
           this.expandProjectView(this);
         }

@@ -2,6 +2,26 @@
   <style>
   .mdl-card {
       border-radius: 15px;
+      margin-left: auto;
+      margin-right: auto;
+  }
+
+  .portfolio-card--youth_engagement {
+      --portfolio-card-lead-color: #ffcc33;
+  }
+
+  .portfolio-card--real-time-information {
+      --portfolio-card-lead-color: #ff3366;
+  }
+
+  .portfolio-card--infrastructure {
+      --portfolio-card-lead-color: #66cc66;
+  }
+
+  @media (max-width: 840px) {
+      .mdl-card {
+          border-radius: 0;
+      }
   }
   </style>
 
@@ -18,19 +38,19 @@
 
       <main>
         <div class="mdl-grid" style="max-width:1200px;">
-          <div class="mdl-card mdl-shadow--3dp mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone db_card">
+          <div class="mdl-card mdl-shadow--3dp mdl-cell mdl-cell--3-col mdl-cell--6-col-tablet mdl-cell--4-col-phone db_card">
             <portfolios-summary class='item'></portfolios-summary>
           </div>
-          <div class="mdl-card mdl-shadow--3dp mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone db_card">
-            <portfolio-card progress="{{_financial(financials, 'youth_engagement')}}" tooltip_target= 'db_tooltip_youth_engagement' phrase='Products For Youth' featured='U-Report' featured_slug='u_report_global' chart_description='NUMBER OF USERS' featured_source='ureport' svg="youth_engagement" rgb='255, 204, 51, 0.2'>
+          <div class="mdl-card mdl-shadow--3dp mdl-cell mdl-cell--3-col mdl-cell--6-col-tablet mdl-cell--4-col-phone db_card">
+            <portfolio-card class="portfolio-card--youth_engagement" progress="{{_financial(financials, 'youth_engagement')}}" tooltip_target= 'db_tooltip_youth_engagement' phrase='Products For Youth' featured='U-Report' featured_slug='u_report_global' chart_description='NUMBER OF USERS' featured_source='ureport' svg="youth_engagement" rgb='255, 204, 51, 0.2'>
             </portfolio-card>
           </div>
-          <div class="mdl-card mdl-shadow--3dp mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone db_card">
-            <portfolio-card progress="{{_financial(financials, 'realtime_information')}}" tooltip_target='db_tooltip_real_time_info' phrase='Real-time Information'  featured='MomConnect' featured_slug='momconnect'  chart_description='NUMBER OF GIT COMMITS' featured_source='mom_connect' svg="real_time_information" rgb='255, 204, 51, 0.2'>
+          <div class="mdl-card mdl-shadow--3dp mdl-cell mdl-cell--3-col mdl-cell--6-col-tablet mdl-cell--4-col-phone db_card">
+            <portfolio-card class="portfolio-card--real-time-information" progress="{{_financial(financials, 'realtime_information')}}" tooltip_target='db_tooltip_real_time_info' phrase='Real-time Information'  featured='MomConnect' featured_slug='momconnect'  chart_description='NUMBER OF GIT COMMITS' featured_source='mom_connect' svg="real_time_information" rgb='255, 204, 51, 0.2'>
             </portfolio-card>
           </div>
-          <div class="mdl-card mdl-shadow--3dp mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone db_card" >
-            <portfolio-card progress="{{_financial(financials, 'infrastructure')}}" tooltip_target='db_tooltip_infrastructure' phrase='Infrastructure' featured='IoGT' chart_description='NUMBER OF USERS' featured_source='iogt' featured_slug='iogt' svg="infrastructure" rgb='255, 204, 51, 0.2'>
+          <div class="mdl-card mdl-shadow--3dp mdl-cell mdl-cell--3-col mdl-cell--6-col-tablet mdl-cell--4-col-phone db_card" >
+            <portfolio-card class="portfolio-card--infrastructure" progress="{{_financial(financials, 'infrastructure')}}" tooltip_target='db_tooltip_infrastructure' phrase='Infrastructure' featured='IoGT' chart_description='NUMBER OF USERS' featured_source='iogt' featured_slug='iogt' svg="infrastructure" rgb='255, 204, 51, 0.2'>
             </portfolio-card>
           </div>
         </div>
