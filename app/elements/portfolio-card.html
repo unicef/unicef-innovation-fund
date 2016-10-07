@@ -3,10 +3,9 @@
   <template>
     <style>
       .pc_left{
-        padding-left:20px;
-        padding-right:20px;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
         margin: 0 auto;
-        height:40px;
       }
 
       .card_title {
@@ -87,6 +86,70 @@
           width:auto;
         };
       }
+
+      .project__switch {
+          cursor: pointer;
+          display: inline-block;
+          font-size: 0.85rem;
+          list-style-type: none;
+          margin-right: 2.5rem;
+          transition: all 0.5s;
+          text-transform: uppercase;
+      }
+
+      .project__section {
+        transition: all 0.5s ease-in-out;
+      }
+
+
+      @media (min-width: 840px) {
+          .project__section:last-of-type {
+              padding-top: 170px;
+          }
+      }
+
+      @media (max-width: 840px) {
+        .project__header {
+            background-color: #F1F2F2;
+            box-shadow: 0 -10px 0 0 var(--portfolio-card-lead-color);
+            margin: 10px 0 0;
+            padding-bottom: 0.6rem;
+            padding-left: 1.5rem;
+            padding-top: 1rem;
+        }
+
+        .project__title {
+            font-size: 1.35rem;
+            margin: 0;
+        }
+
+        .is-active {
+            box-shadow: 0 2px 0 0 var(--portfolio-card-lead-color);
+        }
+
+        .js-active {
+          opacity: 1;
+          position: relative;
+          transform: translateY(0);
+          visibility: visible;
+        }
+
+        .js-hidden {
+          opacity: 0;
+          position: absolute;
+          transform: translateY(10%);
+          visibility: hidden;
+        }
+
+        [data-content="description"] > *:not(.project__description) {
+            display: none;
+        }
+
+        .project__section {
+            padding-bottom: 2rem;
+            padding-top: 2rem;
+        }
+      }
     </style>
 
     <iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query>
@@ -94,24 +157,32 @@
 
 
     <div class$="{{_computeClass(wide)}}">
-      <div class='top_container_in_card'>
-        <div class$="edge_{{svg}}" style='height:20px;'>
-        </div>
-        <br />
-        <img src="/images/icons/{{svg}}.svg" width=100 style='padding-left:15px;'>
-        <p class$="portfolio_card_title {{svg}}">
-          <div class='mdl-grid' style='text-align: center; '>
-            <div class='mdl-cell mdl-cell--10-col title_card' style='text-align: left;'>
-              <span class$='portfolio_card_title {{svg}}' >{{phrase}}</span>
+        <ul class="mdl-layout__cell mdl-cell--hide-desktop project__header">
+            <h2 class="project__title">{{featured}}</h2>
+            <li on-tap="toggleSection" class="project__switch is-active" data-active="description" data-hide="graph">Description</li>
+            <li on-tap="toggleSection" class="project__switch" data-active="graph" data-hide="description">Graph</li>
+        </ul>
+        <div data-content="description" class="project__section js-active">
+          <div class='top_container_in_card'>
+            <div class$="edge_{{svg}}" style='height:20px;'>
             </div>
-            <div class='mdl-cell mdl-cell--2-col' style='margin:0px;padding:0px;display: inline-block; vertical-align: middle; height:100% ;'>
-              <!-- <paper-icon-button style="color:#0099ff; background-color:white;" class='information-tooltip' id="id_2" icon="info" alt="go back"></paper-icon-button> -->
+            <br />
+            <img src="/images/icons/{{svg}}.svg" width=100 style='padding-left:15px;'>
+            <p class$="portfolio_card_title {{svg}}">
+              <div class='mdl-grid' style='text-align: center; '>
+                <div class='mdl-cell mdl-cell--10-col title_card' style='text-align: left;'>
+                  <span class$='portfolio_card_title {{svg}}' >{{phrase}}</span>
+                </div>
+                <div class='mdl-cell mdl-cell--2-col' style='margin:0px;padding:0px;display: inline-block; vertical-align: middle; height:100% ;'>
+                  <!-- <paper-icon-button style="color:#0099ff; background-color:white;" class='information-tooltip' id="id_2" icon="info" alt="go back"></paper-icon-button> -->
 
-              <img src='/images/information.png' style='position:relative; top:5px;'id="id_2" />
-            </div>
-          </div>
-          <div >
-            <paper-tooltip  class="custom" for="id_2" offset="0">{{db_tooltip}}</paper-tooltip>
+                  <img src='/images/information.png' style='position:relative; top:5px;'id="id_2" />
+                </div>
+              </div>
+              <div >
+                <paper-tooltip  class="custom" for="id_2" offset="0">{{db_tooltip}}</paper-tooltip>
+              </div>
+            </p>
           </div>
         </p>
       </div>
@@ -128,61 +199,61 @@
         </circular-progress>
       </div>
 
-      <br>
-      <br>
-      <div class$='featured {{svg}}'>
-        FEATURED
-      </div>
-      <br>
-      <div class='featured_project_name pc_left'>
-        {{featured}}
+    </div>
+
+      <div style='text-align:left;'>
+        <div class$='featured {{svg}}'>
+          FEATURED
+        </div>
+        <br>
+        <div class='featured_project_name pc_left'>
+          {{featured}}
+        </div>
+        <div class='featured_project_blurb pc_left project__description'  on-tap="_handleTap"
+          style='cursor:pointer;display:{{display_content}}'>
+            {{featured_content}}
+            <div style='text-align:left;'>
+                <img src='/images/launch.png' style='width:18px;'/>
+            </div>
+        </div>
       </div>
 
-      <div class='featured_project_blurb pc_left'  on-tap="_handleTap"
-        style='max-height:70px;min-height:70px;cursor:pointer;display:{{display_content}}'>
-          {{featured_content}}
-          <div style='text-align:left;'>
-              <img src='/images/launch.png' style='width:18px;'/>
-          </div>
+      <div data-content="graph" class="project__section js-hidden">
+        <div class="mdl-cell--hide-tablet mdl-cell--hide-phone" style='width:100%; text-align:center;'>
+          <hr style='width:90%; height:100%;margin:auto;' />
+        </div>
+        <div style='height:20px;'>
+        </div>
+        <div class='growth_rate pc_left'>
+          {{chart_description}}
+        </div>
+        <chart-line  data="[[prepare(svg, featured, dataSet)]]" style='width:95%; font-size:30px;padding-left:5px;'></chart-line>
+        <firebase-document
+          app-name="test"
+          path="/content/{{tooltip_target}}"
+          data="{{db_tooltip}}">
+        </firebase-document>
 
-      </div>
+        <firebase-document
+          app-name="test"
+          path="{{location_featured_content}}"
+          data="{{featured_content}}">
+        </firebase-document>
 
-      <div style='min-height:170px;'>
-      </div
-      <div style='width:100%; text-align:center;'>
-        <hr style='width:90%; height:100%;margin:auto;' />
+        <firebase-document
+          app-name="test"
+          path="/portfolio_projects/{{svg}}/projects_hash/{{featured_slug}}"
+          data="{{featured_project}}">
+        </firebase-document>
+
+        <firebase-document
+          app-name="test"
+          path="{{location_featured_data}}"
+          data="{{dataSet}}">
+        </firebase-document>
       </div>
-      <div style='height:20px;'>
-      </div>
-      <div class='growth_rate pc_left'>
-        {{chart_description}}
-      </div>
-      <chart-line  data="[[prepare(svg, featured, dataSet)]]" style='width:95%; font-size:30px;padding-left:5px;'></chart-line>
       <!-- <geo-ureport></geo-ureport> -->
     </div>
-    <firebase-document
-      app-name="test"
-      path="/content/{{tooltip_target}}"
-      data="{{db_tooltip}}">
-    </firebase-document>
-
-    <firebase-document
-      app-name="test"
-      path="{{location_featured_content}}"
-      data="{{featured_content}}">
-    </firebase-document>
-
-    <firebase-document
-      app-name="test"
-      path="/portfolio_projects/{{svg}}/projects_hash/{{featured_slug}}"
-      data="{{featured_project}}">
-    </firebase-document>
-
-    <firebase-document
-      app-name="test"
-      path="{{location_featured_data}}"
-      data="{{dataSet}}">
-    </firebase-document>
 
   </template>
 
@@ -247,6 +318,27 @@
       projectView.node.type = projectType;
       projectModal.node.open();
     },
+    toggleSection: function (event) {
+        var activeMenuItemClass = 'is-active';
+        var activeSectionClass = 'js-active';
+        var inactiveSectionClass = 'js-hidden';
+
+        var dataset = event.target.dataset;
+        var clickedMenuItem = event.target;
+
+        var toHide = this.$$('[data-content="' + dataset.hide + '"]');
+        var toShow = this.$$('[data-content="' + dataset.active + '"]');
+        var activeMenuItem = this.$$('.is-active');
+
+        toHide.classList.remove(activeSectionClass);
+        toHide.classList.add(inactiveSectionClass);
+
+        toShow.classList.remove(inactiveSectionClass);
+        toShow.classList.add(activeSectionClass);
+
+        clickedMenuItem.classList.add(activeMenuItemClass);
+        activeMenuItem.classList.remove(activeMenuItemClass);
+    },
 
     properties: {
 
@@ -301,7 +393,11 @@
 
       url: {
         computed: 'computeUrl(svg)'
-      }
+    },
+
+    lead: {
+        type: String
+    }
     },
 
     _content_arrived: function(obj){
