@@ -23,8 +23,18 @@
       .footer_area[wide-layout] .one_third{
         width:400px;
       }
-      .footer_area .sponsor{
-        width:200px;
+      .sponsor--margin {
+         margin: 0 4rem;
+      }
+
+      @media (max-width: 540px) {
+          .sponsor {
+            display: block;
+            margin: 2rem 0;
+          }
+          .sponsor--margin {
+             margin: 0;
+          }
       }
     </style>
     <iron-media-query query="(min-width: 600px)" query-matches="{{wide}}"></iron-media-query>
@@ -74,11 +84,14 @@
             <div class="mdl-cell mdl-cell--12-col">
               <div class="mdl-grid">
                 <div class="mdl-cell mdl-cell--12-col" >
-                  <a target='_blank' href='http://um.dk/en'>
-                    <img class='sponsor' src="../images/sponsors/danida_logo.jpg">
-                  </a>
                   <a target='_blank' href='http://www.disney.com'>
-                    <img class='sponsor' style='width:100px;' src="../images/sponsors/disney_red.png">
+                    <img class='sponsor' src="../images/sponsors/disney_red.png">
+                  </a>
+                  <a target='_blank' href='http://um.dk/en' class="sponsor--margin">
+                      <img class='sponsor' src="../images/sponsors/danida_logo.jpg">
+                  </a>
+                  <a target='_blank' href='http://formin.finland.fi/public/default.aspx?culture=en-US&contentlan=2'>
+                      <img class='sponsor' src="../images/sponsors/finland_logo.png">
                   </a>
                 </div>
               </div>
