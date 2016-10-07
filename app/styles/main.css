@@ -376,7 +376,7 @@ paper-tab{
 
 .page__header-content, .page__header-content p {
   font-size: 18px;
-  font-weight: 200;
+  font-weight: 400;
   line-height: 1.5;
 }
 
@@ -405,4 +405,17 @@ paper-tab{
   width: 100%;
   height: 100%;
   vertical-align: middle;
+}
+
+.page--yellow .input-content.paper-input-container label {
+  color: #ffcc33;
+}
+.page--red .input-content.paper-input-container label {
+  color: #ff3366;
+}
+.page--green .input-content.paper-input-container label {
+  color: #66cc66;
+}
+.page--blue .input-content.paper-input-container label {
+  color: #33cccc;
 }
