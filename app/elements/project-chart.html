@@ -71,6 +71,9 @@ Polymer({
         data.addRow([googleLabels[x], d]);
       }
 
+      var minRange = googleLabels[1].getTime() - googleLabels[0].getTime();
+
+
       var dash = new google.visualization.Dashboard(document.getElementById('dashboard'));
 
       var control = new google.visualization.ControlWrapper({
@@ -79,6 +82,8 @@ Polymer({
 
         options: {
           filterColumnIndex: 0,
+          minValue: new Date(2016, 2, 2),
+          maxValue: new Date(2016, 4, 2),
           ui: {
             chartOptions: {
               height: 50,
@@ -86,14 +91,19 @@ Polymer({
               //width: 600,
               chartArea: {
                 width: '80%'
-              }
-            }
+              },
+
+            },
+            minRangeSize: 1000 * 60 * 60 * 24 * 31 * 2
           },
 
         },
         state: {
-          'lowValue': new Date(2016, 2, 2),
-          'highValue': new Date(2016, 4, 3)
+          //last three months
+          range: {
+            start: googleLabels[googleLabels.length-4],
+            end: googleLabels[googleLabels.length-1]
+          }
         }
       });
 
