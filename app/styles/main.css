@@ -221,7 +221,7 @@ paper-tab{
   padding:0px;
   margin:0px;
   background: url(../images/map_link.png) no-repeat;
-  background-size:100%;
+  background-size: cover;
 }
 
 .demo-ribbon {
