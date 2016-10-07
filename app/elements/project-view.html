@@ -1,5 +1,5 @@
 
-
+<link rel="import" href="./project-chart.html">
 <dom-module id="project-view">
   <template>
     <style is="custom-style">
@@ -156,7 +156,7 @@
           <!-- line chart -->
           <template is="dom-if" if="[[ _showLineChart(chartData) ]]">
             <div class="project-view__chart">
-              <chart-line data="[[ chartData ]]" id="projectChart"></chart-line>
+              <project-chart data="[[ chartData ]]" options="[[ opt ]]" id="projectChart"></project-chart>
             </div>
           </template>
 
@@ -217,6 +217,13 @@
             type: Object,
             observer: '_handleGeoData',
             notify: true
+          },
+          opt: {
+            type: Object,
+            value: {
+              responsive: true,
+              maintainAspectRatio: false
+            }
           }
         },
         ready: function(){
@@ -321,6 +328,9 @@
           var labels = data.map(function(item){
             var date = humanize_label(item[0]);
             return date;
+          });
+          var googleLabels = data.map(function(item){
+            return item[0];
           });
           var points = data.map(function(item, key){
             if(key > 0) {
