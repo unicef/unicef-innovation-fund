@@ -13,6 +13,9 @@
         padding: 0 16px;
         font-weight: 500;
       }
+      .project-view__item{
+        white-space: nowrap;
+      }
 
       .project-view__divider {
         margin: 0 -16px;
@@ -178,7 +181,17 @@
           <div class="project-view__amount"><span class="project-view__amount-value">[[ _getProjectAmount(project) ]]</span> invested</div>
           <template is="dom-if" if="[[ _getAdditionalInfo(chartData) ]]">
             <div class="project-view__divider"></div>
-            <div class="project-view__additional"><span class="project-view__additional-value">[[ _getAdditionalInfo(chartData) ]]</span><span>users</span></div>
+            <div class="project-view__additional">
+                 <paper-dropdown-menu label="Choose month">
+                  <paper-listbox class="dropdown-content" selected="{{additionalRange}}" on-change="_changeProjectAdditional">  
+                    <paper-item class="project-view__item">All</paper-item>
+                    <template is="dom-repeat" items="{{chartData.labels}}">
+                        <paper-item class="project-view__item">{{item}}</paper-item>
+                    </template>
+                  </paper-listbox>
+                </paper-dropdown-menu><br>
+              <span class="project-view__additional-value">{{ currentUsers }}</span><span>users</span>
+            </div>
           </template>
         </div>
       </div>
@@ -224,6 +237,15 @@
               responsive: true,
               maintainAspectRatio: false
             }
+          },
+          additionalRange: {
+            type: Number,
+            value: 0,
+            observer: '_changeProjectAdditional'
+          },
+          currentUsers:{
+            type: Number,
+            value: 0
           }
         },
         ready: function(){
@@ -324,6 +346,8 @@
           if (!Array.isArray(data)) {
             return this._handleGitChartData(data);
           }
+          this.currentUsers = 0;
+          this.additionalRange = 0;
           var color = this._getChartColor();
           var labels = data.map(function(item){
             var date = humanize_label(item[0]);
@@ -406,7 +430,7 @@
           if (!chartData || !chartData.datasets || !chartData.datasets.length) {
             return null;
           }
-
+          this._changeProjectAdditional();
           var dataset = chartData.datasets[0];
           var value = dataset.data[dataset.data.length-1];
 
@@ -415,6 +439,23 @@
           } else {
             return null;
           }
+        },
+    
+        _changeProjectAdditional: function(){
+          if(Object.keys(this.chartData).length == 0){
+            return;
+          }
+
+          // -1 because of 'all' at the begining
+          var dataIndex = this.additionalRange - 1;
+          if(dataIndex === -1){
+            var ds = this.chartData.datasets[0].data;
+            this.currentUsers = ds[ds.length -1];
+            return;
+          }
+
+          this.currentUsers = this.chartData.datasets[0].data[dataIndex];
+
         },
         _onDomChange: function() {
           if (typeof this.onDomChange == 'function') {
