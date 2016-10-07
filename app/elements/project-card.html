@@ -144,6 +144,10 @@
       return "portfolios/" + svg + '/projects';
     },
     _handleTap: function(e){
+      if(this.selected) {
+        this._redrawProgress();
+      }
+
       if (this.selected != this.svg) {
         this.set('selected', this.svg);
       } else {
@@ -185,6 +189,9 @@
       var bars = document.querySelectorAll('.project-card__progress-item');
       for(var i = 0; i < bars.length; i++) {
         var bar = bars[i];
+        bar.style.display = 'none';
+        bar.redraw();
+        bar.style.display = 'block';
         bar.redraw();
       }
     }
