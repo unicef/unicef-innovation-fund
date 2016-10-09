@@ -48,8 +48,8 @@
           <feComponentTransfer in=SourceAlpha>
             <feFuncA type="table" tableValues="1 0" />
           </feComponentTransfer>
-          <feGaussianBlur stdDeviation="2"/>
-          <feOffset dx="2" dy="2" result="offsetblur"/>
+          <feGaussianBlur stdDeviation="1"/>
+          <feOffset dx="0.5" dy="1" result="offsetblur"/>
           <feFlood flood-color="rgba(20, 0, 0, 0.7)" result="color"/>
           <feComposite in2="offsetblur" operator="in"/>
           <feComposite in2="SourceAlpha" operator="in" />

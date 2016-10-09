@@ -407,15 +407,29 @@ paper-tab{
   vertical-align: middle;
 }
 
-.page--yellow .input-content.paper-input-container label {
-  color: #ffcc33;
+/* use !important to override mdl's default styles */
+.page--yellow .input-content.paper-input-container label, .page--yellow .input-content.label-is-highlighted.paper-input-container .paper-input-label {
+  color: #ffcc33 !important;
 }
-.page--red .input-content.paper-input-container label {
-  color: #ff3366;
+.page--red .input-content.paper-input-container label, .page--red .input-content.label-is-highlighted.paper-input-container .paper-input-label {
+  color: #ff3366 !important;
 }
-.page--green .input-content.paper-input-container label {
-  color: #66cc66;
+.page--green .input-content.paper-input-container label, .page--green .input-content.label-is-highlighted.paper-input-container .paper-input-label {
+  color: #66cc66 !important;
 }
-.page--blue .input-content.paper-input-container label {
-  color: #33cccc;
+.page--blue .input-content.paper-input-container label, .page--blue .input-content.label-is-highlighted.paper-input-container .paper-input-label {
+  color: #33cccc !important;
+}
+
+.page--yellow .focused-line.paper-input-container {
+  background-color: #ffcc33;
+}
+.page--red .focused-line.paper-input-container {
+  background-color: #ff3366;
+}
+.page--green .focused-line.paper-input-container {
+  background-color: #66cc66;
+}
+.page--blue .focused-line.paper-input-container {
+  background-color: #33cccc;
 }

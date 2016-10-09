@@ -11,6 +11,7 @@
       <div id="dashboard">
         <div id="chart_div"></div>
         <div id="control_div"></div>
+        <button on-tap="_onTap">Test</button>
       </div>
     </div>
   </template>
@@ -22,10 +23,26 @@ Polymer({
     data: {
       type: Object,
       observer: '_dataChange'
+    },
+    googleLabels: {
+      type: Array,
+      value: []
+    },
+    control: {
+      type: Object,
+      value: {}
+    },
+    dashboard: {
+      type: Object,
+      value: {}
     }
   },
   ready: function() {
     //this._runGoogleChart()
+  },
+
+  _onTap: function(e) {
+    this.filterByYear(2016);
   },
 
   _dataChange: function(){
@@ -55,6 +72,7 @@ Polymer({
     var self = this;
     drawChart();
     function drawChart() {
+
       var datasets = self.data.datasets[0] || self.data.datasets['0'];
       var labels = self.data.labels;
       var googleLabels = self._prepareGoogleLabels(labels);
@@ -86,7 +104,7 @@ Polymer({
           maxValue: new Date(2016, 4, 2),
           ui: {
             chartOptions: {
-              height: 50,
+              height: 40,
               colors: [datasets.googleBgColor],
               //width: 600,
               chartArea: {
@@ -107,10 +125,15 @@ Polymer({
         }
       });
 
+      self.googleLabels = googleLabels;
+      self.control = control;
+
+
       var chart = new google.visualization.ChartWrapper({
         chartType: 'AreaChart',
         containerId: 'chart_div',
         options: {
+          height: 360,
           colors: [datasets.googleBgColor],
           legend: 'top'
         }
@@ -128,11 +151,28 @@ Polymer({
 
       dash.bind([control], [chart]);
       dash.draw(data);
+      self.dashboard = dash;
     }
 
     $(window).on('resize', function(){
       drawChart();
     });
+  },
+
+  filterByYear: function(year) {
+    this.control.setState({range: {
+      start: (new Date(year, 0, 0)),
+      end: (new Date(year, 11, 30)),
+    }});
+    this.control.draw();
+  },
+  resetFilter: function() {
+    var googleLabels = this.googleLabels;
+    this.control.setState({range: {
+      start: googleLabels[googleLabels.length-4],
+      end: googleLabels[googleLabels.length-1]
+    }});
+    this.control.draw();
   }
 })
 </script>
