@@ -2,10 +2,34 @@
 <dom-module id='portfolio-card'>
   <template>
     <style>
+
+      :host {
+        border-top: 20px solid #ffcc33;
+      }
+
+      :host.portfolio-card--real-time-information {
+        border-color: #ff3366;
+      }
+
+      :host.portfolio-card--infrastructure {
+        border-color: #66cc66;
+      }
+
+      .top_container_in_card {
+        padding-top: 16px;
+      }
+
+      .portfolio_card_title {
+        margin: 0;
+      }
+
+      .featured {
+        margin: 0 auto;
+      }
+
       .pc_left{
         padding-left: 1.5rem;
         padding-right: 1.5rem;
-        margin: 0 auto;
       }
 
       .card_title {
@@ -104,7 +128,7 @@
 
       @media (min-width: 840px) {
           .project__section:last-of-type {
-              padding-top: 170px;
+            padding-top: 32px;
           }
       }
 
@@ -164,30 +188,22 @@
         </ul>
         <div data-content="description" class="project__section js-active">
           <div class='top_container_in_card'>
-            <div class$="edge_{{svg}}" style='height:20px;'>
+            <img src="/images/icons/{{svg}}.svg" width="80" style='padding-left:16px;'>
+            <div class='mdl-grid'>
+              <div class='mdl-cell mdl-cell--10-col title_card' style='text-align: left;'>
+                <span class$='portfolio_card_title {{svg}}' >{{phrase}}</span>
+              </div>
+              <div class='mdl-cell mdl-cell--2-col' style='margin:0px;padding:0px;display: inline-block; vertical-align: middle; height:100% ;'>
+                <!-- <paper-icon-button style="color:#0099ff; background-color:white;" class='information-tooltip' id="id_2" icon="info" alt="go back"></paper-icon-button> -->
+                <img src='/images/information.png' style='position:relative; top:5px;'id="id_2" />
+              </div>
             </div>
-            <br />
-            <img src="/images/icons/{{svg}}.svg" width=100 style='padding-left:15px;'>
-            <p class$="portfolio_card_title {{svg}}">
-              <div class='mdl-grid' style='text-align: center; '>
-                <div class='mdl-cell mdl-cell--10-col title_card' style='text-align: left;'>
-                  <span class$='portfolio_card_title {{svg}}' >{{phrase}}</span>
-                </div>
-                <div class='mdl-cell mdl-cell--2-col' style='margin:0px;padding:0px;display: inline-block; vertical-align: middle; height:100% ;'>
-                  <!-- <paper-icon-button style="color:#0099ff; background-color:white;" class='information-tooltip' id="id_2" icon="info" alt="go back"></paper-icon-button> -->
-
-                  <img src='/images/information.png' style='position:relative; top:5px;'id="id_2" />
-                </div>
-              </div>
-              <div >
-                <paper-tooltip  class="custom" for="id_2" offset="0">{{db_tooltip}}</paper-tooltip>
-              </div>
-            </p>
+            <div>
+              <paper-tooltip  class="custom" for="id_2" offset="0">{{db_tooltip}}</paper-tooltip>
+            </div>
           </div>
         </p>
       </div>
-      <hr />
-
       <div class="portfolio-card__progress">
         <div class$="portfolio-card__progress-info portfolio-card__progress-info--{{ svg }}">
           {{ _getProgressValue(progress.0) }}<br/>
@@ -198,12 +214,12 @@
             <span class="portfolio-card__progress-subtitle">Invested</span>
         </circular-progress>
       </div>
-
     </div>
+    <hr>
 
       <div style='text-align:left;'>
         <div class$='featured {{svg}}'>
-          FEATURED
+          Featured Project
         </div>
         <br>
         <div class='featured_project_name pc_left'>
@@ -212,9 +228,6 @@
         <div class='featured_project_blurb pc_left project__description'  on-tap="_handleTap"
           style='cursor:pointer;display:{{display_content}}'>
             {{featured_content}}
-            <div style='text-align:left;'>
-                <img src='/images/launch.png' style='width:18px;'/>
-            </div>
         </div>
       </div>
 
