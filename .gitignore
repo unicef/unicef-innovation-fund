@@ -3,6 +3,7 @@ dist/
 bower_components/
 .tmp
 .publish/
+.vagrant
 .vagrant/
 *.retry
 .idea/
