@@ -298,8 +298,8 @@
       toShow.classList.add(visibleClass);
     },
     changeSection: function(event) {
-      var hide = event.target.dataset.hide;
-      var target = event.target.dataset.display;
+      var hide = event.target.dataset.hide || event.target.parentElement.dataset.hide;
+      var target = event.target.dataset.display || event.target.parentElement.dataset.display;
 
       var toHide = this.$$("[data-target='" + hide + "']");
       var toShow = this.$$("[data-target='" + target + "']");
