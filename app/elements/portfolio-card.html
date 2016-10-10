@@ -5,6 +5,16 @@
 
       :host {
         border-top: 16px solid #ffcc33;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        align-items: stretch;
+        justify-content: space-between;
+      }
+
+      :host hr {
+        width:90%;
+        margin:16px auto 8px;
       }
 
       :host.portfolio-card--real-time-information {
@@ -40,6 +50,8 @@
 
        .portfolio-card__progress {
          text-align: center;
+         margin-bottom: 32px;
+         margin-top: 16px;
        }
 
        .portfolio-card__progress-info {
@@ -201,7 +213,7 @@
                 <span class="portfolio-card__progress-subtitle">Invested</span>
             </circular-progress>
           </div>
-          <hr style='width:90%; height:100%;margin:16px auto;' />
+          <hr/>
           <div style='text-align:left;'>
             <div class$='featured {{svg}}'>
               Featured Project
@@ -218,11 +230,6 @@
       </div>
 
       <div data-content="graph" class="project__section js-hidden">
-        <div class="mdl-cell--hide-tablet mdl-cell--hide-phone" style='width:100%; text-align:center;'>
-          <hr style='width:90%; height:100%;margin:auto;' />
-        </div>
-        <div style='height:20px;'>
-        </div>
         <div class='growth_rate pc_left'>
           {{chart_description}}
         </div>
