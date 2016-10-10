@@ -1,0 +1,171 @@
+<dom-module id='project-chart'>
+  <template>
+    <style>
+    :host {
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+    </style>
+    <div>
+      <div id="dashboard">
+        <div id="chart_div"></div>
+        <div id="control_div"></div>
+      </div>
+    </div>
+  </template>
+</dom-module>
+<script>
+Polymer({
+  is: 'project-chart',
+  properties: {
+    data: {
+      type: Object,
+      observer: '_dataChange'
+    },
+    googleLabels: {
+      type: Array,
+      value: []
+    },
+    control: {
+      type: Object,
+      value: {}
+    },
+    dashboard: {
+      type: Object,
+      value: {}
+    }
+  },
+  ready: function() {
+    //this._runGoogleChart()
+  },
+
+  _dataChange: function(){
+    if(Object.keys(this.data).length >0){
+       this._runGoogleChart();
+    }
+  },
+
+  _convertRgbaToRgb: function(rgba){
+    var b = rgba.substring(5, rgba.length -1);
+    var c = b.split(', ');
+    return 'rgb('+c[0]+', '+c[1]+', '+c[2]+ ')'
+  },
+
+  _prepareGoogleLabels: function(labels){
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return labels.map(function(l){
+      var split = l.split(" ");
+      var monthIdx = months.indexOf(split[0])+1;
+      var month = ((monthIdx) < 10) ? ('0'+monthIdx):(monthIdx);
+      var year = split[1];
+      return new Date(year + '-' + month);
+    })
+  },
+
+  _runGoogleChart: function() {
+    var self = this;
+
+    function drawChart() {
+      var datasets = self.data.datasets[0] || self.data.datasets['0'];
+      var labels = self.data.labels;
+      var googleLabels = self._prepareGoogleLabels(labels);
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('date', 'date');
+      data.addColumn('number', datasets.label);
+
+      datasets.googleBgColor = self._convertRgbaToRgb(datasets.backgroundColor);
+
+      //first loop for labels then for thatasets to support multi columns...
+      for(var x = 0; x < datasets.data.length; x++){
+        var d = datasets.data[x];
+        data.addRow([googleLabels[x], d]);
+      }
+
+      var minRange = googleLabels[1].getTime() - googleLabels[0].getTime();
+
+
+      var dash = new google.visualization.Dashboard(document.getElementById('dashboard'));
+
+      var control = new google.visualization.ControlWrapper({
+        controlType: 'ChartRangeFilter',
+        containerId: 'control_div',
+
+        options: {
+          filterColumnIndex: 0,
+          minValue: new Date(2016, 2, 2),
+          maxValue: new Date(2016, 4, 2),
+          ui: {
+            chartOptions: {
+              height: 40,
+              colors: [datasets.googleBgColor],
+              //width: 600,
+              chartArea: {
+                width: '80%'
+              },
+
+            },
+            minRangeSize: 1000 * 60 * 60 * 24 * 31 * 2
+          },
+
+        },
+        state: {
+          //last three months
+          range: {
+            start: googleLabels[googleLabels.length-4],
+            end: googleLabels[googleLabels.length-1]
+          }
+        }
+      });
+
+      self.googleLabels = googleLabels;
+      self.control = control;
+
+
+      var chart = new google.visualization.ChartWrapper({
+        chartType: 'AreaChart',
+        containerId: 'chart_div',
+        options: {
+          height: 360,
+          colors: [datasets.googleBgColor],
+          legend: 'top',
+          width: '100%'
+        }
+      });
+
+      function setOptions(wrapper) {
+        wrapper.setOption('width', '100%');
+        wrapper.setOption('chartArea.width', '80%');
+      }
+      setOptions(chart);
+
+      dash.bind([control], [chart]);
+      dash.draw(data);
+      self.dashboard = dash;
+    }
+    drawChart();
+
+    $(window).on('resize', function(){
+      drawChart();
+    });
+  },
+
+  filterByYear: function(year) {
+    this.control.setState({range: {
+      start: (new Date(year, 0, 0)),
+      end: (new Date(year, 11, 30)),
+    }});
+    this.control.draw();
+  },
+
+  resetFilter: function() {
+    var googleLabels = this.googleLabels;
+    this.control.setState({range: {
+      start: googleLabels[googleLabels.length-4],
+      end: googleLabels[googleLabels.length-1]
+    }});
+    this.control.draw();
+  }
+})
+</script>

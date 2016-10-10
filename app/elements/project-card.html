@@ -4,6 +4,7 @@
     <style>
 
       :host {
+        width: 100%;
         height: 100%;
       }
 
@@ -12,15 +13,37 @@
       }
 
       .project-card__container {
-        opacity: 0.33;
-        transition: opacity .175s ease-out;
         background-color: #fff;
         height: 100%;
         cursor: pointer;
+        position: relative;
+        box-sizing: border-box;
+        padding-bottom: 120px;
+        position: relative;
+        transition: padding .175s ease-out;
       }
 
-      .project-card__container.is-active {
-        opacity: 1;
+      .project-card__container.has-selected {
+        padding-bottom: 0;
+      }
+
+      .project-card__info {
+        transition: height .175s ease-out;
+        height: 120px;
+        border-top: 1px solid #e9e9e9;
+        position: absolute;
+        bottom: 0;
+        left: 16px;
+        right: 16px;
+        overflow: hidden;
+      }
+
+      .project-card__info-value {
+        font-size: 32px;
+      }
+
+      .project-card__container.has-selected .project-card__info {
+        height: 0;
       }
 
       .project-card__body {
@@ -36,15 +59,48 @@
         height:100%
       }
 
+      circular-progress {
+        --progress-bubble-width: 100px;
+        --progress-bubble-height: 100px;
+      }
+
     </style>
 
-    <div class$="project-card__container mdl-shadow--4dp {{ _isActiveClass(selected, svg) }}">
+    <firebase-document
+      app-name="test"
+      path="{{ _getPath(svg) }}"
+      data="{{ projects }}">
+    </firebase-document>
+
+    <firebase-document
+      app-name="test"
+      path="/budget"
+      data="{{financials}}">
+    </firebase-document>
+
+    <div class$="project-card__container mdl-shadow--4dp {{ _hasSelectedClass(selected) }} {{ _isActiveClass(selected, svg) }}">
       <div class-name="project-card__edge edge edge--{{svg}}"></div>
       <div class="project-card__body">
         <img class="project-card__icon" src="/images/icons/{{svg}}.svg" />
         <div style='project-card__content'>
           <h4 class="project-card__title">{{phrase}}</h4>
           <span>{{content}}</span>
+        </div>
+      </div>
+      <div class="project-card__info">
+        <div class="vcenter__container">
+          <div class="vcenter">
+            <div class="project-card__info-value"><span>{{ projects.length }} projects</span></div>
+          </div>
+          <div class="vcenter">
+            <div class="project-card__progress">
+              <template id="cardProgressContainer" is="dom-if" if="[[ _canShowProgress(financials, type) ]]">
+                <circular-progress class="project-card__progress-item" value="[[ _getProgressValue(financials, type) ]]" max="[[ _getProgressMax(financials, type) ]]" type="[[ svg ]]">
+                    {{ _getProgressContent(financials, type) }}
+                </circular-progress>
+              </template>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -79,11 +135,66 @@
     listeners: {
       'tap': '_handleTap'
     },
+    ready: function() {
+      var that = this;
+      $(document).on('page-changed', function(){
+        that._redrawProgress();
+      });
+    },
+    _getPath: function(svg) {
+      return "portfolios/" + svg + '/projects';
+    },
     _handleTap: function(e){
-      this.set('selected', this.svg);
+      if(this.selected) {
+        this._redrawProgress();
+      }
+
+      if (this.selected != this.svg) {
+        this.set('selected', this.svg);
+      } else {
+        this.set('selected', null);
+        var projectList = document.getElementById('projectList');
+        projectList.classList.remove('is-loaded');
+      }
     },
     _isActiveClass: function(selected, svg) {
       return selected == svg ? 'is-active' : ''
+    },
+    _hasSelectedClass: function(selected) {
+      return selected ? 'has-selected' : ''
+    },
+    _canShowProgress: function(financials, type){
+      if(!financials || !financials.spents || !financials.totals || !type) {
+        return false;
+      }
+
+      var spent = financials.spents[type];
+      var total = financials.totals[type];
+
+      if(!spent || !total){
+        return false;
+      }
+
+      return true;
+    },
+    _getProgressValue: function(financials, type) {
+      return financials.spents[type];
+    },
+    _getProgressMax: function(financials, type) {
+      return financials.totals[type];
+    },
+    _getProgressContent: function(financials, type) {
+      return cleanToMil(financials.spents[type]);
+    },
+    _redrawProgress: function() {
+      var bars = document.querySelectorAll('.project-card__progress-item');
+      for(var i = 0; i < bars.length; i++) {
+        var bar = bars[i];
+        bar.style.display = 'none';
+        bar.redraw();
+        bar.style.display = 'block';
+        bar.redraw();
+      }
     }
   })
 </script>

@@ -1,19 +1,20 @@
 <dom-module id='portfolios-summary'>
   <style>
-  /*.top_line{
-    font-weight:500;
-    font-size:12px;
-  }*/
-  /*.see_all_projects{
-    color:#0099ff;
-    font-size:24px;
-    font-weight:400;
-    padding:0px;
-    margin:0px;
-  }*/
-  .top_sum{
+
+  :host {
+    padding: 16px 8px;
+  }
+
+  .top_sum {
     font-weight:400;
     font-size:34px;
+    line-height: 1.2em;
+    margin-bottom: 8px;
+    color: #888;
+  }
+
+  .top_title {
+    line-height: 1.2em;
   }
 
   .pie_explanation{
@@ -21,7 +22,7 @@
     font-size: 18px;
     line-height: 24px;
     font-weight:400;
-    padding:10px;
+    padding:16px;
   }
 
   .portfolios{
@@ -86,28 +87,21 @@
 
     <div class='top_container_in_card'>
       <div style='text-align:center;'>
-        <div class="pointer" style="content: '';position: absolute;border-style: solid;border-width: 15px 9px 0;border-color: #FFFFFF transparent;display: block;width: 0;z-index: 1;bottom: -15px;left: 111px;">
-        </div>
-        <div class="pointerBorder" style="display: none">
-        </div>
-        <br /><br />
         <div class="content-grid mdl-grid" style='font-weight:800;font-size:12px;'>
-          <div class="mdl-cell mdl-cell--12-col">
-            <div style="height:40px;">
-              INNOVATION FUND
-            </div>
-              <br>
+          <div class="mdl-cell mdl-cell--6-col">
             <div class='top_sum'>
               {{to_mil(summary.stats.total_available)}}
             </div>
-          </div>
-          <div class="mdl-cell mdl-cell--12-col">
-            <div style="height:40px;">
-              CO FUNDING LEVERAGED
+            <div class="top_title">
+              INNOVATION</br>FUND
             </div>
-              <br>
+          </div>
+          <div class="mdl-cell mdl-cell--6-col">
             <div class='top_sum'>
               {{to_mil(summary.stats.co_funding)}}
+            </div>
+            <div class="top_title">
+              CO FUNDING<br/>LEVERAGED
             </div>
           </div>
         </div>

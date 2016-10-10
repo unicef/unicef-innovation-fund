@@ -56,7 +56,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript">
 
-    google.charts.load('current', {'packages':['geochart']});
+    google.charts.load('current', {'packages':['geochart', 'controls', 'corechart']});
 
     function humanize_label(label){
       var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -162,6 +162,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         background-color: #0099FF;
         color: white;
       }
+
+      .project-view__dialog-close {
+        position: absolute;
+        top: 14px;
+        right: 16px;
+        color: #333;
+        font-size: 16px;
+        z-index: 1;
+        margin: 0;
+        padding: 0;
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+      }
+
   </style>
 
 </head>
@@ -241,8 +257,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </div>
           </paper-toolbar>
 
-          <project-modal></project-modal>
-
           <!-- Main Content -->
           <div class="content">
             <modal-warning></modal-warning>
@@ -299,6 +313,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </platinum-sw-cache>
       </platinum-sw-register>
       -->
+
+      <paper-dialog class="project-view__dialog" id="projectModal" entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop>
+        <button class="project-view__dialog-close" onclick="projectModal.close()"><i class="material-icons">&#xE5CD;</i></button>
+        <paper-dialog-scrollable class="project-view__dialog-scrollable container">
+          <project-view id="projectView"></project-view>
+        </paper-dialog-scrollable>
+      </paper-dialog>
     </div>
   </template>
 

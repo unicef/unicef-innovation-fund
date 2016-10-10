@@ -15,9 +15,15 @@
         padding: 16px;
         position: relative;
         z-index: 1;
+        margin-top: -8px;
+      }
+
+      .project-info__value {
+        font-weight: 200;
       }
 
       .project-list {
+        position: relative;
         min-height: 143px;
         margin-top: -16px;
       }
@@ -25,7 +31,7 @@
       .project-list__item {
         opacity: 0;
         transition: all .175s ease-in;
-        transform: translateX(-16px);
+        transform: translateY(16px);
       }
 
       .project-list__item.is-hidden {
@@ -39,7 +45,7 @@
 
       .project-list.is-loaded .project-list__item {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(0);
       }
 
       .project-filter {
@@ -105,8 +111,55 @@
         animation-delay: 625ms;
       }
 
+      .project-info.is-hidden {
+        display: none;
+      }
+
       .project-info.fade-in {
-        animation-delay: 650ms;
+        animation-delay: 25ms;
+      }
+
+      .project-list__project-view {
+        position: absolute;
+        left: 8px;
+        right: 8px;
+        visibility: hidden;
+        opacity: 0;
+        z-index: -1;
+        transition: transform 0.175s ease-in, opacity 0.175s ease-in, visibility 0s linear 0.175s, z-index 0s linear 0.175s;
+        transform: scale(0, 0);
+      }
+
+      .project-list__project-view.is-active {
+        transition-delay: 0s;
+        opacity: 1;
+        z-index: 1;
+        visibility: visible;
+        transform: scale(1, 1);
+      }
+
+      .project-list__project-view > div {
+        height: 100%;
+      }
+
+      .project-list__project-view project-view {
+        background-color: #fff;
+        display: inline-block;
+        width: 100%;
+      }
+
+      project-card {
+        display: inline-block;
+        transition: opacity .175s ease-out;
+        opacity: 1;
+      }
+
+      .project-card__list.has-selected project-card {
+        opacity: 0.33;
+      }
+
+      .project-card__list.has-selected project-card.is-active {
+        opacity: 1;
       }
 
     </style>
@@ -126,20 +179,22 @@
     <div class$='page {{ _getColorClass(selected) }}'>
       <hello-all-projects all_projects_cloud_content="{{content.all_projects_cloud_content}}"></hello-all-projects>
       <div class="page__content">
+        <div class$="project-card__list {{ _getProjectCardListClass(selected) }} mdl-grid">
+          <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+            <project-card class$="{{ _projectCardActiveClass(selected, 'youth_engagement') }}" selected={{selected}} type="youth_engagement" content="{{content.youth_engagement}}" phrase='Products For Youth' fb='ureport' svg="youth_engagement" rgb='255, 204, 51, 0.2'></project-card>
+          </div>
+          <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+            <project-card class$="{{ _projectCardActiveClass(selected, 'real_time_information') }}" selected={{selected}} type="realtime_information" content="{{content.real_time_info}}" phrase='Real-time Information' svg="real_time_information" rgb='255, 204, 51, 0.2'></project-card>
+          </div>
+          <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+            <project-card class$="{{ _projectCardActiveClass(selected, 'infrastructure') }}" selected={{selected}} type="infrastructure" content="{{content.infrastructure}}" phrase='Infrastructure' fb='iogt'  svg="infrastructure"   rgb='255, 204, 51, 0.2'></project-card>
+          </div>
+          <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+            <project-card class$="{{ _projectCardActiveClass(selected, 'knowledge_products') }}" selected={{selected}} type="knowledge_p" content="{{content.knowledge_p}}" phrase='Knowledge Products' fb='iogt'  svg="knowledge_products"   rgb='255, 204, 51, 0.2'></project-card>
+          </div>
+        </div>
         <div class="mdl-grid">
-          <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
-            <project-card selected={{selected}} content="{{content.youth_engagement}}" phrase='Products For Youth' fb='ureport' svg="youth_engagement" rgb='255, 204, 51, 0.2'></project-card>
-          </div>
-          <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
-            <project-card selected={{selected}} content="{{content.real_time_info}}" phrase='Real-time Information' svg="real_time_information" rgb='255, 204, 51, 0.2'></project-card>
-          </div>
-          <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
-            <project-card selected={{selected}} content="{{content.infrastructure}}" phrase='Infrastructure' fb='iogt'  svg="infrastructure"   rgb='255, 204, 51, 0.2'></project-card>
-          </div>
-          <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
-            <project-card selected={{selected}} content="{{content.knowledge_p}}" phrase='Knowledge Products' fb='iogt'  svg="knowledge_products"   rgb='255, 204, 51, 0.2'></project-card>
-          </div>
-          <div id="projectInfo" class="project-info fade-in mdl-cell mdl-cell--12-col mdl-shadow--4dp">
+          <div id="projectInfo" class$="project-info fade-in mdl-cell mdl-cell--12-col mdl-shadow--4dp {{ _getProjectInfoClass(selected, projects) }}">
             <div class="mdl-grid mdl-grid--no-spacing">
               <div class="mdl-cell--4-col mdl-cell">
                 <h2 class="project-info__value">{{ _getProjectInfoValue(projects) }}</h2>
@@ -170,10 +225,17 @@
             </div>
           </div>
         </div>
-        <div class="project-list mdl-grid">
+        <div class="project-list mdl-grid" id="projectList">
           <template is="dom-repeat" id='templateProjects' items="{{projects}}">
-              <portfolio-project class$="project-list__item mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone {{ _getFilterClass(item, filterAmountMin, filterAmountMax, filterRegion) }}" data={{projectsData}} index={{index}} svg={{selected}} item={{item}}></portfolio-project>
+            <div class$="project-list__item mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone {{ _getFilterClass(item, filterAmountMin, filterAmountMax, filterRegion) }}">
+              <portfolio-project data={{projectsData}} index={{index}} svg={{selected}} item={{item}}></portfolio-project>
+            </div>
           </template>
+          <div class="project-list__project-view" id="projectListProjectViewContainer">
+            <div class="mdl-cell mdl-cell--12-col">
+              <project-view class="mdl-shadow--4dp" id="projectListProjectView"></project-view>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -193,7 +255,7 @@
     properties: {
       selected: {
         type: String,
-        value: projectCards[0].key,
+        value: null,
         notify: true,
         observer: '_selectedChange'
       },
@@ -218,7 +280,9 @@
         observer: '_assignProjects'
       },
       projects: {
-        type: Array
+        type: Array,
+        value: [],
+        notify: true
       },
       projectCards: {
         type: Array,
@@ -262,11 +326,6 @@
       $(document).on('page-changed', function(e, page_id){
         if (page_id != 'all_projects') {
           projectList.classList.remove('is-loaded');
-        } else {
-          //Reveal project items on tab switch
-          setTimeout(function(){
-            projectList.classList.add('is-loaded');
-          }, 675);
         }
       });
 
@@ -281,6 +340,7 @@
 
         this._setAmountMinMax(obj);
         this._resetFilters();
+        this._hideExpandedProjects();
 
         //Timeout waits for transition to finish
         setTimeout((function(){
@@ -414,6 +474,36 @@
     _resetFilters: function() {
       this.filterRegion = null;
       this.$.regionFilterListbox.select(null);
+    },
+
+    _hideExpandedProjects: function() {
+      var expandedProjects = document.querySelectorAll('portfolio-project.is-expanded');
+      if (expandedProjects.length) {
+        expandedProjects[0].deactivate();
+      }
+    },
+
+    _getProjectInfoClass: function(selected, projects) {
+      if (!selected || !projects.length) {
+        return 'is-hidden';
+      }
+      return '';
+    },
+
+    _getProjectCardListClass: function(selected) {
+      if (!selected) {
+        return '';
+      }
+
+      return 'has-selected';
+    },
+
+    _projectCardActiveClass(selected, type) {
+      if (selected == type) {
+        return 'is-active';
+      }
+
+      return '';
     }
   })
 </script>
