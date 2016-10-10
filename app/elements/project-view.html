@@ -118,6 +118,7 @@
       .project-view__chart {
         max-width: 100%;
         padding-right: 16px;
+        margin-bottom: 32px;
       }
 
       .project-view__chart chart-line {
@@ -176,7 +177,7 @@
           <div class="project-view__divider project-view__divider--left"></div>
 
           <!-- line chart -->
-          <template is="dom-if" if="[[ _showLineChart(chartData) ]]">
+          <template id="projectChartTemplate" is="dom-if" if="[[ _showLineChart(chartData) ]]">
             <div class="project-view__chart-dropdown">
               <paper-dropdown-menu label="Choose year">
                <paper-listbox id="chartYearSelect" class="dropdown-content" attr-for-selected="value" selected="{{chartYear}}">
@@ -288,11 +289,6 @@
           this.addEventListener('dom-change', function(){
             this._onDomChange();
           });
-
-          if(this.$.chartYearSelect)
-            this.$.chartYearSelect.addEventListener('iron-select', function(e){
-              console.log(e);
-            })
         },
         _getColorClass(type) {
           if(type == 'youth_engagement') {

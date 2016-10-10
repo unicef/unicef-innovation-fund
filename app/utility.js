@@ -157,7 +157,7 @@ function humanize_label(label){
   var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   month = parseInt(label.split(/-/)[1]);
   human_month = months[month-1];
-  year_contraction = label.substr(2,2);
+  year_contraction = label.substr(0,4);
   return human_month + " '" + year_contraction;
 }
 
@@ -194,7 +194,7 @@ function gitPointsAndLabels(dataSet){
     week_sum = commit.days.reduce(function(total, day){
       return total + day
     }, 0)
-    var label = months[month] + " '" +  String(year).slice(2, 4);
+    var label = months[month] + " " +  year;
     humanized_months.push(label);
 
     var date = year + "-" + month;
