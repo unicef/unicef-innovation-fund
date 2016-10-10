@@ -158,7 +158,7 @@ function humanize_label(label){
   month = parseInt(label.split(/-/)[1]);
   human_month = months[month-1];
   year_contraction = label.substr(0,4);
-  return human_month + " '" + year_contraction;
+  return human_month + " " + year_contraction;
 }
 
 
