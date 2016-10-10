@@ -23,10 +23,6 @@
         margin: 0;
       }
 
-      .featured {
-        margin: 0 auto;
-      }
-
       .pc_left{
         padding-left: 1.5rem;
         padding-right: 1.5rem;
@@ -125,13 +121,6 @@
         transition: all 0.5s ease-in-out;
       }
 
-
-      @media (min-width: 840px) {
-          .project__section:last-of-type {
-            padding-top: 32px;
-          }
-      }
-
       @media (max-width: 840px) {
         .project__header {
             background-color: #F1F2F2;
@@ -165,13 +154,13 @@
           visibility: hidden;
         }
 
-        [data-content="description"] > *:not(.project__description) {
-            display: none;
-        }
-
         .project__section {
             padding-bottom: 2rem;
             padding-top: 2rem;
+        }
+
+        .project__description {
+          margin-bottom: 16px;
         }
       }
     </style>
@@ -180,14 +169,14 @@
     <iron-media-query full query="print" query-matches="{{print}}"></iron-media-query>
 
 
-    <div class$="{{_computeClass(wide)}}">
+      <div class$="{{_computeClass(wide)}}">
         <ul class="mdl-layout__cell mdl-cell--hide-desktop project__header">
             <h2 class="project__title">{{featured}}</h2>
             <li on-tap="toggleSection" class="project__switch is-active" data-active="description" data-hide="graph">Description</li>
             <li on-tap="toggleSection" class="project__switch" data-active="graph" data-hide="description">Graph</li>
         </ul>
         <div data-content="description" class="project__section js-active">
-          <div class='top_container_in_card'>
+          <div class='top_container_in_card hidden--tablet'>
             <img src="/images/icons/{{svg}}.svg" width="80" style='padding-left:16px;'>
             <div class='mdl-grid'>
               <div class='mdl-cell mdl-cell--10-col title_card' style='text-align: left;'>
@@ -202,32 +191,29 @@
               <paper-tooltip  class="custom" for="id_2" offset="0">{{db_tooltip}}</paper-tooltip>
             </div>
           </div>
-        </p>
-      </div>
-      <div class="portfolio-card__progress">
-        <div class$="portfolio-card__progress-info portfolio-card__progress-info--{{ svg }}">
-          {{ _getProgressValue(progress.0) }}<br/>
-          available
-        </div>
-        <circular-progress id="progressBar" value="[[ progress.1 ]]" max="[[ progress.0 ]]" type="[[ svg ]]">
-            {{ _getProgressValue(progress.1) }}
-            <span class="portfolio-card__progress-subtitle">Invested</span>
-        </circular-progress>
-      </div>
-    </div>
-    <hr>
-
-      <div style='text-align:left;'>
-        <div class$='featured {{svg}}'>
-          Featured Project
-        </div>
-        <br>
-        <div class='featured_project_name pc_left'>
-          {{featured}}
-        </div>
-        <div class='featured_project_blurb pc_left project__description'  on-tap="_handleTap"
-          style='cursor:pointer;display:{{display_content}}'>
-            {{featured_content}}
+          <div class="portfolio-card__progress">
+            <div class$="portfolio-card__progress-info portfolio-card__progress-info--{{ svg }}">
+              {{ _getProgressValue(progress.0) }}<br/>
+              available
+            </div>
+            <circular-progress id="progressBar" value="[[ progress.1 ]]" max="[[ progress.0 ]]" type="[[ svg ]]">
+                {{ _getProgressValue(progress.1) }}
+                <span class="portfolio-card__progress-subtitle">Invested</span>
+            </circular-progress>
+          </div>
+          <hr style='width:90%; height:100%;margin:16px auto;' />
+          <div style='text-align:left;'>
+            <div class$='featured {{svg}}'>
+              Featured Project
+            </div>
+            <div class='featured_project_name pc_left'>
+              {{featured}}
+            </div>
+            <div class='featured_project_blurb pc_left project__description'  on-tap="_handleTap"
+              style='cursor:pointer;display:{{display_content}}'>
+                {{featured_content}}
+            </div>
+          </div>
         </div>
       </div>
 
