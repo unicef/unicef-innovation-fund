@@ -243,3 +243,10 @@ function clickHandler(e) {
     dialog.open();
   }
 }
+
+function isIE() {
+  if( !(window.ActiveXObject) && "ActiveXObject" in window ) {
+    return true;
+  }
+  return false;
+}
