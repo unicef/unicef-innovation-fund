@@ -85,7 +85,6 @@ Polymer({
 
       var minRange = googleLabels[1].getTime() - googleLabels[0].getTime();
 
-
       var dash = new google.visualization.Dashboard(document.getElementById('dashboard'));
 
       var control = new google.visualization.ControlWrapper({
@@ -143,6 +142,10 @@ Polymer({
       dash.bind([control], [chart]);
       dash.draw(data);
       self.dashboard = dash;
+      if (!self.dashboard.initiated) {
+        self.dashboard.initiated = true;
+        google.visualization.events.addListener(self.dashboard, 'ready', self._dashboardReady.bind(self));
+      }
     }
     drawChart();
 
@@ -166,6 +169,13 @@ Polymer({
       end: googleLabels[googleLabels.length-1]
     }});
     this.control.draw();
+  },
+
+  _dashboardReady: function(e) {
+    var projectView = document.getElementById('projectListProjectView');
+    if (projectView && projectView._onDomChange) {
+      projectView._onDomChange();
+    }
   }
 })
 </script>
