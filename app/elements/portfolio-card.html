@@ -321,6 +321,25 @@
       this.data = request.detail.response
     },
 
+    ready: function(){
+      var that = this;
+      $(document).on('page-changed', function(e, page){
+          //await for animation end / page render.
+        if(page =='dashboard'){
+          setTimeout(function(){
+            that._redrawProgress();
+          }, 625);
+        }
+      });
+    },
+    _redrawProgress: function() {
+      var bar = document.getElementById('progressBar');
+        bar.style.display = 'none';
+        bar.redraw();
+        bar.style.display = 'block';
+        bar.redraw();
+      
+    },
     _handleTap:function(){
       var project = this.featured_project;
       var projectType = this.svg;
