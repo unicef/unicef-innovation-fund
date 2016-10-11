@@ -25,6 +25,7 @@
     }
 
     .button--big {
+      background-color: #FFFFFF;
       color: #0097D8;
       float: left;
       font-size: 1.2rem;
@@ -34,25 +35,13 @@
       width: 50%;
     }
 
-    .button--white {
-      background-color: #FFFFFF;
-    }
-
     .submit__icon {
       display: block;
     }
 
-    .button--text-blue {
-      color: #0097D8;
-    }
-
-    .button--text-violet {
-      color: #2B3880;
-    }
-
     .section__header {
       color: #0097D8;
-      font-size: 3rem;
+      font-size: 1.75rem;
       letter-spacing: 0.08rem;
       line-height: 4rem;
       margin-bottom: 3rem;
@@ -60,7 +49,7 @@
 
     .section__description {
       color: #727272;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 900;
       line-height: 1.45;
       letter-spacing: 0.11rem;
@@ -94,11 +83,11 @@
     }
 
     .section__subheader {
-      color: #33B9B9;
-      font-size: 3.7rem;
-      font-weight: 300;
+      font-size: 1.25rem;
+      font-weight: 600;
       letter-spacing: 0.05rem;
       margin-bottom: 3rem;
+      text-transform: uppercase;
     }
 
     .section__icon {
@@ -113,7 +102,7 @@
       background-color: transparent;
       border: none;
       float: left;
-      font-size: 2rem;
+      font-size: 1rem;
       text-decoration: underline;
       text-transform: uppercase;
     }
@@ -138,7 +127,7 @@
     }
 
     .faq__name {
-      font-size: 1.4rem;
+      font-size: 1.25rem;
       font-weight: 600;
       margin: 1.3rem 0;
       text-align: left;
@@ -156,7 +145,7 @@
     }
 
     .faq__description {
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       line-height: 1.4;
       letter-spacing: 0.094rem;
       margin-bottom: 4.1rem;
@@ -210,7 +199,7 @@
         width: 100%;
       }
     }
-    
+
     </style>
     <style is="custom-style" include="style-fade-in"></style>
     <header class='page__header page__header--dark'>
@@ -225,11 +214,11 @@
     <div class="mdl-grid js-visible" data-target="main">
       <div class="mdl-layout-spacer"></div>
       <div class="container--wide mdl-cell mdl-cell--12-col">
-        <button on-tap="changeSection" class="button button--big button--white button--text-blue mdl-button mdl-js-button mdl-js-ripple-effect fade-in" data-display="office" data-hide="main">
+        <button on-tap="changeSection" class="button button--big mdl-button mdl-js-button mdl-js-ripple-effect fade-in" data-display="office" data-hide="main">
           <p class="button__text">Submissions by UNICEF country offices</p>
           <img src="../images/icons/country_offices.png" alt="Submissions by country offices" class="button__image"/>
         </button>
-        <button on-tap="changeSection" class="button button--big button--white button--text-violet mdl-button mdl-js-button mdl-js-ripple-effect fade-in" data-display="startup" data-hide="main">
+        <button on-tap="changeSection" class="button button--big mdl-button mdl-js-button mdl-js-ripple-effect fade-in" data-display="startup" data-hide="main">
           <p class="button__text">Submissions by start-ups</p>
           <img src="../images/icons/startups.png" alt="Submissions by country offices" class="button__image"/>
         </button>
