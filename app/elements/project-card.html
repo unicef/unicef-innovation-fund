@@ -137,8 +137,13 @@
     },
     ready: function() {
       var that = this;
-      $(document).on('page-changed', function(){
-        that._redrawProgress();
+      $(document).on('page-changed', function(e, page){
+          //await for animation end / page render.
+        if(page =='all_projects'){
+          setTimeout(function(){
+            that._redrawProgress();
+          }, 625);
+        }
       });
     },
     _getPath: function(svg) {
