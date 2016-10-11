@@ -88,7 +88,7 @@
     <div class='top_container_in_card'>
       <div style='text-align:center;'>
         <div class="content-grid mdl-grid" style='font-weight:800;font-size:12px;'>
-          <div class="mdl-cell mdl-cell--6-col">
+          <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet">
             <div class='top_sum'>
               {{to_mil(summary.stats.total_available)}}
             </div>
@@ -96,7 +96,7 @@
               INNOVATION</br>FUND
             </div>
           </div>
-          <div class="mdl-cell mdl-cell--6-col">
+          <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet">
             <div class='top_sum'>
               {{to_mil(summary.stats.co_funding)}}
             </div>
@@ -110,11 +110,21 @@
 </p>
 
     <div style='text-align:center;'>
-      <hr style='width:80%;margin:auto;' />
+      <hr style='width:80%; margin: 1em auto;'/>
     </div>
 
-    <div class='pie_explanation'>
-      {{to_mil(summary.stats.total_invested)}} has been invested in {{summary.stats.num_projects}} projects in {{summary.stats.num_countries}} countries.
+    <div class='pie_explanation mdl-grid'>
+      <div class="mdl-layout-spacer"></div>
+      <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet">
+        {{to_mil(summary.stats.total_invested)}}<br/>invested
+      </div>
+      <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet">
+        {{summary.stats.num_projects}}<br/>projects
+      </div>
+      <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet">
+        {{summary.stats.num_countries}}<br/>countries
+      </div>
+      <div class="mdl-layout-spacer"></div>
     </div>
     <br>
     <br>

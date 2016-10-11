@@ -312,14 +312,10 @@
             projectItems[i].style.transitionDelay = (i*stagger)+'ms';
         }
 
-        //This line is used to force DOM redraw
-        $(projectList).hide().show(0);
+        //This line is used to force DOM redraw (Not working in IE)
+        $(projectList).hide().show(1);
 
-        //If All projects tab is active
-        var scope = document.querySelector('template[is="dom-bind"]');
-        if (scope.page_id == 'all_projects') {
-          projectList.classList.add('is-loaded');
-        }
+        $(projectList).addClass('is-loaded');
 
       }).bind(this));
 
@@ -498,7 +494,7 @@
       return 'has-selected';
     },
 
-    _projectCardActiveClass(selected, type) {
+    _projectCardActiveClass: function(selected, type) {
       if (selected == type) {
         return 'is-active';
       }
