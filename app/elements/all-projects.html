@@ -10,11 +10,24 @@
         display: block;
       }
 
+      .project-info circular-progress {
+        --circular-progress-width: 100px;
+        --circular-progress-height: 100px;
+      }
+
+      .project-info.is-hidden {
+        display: none;
+      }
+
+      .project-info.fade-in {
+        animation-delay: 25ms;
+      }
+
       .project-info {
         background-color: #fff;
         padding: 16px;
         position: relative;
-        z-index: 1;
+        z-index: 2;
         margin-top: -8px;
       }
 
@@ -49,9 +62,10 @@
       }
 
       .project-filter {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
+        border-top: 1px solid #d7d7d7;
+        margin: 48px -16px 0;
+        padding: 16px;
+        height: 84px;
       }
 
       .project-filter.is-hidden {
@@ -60,6 +74,23 @@
 
       .project-filter__menu {
         margin-right: 16px;
+      }
+
+      .project-info__progress {
+        float: left;
+      }
+
+      .project-info__progress.is-hidden {
+        display: none;
+      }
+
+      .project-info__filters {
+        padding-top: 8px;
+        float: right;
+      }
+
+      .project-info__filters.is-hidden {
+        display: none;
       }
 
       .page--yellow paper-range-slider {
@@ -111,14 +142,6 @@
         animation-delay: 625ms;
       }
 
-      .project-info.is-hidden {
-        display: none;
-      }
-
-      .project-info.fade-in {
-        animation-delay: 25ms;
-      }
-
       .project-list__project-view {
         position: absolute;
         left: 8px;
@@ -158,6 +181,10 @@
         opacity: 0.33;
       }
 
+      .project-card__list.has-selected project-card:hover {
+        opacity: 1;
+      }
+
       .project-card__list.has-selected project-card.is-active {
         opacity: 1;
       }
@@ -174,6 +201,12 @@
       app-name="test"
       path="{{ location }}"
       data="{{ projectsData }}">
+    </firebase-document>
+
+    <firebase-document
+      app-name="test"
+      path="/budget"
+      data="{{financials}}">
     </firebase-document>
 
     <div class$='page {{ _getColorClass(selected) }}'>
@@ -195,12 +228,14 @@
         </div>
         <div class="mdl-grid">
           <div id="projectInfo" class$="project-info fade-in mdl-cell mdl-cell--12-col mdl-shadow--4dp {{ _getProjectInfoClass(selected, projects) }}">
-            <div class="mdl-grid mdl-grid--no-spacing">
-              <div class="mdl-cell--4-col mdl-cell">
-                <h2 class="project-info__value">{{ _getProjectInfoValue(projects) }}</h2>
+            <h2 class="project-info__value">{{ _getProjectInfoValue(projects) }}</h2>
+            <div class="project-filter project-filter--yellow">
+              <div class$="project-info__progress {{ _getInfoProgressClass(selected) }}">
+                <circular-progress value="[[ _getProgressValue(financials, selected) ]]" max="[[ _getProgressMax(financials, selected) ]]" type="[[ selected ]]">
+                    {{ _getProgressContent(financials, selected) }}
+                </circular-progress>
               </div>
-              <div class="mdl-layout-spacer"></div>
-              <div class$="project-filter project-filter--yellow mdl-cell--4-col mdl-cell {{ _showFiltersClass(projects) }}">
+              <div class$="project-info__filters {{ _showFiltersClass(projects) }}">
                 <!-- region filter -->
                 <paper-dropdown-menu id="regionFilter" class="project-filter__menu" label="Region">
                   <paper-listbox id="regionFilterListbox" class="dropdown-content" attr-for-selected="value">
@@ -303,6 +338,7 @@
     },
 
     ready: function(){
+      var self = this;
       var stagger = 25;
       var projectList = this.querySelector('.project-list');
 
@@ -313,7 +349,7 @@
         }
 
         //This line is used to force DOM redraw (Not working in IE)
-        $(projectList).hide().show(1);
+        $(projectList).hide().show(0);
 
         $(projectList).addClass('is-loaded');
 
@@ -322,6 +358,7 @@
       $(document).on('page-changed', function(e, page_id){
         if (page_id != 'all_projects') {
           projectList.classList.remove('is-loaded');
+          self.selected = null;
         }
       });
 
@@ -500,6 +537,39 @@
       }
 
       return '';
+    },
+    _getProgressValue: function(financials, type) {
+      //sorry for this. backend inconsistency
+      if(type == 'real_time_information') {
+        type = 'realtime_information'
+      }
+      if(!financials || !type)
+        return;
+      return financials.spents[type];
+    },
+    _getProgressMax: function(financials, type) {
+      //sorry for this. backend inconsistency
+      if(type == 'real_time_information') {
+        type = 'realtime_information'
+      }
+      if(!financials || !type)
+        return;
+      return financials.totals[type];
+    },
+    _getProgressContent: function(financials, type) {
+      //sorry for this. backend inconsistency
+      if(type == 'real_time_information') {
+        type = 'realtime_information'
+      }
+      if(!financials || !type)
+        return;
+      return cleanToMil(financials.spents[type]);
+    },
+
+    _getInfoProgressClass: function(selected) {
+      if(selected == 'knowledge_products') {
+        return 'is-hidden';
+      }
     }
   })
 </script>

@@ -60,8 +60,8 @@
       }
 
       circular-progress {
-        --progress-bubble-width: 100px;
-        --progress-bubble-height: 100px;
+        --circular-progress-width: 100px;
+        --circular-progress-height: 100px;
       }
 
     </style>
@@ -90,7 +90,7 @@
       <div class="project-card__info">
         <div class="vcenter__container">
           <div class="vcenter">
-            <div class="project-card__info-value"><span>{{ projects.length }} projects</span></div>
+            <div class="project-card__info-value"><span>{{ _getProjectInfoValue(projects) }}</span></div>
           </div>
           <div class="vcenter">
             <div class="project-card__progress">
@@ -137,23 +137,11 @@
     },
     ready: function() {
       var that = this;
-      $(document).on('page-changed', function(e, page){
-          //await for animation end / page render.
-        if(page =='all_projects'){
-          setTimeout(function(){
-            that._redrawProgress();
-          }, 625);
-        }
-      });
     },
     _getPath: function(svg) {
       return "portfolios/" + svg + '/projects';
     },
     _handleTap: function(e){
-      if(this.selected) {
-        this._redrawProgress();
-      }
-
       if (this.selected != this.svg) {
         this.set('selected', this.svg);
       } else {
@@ -191,15 +179,11 @@
     _getProgressContent: function(financials, type) {
       return cleanToMil(financials.spents[type]);
     },
-    _redrawProgress: function() {
-      var bars = document.querySelectorAll('.project-card__progress-item');
-      for(var i = 0; i < bars.length; i++) {
-        var bar = bars[i];
-        bar.style.display = 'none';
-        bar.redraw();
-        bar.style.display = 'block';
-        bar.redraw();
+    _getProjectInfoValue: function(projects) {
+      if (!projects.length) {
+        return '';
       }
-    }
+      return projects.length + ' project' + (projects.length > 1 ? 's' : '');
+    },
   })
 </script>

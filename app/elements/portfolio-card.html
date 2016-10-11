@@ -56,7 +56,7 @@
 
        .portfolio-card__progress-info {
          position: relative;
-         margin-bottom: 6px;
+         margin-bottom: 16px;
        }
 
        .portfolio-card__progress-info::before {
@@ -90,23 +90,8 @@
        }
 
        .portfolio-card__progress-subtitle {
+         display: block;
          margin-top: 0.3em;
-         margin-bottom: -0.5em;
-       }
-
-       progress-bubble.circular-progress__bubble--real_time_information {
-         --progress-bubble-stroke-color: #ff3366;
-         color: #ff3366;
-       }
-
-       progress-bubble.circular-progress__bubble--infrastructure {
-         --progress-bubble-stroke-color: #66cc66;
-         color: #66cc66;
-       }
-
-       progress-bubble.circular-progress__bubble--knowledge_products {
-         --progress-bubble-stroke-color: #33cccc;
-         color: #33cccc;
        }
 
     </style>
@@ -316,22 +301,6 @@
 
     ready: function(){
       var that = this;
-      $(document).on('page-changed', function(e, page){
-          //await for animation end / page render.
-        if(page =='dashboard'){
-          setTimeout(function(){
-            that._redrawProgress();
-          }, 625);
-        }
-      });
-    },
-    _redrawProgress: function() {
-      var bar = document.getElementById('progressBar');
-        bar.style.display = 'none';
-        bar.redraw();
-        bar.style.display = 'block';
-        bar.redraw();
-      
     },
     _handleTap:function(){
       var project = this.featured_project;

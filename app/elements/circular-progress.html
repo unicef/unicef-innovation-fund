@@ -4,47 +4,89 @@
     <style>
 
       :host {
-        --progress-bubble-width: 120px;
-        --progress-bubble-height: 120px;
+        --circular-progress-width: 120px;
+        --circular-progress-height: 120px;
       }
 
-      progress-bubble {
-        width: var(--progress-bubble-width);
-        height: var(--progress-bubble-height);
-        text-shadow: none;
-        --progress-bubble-stroke-color: #ffcc33;
-        --progress-bubble-stroke-linecap: round;
-        --progress-bubble-bg-stroke-color: rgb(215, 215, 215);
-        --progress-bubble-background: transparent;
-        --progress-bubble-reflection-display: none;
+      :host.is-hidden {
+        display: none;
+      }
+
+      #content {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+      }
+
+      #progressBar {
+        position: relative;
+        width: var(--circular-progress-width);
+        height: var(--circular-progress-height);
+      }
+
+      #filters {
+        display: none;
+      }
+
+      .circular-progress__content {
         color: #ffcc33;
-        display: inline-block;
+        line-height: 1em;
+        font-size: 24px;
+        text-align: center;
       }
-
-      progress-bubble.circular-progress__bubble--real_time_information {
-        --progress-bubble-stroke-color: #ff3366;
+      .circular-progress__content--real_time_information {
         color: #ff3366;
       }
-
-      progress-bubble.circular-progress__bubble--infrastructure {
-        --progress-bubble-stroke-color: #66cc66;
+      .circular-progress__content--infrastructure {
         color: #66cc66;
       }
-
-      progress-bubble.circular-progress__bubble--knowledge_products {
-        --progress-bubble-stroke-color: #33cccc;
+      .circular-progress__content--knowledge_products {
         color: #33cccc;
       }
 
     </style>
 
-    <div class="circular-progress__container">
-      <progress-bubble stroke-width="10" class$="circular-progress__bubble circular-progress__bubble--{{type}}" id="circularProgress" value="[[value]]" max="[[max]]"><content></content></progress-bubble>
+
+    <div id="progressBar">
+      <div class$="circular-progress__content circular-progress__content--{{ type }}" id="content">
+        <div class="vcenter__container">
+          <div class="vcenter">
+            <content></content>
+          </div>
+        </div>
+      </div>
     </div>
+    <svg id="filters">
+      <defs>
+        <filter  id="inset-shadow" x0="-50%" y0="-50%" width="200%" height="200%">
+    			<feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"></feGaussianBlur>
+    			<feOffset dy="1" dx="0.5"></feOffset>
+    			<feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3=".9" result="shadowDiff"></feComposite>
+    		  <feComposite in2="shadowDiff" operator="in"></feComposite>
+    		  <feComposite in2="SourceGraphic" operator="over" result="firstfilter"></feComposite>
+    		</filter>
+      </defs>
+    </svg>
+
+    <!-- Shadow Offset -->
+    <feOffset dx='0' dy='0' />
+    <!-- Shadow Blur -->
+    <feGaussianBlur stdDeviation='30' result='offset-blur' />
+    <!-- Invert the drop shadow to create an inner shadow -->
+    <feComposite operator='out' in='SourceGraphic' in2='offset-blur' result='inverse' />
+    <!-- Color & Opacity -->
+    <feFlood flood-color='black' flood-opacity='1' result='color' />
+    <!-- Clip color inside shadow -->
+    <feComposite operator='in' in='color' in2='inverse' result='shadow' />
+    <!-- Put shadow over original object -->
+    <feComposite operator='over' in='shadow' in2='SourceGraphic' />
 
   </template>
 </dom-module>
 
+<script src="../bower_components/progressbar.js/dist/progressbar.min.js" type="text/javascript"></script>
 <script>
 
   Polymer({
@@ -61,10 +103,62 @@
       type: {
         type: String,
         value: null
+      },
+      progress: {
+        type: Object,
+        value: null
       }
     },
-    redraw: function() {
-      this.$.circularProgress.redraw();
+    observers: [
+      '_dataChanged(max, value, type)'
+    ],
+    ready: function () {
+      var that = this;
+
+      //set up observer to watch content changes
+      var observer = new MutationObserver(function (mutations) {
+        that.fire('contentChanged', {content: mutations[0].target.parentNode.innerHTML});
+      }).observe(this, { childList: true, subtree: true, characterData: true });
+
+      this.addEventListener('contentChanged', this._contentChanged);
+    },
+    _contentChanged: function(e) {
+      var content = e.detail.content;
+    },
+    _dataChanged: function(max, value, type) {
+      if (this.progress) {
+        this.progress.destroy();
+      }
+
+      var progressValue = value / max;
+
+      this.progress = new ProgressBar.Circle(this.$.progressBar, {
+        strokeWidth: 8,
+        easing: 'easeInOut',
+        duration: 1400,
+        color: this._getColorForType(type),
+        trailColor: '#eee',
+        trailWidth: 8,
+        svgStyle: null
+      });
+      this.progress.path.setAttribute('stroke-linecap', 'round');
+      
+      //firefox does not support svg filters
+      if(navigator.userAgent.toLowerCase().indexOf('firefox') < 0){
+        this.progress.svg.setAttribute('filter', 'url(#inset-shadow)');
+      }
+      this.progress.animate(progressValue);
+    },
+    _getColorForType: function(type) {
+      if (type == 'real_time_information') {
+        return '#ff3366';
+      } else if (type == 'infrastructure') {
+        return '#66cc66';
+      } else if (type == 'knowledge_products') {
+        return '#33cccc';
+      } else {
+        return '#ffcc33';
+      }
     }
   });
 
