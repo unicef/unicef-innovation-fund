@@ -16,16 +16,30 @@
       z-index: 1;
     }
 
+    .button__text {
+      margin-bottom: 35px;
+    }
+
+    .button__image {
+      max-height: 80px;
+    }
+
     .button--big {
+      color: #0097D8;
       float: left;
       font-size: 1.2rem;
       height: 252px;
+      padding: 0;
       text-transform: none;
       width: 50%;
     }
 
     .button--white {
       background-color: #FFFFFF;
+    }
+
+    .submit__icon {
+      display: block;
     }
 
     .button--text-blue {
@@ -177,6 +191,18 @@
       }
     }
 
+    @media (min-width: 680px) {
+      .button:first-of-type:after {
+        border-right: 2px solid #58595B;
+        content: '';
+        height: 60%;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
     @media (max-width: 680px) {
       .button--big {
         display: block;
@@ -184,6 +210,7 @@
         width: 100%;
       }
     }
+    
     </style>
     <style is="custom-style" include="style-fade-in"></style>
     <header class='page__header page__header--dark'>
@@ -198,8 +225,14 @@
     <div class="mdl-grid js-visible" data-target="main">
       <div class="mdl-layout-spacer"></div>
       <div class="container--wide mdl-cell mdl-cell--12-col">
-        <button on-tap="changeSection" class="button button--big button--white button--text-blue mdl-button mdl-js-button mdl-js-ripple-effect fade-in" data-display="office" data-hide="main">Submissions by UNICEF country offices</button>
-        <button on-tap="changeSection" class="button button--big button--white button--text-violet mdl-button mdl-js-button mdl-js-ripple-effect fade-in" data-display="startup" data-hide="main">Submissions by start-ups</button>
+        <button on-tap="changeSection" class="button button--big button--white button--text-blue mdl-button mdl-js-button mdl-js-ripple-effect fade-in" data-display="office" data-hide="main">
+          <p class="button__text">Submissions by UNICEF country offices</p>
+          <img src="../images/icons/country_offices.png" alt="Submissions by country offices" class="button__image"/>
+        </button>
+        <button on-tap="changeSection" class="button button--big button--white button--text-violet mdl-button mdl-js-button mdl-js-ripple-effect fade-in" data-display="startup" data-hide="main">
+          <p class="button__text">Submissions by start-ups</p>
+          <img src="../images/icons/startups.png" alt="Submissions by country offices" class="button__image"/>
+        </button>
       </div>
       <div class="mdl-layout-spacer"></div>
     </div>
@@ -273,8 +306,8 @@
       toShow.classList.add(visibleClass);
     },
     changeSection: function(event) {
-      var hide = event.target.dataset.hide;
-      var target = event.target.dataset.display;
+      var hide = event.target.dataset.hide || event.target.parentElement.dataset.hide;
+      var target = event.target.dataset.display || event.target.parentElement.dataset.display;
 
       var toHide = this.$$("[data-target='" + hide + "']");
       var toShow = this.$$("[data-target='" + target + "']");
