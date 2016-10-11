@@ -93,22 +93,26 @@
       }
 
       .project-view__amount {
-        font-size: 24px;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 18px;
         padding: 16px 0;
+        font-weight: 400;
       }
 
       .project-view__amount-value {
+        font-size: 30px;
         font-weight: 700;
         margin-right: 8px;
       }
 
       .project-view__additional {
-        font-size: 24px;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 18px;
         font-weight: 400;
       }
 
       .project-view__additional-value {
-        font-size: 36px;
+        font-size: 30px;
         font-weight: 700;
         margin-right: 8px;
         padding: 16px 0;
@@ -135,17 +139,10 @@
       }
 
       .project-view__additional-content {
-        width: 100%;
-        padding-right: 50%;
-        white-space: nowrap;
+        display: block;
       }
 
       .project-view__additional-dropdown {
-        width: 100%;
-        padding-left: 50%;
-        box-sizing: border-box;
-        text-align: right;
-        margin-bottom: -28px;
         display: block;
       }
 
@@ -212,7 +209,8 @@
           <template is="dom-if" if="[[ _getAdditionalInfo(chartData) ]]">
             <div class="project-view__divider"></div>
             <div class="project-view__additional">
-                 <paper-dropdown-menu class="project-view__additional-dropdown" label="Choose month">
+              <div class="project-view__additional-dropdown">
+                 <paper-dropdown-menu label="Choose month">
                   <paper-listbox class="dropdown-content" selected="{{additionalRange}}">
                     <paper-item class="project-view__item">All</paper-item>
                     <template is="dom-repeat" items="{{chartData.labels}}">
@@ -220,9 +218,10 @@
                     </template>
                   </paper-listbox>
                 </paper-dropdown-menu>
-                <div class="project-view__additional-content">
-                  <span class="project-view__additional-value">{{ currentUsers }}</span><span>users</span>
-                </div>
+              </div>
+              <div class="project-view__additional-content">
+                <span class="project-view__additional-value">{{ currentUsers }}</span><span>users</span>
+              </div>
             </div>
           </template>
         </div>
