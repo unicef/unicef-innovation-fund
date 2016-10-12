@@ -27,7 +27,6 @@
       }
 
       #filters {
-        visibility: hidden;
         position: absolute;
       }
 
@@ -50,12 +49,12 @@
 
     </style>
     <div id="filters">
-      <svg viewBox="0 0 100 100">
-          <defs>
+      <svg width="100%" height="100%" viewBox="0 0 100 100">
+          <defs id="defs">
             <filter id="inset-shadow" x0="-50%" y0="-50%" width="200%" height="200%">
         			<feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"></feGaussianBlur>
         			<feOffset dy="1.5" dx="1"></feOffset>
-        			<feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3=".8" result="shadowDiff"></feComposite>
+        			<feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3=".9" result="shadowDiff"></feComposite>
         		  <feComposite in2="shadowDiff" operator="in"></feComposite>
         		  <feComposite in2="SourceGraphic" operator="over" result="firstfilter"></feComposite>
         		</filter>
@@ -115,11 +114,16 @@
       }).observe(this, { childList: true, subtree: true, characterData: true });
 
       this.addEventListener('contentChanged', this._contentChanged);
+
+      // $(window).on('resize', function(){
+      //   that.redraw();
+      // });
     },
-    _contentChanged: function(e) {
-      var content = e.detail.content;
-    },
-    _dataChanged: function(max, value, type) {
+    redraw: function() {
+      var max = this.max;
+      var value = this.value;
+      var type = this.type;
+
       if (this.progress) {
         this.progress.destroy();
       }
@@ -140,12 +144,21 @@
       var group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
       group.appendChild(this.progress.trail);
       group.appendChild(this.progress.path);
+      this.progress.svg.appendChild(this.$.defs);
       this.progress.svg.appendChild(group);
+
+      //firefox doesn't support svg filters
       if(navigator.userAgent.toLowerCase().indexOf('firefox') < 0) {
         this.progress.svg.classList.add('has-filter');
       }
 
       this.progress.animate(progressValue);
+    },
+    _contentChanged: function(e) {
+      var content = e.detail.content;
+    },
+    _dataChanged: function(max, value, type) {
+      this.redraw();
     },
     _getColorForType: function(type) {
       if (type == 'real_time_information') {

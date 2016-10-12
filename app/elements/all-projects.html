@@ -35,6 +35,29 @@
         font-weight: 200;
       }
 
+      .project-info__close {
+        position: absolute;
+        right: 32px;
+        top: 32px;
+        display: block;
+        width: 64px;
+        height: 64px;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        border: none;
+        background: none;
+        outline: none;
+        cursor: pointer;
+      }
+
+      .project-info__close::after {
+        content: '\e316';
+        font-family: 'Material Icons';
+        line-height: 64px;
+        font-size: 64px;
+      }
+
       .project-list {
         position: relative;
         min-height: 143px;
@@ -228,6 +251,7 @@
         </div>
         <div class="mdl-grid">
           <div id="projectInfo" class$="project-info fade-in mdl-cell mdl-cell--12-col mdl-shadow--4dp {{ _getProjectInfoClass(selected, projects) }}">
+            <button on-tap="_closeProjectInfo" class="project-info__close"></button>
             <h2 class="project-info__value">{{ _getProjectInfoValue(projects) }}</h2>
             <div class="project-filter project-filter--yellow">
               <div class$="project-info__progress {{ _getInfoProgressClass(selected) }}">
@@ -339,7 +363,7 @@
 
     ready: function(){
       var self = this;
-      var stagger = 25;
+      var stagger = 50;
       var projectList = this.querySelector('.project-list');
 
       this.$.templateProjects.addEventListener('dom-change', (function(){
@@ -357,8 +381,9 @@
 
       $(document).on('page-changed', function(e, page_id){
         if (page_id != 'all_projects') {
-          projectList.classList.remove('is-loaded');
-          self.selected = null;
+          if (!self.selected) {
+            projectList.classList.remove('is-loaded');
+          }
         }
       });
 
@@ -570,6 +595,20 @@
       if(selected == 'knowledge_products') {
         return 'is-hidden';
       }
+    },
+
+    _redrawProgress: function() {
+      var progress = document.querySelectorAll('circular-progress');
+      for (var i = 0; i < progress.length; i++) {
+        var item = progress[i];
+        item.redraw();
+      }
+    },
+
+    _closeProjectInfo: function() {
+      this.selected = null;
+      var projectList = this.querySelector('.project-list');
+      projectList.classList.remove('is-loaded');
     }
   })
 </script>
