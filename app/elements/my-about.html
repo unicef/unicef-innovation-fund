@@ -14,22 +14,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="my-about" >
   <template bind>
     <style include="style-fade-in">
-      .about_vertical_space{
-        height:80px;
-      }
-
-      .about__section.fade-in:first-of-type {
-        animation-delay: 0.525s;
-      }
-
-      .about__section.fade-in:nth-of-type(2) {
-        animation-delay: 0.550s;
-      }
-
-      .about__section.fade-in:nth-of-type(3) {
-        animation-delay: 0.575s;
-      }
-
       .about__content {
         text-align: center;
       }
@@ -49,6 +33,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: 0;
         margin: 2.3rem auto;
         max-width: 70px;
+      }
+
+      .about__image {
+        max-width: 150px;
+      }
+
+      @media (min-width: 1600px) {
+        .about__content {
+          width: 50%;
+        }
       }
 
       @media (min-width: 920px) {
@@ -71,7 +65,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       }
 
-      @media (min-width: 640px) {
+      @media (max-width: 920px) {
+        .about__image {
+          width: 32%;
+        }
+      }
+
+      @media (min-width: 820px) {
         .about__description--narrow {
           margin-left: auto;
           margin-right: auto;
@@ -79,18 +79,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       }
 
-      @media (max-width: 640px) {
-        .about__image {
-          width: 32%;
-        }
-      }
     </style>
     <div class="hello_holder">
       <hello-about></hello-about>
 
       <div class="mdl-grid about__section fade-in">
         <div class="mdl-layout-spacer" ></div>
-        <div class="mdl-cell--bottom mdl-cell--6-col about__content">
+        <div class="mdl-cell--bottom mdl-cell--10-col mdl-cell--8-col-tablet about__content">
           <p class="about__description">UNICEF Innovation is creating communities around the products we invest in.<br>Having access to robust communities of developers and entrepreneurs is also of value to our partners. It will allow them to extend work for their own purposes and also access a global change engine that can be used to build other solutions in the future.</p>
           <hr class="about__divider">
 
