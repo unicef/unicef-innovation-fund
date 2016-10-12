@@ -347,7 +347,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     window.addEventListener('WebComponentsReady', function(e) {
       $('paper-tabs#main-menu paper-tab').click(function(){
         $('#mainContainer').scrollTop(0);
-        scope.selected = $('paper-tabs paper-tab').index(this);
+        scope.selected = $('paper-tabs#main-menu paper-tab').index(this);
         scope.page_id = this.id;
         // Update css settings per tab
         page_change(this.id);
