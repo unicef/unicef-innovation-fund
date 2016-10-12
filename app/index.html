@@ -245,7 +245,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <div class="middle middle-container" style='width:100%'>
               <div class="app-name">UNICEF INNOVATION FUND</div>
               <div class="spacer"></div>
-              <paper-tabs selected="[[selected]]" class="bottom self-end">
+              <paper-tabs id="main-menu" selected="[[selected]]" class="bottom self-end">
                 <paper-tab id='dashboard'>DASHBOARD</paper-tab>
                 <paper-tab id='all_projects'>ALL PROJECTS</paper-tab>
                 <paper-tab id='about'>ABOUT</paper-tab>
@@ -332,7 +332,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     scope.selected = 0;
 
     window.addEventListener('WebComponentsReady', function(e) {
-      $('paper-tabs paper-tab').click(function(){
+      $('paper-tabs#main-menu paper-tab').click(function(){
         $('#mainContainer').scrollTop(0);
         scope.selected = $('paper-tabs paper-tab').index(this);
         scope.page_id = this.id;
