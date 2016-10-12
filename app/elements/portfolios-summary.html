@@ -244,6 +244,8 @@
 
 <script>
   function divide_by_100k(str_dollar_amount){
+    if(!str_dollar_amount)
+      return 0;
     var num = Number(str_dollar_amount.replace(/[^0-9\.]+/g,""))
     // return num/1000;
     return num/1;
