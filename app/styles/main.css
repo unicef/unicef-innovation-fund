@@ -480,3 +480,7 @@ paper-tab{
     display: none;
   }
 }
+
+svg.has-filter g {
+  filter: url('#inset-shadow');
+}

@@ -27,7 +27,8 @@
       }
 
       #filters {
-        display: none;
+        visibility: hidden;
+        position: absolute;
       }
 
       .circular-progress__content {
@@ -46,8 +47,21 @@
         color: #33cccc;
       }
 
-    </style>
 
+    </style>
+    <div id="filters">
+      <svg viewBox="0 0 100 100">
+          <defs>
+            <filter id="inset-shadow" x0="-50%" y0="-50%" width="200%" height="200%">
+        			<feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"></feGaussianBlur>
+        			<feOffset dy="1.5" dx="1"></feOffset>
+        			<feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3=".8" result="shadowDiff"></feComposite>
+        		  <feComposite in2="shadowDiff" operator="in"></feComposite>
+        		  <feComposite in2="SourceGraphic" operator="over" result="firstfilter"></feComposite>
+        		</filter>
+        </defs>
+      </svg>
+    </div>
 
     <div id="progressBar">
       <div class$="circular-progress__content circular-progress__content--{{ type }}" id="content">
@@ -57,31 +71,11 @@
           </div>
         </div>
       </div>
+      <div id="progressBarCanvas" class="circular-progress__canvas">
+      </div>
     </div>
-    <svg id="filters">
-      <defs>
-        <filter  id="inset-shadow" x0="-50%" y0="-50%" width="200%" height="200%">
-    			<feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"></feGaussianBlur>
-    			<feOffset dy="1" dx="0.5"></feOffset>
-    			<feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3=".9" result="shadowDiff"></feComposite>
-    		  <feComposite in2="shadowDiff" operator="in"></feComposite>
-    		  <feComposite in2="SourceGraphic" operator="over" result="firstfilter"></feComposite>
-    		</filter>
-      </defs>
-    </svg>
 
-    <!-- Shadow Offset -->
-    <feOffset dx='0' dy='0' />
-    <!-- Shadow Blur -->
-    <feGaussianBlur stdDeviation='30' result='offset-blur' />
-    <!-- Invert the drop shadow to create an inner shadow -->
-    <feComposite operator='out' in='SourceGraphic' in2='offset-blur' result='inverse' />
-    <!-- Color & Opacity -->
-    <feFlood flood-color='black' flood-opacity='1' result='color' />
-    <!-- Clip color inside shadow -->
-    <feComposite operator='in' in='color' in2='inverse' result='shadow' />
-    <!-- Put shadow over original object -->
-    <feComposite operator='over' in='shadow' in2='SourceGraphic' />
+
 
   </template>
 </dom-module>
@@ -132,7 +126,7 @@
 
       var progressValue = value / max;
 
-      this.progress = new ProgressBar.Circle(this.$.progressBar, {
+      this.progress = new ProgressBar.Circle(this.$.progressBarCanvas, {
         strokeWidth: 8,
         easing: 'easeInOut',
         duration: 1400,
@@ -142,11 +136,15 @@
         svgStyle: null
       });
       this.progress.path.setAttribute('stroke-linecap', 'round');
-      
-      //firefox does not support svg filters
-      if(navigator.userAgent.toLowerCase().indexOf('firefox') < 0){
-        this.progress.svg.setAttribute('filter', 'url(#inset-shadow)');
+
+      var group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      group.appendChild(this.progress.trail);
+      group.appendChild(this.progress.path);
+      this.progress.svg.appendChild(group);
+      if(navigator.userAgent.toLowerCase().indexOf('firefox') < 0) {
+        this.progress.svg.classList.add('has-filter');
       }
+
       this.progress.animate(progressValue);
     },
     _getColorForType: function(type) {
