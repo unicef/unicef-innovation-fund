@@ -179,6 +179,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         outline: none;
         cursor: pointer;
       }
+      .project-view__dialog .project-view__dialog-scrollable{
+        margin-bottom: 0 !important;
+      }
+
+      .dialog-type-infrastructure{
+        border-bottom: 5px solid #66cc66;
+      }
+      .dialog-type-real_time_information{
+         border-bottom: 5px solid #ff3366;
+      }
+      .dialog-type-youth_engagement{
+         border-bottom: 5px solid #ffcc33;
+      }
 
   </style>
 
@@ -245,7 +258,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <div class="middle middle-container" style='width:100%'>
               <div class="app-name">UNICEF INNOVATION FUND</div>
               <div class="spacer"></div>
-              <paper-tabs selected="[[selected]]" class="bottom self-end">
+              <paper-tabs id="main-menu" selected="[[selected]]" class="bottom self-end">
                 <paper-tab id='dashboard'>DASHBOARD</paper-tab>
                 <paper-tab id='all_projects'>ALL PROJECTS</paper-tab>
                 <paper-tab id='about'>ABOUT</paper-tab>
@@ -332,9 +345,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     scope.selected = 0;
 
     window.addEventListener('WebComponentsReady', function(e) {
-      $('paper-tabs paper-tab').click(function(){
+      $('paper-tabs#main-menu paper-tab').click(function(){
         $('#mainContainer').scrollTop(0);
-        scope.selected = $('paper-tabs paper-tab').index(this);
+        scope.selected = $('paper-tabs#main-menu paper-tab').index(this);
         scope.page_id = this.id;
         // Update css settings per tab
         page_change(this.id);

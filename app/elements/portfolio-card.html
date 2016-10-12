@@ -310,6 +310,10 @@
 
       projectView.node.project = project;
       projectView.node.type = projectType;
+      $(projectModal.node).removeClass("dialog-type-infrastructure");
+      $(projectModal.node).removeClass("dialog-type-real_time_information");
+      $(projectModal.node).removeClass("dialog-type-youth_engagement");
+      $(projectModal.node).addClass('dialog-type-' + projectType);
       projectModal.node.open();
     },
     toggleSection: function (event) {
