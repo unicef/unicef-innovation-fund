@@ -3,7 +3,11 @@
 <dom-module id="project-view">
   <template>
     <style is="custom-style">
-   
+
+      :host {
+        overflow: hidden;
+      }
+
       .project-view__container {
         background-color: #fff;
         border-bottom-width: 5px;
@@ -86,7 +90,7 @@
       .project-view__container--knowledge_products paper-tabs{
         --paper-tabs-selection-bar-color: #ff3366;
       }
-      
+
       .project-view__col--main {
         border-right: 1px solid #222;
       }
@@ -173,11 +177,18 @@
         padding: 0 16px;
       }
 
+      .project-view__chart-container {
+        height: 476px;
+      }
+
       .project-view__tabs{
         max-width: 200px;
         margin-top: -30px
       }
-      --paper-tabs-selection-bar-color: #000;
+
+      paper-tabs {
+        --paper-tabs-selection-bar-color: #000;
+      }
     </style>
 
     <firebase-document
@@ -205,7 +216,7 @@
             </paper-tabs>
           </template>
           <div class="project-view__divider project-view__divider--left"></div>
-           <neon-animated-pages style='z-index:0;' selected="{{tabName}}" attr-for-selected="tab-name" exit-animation="fade-out-animation" entry-animation="slide-from-left-animation">
+           <neon-animated-pages class="project-view__chart-container" style='z-index:0;' selected="{{tabName}}" attr-for-selected="tab-name" exit-animation="fade-out-animation" entry-animation="slide-from-left-animation">
               <neon-animatable tab-name="graph">
                 <!-- line chart -->
                 <template id="projectChartTemplate" is="dom-if" if="[[ _showLineChart(chartData) ]]">
@@ -236,7 +247,7 @@
 
 
 
-    
+
         </div>
         <div class$="mdl-cell [[ _getDescColClass(chartData, geoData) ]] mdl-cell--12-col-tablet">
           <h4 class="project-view__description-title">Description</h4>
