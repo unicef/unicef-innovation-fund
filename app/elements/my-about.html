@@ -14,81 +14,91 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="my-about" >
   <template bind>
     <style include="style-fade-in">
-      .about_vertical_space{
-        height:80px;
+      .about__content {
+        text-align: center;
       }
 
-      .about__section.fade-in:first-of-type {
-        animation-delay: 0.525s;
+      .about__description {
+        font-size: 1.1rem;
+        letter-spacing: 0.02rem;
+        line-height: 1.85;
       }
 
-      .about__section.fade-in:nth-of-type(2) {
-        animation-delay: 0.550s;
+      .about__description--italic {
+        font-style: italic;
       }
 
-      .about__section.fade-in:nth-of-type(3) {
-        animation-delay: 0.575s;
+      .about__divider {
+        border: 2px solid #3366CB;
+        height: 0;
+        margin: 2.3rem auto;
+        max-width: 70px;
       }
+
+      .about__image {
+        max-width: 150px;
+      }
+
+      @media (min-width: 1600px) {
+        .about__content {
+          width: 50%;
+        }
+      }
+
+      @media (min-width: 920px) {
+        .about__content {
+          padding-top: 3rem;
+        }
+
+        .about__description {
+          margin-bottom: 2.3rem;
+          padding: 0 4rem;
+        }
+
+        .about__description:last-of-type {
+          margin-bottom: 7.3rem;
+        }
+
+        .about__image {
+          width: 15%;
+          margin: 1.2rem 1.2rem 3.5rem;
+        }
+      }
+
+      @media (max-width: 920px) {
+        .about__image {
+          width: 32%;
+        }
+      }
+
+      @media (min-width: 820px) {
+        .about__description--narrow {
+          margin-left: auto;
+          margin-right: auto;
+          width: 50%;
+        }
+      }
+
     </style>
-    <div class='hello_holder'>
+    <div class="hello_holder">
       <hello-about></hello-about>
-      <firebase-document
-        app-name="test"
-        path="/content/about_innovation_fund_title"
-        data="{{about_innovation_fund_title}}">
-      </firebase-document>
 
-      <firebase-document
-        app-name="test"
-        path="/content/about_innovation_fund"
-        data="{{about_innovation_fund}}">
-      </firebase-document>
-
-
-      <div class='mdl-grid about__section fade-in' style='position:relative;top:0px;padding:0px;'>
+      <div class="mdl-grid about__section fade-in">
         <div class="mdl-layout-spacer" ></div>
-        <div class="mdl-cell--bottom mdl-cell--10-col" style='width:600px;border-radius:15px;padding:0px;'>
-          <div class='mdl-grid' style='padding:0px;width:100%;'>
-            <div class="mdl-cell mdl-cell--12-col" style='text-align:left;'>
-              <div class='about_vertical_space'>
+        <div class="mdl-cell--bottom mdl-cell--10-col mdl-cell--8-col-tablet about__content">
+          <p class="about__description">UNICEF Innovation is creating communities around the products we invest in.<br>Having access to robust communities of developers and entrepreneurs is also of value to our partners. It will allow them to extend work for their own purposes and also access a global change engine that can be used to build other solutions in the future.</p>
+          <hr class="about__divider">
 
-              </div>
-                <span id='about'>
-                  {{about_innovation_fund}}
-                </span>
-            </div>
-            <div class="mdl-layout-spacer"></div>
-          </div>
+          <img src="../images/icons/youth_engagement.svg" alt="Youth engagement" class="about__image">
+          <img src="../images/icons/infrastructure.svg" alt="Infrastructure" class="about__image">
+          <img src="../images/icons/real_time_information.svg" alt="Real time information" class="about__image">
+          <p class="about__description about__description--italic about__description--narrow">The Fund has raised $9 million so far and focuses its investments on three portfolio areas: products for youth, real-time information and infrastructure. These portfolio areas encompass a set of technologies and initiatives that are fundamental to increasing children’s access to information, opportunity and choice. The Fund brings together models of financing and methodologies used by Venture Capital funds and the principles of UNICEF's award winning Office of Innovation.</p>
+
+          <hr class="about__divider">
+          <p class="about__description">This website provides investors, supporters and other partners with real-time information about the Innovation Fund. This site is currently a beta version and we are continuing to build, improve and grow it. The website allows for exploration of individual projects and tracking of the overall portfolio in real time. Through dashboards that provide real time information aggregated at the project, portfolio and Fund level, contributors, and investors are able to continually monitor progress.</p>
         </div>
         <div class="mdl-layout-spacer"></div>
       </div>
-
-      <div class='mdl-grid about__section fade-in' style='position:relative;top:0px;padding:0px;'>
-        <div class="mdl-layout-spacer" ></div>
-        <div class="mdl-cell--bottom mdl-cell--10-col" style='width:600px;border-radius:15px;padding:0px;'>
-          <div class='mdl-grid' style='padding:0px;width:100%;'>
-            <div class="mdl-cell mdl-cell--12-col" style='text-align:left;'>
-              <hr />
-            </div>
-            <div class="mdl-layout-spacer"></div>
-          </div>
-        </div>
-        <div class="mdl-layout-spacer"></div>
-      </div>
-
-      <div class='mdl-grid about__section fade-in' style='position:relative;top:0px;padding:0px;'>
-        <div class="mdl-layout-spacer" ></div>
-        <div class="mdl-cell--bottom mdl-cell--10-col" style='width:600px;border-radius:15px;padding:0px;'>
-          <div class='mdl-grid' style='padding:0px;width:100%;'>
-            <div class="mdl-cell mdl-cell--12-col" style='text-align:left;'>
-              <img src='../images/portfolio_areas_icons.png' style='width:100%;'/>
-            </div>
-            <div class="mdl-layout-spacer"></div>
-          </div>
-        </div>
-        <div class="mdl-layout-spacer"></div>
-      </div>
-      <div class='about_vertical_space'></div>
     </div>
   </template>
 
@@ -97,28 +107,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       'use strict';
 
       Polymer({
-        is: 'my-about',
-
-        properties: {
-          about_innovation_fund:{
-            type: String,
-            notify: true,
-            observer: '_htmlChanged'
-          },
-
-        },
-
-        _htmlChanged: function (neo) {
-          // WARNING: potential XSS vulnerability if `html` comes from an untrusted source
-          if(  document.getElementById('about')){
-            document.getElementById('about').innerHTML = neo;
-          }
-
-        },
-
-
-        ready: function() {
-        }
+        is: 'my-about'
       });
     })();
   </script>
