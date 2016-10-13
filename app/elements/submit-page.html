@@ -41,19 +41,14 @@
 
     .section__header {
       color: #0097D8;
-      font-size: 1.75rem;
-      letter-spacing: 0.08rem;
+      font-size: 1.57rem;
       line-height: 4rem;
-      margin-bottom: 3rem;
     }
 
     .section__description {
-      color: #727272;
-      font-size: 1.25rem;
-      font-weight: 900;
+      font-size: 1.1rem;
       line-height: 1.45;
-      letter-spacing: 0.11rem;
-      margin: 2.5rem;
+      margin: 2rem 0 1.2rem;
     }
 
     .section__user-email {
@@ -109,21 +104,33 @@
 
     .section__input {
       background-color: transparent;
-      border: 1px solid #0097D8;
+      border: 3px solid #BABCBD;
+      color: #0097D8;
       display: block;
-      font-size: 1.7rem;
-      font-style: italic;
+      font-size: 1.1rem;
       margin: 0 auto;
-      padding: 1rem;
+      padding: 0.6rem;
+      width: 230px;
+    }
+
+    .section__input:focus {
+        outline: none
     }
 
     .section__confirm-email {
-      background-color: #BABCBD;
+      background-color: #0097D8;
       border: none;
+      color: #FFFFFF;
+      font-size: 1rem;
+      font-weight: 400;
+      margin-top: 1.85rem;
+      padding: 1.35rem 0;
+      width: 250px;
+    }
+
+    .section__confirm-email:disabled {
+      background-color: #BABCBD;
       color: #000000;
-      font-size: 1.7rem;
-      margin-top: 2.5rem;
-      padding: 1rem 8.2rem;
     }
 
     .faq__name {
@@ -202,6 +209,11 @@
 
     </style>
     <style is="custom-style" include="style-fade-in"></style>
+    <firebase-document
+      app-name="test"
+      path="/summary/portfolios/invested_youth_engagement"
+      data="{{emails}}">
+    </firebase-document>
     <header class='page__header page__header--dark'>
       <div class='mdl-grid container' style='position:relative;'>
         <div class="mdl-layout-spacer"></div>
@@ -230,10 +242,10 @@
       <div class="container mdl-cell mdl-cell--12-col">
         <button on-tap="changeSection" class="section__back" id="back-from-office" data-display="main" data-hide="office">Back</button>
         <h3 class="section__header">UNICEF Country Offices</h3>
-        <p class="section__description">If You are a UNICEF country office, please enter your email address to continue</p>
+        <p class="section__description">If You are a country office, please type your email to continue</p>
         <form is="iron-form" class="section__form" on-submit="submitEmail">
-          <input type="email" class="section__input">
-          <button type="submit" class="section__confirm-email" data-display="office-submited" data-hide="office">Continue</button>
+          <input type="text" class="section__input" placeholder="email@unicef.org" on-input="checkAuth">
+          <button type="submit" class="section__confirm-email" data-display="office-submited" data-hide="office" disabled="{{isDisabled}}">continue</button>
         </form>
       </div>
       <div class="mdl-layout-spacer"></div>
@@ -281,8 +293,24 @@
   <script>
   Polymer({
     is: "submit-page",
+    properties: {
+        isDisabled: {
+            type: Boolean,
+            value: true
+        }
+    },
     listeners: {
       'iron-form-submit': 'submitEmail'
+    },
+    checkAuth: function (event) {
+        var emails = this.emails;
+        for (var key in emails) {
+            if (emails.hasOwnProperty(key) && emails[key] === event.target.value) {
+                return this.isDisabled = false;
+            } else {
+                this.isDisabled = true;
+            }
+        }
     },
     toggleVisible: function(toHide, toShow) {
       var visibleClass = "js-visible";
