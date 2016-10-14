@@ -46,9 +46,9 @@
     }
 
     .section__description {
-      font-size: 1.1rem;
+      font-size: 1.54rem;
       line-height: 1.45;
-      margin: 2rem 0 1.2rem;
+      margin: 9rem 0 2.5rem;
     }
 
     .section__user-email {
@@ -103,13 +103,13 @@
     }
 
     .section__input {
-      border: 3px solid #BABCBD;
+      border: 2px solid #BABCBD;
       color: #0097D8;
       display: block;
       font-size: 1.1rem;
       margin: 0 auto;
-      padding: 0.6rem;
-      width: 230px;
+      padding: 1.1rem;
+      width: 332px;
     }
 
     .section__input--authenticated {
@@ -125,11 +125,12 @@
       background-color: #0097D8;
       border: none;
       color: #FFFFFF;
-      font-size: 1rem;
+      font-size: 1.6rem;
       font-weight: 400;
-      margin-top: 1.85rem;
-      padding: 1.35rem 0;
-      width: 250px;
+      margin-top: 0.8rem;
+      padding: 1rem 0;
+      text-transform: uppercase;
+      width: 365px;
     }
 
     .section__confirm-email:disabled {
@@ -226,7 +227,8 @@
       <div class='mdl-grid container' style='position:relative;'>
         <div class="mdl-layout-spacer"></div>
         <div class="mdl-cell mdl-cell--10-col">
-          <h1 class='page__header-title fade-in'>Submit</h1>
+          <h1 class='page__header--title fade-in'>Submit</h1>
+          <p class="page__header--type">[[sectionName]]</p>
         </div>
         <div class="mdl-layout-spacer"></div>
       </div>
@@ -249,7 +251,6 @@
       <div class="mdl-layout-spacer"></div>
       <div class="container mdl-cell mdl-cell--12-col">
         <button on-tap="changeSection" class="section__back" id="back-from-office" data-display="main" data-hide="office">Back</button>
-        <h3 class="section__header">UNICEF Country Offices</h3>
         <p class$="section__description [[authTextClass]]">[[emailVerificationMessage]]</p>
         <form is="iron-form" class="section__form" on-submit="submitEmail">
           <input type="text" class$="section__input [[inputAuthClass]]" placeholder="email address" on-input="checkAuth">
@@ -262,7 +263,6 @@
       <div class="mdl-layout-spacer"></div>
       <div class="container mdl-cell mdl-cell--12-col">
         <button on-tap="changeSection" class="section__back" data-display="main" data-hide="office-submited">Back</button>
-        <h3 class="section__header">UNICEF Country Offices</h3>
         <strong class="section__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi est ducimus, nemo laborum esse repellat accusamus, repudiandae officia neque voluptatum id. Facilis iste odit eligendi perspiciatis, sed hic nesciunt maiores?</strong>
         <p class="section__user-email"></p>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit mdl-button mdl-js-button mdl-js-ripple-effect">Submission Form</a>
@@ -319,6 +319,10 @@
         inputAuthClass: {
             type: String,
             value: ''
+        },
+        sectionName: {
+            type: String,
+            value: ''
         }
     },
     listeners: {
@@ -368,6 +372,17 @@
     changeSection: function(event) {
       var hide = event.target.dataset.hide || event.target.parentElement.dataset.hide;
       var target = event.target.dataset.display || event.target.parentElement.dataset.display;
+
+      switch (target) {
+          case "office" || "office-submited":
+              this.sectionName = "UNICEF Country Offices";
+              break;
+          case "startup":
+              this.sectionName = "Startups";
+              break;
+          default:
+              this.sectionName = "";
+      }
 
       var toHide = this.$$("[data-target='" + hide + "']");
       var toShow = this.$$("[data-target='" + target + "']");
