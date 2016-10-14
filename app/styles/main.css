@@ -494,3 +494,62 @@ svg.has-filter {
 svg.has-filter g {
   filter: url('#inset-shadow');
 }
+
+
+.date-range-filter .goog-inline-block {
+  width: 100%;
+  outline: none;
+}
+
+.date-range-filter .google-visualization-controls-slider-horizontal {
+  width: 100%;
+  outline: none;
+}
+
+.date-range-filter .google-visualization-controls-rangefilter-thumblabel {
+  position: absolute;
+  top: 27px;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  outline: none;
+  font-family: 'Source Sans Pro';
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 400;
+  color: #929497;
+}
+
+.date-range-filter .google-visualization-controls-slider-horizontal {
+  border: none;
+  background-color: #BBBDBF;
+  border-radius: 0;
+  height: 8px;
+}
+
+.date-range-filter .google-visualization-controls-slider-handle {
+  margin-top: -1px;
+  background-color: #ffcc33;
+  opacity: 1;
+}
+
+.project-view__container--real_time_information .date-range-filter .google-visualization-controls-slider-handle {
+  background-color: #ff3366;
+}
+
+.project-view__container--infrastructure .date-range-filter .google-visualization-controls-slider-handle {
+  background-color: #66cc66;
+}
+
+.project-view__container--knowledge_products .date-range-filter .google-visualization-controls-slider-handle {
+  background-color: #33cccc;
+}
+
+.date-range-filter .google-visualization-controls-slider-thumb {
+  outline: none;
+  margin-top: 0;
+  border: none;
+  border-radius: 0;
+  background-color: #686969;
+  cursor: pointer;
+}

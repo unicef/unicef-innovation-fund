@@ -7,6 +7,7 @@
       position: relative;
       display: inline-block;
     }
+
     </style>
     <div>
       <div id="dashboard">
@@ -89,47 +90,49 @@ Polymer({
       var dash = new google.visualization.Dashboard(document.getElementById('dashboard'));
 
       var control = new google.visualization.ControlWrapper({
-        controlType: 'ChartRangeFilter',
+        controlType: 'DateRangeFilter',
         containerId: 'control_div',
 
         options: {
           filterColumnIndex: 0,
-          minValue: new Date(2016, 2, 2),
-          maxValue: new Date(2016, 4, 2),
+          minValue: googleLabels[0],
+          maxValue: googleLabels[googleLabels.length-1],
+          width: '100%',
           ui: {
-            chartOptions: {
-              height: 40,
-              colors: [datasets.googleBgColor],
-              //width: 600,
-              chartArea: {
-                width: '80%'
-              },
-
-            },
-            minRangeSize: 1000 * 60 * 60 * 24 * 31 * 2
-          },
-
+            label: false,
+            format: {pattern: "MMM yyyy"},
+            cssClass: "date-range-filter"
+          }
         },
         state: {
           //last three months
-          range: {
-            start: googleLabels[googleLabels.length-4],
-            end: googleLabels[googleLabels.length-1]
-          }
+          lowValue: googleLabels[googleLabels.length-4],
+          highValue: googleLabels[googleLabels.length-1]
         }
       });
 
       self.googleLabels = googleLabels;
       self.control = control;
+      google.visualization.events.addListener(self.control, 'statechange', self._controlUpdate.bind(self));
 
 
       var chart = new google.visualization.ChartWrapper({
         chartType: 'AreaChart',
         containerId: 'chart_div',
         options: {
+          chartArea: {
+            left: 40,
+            top: 60,
+            right: 0,
+            width: '100%',
+            height: 240
+          },
           height: 360,
           colors: [datasets.googleBgColor],
-          legend: 'top',
+          legend: {
+            position: 'top',
+            alignment: 'start'
+          },
           width: '100%'
         }
       });
@@ -156,10 +159,10 @@ Polymer({
   },
 
   filterByYear: function(year) {
-    this.control.setState({range: {
-      start: (new Date(year, 0, 0)),
-      end: (new Date(year, 11, 30)),
-    }});
+    this.control.setState({
+      lowValue: (new Date(year, 0, 0)),
+      highValue: (new Date(year, 11, 30)),
+    });
     this.control.draw();
   },
 
@@ -177,6 +180,18 @@ Polymer({
     if (projectView && projectView._onDomChange) {
       projectView._onDomChange();
     }
+
+    var controlContainer = this.control.getContainer();
+    var controlThumbLabel = controlContainer.querySelectorAll('.google-visualization-controls-rangefilter-thumblabel');
+    var controlThumb = controlContainer.querySelectorAll('.google-visualization-controls-slider-thumb');
+
+    //Display thumb labels directly under thumbs
+    controlThumb[0].appendChild(controlThumbLabel[0]);
+    controlThumb[1].appendChild(controlThumbLabel[1]);
+  },
+
+  _controlUpdate: function() {
+
   }
 })
 </script>
