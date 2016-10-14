@@ -103,7 +103,6 @@
     }
 
     .section__input {
-      background-color: transparent;
       border: 3px solid #BABCBD;
       color: #0097D8;
       display: block;
@@ -111,6 +110,11 @@
       margin: 0 auto;
       padding: 0.6rem;
       width: 230px;
+    }
+
+    .section__input--authenticated {
+        background: url('../images/confirm.svg') no-repeat 97% center;
+        background-size: 7%;
     }
 
     .section__input:focus {
@@ -207,6 +211,10 @@
       }
     }
 
+    .is-alert {
+        color: red !important;
+    }
+
     </style>
     <style is="custom-style" include="style-fade-in"></style>
     <firebase-document
@@ -242,10 +250,10 @@
       <div class="container mdl-cell mdl-cell--12-col">
         <button on-tap="changeSection" class="section__back" id="back-from-office" data-display="main" data-hide="office">Back</button>
         <h3 class="section__header">UNICEF Country Offices</h3>
-        <p class="section__description">If You are a country office, please type your email to continue</p>
+        <p class$="section__description [[authTextClass]]">[[emailVerificationMessage]]</p>
         <form is="iron-form" class="section__form" on-submit="submitEmail">
-          <input type="text" class="section__input" placeholder="email@unicef.org" on-input="checkAuth">
-          <button type="submit" class="section__confirm-email" data-display="office-submited" data-hide="office" disabled="{{isDisabled}}">continue</button>
+          <input type="text" class$="section__input [[inputAuthClass]]" placeholder="email address" on-input="checkAuth">
+          <button type="submit" class="section__confirm-email" data-display="office-submited" data-hide="office" disabled="[[isDisabled]]">continue</button>
         </form>
       </div>
       <div class="mdl-layout-spacer"></div>
@@ -296,20 +304,55 @@
     properties: {
         isDisabled: {
             type: Boolean,
-            value: true
+            value: true,
+            observer: 'checkAuthInputClass'
+        },
+        emailVerificationMessage: {
+            type: String,
+            value: "Please submit your email address to continue",
+            observer: 'checkAuthTextClass'
+        },
+        authTextClass: {
+            type: String,
+            value: ''
+        },
+        inputAuthClass: {
+            type: String,
+            value: ''
         }
     },
     listeners: {
       'iron-form-submit': 'submitEmail'
     },
     checkAuth: function (event) {
+        var defaultEmailVerificationText = "Please submit your email address to continue"
         var emails = this.emails;
         for (var key in emails) {
             if (emails.hasOwnProperty(key) && emails[key] === event.target.value) {
+                this.emailVerificationMessage = defaultEmailVerificationText;
                 return this.isDisabled = false;
             } else {
+                this.emailVerificationMessage = "This email is not registered with a UNICEF Country Office";
                 this.isDisabled = true;
             }
+        }
+        if (event.target.value.length === 0) {
+            return this.emailVerificationMessage = defaultEmailVerificationText;
+        }
+    },
+    checkAuthTextClass: function () {
+        var defaultEmailVerificationText = "Please submit your email address to continue";
+        if (this.emailVerificationMessage !== defaultEmailVerificationText) {
+            return this.authTextClass = "is-alert";
+        } else {
+            return this.authTextClass = null;
+        }
+    },
+    checkAuthInputClass: function () {
+        if (this.isDisabled) {
+            return this.inputAuthClass = '';
+        } else {
+            return this.inputAuthClass = 'section__input--authenticated';
         }
     },
     toggleVisible: function(toHide, toShow) {
