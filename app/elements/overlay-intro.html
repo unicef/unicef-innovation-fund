@@ -140,7 +140,10 @@
 
       self.startCounter();
       setTimeout(function() {
-        $('.overlay').css({display: 'block', opacity: 0})
+        $('.overlay').css({
+          display: 'block',
+          opacity: 0
+        })
         $('.overlay').stop().animate({
           opacity: 1
         }, 300, function() {});
@@ -158,40 +161,40 @@
         self.resetCounter();
       });
     },
-    startCounter:function(){
+    startCounter: function() {
       var counters = document.querySelectorAll('[counter]');
       var intervals = [];
       console.log(counters);
-      for(var x=0; x<counters.length; x++){
+      for (var x = 0; x < counters.length; x++) {
         var counter = counters[x];
         this.runInterval(counter);
       }
     },
-    runInterval: function(counter){
+    runInterval: function(counter) {
       var timeToCount = 1500;
       var from = Number(counter.getAttribute('from'));
       var to = Number(counter.getAttribute('to'));
       var step = Number(counter.getAttribute('step'));
-      var numOfSteps = Math.round(to/step);
-      var timeForStep = Math.round(timeToCount/numOfSteps);
+      var numOfSteps = Math.round(to / step);
+      var timeForStep = Math.round(timeToCount / numOfSteps);
       var intervalCount = 1;
-      var inter = setInterval(function(){
-        var newValue = from + step*intervalCount;
-        if(step<1){
-          var toFixedTo = (((1+step)/step).toString()).length -1;
-          var newValue = (from + step*intervalCount).toFixed(toFixedTo);
+      var inter = setInterval(function() {
+        var newValue = from + step * intervalCount;
+        if (step < 1) {
+          var toFixedTo = (((1 + step) / step).toString()).length - 1;
+          var newValue = (from + step * intervalCount).toFixed(toFixedTo);
         }
-        if(newValue<=to){
+        if (newValue <= to) {
           counter.innerHTML = newValue;
           intervalCount++;
           return;
         }
         clearInterval(inter);
-      },timeForStep)
+      }, timeForStep)
     },
-    resetCounter: function(){
+    resetCounter: function() {
       var counters = document.querySelectorAll('[counter]');
-      for(var x=0; x<counters.length; x++){
+      for (var x = 0; x < counters.length; x++) {
         var counter = counters[x];
         counter.innerHTML = "0";
       }
