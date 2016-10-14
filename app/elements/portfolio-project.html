@@ -158,6 +158,8 @@
       var posX = $(relativeElement).position().left + $(relativeElement).width() / 2;
       $(projectViewContainer).css({top: posY, 'transform-origin': posX+'px -130px'});
 
+      window.scrollTop = posY;
+
       projectView.project = this.item;
       projectView.type = this.svg;
       this.classList.add('is-expanded');

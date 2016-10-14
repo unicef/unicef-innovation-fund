@@ -187,7 +187,7 @@
         z-index: 1;
       }
 
-      .project-view__chart-container {
+      .project-view__chart-container.has-chart {
         height: 448px;
       }
 
@@ -235,38 +235,32 @@
             </paper-tabs>
           </template>
           <div class="project-view__divider project-view__divider--left"></div>
-           <neon-animated-pages class="project-view__chart-container" style='z-index:0;' selected="{{tabName}}" attr-for-selected="tab-name" exit-animation="fade-out-animation" entry-animation="slide-from-left-animation">
-              <neon-animatable tab-name="graph">
-                <!-- line chart -->
-                <template id="projectChartTemplate" is="dom-if" if="[[ _showLineChart(chartData) ]]">
-                  <div class="project-view__chart-dropdown">
-                    <paper-dropdown-menu label="Choose year">
-                     <paper-listbox id="chartYearSelect" class="dropdown-content" attr-for-selected="value" selected="{{chartYear}}">
-                       <paper-item value="0" class="project-view__item">All</paper-item>
-                       <template is="dom-repeat" items="{{_getChartYears(chartData)}}">
-                        <paper-item value="{{item}}" class="project-view__item">{{item}}</paper-item>
-                      </template>
-                      </paper-listbox>
-                      </paper-dropdown-menu>
-                    </div>
-                    <div class="project-view__chart">
-                      <project-chart data="[[ chartData ]]" options="[[ opt ]]" id="projectChart"></project-chart>
-                    </div>
-                </template>
-              </neon-animatable>
-              <neon-animatable tab-name="map">
-               <!-- geo chart -->
+          <neon-animated-pages class$="project-view__chart-container {{ _getChartContainerClass(chartData, geoData) }}" style='z-index:0;' selected="{{tabName}}" attr-for-selected="tab-name" exit-animation="fade-out-animation" entry-animation="slide-from-left-animation">
+            <neon-animatable tab-name="graph">
+              <!-- line chart -->
+              <template id="projectChartTemplate" is="dom-if" if="{{ _showLineChart(chartData) }}">
+                <div class="project-view__chart-dropdown">
+                  <paper-dropdown-menu label="Choose year">
+                   <paper-listbox id="chartYearSelect" class="dropdown-content" attr-for-selected="value" selected="{{chartYear}}">
+                     <paper-item value="0" class="project-view__item">All</paper-item>
+                     <template is="dom-repeat" items="{{_getChartYears(chartData)}}">
+                      <paper-item value="{{item}}" class="project-view__item">{{item}}</paper-item>
+                    </template>
+                    </paper-listbox>
+                  </paper-dropdown-menu>
+                </div>
+                <div class="project-view__chart">
+                  <project-chart data="[[ chartData ]]" options="[[ opt ]]" id="projectChart"></project-chart>
+                </div>
+              </template>
+            </neon-animatable>
+            <neon-animatable tab-name="map">
+              <!-- geo chart -->
               <div class="project-view__geo-chart">
                 <div id="geoChart"></div>
               </div>
-
-              </neon-animatable>
-            </neon-animated-pages>
-
-
-
-
-
+            </neon-animatable>
+          </neon-animated-pages>
         </div>
         <div class$="mdl-cell [[ _getDescColClass(chartData, geoData) ]] mdl-cell--12-col-tablet">
           <h4 class="project-view__description-title">Description</h4>
@@ -630,6 +624,12 @@
             chart.filterByYear(year);
           else
             chart.resetFilter();
+        },
+        _getChartContainerClass: function(chartData, geoData) {
+          if ((!chartData || !Object.keys(chartData).length) && (!geoData || !geoData.length)) {
+            return '';
+          }
+          return 'has-chart';
         }
       });
     })();
