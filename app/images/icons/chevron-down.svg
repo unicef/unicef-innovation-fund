@@ -1,0 +1,10 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
+	  <defs>
+    <style>
+      .path {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+<g><path class="path" d="M10.1,267.9c0-6.6,2.5-13.2,7.5-18.3c10.1-10.1,26.4-10.1,36.5,0l446,446l446-446c10.1-10.1,26.4-10.1,36.5,0c10.1,10.1,10.1,26.4,0,36.5L518.2,750.3c-10.1,10.1-26.4,10.1-36.5,0L17.5,286.1C12.5,281.1,10,274.5,10.1,267.9L10.1,267.9z"/></g>
+</svg>
