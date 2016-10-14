@@ -10,10 +10,8 @@
         transition: all .175s ease-in;
         margin-bottom: 0;
         height: 130px;
-        --portfolio-project-expanded-height: 616px;
         position: relative;
         bottom: 0;
-
       }
 
       :host.is-expanded {
@@ -158,7 +156,9 @@
       var posX = $(relativeElement).position().left + $(relativeElement).width() / 2;
       $(projectViewContainer).css({top: posY, 'transform-origin': posX+'px -130px'});
 
-      window.scrollTop = posY;
+      var scrollTo = $(relativeElement).position().top + $(this).offsetParent().position().top - 16;
+
+      $('#mainContainer').animate({scrollTop: scrollTo});
 
       projectView.project = this.item;
       projectView.type = this.svg;
