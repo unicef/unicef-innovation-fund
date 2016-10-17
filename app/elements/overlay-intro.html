@@ -1,6 +1,12 @@
 <dom-module id="overlay-intro">
   <template>
     <style>
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    
     .overlay {
       position: fixed;
       width: 100%;
@@ -42,6 +48,11 @@
       -webkit-font-smoothing: antialiased;
     }
     
+    .overlay__content[mobile-layout] p {
+      font-size: 20px;
+      line-height: 30px;
+    }
+    
     .overlay__list {
       position: relative;
       width: 85%;
@@ -51,11 +62,23 @@
       padding-left: 0;
     }
     
+    .overlay__list[mobile-layout] {
+      margin-top: 40px;
+    }
+    
     .overlay__item {
       float: left;
       width: 33.3333%;
       position: relative;
       text-align: center;
+    }
+    
+    .overlay__list[mobile-layout] .overlay__item {
+      width: 100%;
+      float: none;
+      clear: both;
+      text-align: center;
+      margin-bottom: 20px;
     }
     
     .overlay__icon {
@@ -90,16 +113,29 @@
       cursor: pointer;
     }
     
+    .overlay__close[mobile-layout] {
+      position: relative;
+      width: 200px;
+      margin: 0 auto;
+      margin-top: 30px;
+      transform: none;
+      left: auto;
+      bottom: auto;
+      display: block;
+    }
+    
     .overlay__close img {
       position: relative;
       display: inline-block;
       width: 50px;
     }
     </style>
+    <iron-media-query query="(max-width: 767px)" query-matches="{{wide}}"></iron-media-query>
+    <iron-media-query full query="print" query-matches="{{print}}"></iron-media-query>
     <section class="overlay">
       <div class="overlay__scroll-content">
         <div class="overlay__container">
-          <div class="overlay__content">
+          <div class="overlay__content" mobile-layout$="{{wide}}">
             <p>
               The UNICEF Innovation Fund is a pooled funding vehicle to quickly assess, fund and scale open-source solutions that are being developed in new and emerging markets and have ability to improve the lives of children.
               <br>
@@ -108,7 +144,7 @@
               <br> This website provides an overview of the Fund and allows you to monitor the progress of each investment in real-time.
             </p>
           </div>
-          <ul class="overlay__list">
+          <ul class="overlay__list" mobile-layout$="{{wide}}">
             <li class="overlay__item">
               <img src="../images/icons/youth_engagement.svg" alt="" class="overlay__icon">
               <span class="overlay__label">PRODUCTS FOR YOUTH</span>
@@ -124,7 +160,7 @@
           </ul>
         </div>
       </div>
-      <button type="button" class="overlay__close" on-tap="hideOverlay">
+      <button type="button" class="overlay__close" on-tap="hideOverlay" mobile-layout$="{{wide}}">
         <img src="../images/icons/chevron-down.svg" alt="#">
       </button>
     </section>
@@ -163,7 +199,6 @@
     startCounter: function() {
       var counters = document.querySelectorAll('[counter]');
       var intervals = [];
-      console.log(counters);
       for (var x = 0; x < counters.length; x++) {
         var counter = counters[x];
         this.runInterval(counter);
