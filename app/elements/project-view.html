@@ -24,9 +24,7 @@
       }
 
       .project-view__title {
-        font-size: 24px;
         padding: 0 16px;
-        font-weight: 500;
       }
       .project-view__item{
         white-space: nowrap;
@@ -55,9 +53,7 @@
       }
 
       .project-view__description-title {
-        font-size: 18px;
         text-transform: uppercase;
-        font-weight: 400;
         margin-top: 32px;
         margin-bottom: 32px;
         border-bottom: 2px solid #ffcc33;
@@ -208,7 +204,7 @@
     <div class$="project-view__container project-view__container--{{ type }} {{ _getColorClass(type) }}">
       <div class="mdl-grid">
         <div class$="mdl-cell [[ _getMainColClass(chartData, geoData) ]] mdl-cell--12-col-tablet project-view__col--main">
-          <h3 class="project-view__title">[[ _getProjectName(project) ]]</h3>
+          <h3 class="title--small">[[ _getProjectName(project) ]]</h3>
           <template is="dom-if" if="[[checkGraphsAndMap(chartData, geoData)]]">
             <paper-tabs class="project-view__tabs" selected="{{tabName}}" attr-for-selected="tab-name">
               <paper-tab tab-name="graph">GRAPH</paper-tab>
@@ -250,7 +246,7 @@
 
         </div>
         <div class$="mdl-cell [[ _getDescColClass(chartData, geoData) ]] mdl-cell--12-col-tablet">
-          <h4 class="project-view__description-title">Description</h4>
+          <h4 class="title--tiny project-view__description-title">Description</h4>
           <div class="project-view__description">
             <p>[[ project.description ]]</p>
           </div>
