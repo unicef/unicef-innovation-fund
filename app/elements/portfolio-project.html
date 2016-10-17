@@ -138,12 +138,15 @@
       }
     },
     deactivate: function(callback) {
+      if (!this.classList.contains('is-expanded')) {
+        return;
+      }
+      this.classList.remove('is-expanded');
       var projectViewContainer = document.querySelector('#projectListProjectViewContainer');
       var projectView = document.querySelector('#projectListProjectView');
       projectViewContainer.classList.remove('is-active');
       projectView.project = {};
       projectView.type = null;
-      this.classList.remove('is-expanded');
       this.style.marginBottom = 0;
       projectView.onDomChange = null;
       projectViewContainer.classList.remove('is-active');

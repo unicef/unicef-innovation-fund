@@ -52,8 +52,8 @@
       }
 
       .project-info__close::after {
-        content: '\e316';
-        font-family: 'Material Icons';
+        content: '\e901';
+        font-family: 'icomoon';
         line-height: 64px;
         font-size: 64px;
       }
@@ -308,7 +308,7 @@
         </div>
         <div class="project-list mdl-grid" id="projectList">
           <template is="dom-repeat" id='templateProjects' items="{{projects}}">
-            <div class$="project-list__item mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone {{ _getFilterClass(item, filterAmountMin, filterAmountMax, filterRegion, filterStatus) }}">
+            <div class$="project-list__item mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone {{ _getFilterClass(item, index, filterAmountMin, filterAmountMax, filterRegion, filterStatus) }}">
               <portfolio-project data={{projectsData}} index={{index}} svg={{selected}} item={{item}}></portfolio-project>
             </div>
           </template>
@@ -531,18 +531,24 @@
       return 'is-hidden';
     },
 
-    _getFilterClass: function(item, filterAmountMin, filterAmountMax, filterRegion, filterStatus) {
+    _getFilterClass: function(item, index, filterAmountMin, filterAmountMax, filterRegion, filterStatus) {
+      var portfolioProjects = document.querySelectorAll('portfolio-project');
+      var element = portfolioProjects[index];
+
       var amount = this._getIntFromAmount(item.amount);
       if ((filterAmountMin && filterAmountMax) && (amount < filterAmountMin || amount > filterAmountMax)) {
+        element.deactivate();
         return 'is-hidden';
       }
 
       if (filterRegion && filterRegion != item.country) {
+        element.deactivate();
         return 'is-hidden';
       }
 
       if (filterStatus && filterStatus.length) {
         if (filterStatus != item.status) {
+          element.deactivate();
           return 'is-hidden';
         }
       }
@@ -567,7 +573,9 @@
 
     _resetFilters: function() {
       this.filterRegion = null;
+      this.filterStatus = null;
       this.$.regionFilterListbox.select(null);
+      this.$.statusFilterListbox.select(null);
     },
 
     _hideExpandedProjects: function() {
