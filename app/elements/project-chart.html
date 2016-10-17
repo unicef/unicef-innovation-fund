@@ -137,6 +137,8 @@ Polymer({
         }
       });
 
+      self.chart = chart;
+
       function setOptions(wrapper) {
         wrapper.setOption('width', '100%');
         wrapper.setOption('chartArea.width', '80%');
@@ -169,7 +171,7 @@ Polymer({
   resetFilter: function() {
     var googleLabels = this.googleLabels;
     this.control.setState({
-      lowValue: googleLabels[googleLabels.length-4],
+      lowValue: googleLabels[0],
       highValue: googleLabels[googleLabels.length-1]
     });
     this.control.draw();
