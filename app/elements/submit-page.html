@@ -309,8 +309,7 @@
         },
         emailVerificationMessage: {
             type: String,
-            value: "Please submit your email address to continue",
-            observer: 'checkAuthTextClass'
+            value: "Please submit your email address to continue"
         },
         authTextClass: {
             type: String,
@@ -329,27 +328,20 @@
       'iron-form-submit': 'submitEmail'
     },
     checkAuth: function (event) {
-        var defaultEmailVerificationText = "Please submit your email address to continue"
-        var emails = this.emails;
-        for (var key in emails) {
-            if (emails.hasOwnProperty(key) && emails[key] === event.target.value) {
-                this.emailVerificationMessage = defaultEmailVerificationText;
-                return this.isDisabled = false;
-            } else {
-                this.emailVerificationMessage = "This email is not registered with a UNICEF Country Office";
-                this.isDisabled = true;
-            }
-        }
-        if (event.target.value.length === 0) {
+        var regxTest = /.{1,}@unicef\.org$/gi;
+        var defaultEmailVerificationText = "Please submit your email address to continue";
+        var inputValue = event.target.value;
+
+        if (inputValue.length === 0) {
             return this.emailVerificationMessage = defaultEmailVerificationText;
         }
-    },
-    checkAuthTextClass: function () {
-        var defaultEmailVerificationText = "Please submit your email address to continue";
-        if (this.emailVerificationMessage !== defaultEmailVerificationText) {
-            return this.authTextClass = "is-alert";
+
+        if (regxTest.test(inputValue) === true) {
+            this.emailVerificationMessage = defaultEmailVerificationText;
+            return this.isDisabled = false;
         } else {
-            return this.authTextClass = null;
+            this.emailVerificationMessage = "This email is not valid";
+            return this.isDisabled = true;
         }
     },
     checkAuthInputClass: function () {
