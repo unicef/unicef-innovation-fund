@@ -9,7 +9,7 @@
         position: relative;
         transition: all .175s ease-in;
         margin-bottom: 0;
-        height: 130px;
+        height: 150px;
         position: relative;
         bottom: 0;
       }
@@ -35,6 +35,10 @@
 
       .portfolio-project__sub-text {
         color:gray;
+      }
+
+      .portfolio-project__status {
+        color: #3366CB;
       }
 
       .portfolio-project__name {
@@ -74,6 +78,9 @@
         </div>
         <div class='portfolio-project__sub-text'>
           {{to_mil(item.amount)}}
+        </div>
+        <div class='portfolio-project__sub-text portfolio-project__status'>
+          {{_getProjectStatus(item.status)}}
         </div>
       </div>
     </div>
@@ -169,6 +176,18 @@
       projectView.onDomChange = (function(){
         $(this).css({marginBottom: projectView.offsetHeight + 8});
       }).bind(this);
+    },
+    _getProjectStatus: function(status) {
+      switch(status) {
+        case "active":
+          return "Current Investment";
+        case "inactive":
+          return "Past Investment";
+        case "completed":
+          return "Funding Completed";
+        default:
+          return "";
+      }
     }
   });
 
