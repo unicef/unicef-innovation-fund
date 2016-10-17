@@ -378,8 +378,8 @@ paper-tab{
 }
 
 .page__header {
-  padding: 50px 0;
   color: #fff;
+  padding: 50px 0;
   text-align: center;
 }
 
@@ -396,6 +396,12 @@ paper-tab{
   font-weight: 200;
   margin: 0 0 0.33em;
   letter-spacing: 0.01em;
+}
+
+.page__header--type {
+    color: #0096D7;
+    font-size: 3rem;
+    margin: 3rem 0;
 }
 
 .page__header-content, .page__header-content p {
