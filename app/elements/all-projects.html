@@ -520,7 +520,12 @@
     _selectedChange: function(e) {
         var menuFilter = this.querySelectorAll('.project-filter__menu, .slider');
         for (var i = 0; i < menuFilter.length; i++) {
-            menuFilter[i].updateStyles();
+          menuFilter[i].updateStyles();
+        }
+
+        var projectView = document.getElementById('projectListProjectViewContainer');
+        if (projectView) {
+          projectView.classList.remove('is-active');
         }
     },
 
