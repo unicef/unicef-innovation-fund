@@ -57,7 +57,7 @@
       }
 
       .project-card__info-value {
-        font-size: 32px;
+        font-size: 36px;
       }
 
       .project-card__container.has-selected .project-card__info {
@@ -78,8 +78,23 @@
       }
 
       circular-progress {
-        --circular-progress-width: 100px;
-        --circular-progress-height: 100px;
+        --circular-progress-width: 80px;
+        --circular-progress-height: 80px;
+        --circular-progress-padding: 10px;
+      }
+
+      .project-card__progress-value {
+        font-size: 20px;
+        display: block;
+        line-height: 1em;
+      }
+
+      .project-card__progress-subtitle {
+        font-size: 10px;
+        color: #333;
+        display: block;
+        text-transform: uppercase;
+        margin-bottom: -0.66em;
       }
 
     </style>
@@ -114,7 +129,8 @@
             <div class="project-card__progress">
               <template id="cardProgressContainer" is="dom-if" if="[[ _canShowProgress(financials, type) ]]">
                 <circular-progress id="cardProgress" class="project-card__progress-item" value="[[ _getProgressValue(financials, type) ]]" max="[[ _getProgressMax(financials, type) ]]" type="[[ svg ]]">
-                    {{ _getProgressContent(financials, type) }}
+                  <span class="project-card__progress-value">{{ _getProgressContent(financials, type) }}</span>
+                  <span class="project-card__progress-subtitle">Invested</span>
                 </circular-progress>
               </template>
             </div>
