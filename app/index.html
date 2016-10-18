@@ -194,6 +194,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
          border-bottom: 5px solid #ffcc33;
       }
 
+      .app-name{
+        cursor: pointer;
+      }
+
   </style>
 
 </head>
@@ -257,7 +261,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             <!-- Application name -->
             <div class="middle middle-container" style='width:100%'>
-              <div class="app-name">UNICEF INNOVATION FUND</div>
+              <div class="app-name" on-click="openOverlay">UNICEF INNOVATION FUND</div>
               <div class="spacer"></div>
               <paper-tabs id="main-menu" selected="[[selected]]" class="bottom self-end">
                 <paper-tab id='dashboard'>DASHBOARD</paper-tab>
@@ -338,7 +342,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </paper-dialog>
     </div>
   </template>
-
+  <overlay-intro></overlay-intro>
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>
   <script>
@@ -361,6 +365,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         page_change(this.id);
       });
 
+
+      $('.app-name').on('click', function(){
+        var overlay = document.querySelector('overlay-intro');
+        overlay.showOverlay(0);
+      })
     });
 
     function page_change(page_id) {

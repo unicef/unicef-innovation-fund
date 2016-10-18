@@ -1,0 +1,256 @@
+<dom-module id="overlay-intro">
+  <template>
+    <style>
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    
+    .overlay {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background: rgba(30, 30, 30, .9);
+      opacity: 0;
+      -webkit-transition: opacity .3s;
+      -o-transition: opacity .3s;
+      transition: opacity .3s;
+      overflow: auto;
+    }
+    
+    .overlay__scroll-content {
+      position: relative;
+    }
+    
+    .overlay__container {
+      width: 100%;
+      max-width: 960px;
+      padding-left: 15px;
+      padding-right: 15px;
+      margin: 0 auto;
+    }
+    
+    .overlay__content {
+      font-size: 40px;
+      color: #fff;
+      padding-top: 30px;
+      border-top: 1px solid #fff;
+      margin-top: 100px;
+    }
+    
+    .overlay__content p {
+      font-size: 30px;
+      line-height: 1.22em;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    .overlay__content[mobile-layout] p {
+      font-size: 20px;
+      line-height: 30px;
+    }
+    
+    .overlay__list {
+      position: relative;
+      width: 85%;
+      overflow: hidden;
+      margin: 0 auto;
+      margin-top: 50px;
+      padding-left: 0;
+      list-style: none;
+    }
+    
+    .overlay__list[mobile-layout] {
+      margin-top: 40px;
+    }
+    
+    .overlay__item {
+      float: left;
+      width: 33.3333%;
+      position: relative;
+      text-align: center;
+      vertical-align: bottom;
+    }
+    
+    .overlay__list[mobile-layout] .overlay__item {
+      width: 100%;
+      float: none;
+      clear: both;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .overlay__icon {
+      display: inline-block;
+      height: 90px;
+      width: auto;
+    }
+    
+    .overlay__item:nth-child(1) .overlay__icon {
+      height: 90px;
+    }
+    
+    .overlay__item:nth-child(2) .overlay__icon {
+      height: 80px;
+      margin-top: 10px;
+    }
+    
+    .overlay__item:nth-child(3) .overlay__icon {
+      height: 86px;
+      margin-top: 4px;
+    }
+    
+    .overlay__label {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 400;
+      display: block;
+      text-align: center;
+      -webkit-font-smoothing: antialiased;
+      margin-top: 10px;
+    }
+    
+    .overlay__close {
+      position: absolute;
+      left: 50%;
+      bottom: 90px;
+      -webkit-transform: translate(-50%, 0);
+      -ms-transform: translate(-50%, 0);
+      -o-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+    
+    .overlay__close[mobile-layout] {
+      position: relative;
+      width: 200px;
+      margin: 0 auto;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      transform: none;
+      left: auto;
+      bottom: auto;
+      display: block;
+    }
+    
+    .overlay__close img {
+      position: relative;
+      display: inline-block;
+      width: 32px;
+      height: 18px;
+    }
+    </style>
+    <iron-media-query query="(max-width: 767px)" query-matches="{{wide}}"></iron-media-query>
+    <iron-media-query full query="print" query-matches="{{print}}"></iron-media-query>
+    <section class="overlay">
+      <div class="overlay__scroll-content">
+        <div class="overlay__container">
+          <div class="overlay__content" mobile-layout$="{{wide}}">
+            <p>
+              The UNICEF Innovation Fund is a pooled funding vehicle to quickly assess, fund and scale open-source solutions that are being developed in new and emerging markets and have ability to improve the lives of children.
+              <br>
+              <br> Since its launch in 2015, the Fund has raised <strong>$<span counter from="0" to="10.6" step="0.1">0</span> milion</strong> and has made <strong><span counter from="0" to="25" step="1">0</span>&nbsp;investments</strong> in over <strong><span counter from="0" to="30" step="1">0</span> countries</strong>.
+              <br>
+              <br> This website provides an overview of the Fund and allows you to monitor the progress of each investment in real-time.
+            </p>
+          </div>
+          <ul class="overlay__list" mobile-layout$="{{wide}}">
+            <li class="overlay__item">
+              <img src="../images/icons/youth_engagement.svg" alt="" class="overlay__icon">
+              <span class="overlay__label">PRODUCTS FOR YOUTH</span>
+            </li>
+            <li class="overlay__item">
+              <img src="../images/icons/real_time_information.svg" alt="" class="overlay__icon">
+              <span class="overlay__label">REAL-TIME INFORMATION</span>
+            </li>
+            <li class="overlay__item">
+              <img src="../images/icons/infrastructure.svg" alt="" class="overlay__icon">
+              <span class="overlay__label">INFRASTRUCTURE</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <button type="button" class="overlay__close" on-tap="hideOverlay" mobile-layout$="{{wide}}">
+        <img src="../images/icons/chevron-down.svg" alt="#">
+      </button>
+    </section>
+  </template>
+  <script>
+  Polymer({
+    is: "overlay-intro",
+    ready: function() {
+      this.showOverlay(500);
+    },
+    showOverlay: function(delay) {
+      var self = this;
+
+      self.startCounter();
+      setTimeout(function() {
+        $('.overlay').css({
+          display: 'block',
+          opacity: 0
+        })
+        $('.overlay').stop().animate({
+          opacity: 1
+        }, 300, function() {});
+      }, delay);
+    },
+    hideOverlay: function() {
+      var self = this;
+      $('.overlay').stop().animate({
+        opacity: 0
+      }, 300, function() {
+        $('.overlay').css({
+          display: 'none'
+        });
+        self.resetCounter();
+      });
+    },
+    startCounter: function() {
+      var counters = document.querySelectorAll('[counter]');
+      var intervals = [];
+      for (var x = 0; x < counters.length; x++) {
+        var counter = counters[x];
+        this.runInterval(counter);
+      }
+    },
+    runInterval: function(counter) {
+      var timeToCount = 1500;
+      var from = Number(counter.getAttribute('from'));
+      var to = Number(counter.getAttribute('to'));
+      var step = Number(counter.getAttribute('step'));
+      var numOfSteps = Math.round(to / step);
+      var timeForStep = Math.round(timeToCount / numOfSteps);
+      var intervalCount = 1;
+      var inter = setInterval(function() {
+        var newValue = from + step * intervalCount;
+        if (step < 1) {
+          var toFixedTo = (((1 + step) / step).toString()).length - 1;
+          var newValue = (from + step * intervalCount).toFixed(toFixedTo);
+        }
+        if (newValue <= to) {
+          counter.innerHTML = newValue;
+          intervalCount++;
+          return;
+        }
+        clearInterval(inter);
+      }, timeForStep)
+    },
+    resetCounter: function() {
+      var counters = document.querySelectorAll('[counter]');
+      for (var x = 0; x < counters.length; x++) {
+        var counter = counters[x];
+        counter.innerHTML = "0";
+      }
+    }
+  })
+  </script>
+</dom-module>
