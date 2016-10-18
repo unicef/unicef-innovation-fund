@@ -4,6 +4,7 @@
     <style>
 
       :host {
+        --circular-progress-padding: 20px;
         --circular-progress-width: 120px;
         --circular-progress-height: 120px;
       }
@@ -14,10 +15,10 @@
 
       #content {
         position: absolute;
-        top: 20px;
-        left: 20px;
-        right: 20px;
-        bottom: 20px;
+        top: var(--circular-progress-padding);
+        left: var(--circular-progress-padding);
+        right: var(--circular-progress-padding);
+        bottom: var(--circular-progress-padding);
       }
 
       #progressBar {
@@ -35,7 +36,7 @@
 
       .circular-progress__content {
         color: #ffcc33;
-        line-height: 1em;
+        line-height: 0.66em;
         font-size: 24px;
         text-align: center;
       }

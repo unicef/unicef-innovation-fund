@@ -18,7 +18,7 @@
         cursor: pointer;
         position: relative;
         box-sizing: border-box;
-        padding-bottom: 120px;
+        padding-bottom: 152px;
         position: relative;
         transition: padding .175s ease-out;
       }
@@ -29,32 +29,35 @@
 
       .project-card__info {
         transition: height .175s ease-out;
-        height: 120px;
+        height: 152px;
         border-top: 1px solid #e9e9e9;
         position: absolute;
         bottom: 0;
         left: 16px;
         right: 16px;
         overflow: hidden;
+        padding: 0 16px;
+        margin: 0 -16px;
+      }
+
+      .project-card__info .vcenter__container {
+        height: 120px;
       }
 
       .project-card__info::after {
-        content: '\e313';
-        font-family: 'Material Icons';
-        display: block;
-        width: 32px;
         height: 32px;
+        content: '\e900';
+        font-family: 'icomoon';
+        display: block;
         line-height: 32px;
         text-align: center;
-        position: absolute;
-        left: 50%;
-        margin-left: -16px;
-        bottom: 16px;
-        font-size: 32px;
+        font-size: 20px;
+        border-top: 1px solid #e9e9e9;
+        margin: 0 -16px;
       }
 
       .project-card__info-value {
-        font-size: 32px;
+        font-size: 36px;
       }
 
       .project-card__container.has-selected .project-card__info {
@@ -75,8 +78,23 @@
       }
 
       circular-progress {
-        --circular-progress-width: 100px;
-        --circular-progress-height: 100px;
+        --circular-progress-width: 80px;
+        --circular-progress-height: 80px;
+        --circular-progress-padding: 10px;
+      }
+
+      .project-card__progress-value {
+        font-size: 20px;
+        display: block;
+        line-height: 1em;
+      }
+
+      .project-card__progress-subtitle {
+        font-size: 10px;
+        color: #333;
+        display: block;
+        text-transform: uppercase;
+        margin-bottom: -0.33em;
       }
 
     </style>
@@ -111,7 +129,8 @@
             <div class="project-card__progress">
               <template id="cardProgressContainer" is="dom-if" if="[[ _canShowProgress(financials, type) ]]">
                 <circular-progress id="cardProgress" class="project-card__progress-item" value="[[ _getProgressValue(financials, type) ]]" max="[[ _getProgressMax(financials, type) ]]" type="[[ svg ]]">
-                    {{ _getProgressContent(financials, type) }}
+                  <span class="project-card__progress-value">{{ _getProgressContent(financials, type) }}</span>
+                  <span class="project-card__progress-subtitle">Invested</span>
                 </circular-progress>
               </template>
             </div>

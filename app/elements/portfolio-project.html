@@ -9,11 +9,9 @@
         position: relative;
         transition: all .175s ease-in;
         margin-bottom: 0;
-        height: 130px;
-        --portfolio-project-expanded-height: 616px;
+        height: 150px;
         position: relative;
         bottom: 0;
-
       }
 
       :host.is-expanded {
@@ -33,6 +31,14 @@
         transition: box-shadow .175s ease-in;
         cursor: pointer;
         height: 100%;
+      }
+
+      .portfolio-project__sub-text {
+        color:gray;
+      }
+
+      .portfolio-project__status {
+        color: #3366CB;
       }
 
       .portfolio-project__name {
@@ -72,6 +78,9 @@
         </div>
         <div class='description__text--small'>
           {{to_mil(item.amount)}}
+        </div>
+        <div class='portfolio-project__sub-text portfolio-project__status'>
+          {{_getProjectStatus(item.status)}}
         </div>
       </div>
     </div>
@@ -129,12 +138,15 @@
       }
     },
     deactivate: function(callback) {
+      if (!this.classList.contains('is-expanded')) {
+        return;
+      }
+      this.classList.remove('is-expanded');
       var projectViewContainer = document.querySelector('#projectListProjectViewContainer');
       var projectView = document.querySelector('#projectListProjectView');
       projectViewContainer.classList.remove('is-active');
       projectView.project = {};
       projectView.type = null;
-      this.classList.remove('is-expanded');
       this.style.marginBottom = 0;
       projectView.onDomChange = null;
       projectViewContainer.classList.remove('is-active');
@@ -154,6 +166,10 @@
       var posX = $(relativeElement).position().left + $(relativeElement).width() / 2;
       $(projectViewContainer).css({top: posY, 'transform-origin': posX+'px -130px'});
 
+      var scrollTo = $(relativeElement).position().top + $(this).offsetParent().position().top - 16;
+
+      $('#mainContainer').animate({scrollTop: scrollTo});
+
       projectView.project = this.item;
       projectView.type = this.svg;
       this.classList.add('is-expanded');
@@ -163,6 +179,18 @@
       projectView.onDomChange = (function(){
         $(this).css({marginBottom: projectView.offsetHeight + 8});
       }).bind(this);
+    },
+    _getProjectStatus: function(status) {
+      switch(status) {
+        case "active":
+          return "Current Investment";
+        case "inactive":
+          return "Past Investment";
+        case "completed":
+          return "Funding Completed";
+        default:
+          return "";
+      }
     }
   });
 

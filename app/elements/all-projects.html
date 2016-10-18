@@ -48,8 +48,8 @@
       }
 
       .project-info__close::after {
-        content: '\e316';
-        font-family: 'Material Icons';
+        content: '\e901';
+        font-family: 'icomoon';
         line-height: 64px;
         font-size: 64px;
       }
@@ -208,6 +208,26 @@
         opacity: 1;
       }
 
+      .project-info__progress-subtitle {
+        text-transform: uppercase;
+        font-size: 12px;
+        color: #333333;
+        line-height: 1.1em;
+        margin-bottom: -0.3em;
+        display: inline-block;
+      }
+
+      .project-list__project-view-close {
+        position: absolute;
+        top: 24px;
+        right: 20px;
+        font-size: 24px;
+        background: none;
+        outline: none;
+        border: none;
+        cursor: pointer;
+      }
+
     </style>
 
     <firebase-document
@@ -253,9 +273,21 @@
               <div class$="project-info__progress {{ _getInfoProgressClass(selected) }}">
                 <circular-progress value="[[ _getProgressValue(financials, selected) ]]" max="[[ _getProgressMax(financials, selected) ]]" type="[[ selected ]]">
                     {{ _getProgressContent(financials, selected) }}
+                    <span class="project-info__progress-subtitle">Invested</span>
                 </circular-progress>
               </div>
               <div class$="project-info__filters {{ _showFiltersClass(projects) }}">
+                <!-- status filter -->
+                <paper-dropdown-menu id="statusFilter" class="project-filter__menu" label="Investment Status">
+                  <paper-listbox id="statusFilterListbox" class="dropdown-content" attr-for-selected="value">
+                    <paper-item value="">All</paper-item>
+                    <template is="dom-repeat" id='statusItems' items="{{_getStatusList()}}">
+                      <paper-item value="{{item.value}}">{{item.label}}</paper-item>
+                    </template>
+                  </paper-listbox>
+                </paper-dropdown-menu>
+                <!-- /status filter -->
+
                 <!-- region filter -->
                 <paper-dropdown-menu id="regionFilter" class="project-filter__menu" label="Region">
                   <paper-listbox id="regionFilterListbox" class="dropdown-content" attr-for-selected="value">
@@ -265,7 +297,8 @@
                     </template>
                   </paper-listbox>
                 </paper-dropdown-menu>
-                <!-- region filter -->
+                <!-- /region filter -->
+
                 <!-- amount filter -->
                 <paper-dropdown-menu class="project-filter__menu" label="Amount" on-paper-dropdown-close="_amountFilterClosed">
                   <paper-listbox id="amountFilterListbox" class="dropdown-content">
@@ -275,19 +308,20 @@
                     </paper-item>
                   </paper-listbox>
                 </paper-dropdown-menu>
-                <!-- amount filter -->
+                <!-- /amount filter -->
               </div>
             </div>
           </div>
         </div>
         <div class="project-list mdl-grid" id="projectList">
           <template is="dom-repeat" id='templateProjects' items="{{projects}}">
-            <div class$="project-list__item mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone {{ _getFilterClass(item, filterAmountMin, filterAmountMax, filterRegion) }}">
+            <div class$="project-list__item mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone {{ _getFilterClass(item, index, filterAmountMin, filterAmountMax, filterRegion, filterStatus) }}">
               <portfolio-project data={{projectsData}} index={{index}} svg={{selected}} item={{item}}></portfolio-project>
             </div>
           </template>
           <div class="project-list__project-view" id="projectListProjectViewContainer">
             <div class="mdl-cell mdl-cell--12-col">
+              <button id="projectViewClose" on-tap="_closeProjectView" class="project-list__project-view-close"><i class="icon-shrink"></i></button>
               <project-view class="mdl-shadow--4dp" id="projectListProjectView"></project-view>
             </div>
           </div>
@@ -352,6 +386,10 @@
         value: null
       },
       filterRegion: {
+        type: String,
+        value: null
+      },
+      filterStatus: {
         type: String,
         value: null
       }
@@ -434,6 +472,10 @@
       this.$.regionFilterListbox.addEventListener('iron-select', function(e){
         that.filterRegion = this.selected;
       });
+
+      this.$.statusFilterListbox.addEventListener('iron-select', function(e){
+        that.filterStatus = this.selected;
+      });
     },
 
     _amountFilterClosed: function(e) {
@@ -486,7 +528,12 @@
     _selectedChange: function(e) {
         var menuFilter = this.querySelectorAll('.project-filter__menu, .slider');
         for (var i = 0; i < menuFilter.length; i++) {
-            menuFilter[i].updateStyles();
+          menuFilter[i].updateStyles();
+        }
+
+        var projectView = document.getElementById('projectListProjectViewContainer');
+        if (projectView) {
+          projectView.classList.remove('is-active');
         }
     },
 
@@ -497,14 +544,26 @@
       return 'is-hidden';
     },
 
-    _getFilterClass: function(item, filterAmountMin, filterAmountMax, filterRegion) {
+    _getFilterClass: function(item, index, filterAmountMin, filterAmountMax, filterRegion, filterStatus) {
+      var portfolioProjects = document.querySelectorAll('portfolio-project');
+      var element = portfolioProjects[index];
+
       var amount = this._getIntFromAmount(item.amount);
       if ((filterAmountMin && filterAmountMax) && (amount < filterAmountMin || amount > filterAmountMax)) {
+        element.deactivate();
         return 'is-hidden';
       }
 
       if (filterRegion && filterRegion != item.country) {
+        element.deactivate();
         return 'is-hidden';
+      }
+
+      if (filterStatus && filterStatus.length) {
+        if (filterStatus != item.status) {
+          element.deactivate();
+          return 'is-hidden';
+        }
       }
 
       return '';
@@ -527,7 +586,9 @@
 
     _resetFilters: function() {
       this.filterRegion = null;
+      this.filterStatus = null;
       this.$.regionFilterListbox.select(null);
+      this.$.statusFilterListbox.select(null);
     },
 
     _hideExpandedProjects: function() {
@@ -605,6 +666,19 @@
       this.selected = null;
       var projectList = this.querySelector('.project-list');
       projectList.classList.remove('is-loaded');
+    },
+
+    _getStatusList: function() {
+      return [
+        { value: "active", label: "Current Investment" },
+        { value: "inactive", label: "Past Investment" },
+        { value: "completed", label: "Funding Completed" }
+      ]
+    },
+
+    _closeProjectView: function() {
+      var activeProject = document.querySelector('portfolio-project.is-expanded');
+      activeProject.deactivate();
     }
   })
 </script>
