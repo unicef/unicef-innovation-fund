@@ -48,7 +48,7 @@
       }
 
       .portfolio-project__content {
-        padding: 32px 16px;
+        padding: 32px;
       }
 
       .portfolio-project__icon {
@@ -63,10 +63,28 @@
         opacity: 1;
       }
 
+      .portfolio-project__content.status-active::before, .portfolio-project__content.status-inactive::before {
+        content: '';
+        display: block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: #3366CB;
+        border: 1px solid #3366CB;
+        box-sizing: border-box;
+        position: absolute;
+        left: 14px;
+        top: 37px;
+      }
+
+      .portfolio-project__content.status-inactive::before {
+        background: transparent;
+      }
+
     </style>
 
     <div class-name='divider divider--{{svg}} portfolio-project__container mdl-shadow--4dp' on-tap="_handleTap" on-mouseenter='_onMouseEnter' on-mouseleave='_onMouseLeave'>
-      <div class="portfolio-project__content">
+      <div class$="portfolio-project__content {{ _getStatusClass(item.status) }}">
         <div class="portfolio-project__icon">
           <i class="material-icons">&#xE56B;</i>
         </div>
@@ -188,6 +206,18 @@
           return "Past Investment";
         case "completed":
           return "Funding Completed";
+        default:
+          return "";
+      }
+    },
+    _getStatusClass: function(status) {
+      switch(status) {
+        case "active":
+          return "status-active";
+        case "inactive":
+          return "status-inactive";
+        case "completed":
+          return "status-completed";
         default:
           return "";
       }
