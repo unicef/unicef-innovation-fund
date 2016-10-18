@@ -120,15 +120,16 @@
 
       .project-view__amount {
         font-family: 'Source Sans Pro', sans-serif;
-        font-size: 18px;
-        padding: 16px 0;
+        font-size: 14px;
         font-weight: 400;
+        margin-bottom: 16px;
       }
 
       .project-view__amount-value {
         font-size: 30px;
-        font-weight: 700;
-        margin-right: 8px;
+        font-weight: 400;
+        display: block;
+        margin-top: 16px;
       }
 
       .project-view__additional {
@@ -138,8 +139,8 @@
       }
 
       .project-view__additional-value {
-        font-size: 30px;
-        font-weight: 700;
+        font-size: 60px;
+        font-weight: 400;
         margin-right: 8px;
         padding: 16px 0;
         display: inline-block;
@@ -173,6 +174,7 @@
         display: block;
         float: left;
         margin-top: 11px;
+        font-size: 18px;
       }
 
       .project-view__additional-dropdown {
@@ -294,7 +296,7 @@
             <a target="_blank" class="project-view__link" href="[[ project.link_href ]]">[[ project.link_text ]]</a>
           </template>
           <div class="project-view__divider"></div>
-          <div class="project-view__amount"><span class="project-view__amount-value">[[ _getProjectAmount(project) ]]</span> invested</div>
+          <div class="project-view__amount">Amount Invested<span class="project-view__amount-value">[[ _getProjectAmount(project) ]]</span></div>
           <template is="dom-if" if="[[ _getAdditionalInfo(chartData) ]]">
             <div class="project-view__divider"></div>
             <div class="project-view__additional">

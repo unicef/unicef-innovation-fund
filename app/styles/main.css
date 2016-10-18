@@ -413,7 +413,7 @@ paper-tab{
 }
 
 .page__content {
-  padding: 32px;
+  padding: 32px 0;
 }
 
 .slider .pin.expand.paper-slider > #sliderKnob.paper-slider > #sliderKnobInner.paper-slider::after {

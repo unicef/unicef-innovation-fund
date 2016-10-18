@@ -250,7 +250,7 @@
 
     <div class$='page {{ _getColorClass(selected) }}'>
       <hello-all-projects all_projects_cloud_content="{{content.all_projects_cloud_content}}"></hello-all-projects>
-      <div class="page__content">
+      <div class="page__content container">
         <div class$="project-card__list {{ _getProjectCardListClass(selected) }} mdl-grid">
           <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
             <project-card class$="{{ _projectCardActiveClass(selected, 'youth_engagement') }}" selected={{selected}} type="youth_engagement" content="{{content.youth_engagement}}" phrase='Products For Youth' fb='ureport' svg="youth_engagement" rgb='255, 204, 51, 0.2'></project-card>
