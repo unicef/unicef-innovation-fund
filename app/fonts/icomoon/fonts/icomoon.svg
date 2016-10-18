@@ -9,4 +9,5 @@
 <glyph unicode="&#x20;" horiz-adv-x="512" d="" />
 <glyph unicode="&#xe900;" glyph-name="arrow-down" d="M220.16 606.72l291.84-266.24 291.84 266.24 23.040-28.16-314.88-289.28-314.88 289.28z" />
 <glyph unicode="&#xe901;" glyph-name="arrow-up" d="M803.84 289.28l-291.84 266.24-291.84-266.24-23.040 28.16 314.88 289.28 314.88-289.28z" />
+<glyph unicode="&#xe902;" glyph-name="shrink, collapse, minimize, contract" d="M448 384v-416l-160 160-192-192-96 96 192 192-160 160zM1024 864l-192-192 160-160h-416v416l160-160 192 192z" />
 </font></defs></svg>

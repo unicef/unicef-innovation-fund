@@ -4,6 +4,38 @@
     {
       "icon": {
         "paths": [
+          "M448 576v416l-160-160-192 192-96-96 192-192-160-160zM1024 96l-192 192 160 160h-416v-416l160 160 192-192z"
+        ],
+        "attrs": [
+          {}
+        ],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "shrink",
+          "collapse",
+          "minimize",
+          "contract"
+        ],
+        "grid": 16
+      },
+      "attrs": [
+        {}
+      ],
+      "properties": {
+        "order": 1,
+        "id": 0,
+        "name": "shrink, collapse, minimize, contract",
+        "prevSize": 32,
+        "code": 59650
+      },
+      "setIdx": 0,
+      "setId": 1,
+      "iconIdx": 0
+    },
+    {
+      "icon": {
+        "paths": [
           "M220.16 353.28l291.84 266.24 291.84-266.24 23.040 28.16-314.88 289.28-314.88-289.28z"
         ],
         "attrs": [
@@ -26,7 +58,7 @@
         "prevSize": 32,
         "code": 59648
       },
-      "setIdx": 0,
+      "setIdx": 1,
       "setId": 0,
       "iconIdx": 0
     },
@@ -55,7 +87,7 @@
         "prevSize": 32,
         "code": 59649
       },
-      "setIdx": 0,
+      "setIdx": 1,
       "setId": 0,
       "iconIdx": 1
     }

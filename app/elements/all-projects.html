@@ -221,6 +221,17 @@
         display: inline-block;
       }
 
+      .project-list__project-view-close {
+        position: absolute;
+        top: 24px;
+        right: 20px;
+        font-size: 24px;
+        background: none;
+        outline: none;
+        border: none;
+        cursor: pointer;
+      }
+
     </style>
 
     <firebase-document
@@ -314,6 +325,7 @@
           </template>
           <div class="project-list__project-view" id="projectListProjectViewContainer">
             <div class="mdl-cell mdl-cell--12-col">
+              <button id="projectViewClose" on-tap="_closeProjectView" class="project-list__project-view-close"><i class="icon-shrink"></i></button>
               <project-view class="mdl-shadow--4dp" id="projectListProjectView"></project-view>
             </div>
           </div>
@@ -666,6 +678,11 @@
         { value: "inactive", label: "Past Investment" },
         { value: "completed", label: "Funding Completed" }
       ]
+    },
+
+    _closeProjectView: function() {
+      var activeProject = document.querySelector('portfolio-project.is-expanded');
+      activeProject.deactivate();
     }
   })
 </script>
