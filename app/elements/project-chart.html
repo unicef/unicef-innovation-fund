@@ -99,7 +99,7 @@ Polymer({
           maxValue: googleLabels[googleLabels.length-1],
           width: '100%',
           ui: {
-            label: false,
+            label: 'Date range:',
             format: {pattern: "MMM yyyy"},
             cssClass: "date-range-filter"
           }
@@ -120,8 +120,9 @@ Polymer({
         chartType: 'AreaChart',
         containerId: 'chart_div',
         options: {
+          pointSize: 5,
           chartArea: {
-            left: 40,
+            left: 55,
             top: 60,
             right: 0,
             width: '100%',
@@ -193,21 +194,21 @@ Polymer({
   },
 
   _controlUpdate: function() {
-    var lowValue = this.control.getState().lowValue;
-    var highValue = this.control.getState().highValue;
-
-    var lowDate = new Date(lowValue.getFullYear(), lowValue.getMonth(), 1, 1, 1, 1);
-    var highDate = new Date(highValue.getFullYear(), highValue.getMonth() + 1, 0);
-
-    if (lowDate.getMonth() == highDate.getMonth()) {
-      var highDate = new Date(highValue.getFullYear(), highValue.getMonth() + 2, 0);
-    }
-
-    this.control.setState({
-      lowValue: lowDate,
-      highValue: highDate
-    });
-    this.control.draw();
+    // var lowValue = this.control.getState().lowValue;
+    // var highValue = this.control.getState().highValue;
+    //
+    // var lowDate = new Date(lowValue.getFullYear(), lowValue.getMonth(), 1, 1, 1, 1);
+    // var highDate = new Date(highValue.getFullYear(), highValue.getMonth() + 1, 0);
+    //
+    // if (lowDate.getMonth() == highDate.getMonth()) {
+    //   var highDate = new Date(highValue.getFullYear(), highValue.getMonth() + 2, 0);
+    // }
+    //
+    // this.control.setState({
+    //   lowValue: lowDate,
+    //   highValue: highDate
+    // });
+    // this.control.draw();
   }
 })
 </script>
