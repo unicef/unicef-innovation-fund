@@ -15,17 +15,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template bind>
     <style include="style-fade-in">
       .about__content {
-        text-align: center;
+        text-align: left;
       }
 
       .about__description {
-        font-size: 1.1rem;
-        letter-spacing: 0.02rem;
-        line-height: 1.85;
-      }
-
-      .about__description--italic {
-        font-style: italic;
+        font-size: 1.2rem;
+        letter-spacing: 0.037rem;
+        line-height: 1.8;
       }
 
       .about__divider {
@@ -33,6 +29,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: 0;
         margin: 2.3rem auto;
         max-width: 70px;
+      }
+
+      .about__icons {
+          margin-bottom: 2.8rem;
+          padding: 0 2rem;
+          text-align: justify;
+      }
+
+      .about__tile {
+          display: inline-block;
+          width: 33%;
+      }
+
+      .about__title {
+          font-size: 1.25rem;
+          font-weight: 600;
+          margin: 0;
+          text-transform: uppercase;
       }
 
       .about__image {
@@ -47,35 +61,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       @media (min-width: 920px) {
         .about__content {
-          padding-top: 3rem;
+          padding-top: 3.75rem;
         }
 
         .about__description {
-          margin-bottom: 2.3rem;
-          padding: 0 4rem;
+          margin-top: 2.85rem;
+          padding: 0 2rem;
         }
 
         .about__description:last-of-type {
-          margin-bottom: 7.3rem;
+          margin-bottom: 5.3rem;
+          margin-top: 6.25rem;
+        }
+
+        .about__description--no-margin {
+          margin-top: 0;
         }
 
         .about__image {
-          width: 15%;
           margin: 1.2rem 1.2rem 3.5rem;
         }
       }
 
       @media (max-width: 920px) {
-        .about__image {
+        .about__tile {
           width: 32%;
         }
       }
 
-      @media (min-width: 820px) {
-        .about__description--narrow {
-          margin-left: auto;
-          margin-right: auto;
-          width: 50%;
+      @media (max-width: 510px) {
+        .about__tile {
+          width: 100%;
         }
       }
 
@@ -85,17 +101,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       <div class="mdl-grid about__section fade-in">
         <div class="mdl-layout-spacer" ></div>
-        <div class="mdl-cell--bottom mdl-cell--10-col mdl-cell--8-col-tablet about__content">
-          <p class="about__description">UNICEF Innovation is creating communities around the products we invest in.<br>Having access to robust communities of developers and entrepreneurs is also of value to our partners. It will allow them to extend work for their own purposes and also access a global change engine that can be used to build other solutions in the future.</p>
-          <hr class="about__divider">
+        <div class="mdl-cell--bottom mdl-cell--8-col about__content">
+          <p class="about__description">UNICEF's Innovation (Venture) Fund is a newly established, non-thematic, pooled fund which has been specifically designed to finance early stage, open-source technology that can benefit children. The core motivation of the Innovation Fund is to fund "clusters" or portfolios of initiatives around emerging technology, like UAVs, Blockchain, or virtual reality - so that UNICEF can both shape markets and also learn about and guide these technologies to benefit children.</p>
+          <p class="about__description">The Fund has raised $10.6 million so far and focuses its investments on three portfolio areas: </p>
 
-          <img src="../images/icons/youth_engagement.svg" alt="Youth engagement" class="about__image">
-          <img src="../images/icons/infrastructure.svg" alt="Infrastructure" class="about__image">
-          <img src="../images/icons/real_time_information.svg" alt="Real time information" class="about__image">
-          <p class="about__description about__description--italic about__description--narrow">The Fund has raised $9 million so far and focuses its investments on three portfolio areas: products for youth, real-time information and infrastructure. These portfolio areas encompass a set of technologies and initiatives that are fundamental to increasing children’s access to information, opportunity and choice. The Fund brings together models of financing and methodologies used by Venture Capital funds and the principles of UNICEF's award winning Office of Innovation.</p>
+          <div class="about__icons">
+              <div class="about__tile">
+                  <h3 class="about__title">Product for youth</h3>
+                  <img src="../images/icons/youth_engagement.svg" alt="Youth engagement" class="about__image">
+              </div>
+              <div class="about__tile">
+                  <h3 class="about__title">Infrastructure</h3>
+                  <img src="../images/icons/infrastructure.svg" alt="Infrastructure" class="about__image">
+              </div>
+              <div class="about__tile">
+                  <h3 class="about__title">Real-time information</h3>
+                  <img src="../images/icons/real_time_information.svg" alt="Real time information" class="about__image">
+              </div>
+          </div>
 
+          <p class="about__description about__description--no-margin">The IF has been designed to fund open source solutions from early-stage technology startups.  This funding can go either to UNICEF Country Offices or to private sector companies in UNICEF programme countries. Through its investments, the Innovation Fund is generating value by strengthening communities of problem solvers, increasing open source intellectual property and growing solutions that bring results for children. The Fund also invests in early-stage "knowledge products" - operation research that is published in the public domain and supports investment strategies and decisions</p>
+
+          <p class="about__description">This site is currently a beta version and we are continuing to build, improve and grow it. The website allows for exploration of individual projects and tracking of the overall portfolio in real time. Through dashboards that provide real time information aggregated at the project, portfolio and Fund level, contributors, and investors are able to continually monitor progress.</p>
           <hr class="about__divider">
-          <p class="about__description">This website provides investors, supporters and other partners with real-time information about the Innovation Fund. This site is currently a beta version and we are continuing to build, improve and grow it. The website allows for exploration of individual projects and tracking of the overall portfolio in real time. Through dashboards that provide real time information aggregated at the project, portfolio and Fund level, contributors, and investors are able to continually monitor progress.</p>
         </div>
         <div class="mdl-layout-spacer"></div>
       </div>
