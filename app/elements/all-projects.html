@@ -535,6 +535,15 @@
         if (projectView) {
           projectView.classList.remove('is-active');
         }
+
+        if (this.selected) {
+          setTimeout((function(){
+            var scrollTo = $(this.$.projectInfo.parentNode).position().top - 48;
+            $('#mainContainer').animate({scrollTop: scrollTo});
+          }).bind(this), 100);
+        } else {
+          $('#mainContainer').animate({scrollTop: 0});
+        }
     },
 
     _showFiltersClass: function(projects) {
