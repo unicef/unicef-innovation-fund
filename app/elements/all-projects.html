@@ -31,10 +31,6 @@
         margin-top: -8px;
       }
 
-      .project-info__value {
-        font-weight: 200;
-      }
-
       .project-info__close {
         position: absolute;
         right: 32px;
@@ -221,6 +217,17 @@
         display: inline-block;
       }
 
+      .project-list__project-view-close {
+        position: absolute;
+        top: 24px;
+        right: 20px;
+        font-size: 24px;
+        background: none;
+        outline: none;
+        border: none;
+        cursor: pointer;
+      }
+
     </style>
 
     <firebase-document
@@ -261,7 +268,7 @@
         <div class="mdl-grid">
           <div id="projectInfo" class$="project-info fade-in mdl-cell mdl-cell--12-col mdl-shadow--4dp {{ _getProjectInfoClass(selected, projects) }}">
             <button on-tap="_closeProjectInfo" class="project-info__close"></button>
-            <h2 class="project-info__value">{{ _getProjectInfoValue(projects) }}</h2>
+            <h2 class="title--medium">{{ _getProjectInfoValue(projects) }}</h2>
             <div class="project-filter project-filter--yellow">
               <div class$="project-info__progress {{ _getInfoProgressClass(selected) }}">
                 <circular-progress value="[[ _getProgressValue(financials, selected) ]]" max="[[ _getProgressMax(financials, selected) ]]" type="[[ selected ]]">
@@ -314,6 +321,7 @@
           </template>
           <div class="project-list__project-view" id="projectListProjectViewContainer">
             <div class="mdl-cell mdl-cell--12-col">
+              <button id="projectViewClose" on-tap="_closeProjectView" class="project-list__project-view-close"><i class="icon-shrink"></i></button>
               <project-view class="mdl-shadow--4dp" id="projectListProjectView"></project-view>
             </div>
           </div>
@@ -664,8 +672,13 @@
       return [
         { value: "active", label: "Current Investment" },
         { value: "inactive", label: "Past Investment" },
-        { value: "completed", label: "Funding Completed" }
+        //{ value: "completed", label: "Funding Completed" }
       ]
+    },
+
+    _closeProjectView: function() {
+      var activeProject = document.querySelector('portfolio-project.is-expanded');
+      activeProject.deactivate();
     }
   })
 </script>
