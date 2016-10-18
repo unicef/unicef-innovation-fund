@@ -27,23 +27,23 @@
     
     .overlay__container {
       width: 100%;
-      max-width: 940px;
-      padding-left: 20px;
-      padding-right: 20px;
+      max-width: 960px;
+      padding-left: 15px;
+      padding-right: 15px;
       margin: 0 auto;
     }
     
     .overlay__content {
       font-size: 40px;
       color: #fff;
-      padding-top: 40px;
+      padding-top: 30px;
       border-top: 1px solid #fff;
       margin-top: 100px;
     }
     
     .overlay__content p {
       font-size: 30px;
-      line-height: 40px;
+      line-height: 1.22em;
       font-weight: 300;
       -webkit-font-smoothing: antialiased;
     }
@@ -58,8 +58,9 @@
       width: 85%;
       overflow: hidden;
       margin: 0 auto;
-      margin-top: 90px;
+      margin-top: 50px;
       padding-left: 0;
+      list-style: none;
     }
     
     .overlay__list[mobile-layout] {
@@ -71,6 +72,7 @@
       width: 33.3333%;
       position: relative;
       text-align: center;
+      vertical-align: bottom;
     }
     
     .overlay__list[mobile-layout] .overlay__item {
@@ -87,9 +89,23 @@
       width: auto;
     }
     
+    .overlay__item:nth-child(1) .overlay__icon {
+      height: 90px;
+    }
+    
+    .overlay__item:nth-child(2) .overlay__icon {
+      height: 80px;
+      margin-top: 10px;
+    }
+    
+    .overlay__item:nth-child(3) .overlay__icon {
+      height: 86px;
+      margin-top: 4px;
+    }
+    
     .overlay__label {
       color: #fff;
-      font-size: 18px;
+      font-size: 14px;
       font-weight: 400;
       display: block;
       text-align: center;
@@ -100,7 +116,7 @@
     .overlay__close {
       position: absolute;
       left: 50%;
-      bottom: 20px;
+      bottom: 90px;
       -webkit-transform: translate(-50%, 0);
       -ms-transform: translate(-50%, 0);
       -o-transform: translate(-50%, 0);
@@ -118,6 +134,7 @@
       width: 200px;
       margin: 0 auto;
       margin-top: 30px;
+      margin-bottom: 30px;
       transform: none;
       left: auto;
       bottom: auto;
@@ -127,7 +144,8 @@
     .overlay__close img {
       position: relative;
       display: inline-block;
-      width: 50px;
+      width: 32px;
+      height: 18px;
     }
     </style>
     <iron-media-query query="(max-width: 767px)" query-matches="{{wide}}"></iron-media-query>
