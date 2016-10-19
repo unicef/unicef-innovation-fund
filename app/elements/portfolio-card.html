@@ -94,6 +94,14 @@
          margin-top: 0.3em;
        }
 
+       .portfolio-card__icon {
+         float: right;
+       }
+
+       .portfolio-card__icon i {
+         vertical-align: -1px;
+       }
+
     </style>
 
     <style is="custom-style">
@@ -171,12 +179,11 @@
           <div class='top_container_in_card hidden--tablet'>
             <img src="/images/icons/{{svg}}.svg" width="80" style='padding-left:16px;'>
             <div class='mdl-grid'>
-              <div class='mdl-cell mdl-cell--10-col title_card' style='text-align: left;'>
+              <div class='mdl-cell mdl-cell--12-col title_card' style='text-align: left;'>
                 <span class$='portfolio_card_title {{svg}}' >{{phrase}}</span>
-              </div>
-              <div class='mdl-cell mdl-cell--2-col' style='margin:0px;padding:0px;display: inline-block; vertical-align: middle; height:100% ;'>
-                <!-- <paper-icon-button style="color:#0099ff; background-color:white;" class='information-tooltip' id="id_2" icon="info" alt="go back"></paper-icon-button> -->
-                <img src='/images/information.png' style='position:relative; top:5px;'id="id_2" />
+                <div class="portfolio-card__icon">
+                  <i class="icon-info"></i>
+                </div>
               </div>
             </div>
             <div>

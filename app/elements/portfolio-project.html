@@ -143,7 +143,10 @@
             project.deactivate(function(){
               count++;
               if (count == expandedProjects.length) {
-                that.expandProjectView(that);
+                //Delay opening of new project
+                setTimeout(function(){
+                  that.expandProjectView(that);
+                }, 300);
               }
             });
           }
