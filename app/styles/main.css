@@ -531,6 +531,11 @@ svg.has-filter g {
     color: #FFFFFF;
 }
 
+.hello--description {
+    font-size: 1.3rem;
+    padding: 0 2.2rem;
+}
+
 .description__title--small {
     color: #333333;
     font-size: 14px;

@@ -16,10 +16,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style include="style-fade-in">
       .about__content {
         text-align: left;
+        opacity: 0;
+      }
+
+      .about__content.fade-in {
+        transition-delay: 5s;
       }
 
       .about__description {
         font-size: 1.2rem;
+        font-family: 'Source Sans Pro', sans-serif;
         letter-spacing: 0.037rem;
         line-height: 1.8;
       }
@@ -33,7 +39,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .about__icons {
           margin-bottom: 2.8rem;
-          padding: 0 2rem;
+          padding: 0 0.75rem;
           text-align: justify;
       }
 
@@ -44,19 +50,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .about__title {
           font-size: 1.25rem;
-          font-weight: 600;
+          font-weight: 700;
+          line-height: 1rem;
           margin: 0;
           text-transform: uppercase;
       }
 
       .about__image {
-        max-width: 150px;
-      }
-
-      @media (min-width: 1600px) {
-        .about__content {
-          width: 50%;
-        }
+        max-width: 135px;
       }
 
       @media (min-width: 920px) {
@@ -66,7 +67,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         .about__description {
           margin-top: 2.85rem;
-          padding: 0 2rem;
+          padding: 0 0.75rem;
         }
 
         .about__description:last-of-type {
@@ -79,7 +80,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
 
         .about__image {
-          margin: 1.2rem 1.2rem 3.5rem;
+          margin: 1.2rem 1.2rem 0.5rem;
         }
       }
 
@@ -106,15 +107,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class="hello_holder">
       <hello-about></hello-about>
 
-      <div class="mdl-grid about__section fade-in">
+      <div class="mdl-grid about__section">
         <div class="mdl-layout-spacer" ></div>
-        <div class="mdl-cell--bottom mdl-cell--8-col about__content">
+        <div class="mdl-cell--bottom mdl-cell--5-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone about__content fade-in">
           <p class="about__description">UNICEF's Innovation (Venture) Fund is a newly established, non-thematic, pooled fund which has been specifically designed to finance early stage, open-source technology that can benefit children. The core motivation of the Innovation Fund is to fund "clusters" or portfolios of initiatives around emerging technology, like UAVs, Blockchain, or virtual reality - so that UNICEF can both shape markets and also learn about and guide these technologies to benefit children.</p>
           <p class="about__description">The Fund has raised $10.6 million so far and focuses its investments on three portfolio areas: </p>
 
           <div class="about__icons">
               <div class="about__tile">
-                  <h3 class="about__title">Product for youth</h3>
+                  <h3 class="about__title">Products for youth</h3>
                   <img src="../images/icons/youth_engagement.svg" alt="Youth engagement" class="about__image">
               </div>
               <div class="about__tile">
