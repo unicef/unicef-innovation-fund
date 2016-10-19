@@ -24,6 +24,31 @@
          margin: 0 4rem;
       }
 
+      .social{
+        margin-top: 16px;
+      }
+
+      .social-list{
+        position: relative;
+        overflow: hidden;
+        padding-left: 13px;
+      }
+
+      .social-list__item{
+        float: left;
+        margin: 0 3px;
+      }
+
+      .social-list__link{
+        display: inline-block;
+      }
+
+      .social-list__icon{
+        width: 30px;
+        display: inline-block;
+      }
+
+
       @media (max-width: 540px) {
           .sponsor {
             display: block;
@@ -104,23 +129,28 @@
 
             </div>
           </div>
-          <div class="mdl-grid" style='text-align:left;'>
-            <div class="mdl-cell mdl-cell--12-col" >
-
-              <div class="mdl-grid" style='padding:0px;margin:0px;'>
-                <div class="mdl-cell mdl-cell--6-col share" style='margin:0px 5px 0px 0px;'>
-                  <a target='_blank' href='https://www.facebook.com/unicef.innovation/'>
-                    <img src='/images/social/social_facebook.svg' class='img_share' />
-                  </a>
-                </div>
-                <div class="mdl-cell mdl-cell--6-col share" style='margin:0px 0px 0px 10px;'>
-                  <a target='_blank' href='https://twitter.com/UNICEFinnovate'>
-                    <img src='/images/social/social_twitter.svg' class='img_share' />
-                  </a>
-                </div>
-              </div>
-
-          </div>
+          <div class="social">
+            <ul class="social-list">
+              <li class="social-list__item">
+                <a target='_blank' href='https://www.facebook.com/unicef.innovation/' class="social-list__link">
+                  <img  src='/images/social/social_facebook.svg' alt="" class="social-list__icon">
+                </a>
+              </li> <li class="social-list__item">
+                <a target='_blank' href='https://twitter.com/UNICEFinnovate' class="social-list__link">
+                  <img src='/images/social/social_twitter.svg' alt="" class="social-list__icon">
+                </a>
+              </li>
+            </ul>
+            <!-- <div class="mdl-cell mdl-cell--6-col share" style='margin:0px 5px 0px 0px;'>
+              <a target='_blank' href='https://www.facebook.com/unicef.innovation/'>
+                <img />
+              </a>
+            </div>
+           <div class="mdl-cell mdl-cell--6-col share" style='margin:0px 0px 0px 10px;'>
+             <a target='_blank' href='https://twitter.com/UNICEFinnovate'>
+               <img src='/images/social/social_twitter.svg' class='img_share' />
+             </a>
+           </div> -->
         </div>
       </footer>
     </div>
