@@ -1,6 +1,12 @@
 <dom-module id='mdl-footer'>
   <template>
     <style>
+      :host{
+        position: absolute;
+        left: 0;
+        width: 100%;
+        bottom: 0;
+      }
       img{
         width:100px;
         list-style: none;
@@ -19,6 +25,9 @@
       }
       .footer_area[wide-layout] .one_third{
         width:400px;
+      }
+      .sponsor__link{
+        text-decoration: none;
       }
       .sponsor--margin {
          margin: 0 4rem;
@@ -106,13 +115,13 @@
             <div class="mdl-cell mdl-cell--12-col">
               <div class="mdl-grid">
                 <div class="mdl-cell mdl-cell--12-col" >
-                  <a target='_blank' href='http://www.disney.com'>
+                  <a target='_blank' href='http://www.disney.com' class="sponsor__link">
                     <img class='sponsor' src="../images/sponsors/disney_red.png">
                   </a>
-                  <a target='_blank' href='http://um.dk/en' class="sponsor--margin">
+                  <a target='_blank' href='http://um.dk/en' class="sponsor--margin sponsor__link">
                       <img class='sponsor' src="../images/sponsors/danida_logo.jpg">
                   </a>
-                  <a target='_blank' href='http://formin.finland.fi/public/default.aspx?culture=en-US&contentlan=2'>
+                  <a target='_blank' href='http://formin.finland.fi/public/default.aspx?culture=en-US&contentlan=2' class="sponsor__link">
                       <img class='sponsor' src="../images/sponsors/finland_logo.png">
                   </a>
                 </div>
