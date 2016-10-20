@@ -392,12 +392,15 @@
                 if (!self.selected) {
                     var currentElement = self.$$("." + visibleClass);
                     var mainElement = self.$$("[data-target='main']");
+                    var inputMail = self.$$(".section__input");
 
                     currentElement.classList.remove(visibleClass);
                     currentElement.classList.add(hiddenClass);
 
                     mainElement.classList.remove(hiddenClass);
                     mainElement.classList.add(visibleClass);
+
+                    inputMail.value = '';
                 }
             }
         });
