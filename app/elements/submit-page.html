@@ -178,44 +178,94 @@
         color: red !important;
     }
 
-    .timeline {
+    .accordion {
         list-style-type: none;
         margin-right: 0;
         margin-left: auto;
         text-align: left;
-        width: 60%;
     }
 
-    .timeline__section {
-
+    .accordion__section:not(:last-of-type) {
+        border-bottom: 1px solid black;
     }
 
-    .timeline__header {
+    .accordion__header {
+        cursor: pointer;
         position: relative;
     }
 
-    .timeline__number {
+
+    .accordion__number {
         border: 1px solid #33B8B8;
         border-radius: 50%;
         color: #33B8B8;
         display: inline-block;
-        left: -7%;
+        left: -4rem;
         line-height: 0.50;
+        margin-right: 1rem;
         padding: 1rem;
         position: absolute;
     }
 
-    .timeline__summary {
+    .accordion__content {
+        opacity: 1;
+        position: relative;
+        transform: translateY(0);
+        transition: position 0.5s, opacity 0.5s, transform 0.5s;
+    }
+
+    .accordion__content--toggle {
+        opacity: 0;
+        position: absolute;
+        transform: translateY(-5%);
+    }
+
+    .accordion__content--open {
+    }
+
+    .accordion__summary {
         font-weight: 600;
+    }
+
+    .accordion__summary--gray {
+        color: #5D5D5D;
     }
 
     .description__list {
         color: #5D5D5D;
         list-style-type: none;
+        padding-left: 0;
     }
 
     .description__item {
 
+    }
+
+    .role__list {
+        list-style-type: none;
+        padding-top: 1rem;
+    }
+
+    .role__item {
+        padding: 1rem 0;
+    }
+
+    .role__image {
+        margin-right: 1rem;
+    }
+
+    .role__info {
+        text-align: left;
+    }
+
+    .role__name {
+        color: #000000;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .role__description {
+        color: #5D5D5D;
     }
 
     @media (max-width: 1120px) {
@@ -303,36 +353,100 @@
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit mdl-button mdl-js-button mdl-js-ripple-effect">Submission Form</a>
         <hr class="section__break">
         <h3 class="section__subheader">What is the application process?</h3>
-        <ol class="timeline">
-            <li class="timeline__section">
-                <h4 class="timeline__header">
-                    <p class="timeline__number">1</p>CHECK ELIGIBILITY (3 minutes)
+        <ol class="accordion">
+            <li class="accordion__section">
+                <h4 class="accordion__header" data-open="eligibility" on-tap="accordionOpen">
+                    <p class="accordion__number">1</p>CHECK ELIGIBILITY (3 minutes)
                 </h4>
-                <p class="timeline__summary">Country office meets the following criteria:</p>
-                <ul class="description__list">
-                    <li class="description__item">Is developing and piloting a new open source solution.</li>
-                    <li class="description__item">Solution has completed initial prototyping and small scale piloting with promising results Lacks su icient evidence or resources to scale further.</li>
-                    <li class="description__item">Has matching co-funding to support the project.</li>
-                    <li class="description__item">Senior management supports the application and project itself</li>
-                    <li class="description__item">Can submit as many applications as they have projects (e.g. 4,5, 6 etc).</li>
-                    <li class="description__item">Are able to spend the investment within 12 months</li>
-                </ul>
+                <div class="accordion__content accordion__content--toggle" data-accordion="eligibility">
+                    <p class="accordion__summary">Country office meets the following criteria:</p>
+                    <ul class="description__list">
+                        <li class="description__item">Is developing and piloting a new open source solution.</li>
+                        <li class="description__item">Solution has completed initial prototyping and small scale piloting with promising results Lacks su icient evidence or resources to scale further.</li>
+                        <li class="description__item">Has matching co-funding to support the project.</li>
+                        <li class="description__item">Senior management supports the application and project itself</li>
+                        <li class="description__item">Can submit as many applications as they have projects (e.g. 4,5, 6 etc).</li>
+                        <li class="description__item">Are able to spend the investment within 12 months</li>
+                    </ul>
+                </div>
             </li>
-            <li class="timeline__section">
-                <h4 class="timeline__header">
-                    <p class="timeline__number">2</p>SUBMIT (50 minutes)
+            <li class="accordion__section">
+                <h4 class="accordion__header" data-open="submit" on-tap="accordionOpen">
+                    <p class="accordion__number">2</p>SUBMIT (50 minutes)
                 </h4>
-                <p class="timeline__summary">Apply on a rolling basis through a simple application form found here.There is no deadline for submission.</p>
-                <p class="timeline__summary">Applications are initially assessed based on a number of criteria, which include:</p>
-                <ul class="description__list">
-                    <li class="description__item">Alignment with UNICEF’s Innovation Principles and UNICEF’s global priorities for children Placement within one of the Fund’s three portfolio areas</li>
-                    <li class="description__item">Size of the market opportunity and relevance across geographic locations</li>
-                    <li class="description__item">Suitability of the team to implement the project</li>
-                    <li class="description__item">Creation of open source, public goods</li>
-                    <li class="description__item">Results able to be measured and monitored in real time</li>
-                </ul>
+                <div class="accordion__content accordion__content--toggle" data-accordion="submit">
+                    <p class="accordion__summary">Apply on a rolling basis through a simple application form found here.There is no deadline for submission.</p>
+                    <ul class="description__list">
+                        <li class="description__item">Alignment with UNICEF’s Innovation Principles and UNICEF’s global priorities for children</li>
+                        <li class="description__item">Placement within one of the Fund’s three portfolio areas</li>
+                        <li class="description__item">Size of the market opportunity and relevance across geographic locations</li>
+                        <li class="description__item">Suitability of the team to implement the project</li>
+                        <li class="description__item">Creation of open source, public goods</li>
+                        <li class="description__item">Results able to be measured and monitored in real time</li>
+                    </ul>
+                </div>
+            </li>
+            <li class="accordion__section">
+                <h4 class="accordion__header" data-open="iterate" on-tap="accordionOpen">
+                    <p class="accordion__number">3</p>ITERATE AND IMPROVE
+                </h4>
+                <div class="accordion__content accordion__content--toggle" data-accordion="iterate">
+                    <p class="accordion__summary--gray">We encourage you to submit applications, as the process includes feedback andapplications can be improved on, if there are gaps.</p>
+                    <ul class="description__list">
+                        <li class="description__item">Await feedback on how best to enhance your application, or answer clarifying questions.</li>
+                        <li class="description__item">If applicable, iterate and improve your application.</li>
+                        <li class="description__item">We aim to review applications and communicate funding decisions within two weeks.</li>
+                    </ul>
+                </div>
+            </li>
+            <li class="accordion__section">
+                <h4 class="accordion__header" data-open="decision" on-tap="accordionOpen">
+                    <p class="accordion__number">4</p>DECISION
+                </h4>
+                <div class="accordion__content accordion__content--toggle" data-accordion="decision">
+                    <p class="accordion__summary--gray">Once the application is complete, projects will be assessed by the Innovation Fund Board (Chris Fabian, Erica Kochi and Tanya Accone) for a final decision. Approved investments are transferred to Country Offices through budget reallocations.</p>
+                </div>
             </li>
         </ol>
+        <hr class="section__break">
+        <h3 class="section__subheader">What is the role of the country office once the investment is approved?</h3>
+        <ul class="role__list">
+            <li class="role__item">
+                <img src="" alt="" class="role__image">
+                <div class="role__info">
+                    <h4 class="role__name">REAL-TIME INFORMATION</h4>
+                    <p class="role__description">Once the Country Office receives funding, we ask you to submit real-time data points that show the progress of the project. Data points include, activity on github, number of users per time period etc.<br>The Office of Innovation provides support to identify suitable real-time data sources for each project. All projects and related data are featured on the real-time reporting website of the Fund.</p>
+                </div>
+            </li>
+            <li class="role__item">
+                <img src="" alt="" class="role__image">
+                <div class="role__info">
+                    <h4 class="role__name">IMPLEMENT</h4>
+                    <p class="role__description">Country Offies may receive technical assistance from a global team of experts in the Office of Innovation.</p>
+                </div>
+            </li>
+            <li class="role__item">
+                <img src="" alt="" class="role__image">
+                <div class="role__info">
+                    <h4 class="role__name">Report</h4>
+                    <p class="role__description">Focal points for each project are required to submit 2 reports during the funding period. A report is due after 6 months and after 12 months</p>
+                </div>
+            </li>
+            <li class="role__item">
+                <img src="" alt="" class="role__image">
+                <div class="role__info">
+                    <h4 class="role__name">Spend</h4>
+                    <p class="role__description">Funding awarded has to be spent within 12 months.</p>
+                </div>
+            </li>
+            <li class="role__item">
+                <img src="" alt="" class="role__image">
+                <div class="role__info">
+                    <h4 class="role__name">Share</h4>
+                    <p class="role__description">As projects and solutions generate new solutions and lessons learned, we ask you to share your experiences through unicefstories.org and dedicated networking opportunities with other COs.</p>
+                </div>
+            </li>
+        </ul>
       </div>
       <div class="mdl-layout-spacer"></div>
     </div>
@@ -474,6 +588,13 @@
       var toShow = this.$$("[data-target='" + submitButton.dataset.display + "']");
 
       this.toggleVisible(toHide, toShow);
+    },
+    accordionOpen: function (event) {
+        var taped = event.target.dataset.open || event.target.parentElement.dataset.open;
+        var selected = this.$$("[data-accordion='" + taped + "']");
+
+        selected.classList.toggle('accordion__content--toggle');
+        console.log(selected);
     }
   })
   </script>
