@@ -26,7 +26,7 @@
 
     .button--big {
       background-color: #FFFFFF;
-      color: #0097D8;
+      color: #0099FF;
       float: left;
       font-size: 1.2rem;
       height: 252px;
@@ -40,7 +40,7 @@
     }
 
     .section__header {
-      color: #0097D8;
+      color: #0099FF;
       font-size: 1.57rem;
       line-height: 4rem;
     }
@@ -56,7 +56,7 @@
     }
 
     .section__submit {
-      background-color: #0097D8;
+      background-color: #0099FF;
       color: #FFFFFF !important;
       /* Overwrite MDL default style */
       font-size: 1.6rem;
@@ -78,6 +78,8 @@
     }
 
     .section__subheader {
+      font-size: 1.25rem;
+      font-weight: 600;
       letter-spacing: 0.05rem;
       margin-bottom: 3rem;
       text-transform: uppercase;
@@ -102,7 +104,7 @@
 
     .section__input {
       border: 2px solid #BABCBD;
-      color: #0097D8;
+      color: #0099FF;
       display: block;
       font-size: 1.1rem;
       margin: 0 auto;
@@ -120,7 +122,7 @@
     }
 
     .section__confirm-email {
-      background-color: #0097D8;
+      background-color: #0099FF;
       border: none;
       color: #FFFFFF;
       font-size: 1.6rem;
@@ -137,17 +139,15 @@
     }
 
     .faq__name {
+      font-size: 1.25rem;
+      font-weight: 600;
       margin: 1.3rem 0;
       text-align: left;
     }
 
-    .faq__image {
-      margin-top: 3rem;
-      width: 100%;
-    }
-
     .faq__link {
       float: right;
+      font-weight: 400;
       text-decoration: none;
     }
 
@@ -168,11 +168,54 @@
       opacity: 0;
       visibility: hidden;
       max-height: 0;
-      overflow: hidden;
     }
 
     button.fade-in{
         animation-delay: 0.525s !important;
+    }
+
+    .is-alert {
+        color: red !important;
+    }
+
+    .timeline {
+        list-style-type: none;
+        margin-right: 0;
+        margin-left: auto;
+        text-align: left;
+        width: 60%;
+    }
+
+    .timeline__section {
+
+    }
+
+    .timeline__header {
+        position: relative;
+    }
+
+    .timeline__number {
+        border: 1px solid #33B8B8;
+        border-radius: 50%;
+        color: #33B8B8;
+        display: inline-block;
+        left: -7%;
+        line-height: 0.50;
+        padding: 1rem;
+        position: absolute;
+    }
+
+    .timeline__summary {
+        font-weight: 600;
+    }
+
+    .description__list {
+        color: #5D5D5D;
+        list-style-type: none;
+    }
+
+    .description__item {
+
     }
 
     @media (max-width: 1120px) {
@@ -208,10 +251,6 @@
       }
     }
 
-    .is-alert {
-        color: red !important;
-    }
-
     </style>
     <style is="custom-style" include="style-fade-in"></style>
     <firebase-document
@@ -223,7 +262,7 @@
       <div class='mdl-grid container' style='position:relative;'>
         <div class="mdl-layout-spacer"></div>
         <div class="mdl-cell mdl-cell--10-col">
-          <h1 class='title--big hello--title fade-in'>Submit</h1>
+          <h1 class='page__header--title fade-in'>Submit</h1>
           <p class="page__header--type">[[sectionName]]</p>
         </div>
         <div class="mdl-layout-spacer"></div>
@@ -263,16 +302,37 @@
         <p class="section__user-email"></p>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit mdl-button mdl-js-button mdl-js-ripple-effect">Submission Form</a>
         <hr class="section__break">
-        <h3 class="title--small section__subheader">TBD</h3>
-        <h4 class="title--tiny faq__name">Short Background Note<a href="https://drive.google.com/file/d/0BwC3tr7jXADzNXJTNzk4d01qams/view?usp=sharing" class="faq__link">Download</a></h4>
-        <p class="faq__description">The Innovation Fund allows UNICEF to quickly assess, fund and scale open-source solutions that have been developed by companies in new and emerging markets. The Innovation Fund supports the generation of open source, public goods that address the most pressing challenges facing children. The Innovation Fund brings together models of financing and methodologies used by Venture Capital funds and the principles of UNICEF'S award winning Innovation Unit. </p>
-        <h4 class="title--tiny faq__name">List of Programme Countries<a href="http://www.unicefinnovationfund.org/programme-countries" class="faq__link">Download</a></h4>
-        <p class="faq__description">This is a list of programme countries who are eligible to submit a project to the Innovation Fund. </p>
-        <h4 class="title--tiny faq__name">Innovation Principles<a href="http://www.unicefstories.org/principles/" class="faq__link">Download</a></h4>
-        <p class="faq__description">The following set of principles represents a concerted effort by donors to capture the most important lessons learned by the development community in the implementation of technology-enabled programs. Having evolved from a previous set of implementer precepts endorsed by over 300 organizations, these principles seek to serve as a set of living guidelines that are meant to inform, but not dictate, the design of technology-enabled development programs.</p>
-        <h4 class="title--tiny faq__name">Previous UNICEF Request for Expression of Interest (REOI)<a href="https://drive.google.com/file/d/0B6-5qW-9eN2bUG9nOVA2eGpyU0k/view" class="faq__link">Download</a></h4>
-        <h4 class="title--tiny faq__name">Frequently Asked Questions (FAQs) about the Request for Expression of Interest (REOI)<a href="http://www.unicefinnovationfund.org/submission-faqs" class="faq__link">Download</a></h4>
-        <img src="https://placehold.it/800x64" alt="" class="faq__image">
+        <h3 class="section__subheader">What is the application process?</h3>
+        <ol class="timeline">
+            <li class="timeline__section">
+                <h4 class="timeline__header">
+                    <p class="timeline__number">1</p>CHECK ELIGIBILITY (3 minutes)
+                </h4>
+                <p class="timeline__summary">Country office meets the following criteria:</p>
+                <ul class="description__list">
+                    <li class="description__item">Is developing and piloting a new open source solution.</li>
+                    <li class="description__item">Solution has completed initial prototyping and small scale piloting with promising results Lacks su icient evidence or resources to scale further.</li>
+                    <li class="description__item">Has matching co-funding to support the project.</li>
+                    <li class="description__item">Senior management supports the application and project itself</li>
+                    <li class="description__item">Can submit as many applications as they have projects (e.g. 4,5, 6 etc).</li>
+                    <li class="description__item">Are able to spend the investment within 12 months</li>
+                </ul>
+            </li>
+            <li class="timeline__section">
+                <h4 class="timeline__header">
+                    <p class="timeline__number">2</p>SUBMIT (50 minutes)
+                </h4>
+                <p class="timeline__summary">Apply on a rolling basis through a simple application form found here.There is no deadline for submission.</p>
+                <p class="timeline__summary">Applications are initially assessed based on a number of criteria, which include:</p>
+                <ul class="description__list">
+                    <li class="description__item">Alignment with UNICEF’s Innovation Principles and UNICEF’s global priorities for children Placement within one of the Fund’s three portfolio areas</li>
+                    <li class="description__item">Size of the market opportunity and relevance across geographic locations</li>
+                    <li class="description__item">Suitability of the team to implement the project</li>
+                    <li class="description__item">Creation of open source, public goods</li>
+                    <li class="description__item">Results able to be measured and monitored in real time</li>
+                </ul>
+            </li>
+        </ol>
       </div>
       <div class="mdl-layout-spacer"></div>
     </div>
@@ -280,15 +340,15 @@
       <div class="mdl-layout-spacer"></div>
       <div class="container mdl-cell mdl-cell--12-col">
         <button on-tap="changeSection" class="section__back" data-display="main" data-hide="startup">Back</button>
-        <h3 class="title--small section__header">STARTUP</h3>
+        <h3 class="section__header">STARTUP</h3>
         <p class="section__description">The next call for submissions from start-ups and academic institutions is planned for December 2016. Please follow us on Twitter <a href="https://twitter.com/unicefinnovate" class="section__link">@unicefinnovate</a>, where we will share updates about the Fund and future submission opportunities and deadlines.</p>
         <p class="section__description">If you submitted an Expression of Interest in the last round (closed on 26 February 2016), only selected companies/institutions have been contacted with information about next steps. Thank you for your submission nd interest in the Innovation Fund.</p>
         <hr class="section__break">
-        <h3 class="title--small section__subheader">Resources</h3>
+        <h3 class="section__subheader">Resources</h3>
         <img src="../images/icons/resources.png" alt="" class="section__icon">
-        <h4 class="title--tiny faq__name">Short Background Note<a href="https://drive.google.com/file/d/0BwC3tr7jXADzNXJTNzk4d01qams/view?usp=sharing" class="faq__link">Download</a></h4>
+        <h4 class="faq__name">Short Background Note<a href="https://drive.google.com/file/d/0BwC3tr7jXADzNXJTNzk4d01qams/view?usp=sharing" class="faq__link">Download</a></h4>
         <p class="faq__description">The Innovation Fund allows UNICEF to quickly assess, fund and scale open-source solutions that have been developed by companies in new and emerging markets. The Innovation Fund supports the generation of open source, public goods that address the most pressing challenges facing children. The Innovation Fund brings together models of financing and methodologies used by Venture Capital funds and the principles of UNICEF'S award winning Innovation Unit. </p>
-        <h4 class="title--tiny faq__name">Innovation Principles<a href="http://www.unicefstories.org/principles/" class="faq__link">Download</a></h4>
+        <h4 class="faq__name">Innovation Principles<a href="http://www.unicefstories.org/principles/" class="faq__link">Download</a></h4>
         <p class="faq__description">The following set of principles represents a concerted effort by donors to capture the most important lessons learned by the development community in the implementation of technology-enabled programs. Having evolved from a previous set of implementer precepts endorsed by over 300 organizations, these principles seek to serve as a set of living guidelines that are meant to inform, but not dictate, the design of technology-enabled development programs.</p>
       </div>
       <div class="mdl-layout-spacer"></div>
@@ -323,20 +383,45 @@
     listeners: {
       'iron-form-submit': 'submitEmail'
     },
+    ready: function () {
+        var self = this;
+        var visibleClass = "js-visible";
+        var hiddenClass = "js-hidden";
+        $(document).on('page-changed', function(e, page_id){
+            if (page_id !== 'about') {
+                if (!self.selected) {
+                    var currentElement = self.$$("." + visibleClass);
+                    var mainElement = self.$$("[data-target='main']");
+                    var inputMail = self.$$(".section__input");
+
+                    currentElement.classList.remove(visibleClass);
+                    currentElement.classList.add(hiddenClass);
+
+                    mainElement.classList.remove(hiddenClass);
+                    mainElement.classList.add(visibleClass);
+
+                    inputMail.value = '';
+                }
+            }
+        });
+    },
     checkAuth: function (event) {
         var regxTest = /.{1,}@unicef\.org$/gi;
         var defaultEmailVerificationText = "Please submit your email address to continue";
         var inputValue = event.target.value;
-
-        if (inputValue.length === 0) {
-            return this.emailVerificationMessage = defaultEmailVerificationText;
-        }
+        var authErrorClass = 'is-alert';
 
         if (regxTest.test(inputValue) === true) {
             this.emailVerificationMessage = defaultEmailVerificationText;
+            this.authTextClass = '';
             return this.isDisabled = false;
-        } else {
+        } else if (inputValue.indexOf('@') !== -1) {
             this.emailVerificationMessage = "This email is not valid";
+            this.authTextClass = authErrorClass
+            return this.isDisabled = true;
+        } else {
+            this.emailVerificationMessage = defaultEmailVerificationText;
+            this.authTextClass = '';
             return this.isDisabled = true;
         }
     },
