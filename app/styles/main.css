@@ -527,11 +527,11 @@ svg.has-filter g {
     font-weight: 400;
 }
 
-.hello--title {
+.hello__title {
     color: #FFFFFF;
 }
 
-.hello--description {
+.hello__description {
     font-size: 1.3rem;
     padding: 0 2.2rem;
 }
