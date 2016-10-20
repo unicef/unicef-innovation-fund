@@ -97,14 +97,10 @@
       <div class="mdl-grid about__section fade-in">
         <div class="mdl-layout-spacer" ></div>
         <div class="mdl-cell--bottom mdl-cell--10-col mdl-cell--8-col-tablet about__content">
-          <p class="about__description">UNICEF's Innovation (Venture) Fund is a newly established, non-thematic, pooled fund which has
-            been specifically designed to finance early stage, open-source technology that can benefit children.
-            The core motivation of the Innovation Fund is to fund "clusters" or portfolios of initiatives around
-            emerging technology, like UAVs, Blockchain, or virtual reality - so that UNICEF can both shape
-            markets and also learn about and guide these technologies to benefit children.
+          <p class="about__description">{{paragraph_1}}
           </p>
 
-          <p class="about__description">The Fund has raised $10.6 million so far and focuses its investments on three portfolio areas:</p>
+          <p class="about__description">{{paragraph_2}}</p>
           <div class="about__tiles">
               <div class="about__tile">
                   <strong class="about__name">Products for youth</strong>
@@ -119,14 +115,34 @@
                   <img src="../images/icons/real_time_information.svg" alt="Real time information" class="about__image">
               </div>
           </div>
-          <p class="about__description">The IF has been designed to fund open source solutions from early-stage technology startups. This funding can go either to UNICEF Country Offices or to private sector companies in UNICEF programme countries. Through its investments, the Innovation Fund is generating value by strengthening communities of problem solvers, increasing open source intellectual property and growing solutions that bring results for children. The Fund also invests in early-stage "knowledge products" - operation research that is published in the public domain and supports investment strategies and decisions</p>
+          <p class="about__description">{{paragraph_3}}</p>
 
-          <p class="about__description">This site is currently a beta version and we are continuing to build, improve and grow it. The website allows for exploration of individual projects and tracking of the overall portfolio in real time. Through dashboards that provide real time information aggregated at the project, portfolio and Fund level, contributors, and investors are able to continually monitor progress.</p>
+          <p class="about__description">{{paragraph_4}}</p>
           <hr class="about__divider">
         </div>
         <div class="mdl-layout-spacer"></div>
       </div>
     </div>
+    <firebase-document
+      app-name="test"
+      path='/content/about_paragraph_1'
+      data="{{paragraph_1}}">
+    </firebase-document>
+    <firebase-document
+      app-name="test"
+      path='/content/about_paragraph_2'
+      data="{{paragraph_2}}">
+    </firebase-document>
+    <firebase-document
+      app-name="test"
+      path='/content/about_paragraph_3'
+      data="{{paragraph_3}}">
+    </firebase-document>
+    <firebase-document
+      app-name="test"
+      path='/content/about_paragraph_4'
+      data="{{paragraph_4}}">
+    </firebase-document>
   </template>
 
   <script>
