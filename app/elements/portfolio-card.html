@@ -182,12 +182,12 @@
               <div class='mdl-cell mdl-cell--12-col title_card' style='text-align: left;'>
                 <span class$='portfolio_card_title {{svg}}' >{{phrase}}</span>
                 <div class="portfolio-card__icon">
-                  <i class="icon-info"></i>
+                  <i id="tooltip" class="icon-info"></i>
                 </div>
               </div>
             </div>
             <div>
-              <paper-tooltip  class="custom" for="id_2" offset="0">{{db_tooltip}}</paper-tooltip>
+              <paper-tooltip  class="custom" for="tooltip" offset="0">{{db_tooltip}}</paper-tooltip>
             </div>
           </div>
           <div class="portfolio-card__progress">

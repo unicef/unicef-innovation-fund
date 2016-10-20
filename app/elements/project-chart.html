@@ -109,6 +109,7 @@ Polymer({
 
       self.googleLabels = googleLabels;
       self.control = control;
+      google.visualization.events.addListener(self.control, 'statechange', self._controlUpdate.bind(self));
 
       var chart = new google.visualization.ChartWrapper({
         chartType: 'AreaChart',
@@ -185,6 +186,30 @@ Polymer({
     //Display thumb labels directly under thumbs
     controlThumb[0].appendChild(controlThumbLabel[0]);
     controlThumb[1].appendChild(controlThumbLabel[1]);
+  },
+
+  _controlUpdate: function() {
+    var lowValue = this.control.getState().lowValue;
+    var highValue = this.control.getState().highValue;
+
+    var lowDate = new Date(lowValue.getFullYear(), lowValue.getMonth(), 1, 1, 1, 1);
+    var highDate = new Date(highValue.getFullYear(), highValue.getMonth() + 1, 0);
+    var firstDate = this.googleLabels[0];
+    var lastDate = this.googleLabels[this.googleLabels.length-1];
+
+    if (lowDate.getMonth() == highDate.getMonth()) {
+      if (highDate.getMonth() >= lastDate.getMonth()) {
+        lowDate = new Date(lowValue.getFullYear(), lowValue.getMonth() - 1, 1);
+      } else {
+        highDate = new Date(highValue.getFullYear(), highValue.getMonth() + 2, 0);
+      }
+    }
+
+    this.control.setState({
+       lowValue: lowDate,
+       highValue: highDate
+     });
+     this.control.draw();
   }
 })
 </script>

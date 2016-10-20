@@ -409,8 +409,10 @@
         //This line is used to force DOM redraw (Not working in IE)
         $(projectList).hide().show(0);
 
-        $(projectList).addClass('is-loaded');
-
+        if (this.selected) {
+          $(projectList).addClass('is-loaded');
+        }
+          
       }).bind(this));
 
       $(document).on('page-changed', function(e, page_id){
@@ -543,6 +545,7 @@
           }).bind(this), 100);
         } else {
           $('#mainContainer').animate({scrollTop: 0});
+          this._closeProjectInfo();
         }
     },
 
@@ -569,7 +572,7 @@
       }
 
       if (filterStatus && filterStatus.length) {
-        if (filterStatus != item.status) {
+        if (filterStatus != item.investment_status) {
           element.deactivate();
           return 'is-hidden';
         }
