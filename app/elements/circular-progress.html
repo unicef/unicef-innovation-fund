@@ -151,8 +151,8 @@
       this.progress.svg.appendChild(this.$.defs);
       this.progress.svg.appendChild(group);
 
-      //firefox doesn't support svg filters
-      if(navigator.userAgent.toLowerCase().indexOf('firefox') < 0 && this.progress.svg.classList) {
+      //svg filters are stable only in chrome
+      if(isChrome() && this.progress.svg.classList) {
         this.progress.svg.classList.add('has-filter');
       }
 
