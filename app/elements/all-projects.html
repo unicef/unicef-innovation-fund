@@ -103,6 +103,8 @@
         margin-right: 16px;
       }
 
+      .project-filter__menu.is-hidden { display: none; }
+
       .project-filter__menu paper-item {
         min-width: 170px;
       }
@@ -298,8 +300,9 @@
                 </circular-progress>
               </div>
               <div class$="project-info__filters {{ _showFiltersClass(projects) }}">
-                <!-- status filter -->
-                <paper-dropdown-menu id="statusFilter" class="project-filter__menu" label="Investment Status">
+
+                  <!-- status filter -->
+                <paper-dropdown-menu id="statusFilter" class$="project-filter__menu {{ _showStatusFilterClass(projects) }}" label="Investment Status">
                   <paper-listbox id="statusFilterListbox" class="dropdown-content" attr-for-selected="value">
                     <paper-item value="">All</paper-item>
                     <template is="dom-repeat" id='statusItems' items="{{_getStatusList()}}">
@@ -714,6 +717,23 @@
     _closeProjectView: function() {
       var activeProject = document.querySelector('portfolio-project.is-expanded');
       activeProject.deactivate();
+    },
+
+    _showStatusFilterClass: function(projects) {
+      var show = false;
+      if (!projects || !projects.length) {
+        return show;
+      }
+
+      for(var i = 0; i < projects.length; i++) {
+        var project = projects[i];
+        if (project.investment_status) {
+          show = true;
+          break;
+        }
+      }
+
+      return show ? '' : 'is-hidden';
     }
   })
 </script>
