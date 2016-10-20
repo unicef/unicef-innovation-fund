@@ -2,11 +2,17 @@
   <template>
     <style>
       :host{
-        position: absolute;
-        left: 0;
-        width: 100%;
-        bottom: 0;
+        position: relative;
       }
+      @media (min-width: 600px) {
+        :host{
+          position: absolute;
+          left: 0;
+          width: 100%;
+          bottom: 0;
+        }
+      }
+
       img{
         width:100px;
         list-style: none;
@@ -23,8 +29,42 @@
         list-style: none;
         padding-left:0;
       }
+      
       .footer_area[wide-layout] .one_third{
         width:400px;
+      }
+
+      .footer_area[wide-layout] .mdl-mini-footer--left-section{
+        order: 0;
+      }
+      .footer_area[small-desktop] .mdl-mini-footer--left-section{
+        order: 0;
+      }
+
+     
+      .footer_area[wide-layout] .mdl-mini-footer--center-section{
+        order: 2;
+        width: 100%;
+      }
+      .footer_area[small-desktop] .mdl-mini-footer--center-section{
+        width: auto;
+        order: 0;
+      }
+
+
+      .footer_area .mdl-mini-footer--right-section{
+        width: 100%;
+      }
+      .footer_area[wide-layout] .mdl-mini-footer--right-section{
+        order: 1;
+        width: auto;
+      }
+      .footer_area[small-desktop] .mdl-mini-footer--right-section{
+        order: 2;
+      }
+     
+      .footer_area[wide-layout] .one_third{
+
       }
       .sponsor__link{
         text-decoration: none;
@@ -69,6 +109,7 @@
       }
     </style>
     <iron-media-query query="(min-width: 600px)" query-matches="{{wide}}"></iron-media-query>
+    <iron-media-query query="(min-width: 1040px)" query-matches="{{small-desktop}}"></iron-media-query>
     <firebase-document
       app-name="test"
       path='/content/footer_text'
@@ -81,7 +122,7 @@
       data="{{footer_donor_text}}">
     </firebase-document>
 
-    <div class="footer_area" wide-layout$="{{wide}}">
+    <div class="footer_area" wide-layout$="{{wide}}" small-desktop$="{{small-desktop}}">
       <footer class='mdl-mini-footer' style='background-color:white;'>
         <div class='mdl-mini-footer--left-section'>
           <div class="mdl-grid">
