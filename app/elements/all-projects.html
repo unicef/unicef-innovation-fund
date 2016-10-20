@@ -38,10 +38,11 @@
       .project-info__close {
         position: absolute;
         right: 32px;
-        top: 24px;
+        top: 26px;
         display: block;
-        width: 48px;
-        height: 48px;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
         text-align: center;
         padding: 0;
         margin: 0;
@@ -54,8 +55,9 @@
       .project-info__close::after {
         content: '\e901';
         font-family: 'icomoon';
-        line-height: 48px;
-        font-size: 48px;
+        line-height: 32px;
+        font-size: 32px;
+        font-weight: 400;
       }
 
       .project-list {
@@ -88,7 +90,7 @@
 
       .project-filter {
         border-top: 1px solid #d7d7d7;
-        margin: 28px -16px 0;
+        margin: 16px -16px 0;
         padding: 16px;
         height: 84px;
       }
@@ -236,6 +238,15 @@
         outline: none;
         border: none;
         cursor: pointer;
+      }
+
+      .title--medium{
+        margin: 0;
+        font-size: 26px;
+        line-height: 32px;
+        margin-top: 10px;
+        font-weight: 400;
+        color: #000;
       }
 
     </style>
