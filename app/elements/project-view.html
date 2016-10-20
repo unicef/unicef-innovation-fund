@@ -120,16 +120,15 @@
 
       .project-view__amount {
         font-family: 'Source Sans Pro', sans-serif;
-        font-size: 14px;
+        font-size: 18px;
         font-weight: 400;
-        margin-bottom: 16px;
+        margin: 16px 0;
       }
 
       .project-view__amount-value {
         font-size: 30px;
         font-weight: 400;
-        display: block;
-        margin-top: 16px;
+        margin-right: 8px;
       }
 
       .project-view__additional {
@@ -233,6 +232,10 @@
         }
       }
 
+      .project-view__month-dropdown {
+        width: 120px;
+      }
+
     </style>
 
     <firebase-document
@@ -296,12 +299,12 @@
             <a target="_blank" class="project-view__link" href="[[ project.link_href ]]">[[ project.link_text ]]</a>
           </template>
           <div class="project-view__divider"></div>
-          <div class="project-view__amount">Amount Invested<span class="project-view__amount-value">[[ _getProjectAmount(project) ]]</span></div>
+          <div class="project-view__amount"><span class="project-view__amount-value">[[ _getProjectAmount(project) ]]</span> Invested</div>
           <template is="dom-if" if="[[ _getAdditionalInfo(chartData) ]]">
             <div class="project-view__divider"></div>
             <div class="project-view__additional">
               <div class="project-view__additional-dropdown">
-                 <paper-dropdown-menu label="Choose month">
+                 <paper-dropdown-menu class="project-view__month-dropdown" label="Choose month" id="monthDropdown">
                   <paper-listbox class="dropdown-content" selected="{{additionalRange}}">
                     <paper-item class="project-view__item">All</paper-item>
                     <template is="dom-repeat" items="{{chartData.labels}}">
@@ -470,9 +473,9 @@
             return color;
           }
 
-          if(this.project.slug.match(/u_report/)){
+          if(this.type == 'youth_engagement'){
             color = 'rgba(255, 204, 51, 0.2)';
-          } else if (this.project.slug.match(/iogt/)){
+          } else if (this.type == 'infrastructure'){
             color = 'rgba(133, 214, 133, 0.2)';
           } else {
             color = 'rgba(255, 143, 171, 0.2)';
@@ -552,7 +555,7 @@
             return;
           }
 
-          var color = 'rgba(255, 143, 171, 0.2)';
+          var color = this._getChartColor();
           var points_labels = gitPointsAndLabels(data);
           var labels = points_labels.labels;
           var points = points_labels.points;

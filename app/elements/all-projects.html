@@ -31,13 +31,17 @@
         margin-top: -8px;
       }
 
+      .project-info__title {
+        margin: 8px 0;
+      }
+
       .project-info__close {
         position: absolute;
         right: 32px;
-        top: 32px;
+        top: 24px;
         display: block;
-        width: 64px;
-        height: 64px;
+        width: 48px;
+        height: 48px;
         text-align: center;
         padding: 0;
         margin: 0;
@@ -50,8 +54,8 @@
       .project-info__close::after {
         content: '\e901';
         font-family: 'icomoon';
-        line-height: 64px;
-        font-size: 64px;
+        line-height: 48px;
+        font-size: 48px;
       }
 
       .project-list {
@@ -62,6 +66,7 @@
 
       .project-list__item {
         opacity: 0;
+        z-index: -1;
         transition: all .175s ease-in;
         transform: translateY(16px);
       }
@@ -78,11 +83,12 @@
       .project-list.is-loaded .project-list__item {
         opacity: 1;
         transform: translateY(0);
+        z-index: 1;
       }
 
       .project-filter {
         border-top: 1px solid #d7d7d7;
-        margin: 48px -16px 0;
+        margin: 28px -16px 0;
         padding: 16px;
         height: 84px;
       }
@@ -93,6 +99,10 @@
 
       .project-filter__menu {
         margin-right: 16px;
+      }
+
+      .project-filter__menu paper-item {
+        min-width: 170px;
       }
 
       .project-info__progress {
@@ -221,7 +231,7 @@
         position: absolute;
         top: 24px;
         right: 20px;
-        font-size: 24px;
+        font-size: 18px;
         background: none;
         outline: none;
         border: none;
@@ -268,7 +278,7 @@
         <div class="mdl-grid">
           <div id="projectInfo" class$="project-info fade-in mdl-cell mdl-cell--12-col mdl-shadow--4dp {{ _getProjectInfoClass(selected, projects) }}">
             <button on-tap="_closeProjectInfo" class="project-info__close"></button>
-            <h2 class="title--medium">{{ _getProjectInfoValue(projects) }}</h2>
+            <h2 class="project-info__title title--medium">{{ _getProjectInfoValue(projects) }}</h2>
             <div class="project-filter project-filter--yellow">
               <div class$="project-info__progress {{ _getInfoProgressClass(selected) }}">
                 <circular-progress value="[[ _getProgressValue(financials, selected) ]]" max="[[ _getProgressMax(financials, selected) ]]" type="[[ selected ]]">
@@ -409,12 +419,15 @@
         //This line is used to force DOM redraw (Not working in IE)
         $(projectList).hide().show(0);
 
-        $(projectList).addClass('is-loaded');
+        if (this.selected) {
+          $(projectList).addClass('is-loaded');
+        }
 
       }).bind(this));
 
       $(document).on('page-changed', function(e, page_id){
         if (page_id != 'all_projects') {
+          self.selected = null;
           if (!self.selected) {
             projectList.classList.remove('is-loaded');
           }
@@ -543,6 +556,7 @@
           }).bind(this), 100);
         } else {
           $('#mainContainer').animate({scrollTop: 0});
+          this._closeProjectInfo();
         }
     },
 
@@ -569,7 +583,7 @@
       }
 
       if (filterStatus && filterStatus.length) {
-        if (filterStatus != item.status) {
+        if (filterStatus != item.investment_status) {
           element.deactivate();
           return 'is-hidden';
         }

@@ -9,7 +9,7 @@
         position: relative;
         transition: all .175s ease-in;
         margin-bottom: 0;
-        height: 150px;
+        height: 125px;
         position: relative;
         bottom: 0;
       }
@@ -18,13 +18,19 @@
         bottom: -16px;
       }
 
+      :host.is-expanded .portfolio-project__icon {
+        opacity: 0 !important;
+      }
+
       ul{
         list-style: none;
       }
 
       .portfolio-project__content {
+        padding: 16px 32px;
         line-height: 1.5;
         height: 100%;
+        box-sizing: border-box;
       }
 
       .portfolio-project__container {
@@ -45,10 +51,11 @@
         text-align: left;
         margin: 0;
         padding: 0;
-      }
-
-      .portfolio-project__content {
-        padding: 32px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: block;
+        width: 100%;
+        overflow: hidden;
       }
 
       .portfolio-project__icon {
@@ -84,11 +91,11 @@
     </style>
 
     <div class-name='divider divider--{{svg}} portfolio-project__container mdl-shadow--4dp' on-tap="_handleTap" on-mouseenter='_onMouseEnter' on-mouseleave='_onMouseLeave'>
-      <div class$="portfolio-project__content {{ _getStatusClass(item.status) }}">
+      <div class$="portfolio-project__content {{ _getStatusClass(item.investment_status) }}">
         <div class="portfolio-project__icon">
           <i class="material-icons">&#xE56B;</i>
         </div>
-        <div class='description__title--small portfolio-project__name'>
+        <div title="{{item.name}}" class='description__title--small portfolio-project__name'>
           <span data-page="{{svg}}"><b>{{item.name}}</b></span>
         </div>
         <div class='description__text--small'>
@@ -143,7 +150,10 @@
             project.deactivate(function(){
               count++;
               if (count == expandedProjects.length) {
-                that.expandProjectView(that);
+                //Delay opening of new project
+                setTimeout(function(){
+                  that.expandProjectView(that);
+                }, 300);
               }
             });
           }
