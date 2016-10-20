@@ -250,3 +250,7 @@ function isIE() {
   }
   return false;
 }
+
+function isChrome() {
+  return /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+}
