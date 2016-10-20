@@ -120,16 +120,15 @@
 
       .project-view__amount {
         font-family: 'Source Sans Pro', sans-serif;
-        font-size: 14px;
+        font-size: 18px;
         font-weight: 400;
-        margin-bottom: 16px;
+        margin: 16px 0;
       }
 
       .project-view__amount-value {
         font-size: 30px;
         font-weight: 400;
-        display: block;
-        margin-top: 16px;
+        margin-right: 8px;
       }
 
       .project-view__additional {
@@ -296,7 +295,7 @@
             <a target="_blank" class="project-view__link" href="[[ project.link_href ]]">[[ project.link_text ]]</a>
           </template>
           <div class="project-view__divider"></div>
-          <div class="project-view__amount">Amount Invested<span class="project-view__amount-value">[[ _getProjectAmount(project) ]]</span></div>
+          <div class="project-view__amount"><span class="project-view__amount-value">[[ _getProjectAmount(project) ]]</span> Invested</div>
           <template is="dom-if" if="[[ _getAdditionalInfo(chartData) ]]">
             <div class="project-view__divider"></div>
             <div class="project-view__additional">
