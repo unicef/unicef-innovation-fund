@@ -232,6 +232,10 @@
         }
       }
 
+      .project-view__month-dropdown {
+        width: 120px;
+      }
+
     </style>
 
     <firebase-document
@@ -300,7 +304,7 @@
             <div class="project-view__divider"></div>
             <div class="project-view__additional">
               <div class="project-view__additional-dropdown">
-                 <paper-dropdown-menu label="Choose month">
+                 <paper-dropdown-menu class="project-view__month-dropdown" label="Choose month" id="monthDropdown">
                   <paper-listbox class="dropdown-content" selected="{{additionalRange}}">
                     <paper-item class="project-view__item">All</paper-item>
                     <template is="dom-repeat" items="{{chartData.labels}}">
@@ -469,9 +473,9 @@
             return color;
           }
 
-          if(this.project.slug.match(/u_report/)){
+          if(this.type == 'youth_engagement'){
             color = 'rgba(255, 204, 51, 0.2)';
-          } else if (this.project.slug.match(/iogt/)){
+          } else if (this.type == 'infrastructure'){
             color = 'rgba(133, 214, 133, 0.2)';
           } else {
             color = 'rgba(255, 143, 171, 0.2)';
@@ -551,7 +555,7 @@
             return;
           }
 
-          var color = 'rgba(255, 143, 171, 0.2)';
+          var color = this._getChartColor();
           var points_labels = gitPointsAndLabels(data);
           var labels = points_labels.labels;
           var points = points_labels.points;
