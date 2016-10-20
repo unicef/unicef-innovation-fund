@@ -34,8 +34,8 @@
       }
 
       .pc_left{
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
+        padding-left: 16px;
+        padding-right: 16px;
       }
 
       .card_title {
@@ -205,12 +205,17 @@
             <div class$='featured {{svg}}'>
               Featured Project
             </div>
-            <div class='featured_project_name pc_left'>
-              {{featured}}
-            </div>
-            <div class='featured_project_blurb pc_left project__description'  on-tap="_handleTap"
-              style='cursor:pointer;display:{{display_content}}'>
-                {{featured_content}}
+            <div class="featured_project">
+              <div class="featured_project_expand" on-tap="_handleTap">
+                <i class="material-icons">&#xE89E;</i>
+              </div>
+              <div class='featured_project_name pc_left' on-tap="_handleTap">
+                {{featured}}
+              </div>
+              <div class='featured_project_blurb pc_left project__description' on-tap="_handleTap"
+                style='cursor:pointer;display:{{display_content}}'>
+                  {{featured_content}}
+              </div>
             </div>
           </div>
         </div>

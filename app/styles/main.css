@@ -136,11 +136,23 @@ paper-tab{
   font-weight:400;
   font-size:24px;
 }
-.featured_project_name{
+
+.featured_project {
+  position: relative;
+}
+
+.featured_project_expand {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  cursor: pointer;
+}
+
+.featured_project_name {
   font-weight:500;
-  font-size:14px;
+  font-size:16px;
   line-height: 22px;
-  margin: 0.33em 0;
+  margin: 0.33em 0 12px;
   display: block;
   color: #333333;
 }
