@@ -114,16 +114,15 @@
     }
     
     .overlay__close {
-      position: absolute;
-      left: 50%;
-      bottom: 90px;
-      -webkit-transform: translate(-50%, 0);
-      -ms-transform: translate(-50%, 0);
-      -o-transform: translate(-50%, 0);
-      transform: translate(-50%, 0);
+      position: relative;
+      width: 200px;
+      display: block;
+      text-align: center;
       background: transparent;
       padding: 0;
-      margin: 0;
+      margin: 0 auto;
+      margin-top: 130px;
+      margin-bottom: 30px;
       border: none;
       outline: none;
       cursor: pointer;
@@ -150,7 +149,7 @@
     </style>
     <iron-media-query query="(max-width: 767px)" query-matches="{{wide}}"></iron-media-query>
     <iron-media-query full query="print" query-matches="{{print}}"></iron-media-query>
-    <section class="overlay">
+    <section class="overlay" on-tap="hideOverlay">
       <div class="overlay__scroll-content">
         <div class="overlay__container">
           <div class="overlay__content" mobile-layout$="{{wide}}">
@@ -178,7 +177,7 @@
           </ul>
         </div>
       </div>
-      <button type="button" class="overlay__close" on-tap="hideOverlay" mobile-layout$="{{wide}}">
+      <button type="button" class="overlay__close" mobile-layout$="{{wide}}">
         <img src="../images/icons/chevron-down.svg" alt="#">
       </button>
     </section>
@@ -223,7 +222,7 @@
       }
     },
     runInterval: function(counter) {
-      var timeToCount = 1500;
+      var timeToCount = 2500;
       var from = Number(counter.getAttribute('from'));
       var to = Number(counter.getAttribute('to'));
       var step = Number(counter.getAttribute('step'));
