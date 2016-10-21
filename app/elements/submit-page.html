@@ -78,7 +78,7 @@
 
     .section__break {
       border-top: 2px solid #727272;
-      margin: 4rem 0 5rem;
+      margin: 4rem 0;
     }
 
     .section__subheader {
@@ -100,7 +100,7 @@
       background-color: transparent;
       border: none;
       font-size: 1rem;
-      left: -5%;
+      left: -7%;
       position: absolute;
       text-decoration: underline;
       text-transform: uppercase;
@@ -192,7 +192,7 @@
     }
 
     .accordion__section {
-        padding: 2.4rem 0 1.75rem;
+        padding: 3.3rem 0;
     }
 
     .accordion__section:not(:last-of-type) {
@@ -204,11 +204,17 @@
         font-size: 1.35rem;
         font-weight: 600;
         letter-spacing: 0.06rem;
+        margin: 0;
         position: relative;
+        transition: all 0.5s;
+    }
+
+    .accordion__header:hover {
+        color: #33B8B8;
     }
 
     .accordion__number {
-        border: 2px solid #33B8B8;
+        border: 3px solid #33B8B8;
         border-radius: 50%;
         color: #33B8B8;
         display: inline-block;
@@ -216,7 +222,6 @@
         font-size: 1.5em;
         left: -6.75rem;
         line-height: 0.50;
-        margin-right: 1rem;
         padding: 1.65rem;
         position: absolute;
         top: -1rem;
@@ -224,6 +229,7 @@
 
     .accordion__content {
         opacity: 1;
+        padding-top: 1rem;
         position: relative;
         transform: translateY(0);
         transition: position 0.5s, opacity 0.5s, transform 0.5s;
@@ -235,15 +241,20 @@
         transform: translateY(-5%);
     }
 
-    .accordion__content--open {
-    }
-
     .accordion__summary {
+        font-size: 1.25rem;
         font-weight: 600;
+        letter-spacing: 0.0625rem;
+        margin-bottom: 0.5rem;
     }
 
     .accordion__summary--gray {
         color: #5D5D5D;
+        font-size: 1.25rem;
+        font-weight: 600;
+        letter-spacing: 0.0625rem;
+        line-height: 1.7;
+        margin-bottom: 2rem;
     }
 
     .description__list {
@@ -252,8 +263,14 @@
         padding-left: 0;
     }
 
+    .description__item {
+        font-size: 1.42rem;
+        line-height: 1.7;
+    }
+
     .role__list {
         list-style-type: none;
+        margin-bottom: 5rem;
         padding-left: 0;
         padding-top: 1rem;
     }
@@ -271,6 +288,7 @@
         color: #000000;
         font-weight: 600;
         font-size: 1.5rem;
+        margin-bottom: 0;
         position: relative;
         text-transform: uppercase;
     }
@@ -321,6 +339,37 @@
         float: none;
         width: 100%;
       }
+
+      .accordion {
+          margin-bottom: 0;
+          padding-left: 3.5rem;
+      }
+
+      .accordion__number {
+          border-width: 2px;
+          left: -3.75rem;
+          line-height: 0.55;
+          padding: 1.1rem;
+          top: -0.5rem;
+      }
+
+      .section__subheader {
+          font-size: 2rem;
+          margin-bottom: 0;
+      }
+
+      .role__item {
+          padding: 1rem 0 0 3.75rem;
+      }
+
+      .role__image {
+          left: -2rem;
+          max-width: 30px;
+      }
+
+      .role__description {
+          font-size: 1.2rem;
+      }
     }
 
     </style>
@@ -334,7 +383,7 @@
       <div class='mdl-grid container' style='position:relative;'>
         <div class="mdl-layout-spacer"></div>
         <div class="mdl-cell mdl-cell--10-col">
-          <h1 class='page__header--title fade-in'>Submit</h1>
+          <h1 class='title--big hello__title fade-in'>Submit</h1>
           <p class="page__header--type">[[sectionName]]</p>
         </div>
         <div class="mdl-layout-spacer"></div>
@@ -511,11 +560,12 @@
         var visibleClass = "js-visible";
         var hiddenClass = "js-hidden";
         $(document).on('page-changed', function(e, page_id){
-            if (page_id !== 'about') {
+            if (page_id !== 'submit') {
                 if (!self.selected) {
                     var currentElement = self.$$("." + visibleClass);
                     var mainElement = self.$$("[data-target='main']");
                     var inputMail = self.$$(".section__input");
+                    var pageHeader = self.$$(".page__header--type");
 
                     currentElement.classList.remove(visibleClass);
                     currentElement.classList.add(hiddenClass);
@@ -524,6 +574,7 @@
                     mainElement.classList.add(visibleClass);
 
                     inputMail.value = '';
+                    pageHeader.innerHTML = '';
                 }
             }
         });
