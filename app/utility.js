@@ -18,18 +18,15 @@ function prepareUreport(dataSet, featured, color){
 
     months = {}
     // Create months hash
-    Object.keys(dataSet).forEach(function(country){
-      dataSet[country].forEach(function(elem){
-        months[elem[0]] = 0;
-      })
+    dataSet.global.forEach(function(elem){
+      months[elem[0]] = 0;
     })
 
     // Assign count to each month
-    Object.keys(dataSet).forEach(function(country){
-      dataSet[country].forEach(function(elem){
-        months[elem[0]] += elem[1];
-      })
+    dataSet.global.forEach(function(elem){
+      months[elem[0]] += elem[1];
     })
+    
     var labels = Object.keys(months);
     var points = Object.keys(months).map(function(k){return months[k]});
     points.map(function(e, i){
