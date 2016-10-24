@@ -40,6 +40,10 @@
       width: 50%;
     }
 
+    .submit__container {
+      position: relative;
+    }
+
     .submit__icon {
       display: block;
     }
@@ -51,6 +55,7 @@
     }
 
     .section__description {
+      color: #5D5D5D;
       font-size: 1.595rem;
       line-height: 1.5;
       margin: 1rem 0 2.5rem;
@@ -72,18 +77,18 @@
       text-transform: uppercase;
     }
 
-    .section__submit:hover {
+    .section__submit-link:hover {
       background-color: #77C2E2;
     }
 
     .section__break {
-      border-top: 2px solid #727272;
-      margin: 4rem 0;
+      border-top: 3px solid #727272;
+      margin: 4rem 0 4.75rem;
     }
 
     .section__subheader {
-      font-size: 2.25rem;
-      font-weight: 600;
+      font-size: 2.3rem;
+      font-weight: 500;
       letter-spacing: 0.0325rem;
       margin-bottom: 2.5rem;
     }
@@ -99,11 +104,23 @@
     .section__back {
       background-color: transparent;
       border: none;
-      font-size: 1rem;
-      left: -7%;
+      font-size: 0.9rem;
+      left: 1.5%;
       position: absolute;
       text-decoration: underline;
       text-transform: uppercase;
+    }
+
+    [data-target="startup"] .section__back {
+        top: 1.75%;
+    }
+
+    [data-target="office"] .section__back {
+        top: 8%;
+    }
+
+    [data-target="office-submited"] .section__back {
+        top: 0.75%;
     }
 
     .section__input {
@@ -170,8 +187,13 @@
 
     .js-hidden {
       opacity: 0;
-      visibility: hidden;
       max-height: 0;
+      position: absolute;
+      visibility: hidden;
+    }
+
+    [data-target="main"].js-hidden {
+      position: relative;
     }
 
     button.fade-in{
@@ -184,15 +206,9 @@
 
     .accordion {
         list-style-type: none;
-        margin-bottom: 6rem;
-        margin-left: auto;
-        margin-right: 0;
+        margin: 3rem 0 6rem auto;
         padding-left: 6.7rem;
         text-align: left;
-    }
-
-    .accordion__section {
-        padding: 3.3rem 0;
     }
 
     .accordion__section:not(:last-of-type) {
@@ -205,6 +221,7 @@
         font-weight: 600;
         letter-spacing: 0.06rem;
         margin: 0;
+        padding: 3.3rem 0;
         position: relative;
         transition: all 0.5s;
     }
@@ -224,12 +241,24 @@
         line-height: 0.50;
         padding: 1.65rem;
         position: absolute;
-        top: -1rem;
+        transform: translateY(-25%);
+    }
+
+    .accordion__arrow {
+        position: absolute;
+        width: 50px;
+        right: 1%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .accordion__arrow--toggle {
+        transform: translateY(-50%) scaleY(-1);
     }
 
     .accordion__content {
         opacity: 1;
-        padding-top: 1rem;
+        padding-bottom: 3.3rem;
         position: relative;
         transform: translateY(0);
         transition: position 0.5s, opacity 0.5s, transform 0.5s;
@@ -242,7 +271,7 @@
     }
 
     .accordion__summary {
-        font-size: 1.25rem;
+        font-size: 1.3rem;
         font-weight: 600;
         letter-spacing: 0.0625rem;
         margin-bottom: 0.5rem;
@@ -264,7 +293,7 @@
     }
 
     .description__item {
-        font-size: 1.42rem;
+        font-size: 1.3rem;
         line-height: 1.7;
     }
 
@@ -308,6 +337,29 @@
         line-height: 1.5;
     }
 
+    @media (max-width: 1200px) {
+      .submit__container {
+        padding-top: 3rem;
+      }
+
+      .section__back {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      [data-target="startup"] .section__back {
+          top: 1%;
+      }
+
+      [data-target="office"] .section__back {
+          top: 0;
+      }
+
+      [data-target="office-submited"] .section__back {
+          top: 0;
+      }
+    }
+
     @media (max-width: 1120px) {
       .button--big {
         font-size: 2rem;
@@ -342,15 +394,16 @@
 
       .accordion {
           margin-bottom: 0;
-          padding-left: 3.5rem;
+          padding-left: 4.5rem;
       }
 
       .accordion__number {
           border-width: 2px;
-          left: -3.75rem;
+          left: -4.25rem;
           line-height: 0.55;
           padding: 1.1rem;
-          top: -0.5rem;
+          top: 50%;
+          transform: translateY(-50%);
       }
 
       .section__subheader {
@@ -372,6 +425,41 @@
       }
     }
 
+    @media (max-width: 480px) {
+        .page__header--type {
+            font-size: 2rem;
+        }
+
+        .section__input {
+            width: 91%;
+        }
+
+        .section__confirm-email {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 380px) {
+        .page__header--type {
+            font-size: 1.75rem;
+        }
+
+        .section__input {
+            width: 88%;
+        }
+
+        .accordion {
+            padding-left: 0;
+        }
+
+        .accordion__header {
+            font-size: 1.2rem;
+        }
+
+        .accordion__number {
+            display: none;
+        }
+    }
     </style>
     <style is="custom-style" include="style-fade-in"></style>
     <firebase-document
@@ -389,7 +477,7 @@
         <div class="mdl-layout-spacer"></div>
       </div>
     </header>
-    <div class="mdl-grid js-visible" data-target="main">
+    <div class="mdl-grid js-visible submit__container" data-target="main">
       <div class="mdl-layout-spacer"></div>
       <div class="container--wide mdl-cell mdl-cell--12-col">
         <button on-tap="changeSection" class="button button--big mdl-button mdl-js-button mdl-js-ripple-effect fade-in" data-display="office" data-hide="main">
@@ -403,10 +491,10 @@
       </div>
       <div class="mdl-layout-spacer"></div>
     </div>
-    <div class="mdl-grid js-hidden" data-target="office">
+    <div class="mdl-grid js-hidden submit__container" data-target="office">
+      <button on-tap="changeSection" class="section__back" id="back-from-office" data-display="main" data-hide="office">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="container mdl-cell mdl-cell--12-col">
-        <button on-tap="changeSection" class="section__back" id="back-from-office" data-display="main" data-hide="office">Back</button>
         <p class$="section__description [[authTextClass]]">[[emailVerificationMessage]]</p>
         <form is="iron-form" class="section__form" on-submit="submitEmail">
           <input type="text" class$="section__input [[inputAuthClass]]" placeholder="email address" on-input="checkAuth">
@@ -415,10 +503,10 @@
       </div>
       <div class="mdl-layout-spacer"></div>
     </div>
-    <div class="mdl-grid js-hidden" data-target="office-submited">
+    <div class="mdl-grid js-hidden submit__container" data-target="office-submited">
+      <button on-tap="changeSection" class="section__back" data-display="main" data-hide="office-submited">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="submit__office container mdl-cell mdl-cell--12-col">
-        <button on-tap="changeSection" class="section__back" data-display="main" data-hide="office-submited">Back</button>
         <p class="section__description">The Innovation Fund invests in open-source solutions that are being developed and piloted by Country Offices</p>
         <p class="section__description">The Fund is looking to invest in emerging technologies that hold significant potential to bring results for children. These may include blockchain, 3D printing, data, personal/social communications networks, satellites, wearables and sensors, mobile devices, UAVs, artificial intelligence and renewable energy</p>
         <div class="section__submit">
@@ -430,6 +518,7 @@
             <li class="accordion__section">
                 <h4 class="accordion__header" data-open="eligibility" on-tap="accordionOpen">
                     <p class="accordion__number">1</p>CHECK ELIGIBILITY (3 minutes)
+                    <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
                 </h4>
                 <div class="accordion__content accordion__content--toggle" data-accordion="eligibility">
                     <p class="accordion__summary">Country office meets the following criteria:</p>
@@ -446,6 +535,7 @@
             <li class="accordion__section">
                 <h4 class="accordion__header" data-open="submit" on-tap="accordionOpen">
                     <p class="accordion__number">2</p>SUBMIT (50 minutes)
+                    <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
                 </h4>
                 <div class="accordion__content accordion__content--toggle" data-accordion="submit">
                     <p class="accordion__summary">Apply on a rolling basis through a simple application form found here.There is no deadline for submission.</p>
@@ -462,6 +552,7 @@
             <li class="accordion__section">
                 <h4 class="accordion__header" data-open="iterate" on-tap="accordionOpen">
                     <p class="accordion__number">3</p>ITERATE AND IMPROVE
+                    <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
                 </h4>
                 <div class="accordion__content accordion__content--toggle" data-accordion="iterate">
                     <p class="accordion__summary--gray">We encourage you to submit applications, as the process includes feedback andapplications can be improved on, if there are gaps.</p>
@@ -475,6 +566,7 @@
             <li class="accordion__section">
                 <h4 class="accordion__header" data-open="decision" on-tap="accordionOpen">
                     <p class="accordion__number">4</p>DECISION
+                    <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
                 </h4>
                 <div class="accordion__content accordion__content--toggle" data-accordion="decision">
                     <p class="accordion__summary--gray">Once the application is complete, projects will be assessed by the Innovation Fund Board (Chris Fabian, Erica Kochi and Tanya Accone) for a final decision. Approved investments are transferred to Country Offices through budget reallocations.</p>
@@ -508,10 +600,10 @@
       </div>
       <div class="mdl-layout-spacer"></div>
     </div>
-    <div class="mdl-grid js-hidden" data-target="startup">
+    <div class="mdl-grid js-hidden submit__container" data-target="startup">
+      <button on-tap="changeSection" class="section__back" data-display="main" data-hide="startup">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="container mdl-cell mdl-cell--12-col">
-        <button on-tap="changeSection" class="section__back" data-display="main" data-hide="startup">Back</button>
         <h3 class="section__header">STARTUP</h3>
         <p class="section__description">The next call for submissions from start-ups and academic institutions is planned for December 2016. Please follow us on Twitter <a href="https://twitter.com/unicefinnovate" class="section__link">@unicefinnovate</a>, where we will share updates about the Fund and future submission opportunities and deadlines.</p>
         <p class="section__description">If you submitted an Expression of Interest in the last round (closed on 26 February 2016), only selected companies/institutions have been contacted with information about next steps. Thank you for your submission nd interest in the Innovation Fund.</p>
@@ -560,22 +652,24 @@
         var visibleClass = "js-visible";
         var hiddenClass = "js-hidden";
         $(document).on('page-changed', function(e, page_id){
-            if (page_id !== 'submit') {
-                if (!self.selected) {
-                    var currentElement = self.$$("." + visibleClass);
-                    var mainElement = self.$$("[data-target='main']");
-                    var inputMail = self.$$(".section__input");
-                    var pageHeader = self.$$(".page__header--type");
+            if (page_id !== 'submit' && !self.selected) {
+                var currentElement = self.$$("." + visibleClass);
+                var mainElement = self.$$("[data-target='main']");
+                var inputMail = self.$$(".section__input");
+                var pageHeader = self.$$(".page__header--type");
 
-                    currentElement.classList.remove(visibleClass);
-                    currentElement.classList.add(hiddenClass);
+                currentElement.classList.remove(visibleClass);
+                currentElement.classList.add(hiddenClass);
 
-                    mainElement.classList.remove(hiddenClass);
-                    mainElement.classList.add(visibleClass);
+                mainElement.classList.remove(hiddenClass);
+                mainElement.classList.add(visibleClass);
 
-                    inputMail.value = '';
-                    pageHeader.innerHTML = '';
-                }
+                inputMail.value = '';
+                pageHeader.innerHTML = '';
+                self.inputAuthClass = '';
+                self.authTextClass = '';
+                self.emailVerificationMessage = "Please submit your email address to continue";
+                self.isDisabled = true;
             }
         });
     },
@@ -648,11 +742,13 @@
       this.toggleVisible(toHide, toShow);
     },
     accordionOpen: function (event) {
-        var taped = event.target.dataset.open || event.target.parentElement.dataset.open;
+        var target = event.currentTarget;
+        var taped = target.dataset.open;
         var selected = this.$$("[data-accordion='" + taped + "']");
+        var arrow = target.querySelector('.accordion__arrow');
 
+        arrow.classList.toggle('accordion__arrow--toggle')
         selected.classList.toggle('accordion__content--toggle');
-        console.log(selected);
     }
   })
   </script>
