@@ -16,6 +16,7 @@ html, body {
 .container {
   width: 1200px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 @media only screen and (max-width: 1216px) {
