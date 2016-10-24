@@ -71,10 +71,12 @@
       /* Overwrite MDL default style */
       font-size: 1.15rem;
       font-weight: 400;
-      height: inherit;
+      height: 44px;
+      line-height: 44px;
       margin-top: 2.5rem;
-      padding: 0.1rem 1.8rem;
+      max-width: 260px;
       text-transform: uppercase;
+      width: 100%;
     }
 
     .section__submit-link:hover {
@@ -130,7 +132,7 @@
       font-size: 1.1rem;
       margin: 0 auto;
       padding: 1.1rem;
-      width: 332px;
+      width: 228px;
     }
 
     .section__input--authenticated {
@@ -146,17 +148,17 @@
       background-color: #0099FF;
       border: none;
       color: #FFFFFF;
-      font-size: 1.6rem;
+      font-size: 0.93rem;
       font-weight: 400;
       margin-top: 0.8rem;
-      padding: 1rem 0;
+      padding: 1.0375rem 0;
       text-transform: uppercase;
-      width: 365px;
+      width: 260px;
     }
 
     .section__confirm-email:disabled {
       background-color: #BABCBD;
-      color: #000000;
+      color: #5D5D5D;
     }
 
     .faq__name {
@@ -181,15 +183,11 @@
     }
 
     .js-visible {
-      opacity: 1;
-      visibility: visible;
+        display: block;
     }
 
     .js-hidden {
-      opacity: 0;
-      max-height: 0;
-      position: absolute;
-      visibility: hidden;
+        display: none;
     }
 
     [data-target="main"].js-hidden {
