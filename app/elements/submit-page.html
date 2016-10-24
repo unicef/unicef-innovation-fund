@@ -2,7 +2,8 @@
   <template>
     <style is="custom-style">
     .container {
-      max-width: 1150px;
+      max-width: 1030px;
+      position: relative;
       text-align: center;
     }
 
@@ -14,6 +15,10 @@
       background-color: #FFFFFF;
       box-shadow: 2px 2px 10px 0 #999999;
       z-index: 1;
+    }
+
+    .submit__office {
+        text-align: left;
     }
 
     .button__text {
@@ -35,6 +40,10 @@
       width: 50%;
     }
 
+    .submit__container {
+      position: relative;
+    }
+
     .submit__icon {
       display: block;
     }
@@ -46,43 +55,42 @@
     }
 
     .section__description {
-      font-size: 1.54rem;
-      line-height: 1.45;
-      margin: 9rem 0 2.5rem;
-    }
-
-    .section__user-email {
-      margin-top: 3.7rem;
+      color: #5D5D5D;
+      font-size: 1.595rem;
+      line-height: 1.5;
+      margin: 1rem 0 2.5rem;
     }
 
     .section__submit {
+        text-align: center;
+    }
+
+    .section__submit-link {
       background-color: #0099FF;
       color: #FFFFFF !important;
       /* Overwrite MDL default style */
-      font-size: 1.6rem;
+      font-size: 1.15rem;
       font-weight: 400;
       height: inherit;
-      letter-spacing: 0.05rem;
-      margin-top: 1.1rem;
-      padding: 1rem 3.2rem;
-      text-transform: none;
+      margin-top: 2.5rem;
+      padding: 0.1rem 1.8rem;
+      text-transform: uppercase;
     }
 
-    .section__submit:hover {
+    .section__submit-link:hover {
       background-color: #77C2E2;
     }
 
     .section__break {
-      border-top: 2px solid #727272;
-      margin: 4.8rem 0 5.9rem;
+      border-top: 3px solid #727272;
+      margin: 4rem 0 4.75rem;
     }
 
     .section__subheader {
-      font-size: 1.25rem;
-      font-weight: 600;
-      letter-spacing: 0.05rem;
-      margin-bottom: 3rem;
-      text-transform: uppercase;
+      font-size: 2.3rem;
+      font-weight: 500;
+      letter-spacing: 0.0325rem;
+      margin-bottom: 2.5rem;
     }
 
     .section__icon {
@@ -96,10 +104,23 @@
     .section__back {
       background-color: transparent;
       border: none;
-      float: left;
-      font-size: 1rem;
+      font-size: 0.9rem;
+      left: 1.5%;
+      position: absolute;
       text-decoration: underline;
       text-transform: uppercase;
+    }
+
+    [data-target="startup"] .section__back {
+        top: 1.75%;
+    }
+
+    [data-target="office"] .section__back {
+        top: 8%;
+    }
+
+    [data-target="office-submited"] .section__back {
+        top: 0.75%;
     }
 
     .section__input {
@@ -166,8 +187,13 @@
 
     .js-hidden {
       opacity: 0;
-      visibility: hidden;
       max-height: 0;
+      position: absolute;
+      visibility: hidden;
+    }
+
+    [data-target="main"].js-hidden {
+      position: relative;
     }
 
     button.fade-in{
@@ -178,44 +204,160 @@
         color: red !important;
     }
 
-    .timeline {
+    .accordion {
         list-style-type: none;
-        margin-right: 0;
-        margin-left: auto;
+        margin: 3rem 0 6rem auto;
+        padding-left: 6.7rem;
         text-align: left;
-        width: 60%;
     }
 
-    .timeline__section {
-
+    .accordion__section:not(:last-of-type) {
+        border-bottom: 1px solid black;
     }
 
-    .timeline__header {
+    .accordion__header {
+        cursor: pointer;
+        font-size: 1.35rem;
+        font-weight: 600;
+        letter-spacing: 0.06rem;
+        margin: 0;
+        padding: 3.3rem 0;
         position: relative;
+        transition: all 0.5s;
     }
 
-    .timeline__number {
-        border: 1px solid #33B8B8;
+    .accordion__header:hover {
+        color: #33B8B8;
+    }
+
+    .accordion__number {
+        border: 3px solid #33B8B8;
         border-radius: 50%;
         color: #33B8B8;
         display: inline-block;
-        left: -7%;
+        font-weight: 600;
+        font-size: 1.5em;
+        left: -6.75rem;
         line-height: 0.50;
-        padding: 1rem;
+        padding: 1.65rem;
         position: absolute;
+        transform: translateY(-25%);
     }
 
-    .timeline__summary {
+    .accordion__arrow {
+        position: absolute;
+        width: 50px;
+        right: 1%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .accordion__arrow--toggle {
+        transform: translateY(-50%) scaleY(-1);
+    }
+
+    .accordion__content {
+        opacity: 1;
+        padding-bottom: 3.3rem;
+        position: relative;
+        transform: translateY(0);
+        transition: position 0.5s, opacity 0.5s, transform 0.5s;
+    }
+
+    .accordion__content--toggle {
+        opacity: 0;
+        position: absolute;
+        transform: translateY(-5%);
+    }
+
+    .accordion__summary {
+        font-size: 1.3rem;
         font-weight: 600;
+        letter-spacing: 0.0625rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .accordion__summary--gray {
+        color: #5D5D5D;
+        font-size: 1.25rem;
+        font-weight: 600;
+        letter-spacing: 0.0625rem;
+        line-height: 1.7;
+        margin-bottom: 2rem;
     }
 
     .description__list {
         color: #5D5D5D;
         list-style-type: none;
+        padding-left: 0;
     }
 
     .description__item {
+        font-size: 1.3rem;
+        line-height: 1.7;
+    }
 
+    .role__list {
+        list-style-type: none;
+        margin-bottom: 5rem;
+        padding-left: 0;
+        padding-top: 1rem;
+    }
+
+    .role__item {
+        padding: 1.3rem 0 3rem 6.75rem;
+    }
+
+    .role__info {
+        padding-left: 4rem;
+        text-align: left;
+    }
+
+    .role__name {
+        color: #000000;
+        font-weight: 600;
+        font-size: 1.5rem;
+        margin-bottom: 0;
+        position: relative;
+        text-transform: uppercase;
+    }
+
+    .role__image {
+        left: -5rem;
+        margin-bottom: 0;
+        max-width: 35px;
+        position: absolute;
+        top: 100%;
+        transform: translate(-50%, -50%);
+    }
+
+    .role__description {
+        color: #5D5D5D;
+        font-size: 1.5rem;
+        line-height: 1.5;
+    }
+
+    @media (max-width: 1200px) {
+      .submit__container {
+        padding-top: 3rem;
+      }
+
+      .section__back {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      [data-target="startup"] .section__back {
+          top: 1%;
+      }
+
+      [data-target="office"] .section__back {
+          top: 0;
+      }
+
+      [data-target="office-submited"] .section__back {
+          top: 0;
+      }
     }
 
     @media (max-width: 1120px) {
@@ -249,8 +391,75 @@
         float: none;
         width: 100%;
       }
+
+      .accordion {
+          margin-bottom: 0;
+          padding-left: 4.5rem;
+      }
+
+      .accordion__number {
+          border-width: 2px;
+          left: -4.25rem;
+          line-height: 0.55;
+          padding: 1.1rem;
+          top: 50%;
+          transform: translateY(-50%);
+      }
+
+      .section__subheader {
+          font-size: 2rem;
+          margin-bottom: 0;
+      }
+
+      .role__item {
+          padding: 1rem 0 0 3.75rem;
+      }
+
+      .role__image {
+          left: -2rem;
+          max-width: 30px;
+      }
+
+      .role__description {
+          font-size: 1.2rem;
+      }
     }
 
+    @media (max-width: 480px) {
+        .page__header--type {
+            font-size: 2rem;
+        }
+
+        .section__input {
+            width: 91%;
+        }
+
+        .section__confirm-email {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 380px) {
+        .page__header--type {
+            font-size: 1.75rem;
+        }
+
+        .section__input {
+            width: 88%;
+        }
+
+        .accordion {
+            padding-left: 0;
+        }
+
+        .accordion__header {
+            font-size: 1.2rem;
+        }
+
+        .accordion__number {
+            display: none;
+        }
+    }
     </style>
     <style is="custom-style" include="style-fade-in"></style>
     <firebase-document
@@ -262,30 +471,30 @@
       <div class='mdl-grid container' style='position:relative;'>
         <div class="mdl-layout-spacer"></div>
         <div class="mdl-cell mdl-cell--10-col">
-          <h1 class='page__header--title fade-in'>Submit</h1>
+          <h1 class='title--big hello__title fade-in'>Submit</h1>
           <p class="page__header--type">[[sectionName]]</p>
         </div>
         <div class="mdl-layout-spacer"></div>
       </div>
     </header>
-    <div class="mdl-grid js-visible" data-target="main">
+    <div class="mdl-grid js-visible submit__container" data-target="main">
       <div class="mdl-layout-spacer"></div>
       <div class="container--wide mdl-cell mdl-cell--12-col">
         <button on-tap="changeSection" class="button button--big mdl-button mdl-js-button mdl-js-ripple-effect fade-in" data-display="office" data-hide="main">
           <p class="button__text">Submissions by UNICEF country offices</p>
-          <img src="../images/icons/country_offices.png" alt="Submissions by country offices" class="button__image"/>
+          <img src="../images/icons/country_offices.svg" alt="Submissions by country offices" class="button__image"/>
         </button>
         <button on-tap="changeSection" class="button button--big mdl-button mdl-js-button mdl-js-ripple-effect fade-in" data-display="startup" data-hide="main">
           <p class="button__text">Submissions by start-ups</p>
-          <img src="../images/icons/startups.png" alt="Submissions by country offices" class="button__image"/>
+          <img src="../images/icons/startups.svg" alt="Submissions by country offices" class="button__image"/>
         </button>
       </div>
       <div class="mdl-layout-spacer"></div>
     </div>
-    <div class="mdl-grid js-hidden" data-target="office">
+    <div class="mdl-grid js-hidden submit__container" data-target="office">
+      <button on-tap="changeSection" class="section__back" id="back-from-office" data-display="main" data-hide="office">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="container mdl-cell mdl-cell--12-col">
-        <button on-tap="changeSection" class="section__back" id="back-from-office" data-display="main" data-hide="office">Back</button>
         <p class$="section__description [[authTextClass]]">[[emailVerificationMessage]]</p>
         <form is="iron-form" class="section__form" on-submit="submitEmail">
           <input type="text" class$="section__input [[inputAuthClass]]" placeholder="email address" on-input="checkAuth">
@@ -294,52 +503,107 @@
       </div>
       <div class="mdl-layout-spacer"></div>
     </div>
-    <div class="mdl-grid js-hidden" data-target="office-submited">
+    <div class="mdl-grid js-hidden submit__container" data-target="office-submited">
+      <button on-tap="changeSection" class="section__back" data-display="main" data-hide="office-submited">Back</button>
       <div class="mdl-layout-spacer"></div>
-      <div class="container mdl-cell mdl-cell--12-col">
-        <button on-tap="changeSection" class="section__back" data-display="main" data-hide="office-submited">Back</button>
-        <strong class="section__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi est ducimus, nemo laborum esse repellat accusamus, repudiandae officia neque voluptatum id. Facilis iste odit eligendi perspiciatis, sed hic nesciunt maiores?</strong>
-        <p class="section__user-email"></p>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit mdl-button mdl-js-button mdl-js-ripple-effect">Submission Form</a>
+      <div class="submit__office container mdl-cell mdl-cell--12-col">
+        <p class="section__description">The Innovation Fund invests in open-source solutions that are being developed and piloted by Country Offices</p>
+        <p class="section__description">The Fund is looking to invest in emerging technologies that hold significant potential to bring results for children. These may include blockchain, 3D printing, data, personal/social communications networks, satellites, wearables and sensors, mobile devices, UAVs, artificial intelligence and renewable energy</p>
+        <div class="section__submit">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit-link mdl-button mdl-js-button mdl-js-ripple-effect">Submission Form</a>
+        </div>
         <hr class="section__break">
         <h3 class="section__subheader">What is the application process?</h3>
-        <ol class="timeline">
-            <li class="timeline__section">
-                <h4 class="timeline__header">
-                    <p class="timeline__number">1</p>CHECK ELIGIBILITY (3 minutes)
+        <ol class="accordion">
+            <li class="accordion__section">
+                <h4 class="accordion__header" data-open="eligibility" on-tap="accordionOpen">
+                    <p class="accordion__number">1</p>CHECK ELIGIBILITY (3 minutes)
+                    <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
                 </h4>
-                <p class="timeline__summary">Country office meets the following criteria:</p>
-                <ul class="description__list">
-                    <li class="description__item">Is developing and piloting a new open source solution.</li>
-                    <li class="description__item">Solution has completed initial prototyping and small scale piloting with promising results Lacks su icient evidence or resources to scale further.</li>
-                    <li class="description__item">Has matching co-funding to support the project.</li>
-                    <li class="description__item">Senior management supports the application and project itself</li>
-                    <li class="description__item">Can submit as many applications as they have projects (e.g. 4,5, 6 etc).</li>
-                    <li class="description__item">Are able to spend the investment within 12 months</li>
-                </ul>
+                <div class="accordion__content accordion__content--toggle" data-accordion="eligibility">
+                    <p class="accordion__summary">Country office meets the following criteria:</p>
+                    <ul class="description__list">
+                        <li class="description__item">Is developing and piloting a new open source solution.</li>
+                        <li class="description__item">Solution has completed initial prototyping and small scale piloting with promising results Lacks su icient evidence or resources to scale further.</li>
+                        <li class="description__item">Has matching co-funding to support the project.</li>
+                        <li class="description__item">Senior management supports the application and project itself</li>
+                        <li class="description__item">Can submit as many applications as they have projects (e.g. 4,5, 6 etc).</li>
+                        <li class="description__item">Are able to spend the investment within 12 months</li>
+                    </ul>
+                </div>
             </li>
-            <li class="timeline__section">
-                <h4 class="timeline__header">
-                    <p class="timeline__number">2</p>SUBMIT (50 minutes)
+            <li class="accordion__section">
+                <h4 class="accordion__header" data-open="submit" on-tap="accordionOpen">
+                    <p class="accordion__number">2</p>SUBMIT (50 minutes)
+                    <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
                 </h4>
-                <p class="timeline__summary">Apply on a rolling basis through a simple application form found here.There is no deadline for submission.</p>
-                <p class="timeline__summary">Applications are initially assessed based on a number of criteria, which include:</p>
-                <ul class="description__list">
-                    <li class="description__item">Alignment with UNICEF’s Innovation Principles and UNICEF’s global priorities for children Placement within one of the Fund’s three portfolio areas</li>
-                    <li class="description__item">Size of the market opportunity and relevance across geographic locations</li>
-                    <li class="description__item">Suitability of the team to implement the project</li>
-                    <li class="description__item">Creation of open source, public goods</li>
-                    <li class="description__item">Results able to be measured and monitored in real time</li>
-                </ul>
+                <div class="accordion__content accordion__content--toggle" data-accordion="submit">
+                    <p class="accordion__summary">Apply on a rolling basis through a simple application form found here.There is no deadline for submission.</p>
+                    <ul class="description__list">
+                        <li class="description__item">Alignment with UNICEF’s Innovation Principles and UNICEF’s global priorities for children</li>
+                        <li class="description__item">Placement within one of the Fund’s three portfolio areas</li>
+                        <li class="description__item">Size of the market opportunity and relevance across geographic locations</li>
+                        <li class="description__item">Suitability of the team to implement the project</li>
+                        <li class="description__item">Creation of open source, public goods</li>
+                        <li class="description__item">Results able to be measured and monitored in real time</li>
+                    </ul>
+                </div>
+            </li>
+            <li class="accordion__section">
+                <h4 class="accordion__header" data-open="iterate" on-tap="accordionOpen">
+                    <p class="accordion__number">3</p>ITERATE AND IMPROVE
+                    <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
+                </h4>
+                <div class="accordion__content accordion__content--toggle" data-accordion="iterate">
+                    <p class="accordion__summary--gray">We encourage you to submit applications, as the process includes feedback andapplications can be improved on, if there are gaps.</p>
+                    <ul class="description__list">
+                        <li class="description__item">Await feedback on how best to enhance your application, or answer clarifying questions.</li>
+                        <li class="description__item">If applicable, iterate and improve your application.</li>
+                        <li class="description__item">We aim to review applications and communicate funding decisions within two weeks.</li>
+                    </ul>
+                </div>
+            </li>
+            <li class="accordion__section">
+                <h4 class="accordion__header" data-open="decision" on-tap="accordionOpen">
+                    <p class="accordion__number">4</p>DECISION
+                    <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
+                </h4>
+                <div class="accordion__content accordion__content--toggle" data-accordion="decision">
+                    <p class="accordion__summary--gray">Once the application is complete, projects will be assessed by the Innovation Fund Board (Chris Fabian, Erica Kochi and Tanya Accone) for a final decision. Approved investments are transferred to Country Offices through budget reallocations.</p>
+                </div>
             </li>
         </ol>
+        <hr class="section__break">
+        <h3 class="section__subheader">What is the role of the country office once the investment is approved?</h3>
+        <ul class="role__list">
+            <li class="role__item">
+                <h4 class="role__name"><img src="../images/icons/real-time.svg" alt="Real-time information" class="role__image">REAL-TIME INFORMATION</h4>
+                <p class="role__description">Once the Country Office receives funding, we ask you to submit real-time data points that show the progress of the project. Data points include, activity on github, number of users per time period etc.<br>The Office of Innovation provides support to identify suitable real-time data sources for each project. All projects and related data are featured on the real-time reporting website of the Fund.</p>
+            </li>
+            <li class="role__item">
+                <h4 class="role__name"><img src="../images/icons/implement.svg" alt="Implement" class="role__image">IMPLEMENT</h4>
+                <p class="role__description">Country Offies may receive technical assistance from a global team of experts in the Office of Innovation.</p>
+            </li>
+            <li class="role__item">
+                <h4 class="role__name"><img src="../images/icons/report.svg" alt="Report" class="role__image">Report</h4>
+                <p class="role__description">Focal points for each project are required to submit 2 reports during the funding period. A report is due after 6 months and after 12 months</p>
+            </li>
+            <li class="role__item">
+                <h4 class="role__name"><img src="../images/icons/spend.svg" alt="Spend" class="role__image">Spend</h4>
+                <p class="role__description">Funding awarded has to be spent within 12 months.</p>
+            </li>
+            <li class="role__item">
+                <h4 class="role__name"><img src="../images/icons/share.svg" alt="Share" class="role__image">Share</h4>
+                <p class="role__description">As projects and solutions generate new solutions and lessons learned, we ask you to share your experiences through unicefstories.org and dedicated networking opportunities with other COs.</p>
+            </li>
+        </ul>
       </div>
       <div class="mdl-layout-spacer"></div>
     </div>
-    <div class="mdl-grid js-hidden" data-target="startup">
+    <div class="mdl-grid js-hidden submit__container" data-target="startup">
+      <button on-tap="changeSection" class="section__back" data-display="main" data-hide="startup">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="container mdl-cell mdl-cell--12-col">
-        <button on-tap="changeSection" class="section__back" data-display="main" data-hide="startup">Back</button>
         <h3 class="section__header">STARTUP</h3>
         <p class="section__description">The next call for submissions from start-ups and academic institutions is planned for December 2016. Please follow us on Twitter <a href="https://twitter.com/unicefinnovate" class="section__link">@unicefinnovate</a>, where we will share updates about the Fund and future submission opportunities and deadlines.</p>
         <p class="section__description">If you submitted an Expression of Interest in the last round (closed on 26 February 2016), only selected companies/institutions have been contacted with information about next steps. Thank you for your submission nd interest in the Innovation Fund.</p>
@@ -388,20 +652,24 @@
         var visibleClass = "js-visible";
         var hiddenClass = "js-hidden";
         $(document).on('page-changed', function(e, page_id){
-            if (page_id !== 'about') {
-                if (!self.selected) {
-                    var currentElement = self.$$("." + visibleClass);
-                    var mainElement = self.$$("[data-target='main']");
-                    var inputMail = self.$$(".section__input");
+            if (page_id !== 'submit' && !self.selected) {
+                var currentElement = self.$$("." + visibleClass);
+                var mainElement = self.$$("[data-target='main']");
+                var inputMail = self.$$(".section__input");
+                var pageHeader = self.$$(".page__header--type");
 
-                    currentElement.classList.remove(visibleClass);
-                    currentElement.classList.add(hiddenClass);
+                currentElement.classList.remove(visibleClass);
+                currentElement.classList.add(hiddenClass);
 
-                    mainElement.classList.remove(hiddenClass);
-                    mainElement.classList.add(visibleClass);
+                mainElement.classList.remove(hiddenClass);
+                mainElement.classList.add(visibleClass);
 
-                    inputMail.value = '';
-                }
+                inputMail.value = '';
+                pageHeader.innerHTML = '';
+                self.inputAuthClass = '';
+                self.authTextClass = '';
+                self.emailVerificationMessage = "Please submit your email address to continue";
+                self.isDisabled = true;
             }
         });
     },
@@ -466,14 +734,21 @@
       event.preventDefault();
       var emailAddress = this.$$(".section__input").value;
 
-      this.$$(".section__user-email").innerHTML = emailAddress;
-
       var submitButton = this.$$('.section__confirm-email');
 
       var toHide = this.$$("[data-target='" + submitButton.dataset.hide + "']");
       var toShow = this.$$("[data-target='" + submitButton.dataset.display + "']");
 
       this.toggleVisible(toHide, toShow);
+    },
+    accordionOpen: function (event) {
+        var target = event.currentTarget;
+        var taped = target.dataset.open;
+        var selected = this.$$("[data-accordion='" + taped + "']");
+        var arrow = target.querySelector('.accordion__arrow');
+
+        arrow.classList.toggle('accordion__arrow--toggle')
+        selected.classList.toggle('accordion__content--toggle');
     }
   })
   </script>
