@@ -95,6 +95,12 @@
         border-right: 1px solid #222;
       }
 
+      @media only screen and (max-width: 839px) {
+        .project-view__col--main:not(.mdl-cell--12-col) {
+          border-right: none;
+        }
+      }
+
       .project-view__description {
         margin-bottom: 32px;
       }
@@ -303,16 +309,6 @@
           <template is="dom-if" if="[[ _getAdditionalInfo(chartData) ]]">
             <div class="project-view__divider"></div>
             <div class="project-view__additional">
-              <div class="project-view__additional-dropdown">
-                 <paper-dropdown-menu class="project-view__month-dropdown" label="Choose month" id="monthDropdown">
-                  <paper-listbox class="dropdown-content" selected="{{additionalRange}}">
-                    <paper-item class="project-view__item">All</paper-item>
-                    <template is="dom-repeat" items="{{chartData.labels}}">
-                        <paper-item class="project-view__item">{{item}}</paper-item>
-                    </template>
-                  </paper-listbox>
-                </paper-dropdown-menu>
-              </div>
               <div class="project-view__additional-content">
                 <span class="project-view__additional-value">{{ currentUsers }}</span><span>users</span>
               </div>
