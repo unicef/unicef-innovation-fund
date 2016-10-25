@@ -727,7 +727,7 @@
 
       for(var i = 0; i < projects.length; i++) {
         var project = projects[i];
-        if (project.investment_status) {
+        if (typeof project.investment_status == 'string' && project.investment_status.length > 0) {
           show = true;
           break;
         }
