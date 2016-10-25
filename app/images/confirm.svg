@@ -1,1 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.66 21.89"><defs><style>.cls-1{fill:none;stroke:#0095d6;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title>confirm</title><g id="Layer_2" data-name="Layer 2"><g id="Featured_Blog_Posts" data-name="Featured Blog Posts"><polyline class="cls-1" points="1 12.69 10.53 20.89 20.66 1"/></g></g></svg>
+<svg fill="#0099FF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+</svg>
