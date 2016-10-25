@@ -37,10 +37,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
   <!-- Tile icon for Win8 (144x144) -->
   <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-  <!-- build:css styles/main.css -->
   <link rel="stylesheet" href="//storage.googleapis.com/code.getmdl.io/1.0.1/material.light_blue-blue.min.css" />
   <link rel="stylesheet" href="styles/main.css">
-  <!-- endbuild-->
   <link rel="stylesheet" href="./assets/owl.carousel.min.css" />
   <script src="./polyfill.js"></script>
   <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -69,7 +67,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     })
   }
   </script>
-  <!-- endbuild -->
+
   <!-- Because this project uses vulcanize this should be your only html import
        in this file. All other imports should go in elements.html -->
   <link rel="import" href="elements/elements.html">
@@ -80,85 +78,85 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   .spacer {
     @apply(--layout-flex);
   }
-  
+
   neon-animated-pages .iron-selected {
     position: static;
   }
-  
+
   .owl-nav {
     display: none;
   }
-  
+
   .owl-carousel .item {
     padding: 1rem;
     width: 400px;
     height: 600px;
   }
-  
+
   ul {
     padding: 0;
     list-style-type: none;
   }
-  
+
   .dashboard {
     background-color: #EDEDED;
     color: black;
     height: auto;
   }
-  
+
   #mainToolbar .dashboard {
     background-color: #EDEDED;
     height: auto;
   }
-  
+
   .all_projects {
     background-color: #3366CB;
     /*height:250px;*/
   }
-  
+
   #mainToolbar .all_projects,
   #mainToolbar.about {
     background-color: #3366CB;
   }
-  
+
   #mainToolbar.submit {
     background-color: #333333;
   }
-  
+
   .about,
   .submit {
     background-color: #333333;
   }
-  
+
   .mainView paper-tabs {
     display: none;
   }
-  
+
   .mainView[wide-layout] paper-tabs {
     display: inline;
   }
-  
+
   .mainView #paperToggle {
     display: inline;
   }
-  
+
   .mainView[wide-layout] #paperToggle {
     display: none;
   }
-  
+
   .menu-item {
     font-family: Source Sans Pro;
   }
-  
+
   .menu-item.iron-selected {
     background-color: #0099FF;
     color: white;
   }
-  
+
   .project-view__dialog-close {
     position: absolute;
     top: 14px;
@@ -173,40 +171,40 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     outline: none;
     cursor: pointer;
   }
-  
+
   .project-view__dialog .project-view__dialog-scrollable {
     margin-bottom: 0 !important;
   }
-  
+
   .dialog-type-infrastructure {
     border-bottom: 5px solid #66cc66;
   }
-  
+
   .dialog-type-real_time_information {
     border-bottom: 5px solid #ff3366;
   }
-  
+
   .dialog-type-youth_engagement {
     border-bottom: 5px solid #ffcc33;
   }
-  
+
   .app-name {
     cursor: pointer;
   }
-  
+
   .content {
     min-height: calc(100vh - 64px);
     height: auto;
     position: relative;
     box-sizing: border-box;
   }
-  
+
   @media (min-width: 600px) {
     .content {
       padding-bottom: 535px;
     }
   }
-  
+
   @media (min-width: 1040px) {
     .content {
       padding-bottom: 351px;
@@ -336,7 +334,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </div>
   </template>
   <overlay-intro></overlay-intro>
-  <!-- build:js scripts/app.js -->
+
   <script src="scripts/app.js"></script>
   <script>
   var scope = document.querySelector('template[is="dom-bind"]');
@@ -390,7 +388,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   };
   </script>
   <script src="utility.js"></script>
-  <!-- endbuild-->
+
   <script>
   (function(i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;

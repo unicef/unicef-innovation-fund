@@ -28,7 +28,7 @@
     "optipng-bin": "^3.1.2",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.0.2",
-    "vulcanize": ">= 1.4.2",
+    "vulcanize": "^1.14.8",
     "web-component-tester": "^4.0.0"
   },
   "scripts": {
