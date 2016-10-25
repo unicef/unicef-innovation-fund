@@ -21,6 +21,10 @@
         text-align: left;
     }
 
+    .button__container {
+        font-size: 0;
+    }
+
     .button__text {
       margin-bottom: 35px;
     }
@@ -32,7 +36,7 @@
     .button--big {
       background-color: #FFFFFF;
       color: #0099FF;
-      float: left;
+      display: inline-block;
       font-size: 1.2rem;
       height: 252px;
       padding: 0;
@@ -79,8 +83,24 @@
       width: 100%;
     }
 
+    .section__submit-link:link {
+      background-color: #0099FF;
+    }
+
+    .section__submit-link:visited {
+      background-color: #0099FF;
+    }
+
     .section__submit-link:hover {
       background-color: #77C2E2;
+    }
+
+    .section__submit-link:active {
+      background-color: #0099FF;
+    }
+
+    .section__submit-link:focus {
+      background-color: #0099FF;
     }
 
     .section__break {
@@ -106,6 +126,7 @@
     .section__back {
       background-color: transparent;
       border: none;
+      cursor: pointer;
       font-size: 0.9rem;
       left: 1.5%;
       position: absolute;
@@ -159,6 +180,17 @@
     .section__confirm-email:disabled {
       background-color: #BABCBD;
       color: #5D5D5D;
+    }
+
+    .section__auth-alert {
+        color: red;
+        display: none;
+        font-size: 1.3rem;
+        margin: 1.3rem 0 0.5rem;
+    }
+
+    .section__auth-alert--visible {
+        display: block;
     }
 
     .faq__name {
@@ -346,15 +378,15 @@
       }
 
       [data-target="startup"] .section__back {
-          top: 1%;
+          top: 2.5%;
       }
 
       [data-target="office"] .section__back {
-          top: 0;
+          top: 9%;
       }
 
       [data-target="office-submited"] .section__back {
-          top: 0;
+          top: 1%;
       }
     }
 
@@ -477,7 +509,7 @@
     </header>
     <div class="mdl-grid js-visible submit__container" data-target="main">
       <div class="mdl-layout-spacer"></div>
-      <div class="container--wide mdl-cell mdl-cell--12-col">
+      <div class="button__container container--wide mdl-cell mdl-cell--12-col">
         <button on-tap="changeSection" class="button button--big mdl-button mdl-js-button mdl-js-ripple-effect fade-in" data-display="office" data-hide="main">
           <p class="button__text">Submissions by UNICEF country offices</p>
           <img src="../images/icons/country_offices.svg" alt="Submissions by country offices" class="button__image"/>
@@ -493,10 +525,11 @@
       <button on-tap="changeSection" class="section__back" id="back-from-office" data-display="main" data-hide="office">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="container mdl-cell mdl-cell--12-col">
-        <p class$="section__description [[authTextClass]]">[[emailVerificationMessage]]</p>
+        <p class="section__description">Please submit your email address to continue</p>
         <form is="iron-form" class="section__form" on-submit="submitEmail">
           <input type="text" class$="section__input [[inputAuthClass]]" placeholder="email address" on-input="checkAuth">
-          <button type="submit" class="section__confirm-email" data-display="office-submited" data-hide="office" disabled="[[isDisabled]]">continue</button>
+          <p class$="section__auth-alert [[errorMessageClass]]">This email is not valid</p>
+          <button type="submit" class="section__confirm-email" data-display="office-submited" data-hide="office">continue</button>
         </form>
       </div>
       <div class="mdl-layout-spacer"></div>
@@ -508,7 +541,7 @@
         <p class="section__description">The Innovation Fund invests in open-source solutions that are being developed and piloted by Country Offices</p>
         <p class="section__description">The Fund is looking to invest in emerging technologies that hold significant potential to bring results for children. These may include blockchain, 3D printing, data, personal/social communications networks, satellites, wearables and sensors, mobile devices, UAVs, artificial intelligence and renewable energy</p>
         <div class="section__submit">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit-link mdl-button mdl-js-button mdl-js-ripple-effect">Submission Form</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank">Submission Form</a>
         </div>
         <hr class="section__break">
         <h3 class="section__subheader">What is the application process?</h3>
@@ -620,16 +653,15 @@
   Polymer({
     is: "submit-page",
     properties: {
-        isDisabled: {
+        countryOfficesAuthenticated: {
             type: Boolean,
-            value: true,
-            observer: 'checkAuthInputClass'
+            value: false
         },
         emailVerificationMessage: {
             type: String,
             value: "Please submit your email address to continue"
         },
-        authTextClass: {
+        errorMessageClass: {
             type: String,
             value: ''
         },
@@ -665,37 +697,23 @@
                 inputMail.value = '';
                 pageHeader.innerHTML = '';
                 self.inputAuthClass = '';
-                self.authTextClass = '';
-                self.emailVerificationMessage = "Please submit your email address to continue";
-                self.isDisabled = true;
+                self.errorMessageClass = '';
+                self.countryOfficesAuthenticated = false;
             }
         });
     },
     checkAuth: function (event) {
         var regxTest = /.{1,}@unicef\.org$/gi;
-        var defaultEmailVerificationText = "Please submit your email address to continue";
         var inputValue = event.target.value;
         var authErrorClass = 'is-alert';
 
         if (regxTest.test(inputValue) === true) {
-            this.emailVerificationMessage = defaultEmailVerificationText;
-            this.authTextClass = '';
-            return this.isDisabled = false;
-        } else if (inputValue.indexOf('@') !== -1) {
-            this.emailVerificationMessage = "This email is not valid";
-            this.authTextClass = authErrorClass
-            return this.isDisabled = true;
+            this.errorMessageClass = '';
+            this.inputAuthClass = 'section__input--authenticated';
+            this.countryOfficesAuthenticated = true;
         } else {
-            this.emailVerificationMessage = defaultEmailVerificationText;
-            this.authTextClass = '';
-            return this.isDisabled = true;
-        }
-    },
-    checkAuthInputClass: function () {
-        if (this.isDisabled) {
-            return this.inputAuthClass = '';
-        } else {
-            return this.inputAuthClass = 'section__input--authenticated';
+            this.inputAuthClass = '';
+            this.countryOfficesAuthenticated = false;
         }
     },
     toggleVisible: function(toHide, toShow) {
@@ -731,13 +749,17 @@
     submitEmail: function(event) {
       event.preventDefault();
       var emailAddress = this.$$(".section__input").value;
-
       var submitButton = this.$$('.section__confirm-email');
 
       var toHide = this.$$("[data-target='" + submitButton.dataset.hide + "']");
       var toShow = this.$$("[data-target='" + submitButton.dataset.display + "']");
 
-      this.toggleVisible(toHide, toShow);
+      if (this.countryOfficesAuthenticated === true) {
+          this.toggleVisible(toHide, toShow);
+      } else {
+          this.errorMessageClass = 'section__auth-alert--visible';
+      }
+
     },
     accordionOpen: function (event) {
         var target = event.currentTarget;
