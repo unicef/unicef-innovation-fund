@@ -1,151 +1,173 @@
 <dom-module id='mdl-footer'>
   <template>
     <style>
-      :host{
-        position: relative;
-      }
-      @media (min-width: 600px) {
-        :host{
-          position: absolute;
-          left: 0;
-          width: 100%;
-          bottom: 0;
-        }
-      }
-
-      img{
-        width:100px;
-        list-style: none;
-      }
-      .img_share{
-        width:30px;
-      }
-      .share{
-        padding:5px;
-        margin:5px;
-        max-width:30px;
-      }
-      ul{
-        list-style: none;
-        padding-left:0;
-      }
-      
-      .footer_area[wide-layout] .one_third{
-        width:400px;
-      }
-
-      .footer_area[wide-layout] .mdl-mini-footer--left-section{
-        -webkit-order: 0;
-        -moz-order: 0;
-        -ms-order: 0;
-        -o-order: 0;
-        order: 0;
-      }
-      .footer_area[small-desktop] .mdl-mini-footer--left-section{
-        -webkit-order: 0;
-        -moz-order: 0;
-        -ms-order: 0;
-        -o-order: 0;
-        order: 0;
-      }
-
-     
-      .footer_area[wide-layout] .mdl-mini-footer--center-section{
-        -webkit-order: 2;
-        -moz-order: 2;
-        -ms-order: 2;
-        -o-order: 2;
-        order: 2;
+    :host {
+      position: relative;
+    }
+    
+    @media (min-width: 600px) {
+      :host {
+        position: absolute;
+        left: 0;
         width: 100%;
+        bottom: 0;
       }
-      .footer_area[small-desktop] .mdl-mini-footer--center-section{
-        width: auto;
-        -webkit-order: 0;
-        -moz-order: 0;
-        -ms-order: 0;
-        -o-order: 0;
-        order: 0;
-      }
-
-
-      .footer_area .mdl-mini-footer--right-section{
-        width: 100%;
-      }
-      .footer_area[wide-layout] .mdl-mini-footer--right-section{
-        -webkit-order: 1;
-        -moz-order: 1;
-        -ms-order: 1;
-        -o-order: 1;
-        order: 1;
-        width: auto;
-      }
-      .footer_area[small-desktop] .mdl-mini-footer--right-section{
-        -webkit-order: 2;
-        -moz-order: 2;
-        -ms-order: 2;
-        -o-order: 2;
-        order: 2;
-      }
-     
-      .footer_area[wide-layout] .one_third{
-
-      }
-      .sponsor__link{
-        text-decoration: none;
+    }
+    
+    img {
+      list-style: none;
+    }
+    
+    .img_share {
+      width: 30px;
+    }
+    
+    .share {
+      padding: 5px;
+      margin: 5px;
+      max-width: 30px;
+    }
+    
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    
+    .footer_area[wide-layout] .one_third {
+      width: 400px;
+    }
+    
+    .footer_area[wide-layout] .mdl-mini-footer--left-section {
+      -webkit-order: 0;
+      -moz-order: 0;
+      -ms-order: 0;
+      -o-order: 0;
+      order: 0;
+    }
+    
+    .footer_area[small-desktop] .mdl-mini-footer--left-section {
+      -webkit-order: 0;
+      -moz-order: 0;
+      -ms-order: 0;
+      -o-order: 0;
+      order: 0;
+    }
+    
+    .footer_area[wide-layout] .mdl-mini-footer--center-section {
+      -webkit-order: 2;
+      -moz-order: 2;
+      -ms-order: 2;
+      -o-order: 2;
+      order: 2;
+      width: 100%;
+    }
+    
+    .footer_area[small-desktop] .mdl-mini-footer--center-section {
+      width: auto;
+      -webkit-order: 0;
+      -moz-order: 0;
+      -ms-order: 0;
+      -o-order: 0;
+      order: 0;
+    }
+    
+    .footer_area .mdl-mini-footer--right-section {
+      width: 100%;
+    }
+    
+    .footer_area[wide-layout] .mdl-mini-footer--right-section {
+      -webkit-order: 1;
+      -moz-order: 1;
+      -ms-order: 1;
+      -o-order: 1;
+      order: 1;
+      width: auto;
+    }
+    
+    .footer_area[small-desktop] .mdl-mini-footer--right-section {
+      -webkit-order: 2;
+      -moz-order: 2;
+      -ms-order: 2;
+      -o-order: 2;
+      order: 2;
+    }
+    
+    .footer_area[wide-layout] .one_third {}
+    
+    .sponsor__link {
+      vertical-align: middle;
+      display: block;
+    }
+    
+    .sponsor__link:nth-child(1) {
+      width: 110px;
+    }
+    
+    .sponsor__link:nth-child(2) {
+      width: 190px;
+    }
+    
+    .sponsor__link:nth-child(3) {
+      width: 140px;
+    }
+    
+    .sponsor__link img {
+      width: 100%;
+      display: block;
+    }
+    
+    .footer_area[wide-layout] .sponsor__link {
+      text-decoration: none;
+      display: inline-block;
+      text-align: left;
+    }
+    
+    .footer_area[wide-layout] .sponsol__link {}
+    
+    .footer_area[wide-layout] .sponsor--margin {
+      margin: 0 2rem;
+    }
+    
+    .social {
+      margin-top: 16px;
+    }
+    
+    .social-list {
+      position: relative;
+      overflow: hidden;
+      padding-left: 13px;
+    }
+    
+    .social-list__item {
+      float: left;
+      margin: 0 3px;
+    }
+    
+    .social-list__link {
+      display: inline-block;
+    }
+    
+    .social-list__icon {
+      width: 30px;
+      display: inline-block;
+    }
+    
+    @media (max-width: 540px) {
+      .sponsor {
+        display: block;
+        margin: 2rem 0;
       }
       .sponsor--margin {
-         margin: 0 4rem;
+        margin: 0;
       }
-
-      .social{
-        margin-top: 16px;
-      }
-
-      .social-list{
-        position: relative;
-        overflow: hidden;
-        padding-left: 13px;
-      }
-
-      .social-list__item{
-        float: left;
-        margin: 0 3px;
-      }
-
-      .social-list__link{
-        display: inline-block;
-      }
-
-      .social-list__icon{
-        width: 30px;
-        display: inline-block;
-      }
-
-
-      @media (max-width: 540px) {
-          .sponsor {
-            display: block;
-            margin: 2rem 0;
-          }
-          .sponsor--margin {
-             margin: 0;
-          }
-      }
+    }
     </style>
     <iron-media-query query="(min-width: 600px)" query-matches="{{wide}}"></iron-media-query>
     <iron-media-query query="(min-width: 1040px)" query-matches="{{small-desktop}}"></iron-media-query>
-    <firebase-document
-      app-name="test"
-      path='/content/footer_text'
-      data="{{footer_text}}">
+    <firebase-document app-name="test" path='/content/footer_text' data="{{footer_text}}">
     </firebase-document>
-
-    <firebase-document
-      app-name="test"
-      path='/content/footer_donor_text'
-      data="{{footer_donor_text}}">
+    <firebase-document app-name="test" path='/content/footer_donor_text' data="{{footer_donor_text}}">
     </firebase-document>
-
     <div class="footer_area" wide-layout$="{{wide}}" small-desktop$="{{small-desktop}}">
       <footer class='mdl-mini-footer' style='background-color:white;'>
         <div class='mdl-mini-footer--left-section'>
@@ -157,16 +179,15 @@
           <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--12-col">
               <div class='one_third' id='footer_text'>
-              {{footer_text}}
+                {{footer_text}}
               </div>
             </div>
           </div>
         </div>
-
         <div class='mdl-mini-footer--center-section'>
           <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--12-col">
-                SUPPORTERS & INVESTORS
+              SUPPORTERS & INVESTORS
             </div>
           </div>
           <div class="mdl-grid">
@@ -179,15 +200,15 @@
           <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--12-col">
               <div class="mdl-grid">
-                <div class="mdl-cell mdl-cell--12-col" >
+                <div class="mdl-cell mdl-cell--12-col">
                   <a target='_blank' href='http://www.disney.com' class="sponsor__link">
                     <img class='sponsor' src="../images/sponsors/disney_red.png">
                   </a>
                   <a target='_blank' href='http://um.dk/en' class="sponsor--margin sponsor__link">
-                      <img class='sponsor' src="../images/sponsors/danida_logo.jpg">
+                    <img class='sponsor' src="../images/sponsors/danida_logo.jpg">
                   </a>
                   <a target='_blank' href='http://formin.finland.fi/public/default.aspx?culture=en-US&contentlan=2' class="sponsor__link">
-                      <img class='sponsor' src="../images/sponsors/finland_logo.png">
+                    <img class='sponsor' src="../images/sponsors/finland_logo.png">
                   </a>
                 </div>
               </div>
@@ -200,53 +221,40 @@
               <span>
                 SHARE
               </span>
-
             </div>
           </div>
           <div class="social">
             <ul class="social-list">
               <li class="social-list__item">
                 <a target='_blank' href='https://www.facebook.com/unicef.innovation/' class="social-list__link">
-                  <img  src='/images/social/social_facebook.svg' alt="" class="social-list__icon">
+                  <img src='/images/social/social_facebook.svg' alt="" class="social-list__icon">
                 </a>
-              </li> <li class="social-list__item">
+              </li>
+              <li class="social-list__item">
                 <a target='_blank' href='https://twitter.com/UNICEFinnovate' class="social-list__link">
                   <img src='/images/social/social_twitter.svg' alt="" class="social-list__icon">
                 </a>
               </li>
             </ul>
-            <!-- <div class="mdl-cell mdl-cell--6-col share" style='margin:0px 5px 0px 0px;'>
-              <a target='_blank' href='https://www.facebook.com/unicef.innovation/'>
-                <img />
-              </a>
-            </div>
-           <div class="mdl-cell mdl-cell--6-col share" style='margin:0px 0px 0px 10px;'>
-             <a target='_blank' href='https://twitter.com/UNICEFinnovate'>
-               <img src='/images/social/social_twitter.svg' class='img_share' />
-             </a>
-           </div> -->
-        </div>
+          </div>
       </footer>
-    </div>
-    <div id='testito'>
-
-    </div>
+      </div>
+      <div id='testito'>
+      </div>
   </template>
-
 </dom-module>
-
 <script>
-  Polymer({
-    is: 'mdl-footer',
-    properties:{
-      footer_text: {
-        value: String,
-        observer: 'interpolate_footer_text'
-      }
-    },
-    interpolate_footer_text: function(text){
-      this.$.footer_text.innerHTML = text;
+Polymer({
+  is: 'mdl-footer',
+  properties: {
+    footer_text: {
+      value: String,
+      observer: 'interpolate_footer_text'
     }
+  },
+  interpolate_footer_text: function(text) {
+    this.$.footer_text.innerHTML = text;
+  }
 
-  })
+})
 </script>
