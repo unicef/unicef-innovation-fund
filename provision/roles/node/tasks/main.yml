@@ -20,12 +20,13 @@
     name: nodejs
     state: latest
 
-- name: install gulp and bower
+- name: install global npm libraries
   become: yes
   npm: name={{ item }} global=yes
   with_items:
     - gulp
     - bower
+    - firebase-tools
 
 - name: install npm dependencies
   shell: npm install
