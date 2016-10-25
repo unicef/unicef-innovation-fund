@@ -8,7 +8,6 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-
 <html lang="en">
 
 <head>
@@ -21,270 +20,245 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <link rel="stylesheet" href="fonts/icomoon/style.css">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700" rel="stylesheet">
   <!-- Place favicon.ico in the `app/` directory -->
-
   <!-- Chrome for Android theme color -->
   <meta name="theme-color" content="#2E3AA1">
-
   <!-- Web Application Manifest -->
   <link rel="manifest" href="manifest.json">
-
   <!-- Tile color for Win8 -->
   <meta name="msapplication-TileColor" content="#3372DF">
-
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="application-name" content="PSK">
   <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
-
   <!-- Add to homescreen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
   <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
-
   <!-- Tile icon for Win8 (144x144) -->
   <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-
   <!-- build:css styles/main.css -->
   <link rel="stylesheet" href="//storage.googleapis.com/code.getmdl.io/1.0.1/material.light_blue-blue.min.css" />
   <link rel="stylesheet" href="styles/main.css">
   <!-- endbuild-->
   <link rel="stylesheet" href="./assets/owl.carousel.min.css" />
-
-
   <script src="./polyfill.js"></script>
   <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-
   <script src="./jquery.min.js"></script>
   <script src="./owl.carousel.min.js"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript">
+  google.charts.load('current', {
+    'packages': ['geochart', 'controls', 'corechart']
+  });
 
-    google.charts.load('current', {'packages':['geochart', 'controls', 'corechart']});
-
-    function humanize_label(label){
-      var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-      month = parseInt(label.split(/-/)[1]);
-      human_month = months[month-1];
-      year_contraction = label.substr(2,2);
-      return human_month + " '" + year_contraction;
-    }
-
-
-    function humanize_labels(ary){
-      var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-      return ary.map(function(e){
-        return humanize_label(e);
-      })
-    }
+  function humanize_label(label) {
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    month = parseInt(label.split(/-/)[1]);
+    human_month = months[month - 1];
+    year_contraction = label.substr(2, 2);
+    return human_month + " '" + year_contraction;
+  }
 
 
+  function humanize_labels(ary) {
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    return ary.map(function(e) {
+      return humanize_label(e);
+    })
+  }
   </script>
-
-
-
-
   <!-- endbuild -->
-
   <!-- Because this project uses vulcanize this should be your only html import
        in this file. All other imports should go in elements.html -->
   <link rel="import" href="elements/elements.html">
-
   <!-- For shared styles, shared-styles.html import in elements.html -->
   <style is="custom-style" include="shared-styles"></style>
   <style is="custom-style">
-    body{
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .spacer {
+    @apply(--layout-flex);
+  }
+  
+  neon-animated-pages .iron-selected {
+    position: static;
+  }
+  
+  .owl-nav {
+    display: none;
+  }
+  
+  .owl-carousel .item {
+    padding: 1rem;
+    width: 400px;
+    height: 600px;
+  }
+  
+  ul {
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  .dashboard {
+    background-color: #EDEDED;
+    color: black;
+    height: auto;
+  }
+  
+  #mainToolbar .dashboard {
+    background-color: #EDEDED;
+    height: auto;
+  }
+  
+  .all_projects {
+    background-color: #3366CB;
+    /*height:250px;*/
+  }
+  
+  #mainToolbar .all_projects,
+  #mainToolbar.about {
+    background-color: #3366CB;
+  }
+  
+  #mainToolbar.submit {
+    background-color: #333333;
+  }
+  
+  .about,
+  .submit {
+    background-color: #333333;
+  }
+  
+  .mainView paper-tabs {
+    display: none;
+  }
+  
+  .mainView[wide-layout] paper-tabs {
+    display: inline;
+  }
+  
+  .mainView #paperToggle {
+    display: inline;
+  }
+  
+  .mainView[wide-layout] #paperToggle {
+    display: none;
+  }
+  
+  .menu-item {
+    font-family: Source Sans Pro;
+  }
+  
+  .menu-item.iron-selected {
+    background-color: #0099FF;
+    color: white;
+  }
+  
+  .project-view__dialog-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    color: #333;
+    font-size: 16px;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .project-view__dialog .project-view__dialog-scrollable {
+    margin-bottom: 0 !important;
+  }
+  
+  .dialog-type-infrastructure {
+    border-bottom: 5px solid #66cc66;
+  }
+  
+  .dialog-type-real_time_information {
+    border-bottom: 5px solid #ff3366;
+  }
+  
+  .dialog-type-youth_engagement {
+    border-bottom: 5px solid #ffcc33;
+  }
+  
+  .app-name {
+    cursor: pointer;
+  }
+  
+  .content {
+    min-height: calc(100vh - 64px);
+    height: auto;
+    position: relative;
+    box-sizing: border-box;
+  }
+  
+  @media (min-width: 600px) {
+    .content {
+      padding-bottom: 535px;
     }
-
-    .spacer {
-      @apply(--layout-flex);
+  }
+  
+  @media (min-width: 1040px) {
+    .content {
+      padding-bottom: 351px;
     }
-
-    neon-animated-pages .iron-selected {
-      position: static;
-    }
-    .owl-nav{
-      display:none;
-    }
-    .owl-carousel .item {
-        padding: 1rem;
-        width: 400px;
-        height: 600px;
-    }
-      ul {
-          padding: 0;
-          list-style-type: none;
-      }
-
-      .dashboard{
-        background-color:#EDEDED;
-        color: black;
-        height:auto;
-      }
-
-      #mainToolbar .dashboard{
-        background-color:#EDEDED;
-        height:auto;
-      }
-
-      .all_projects{
-        background-color:#3366CB;
-        /*height:250px;*/
-      }
-
-      #mainToolbar .all_projects, #mainToolbar.about{
-        background-color:#3366CB;
-      }
-
-      #mainToolbar.submit{
-        background-color:#333333;
-      }
-
-      .about, .submit{
-        background-color:#333333;
-      }
-
-      .mainView paper-tabs{
-        display:none;
-      }
-
-      .mainView[wide-layout] paper-tabs {
-        display:inline;
-      }
-
-      .mainView #paperToggle{
-        display:inline;
-      }
-
-      .mainView[wide-layout] #paperToggle {
-        display:none;
-      }
-
-      .menu-item{
-        font-family: Source Sans Pro;
-      }
-
-      .menu-item.iron-selected {
-        background-color: #0099FF;
-        color: white;
-      }
-
-      .project-view__dialog-close {
-        position: absolute;
-        top: 14px;
-        right: 16px;
-        color: #333;
-        font-size: 16px;
-        z-index: 1;
-        margin: 0;
-        padding: 0;
-        background: none;
-        border: none;
-        outline: none;
-        cursor: pointer;
-      }
-      .project-view__dialog .project-view__dialog-scrollable{
-        margin-bottom: 0 !important;
-      }
-
-      .dialog-type-infrastructure{
-        border-bottom: 5px solid #66cc66;
-      }
-      .dialog-type-real_time_information{
-         border-bottom: 5px solid #ff3366;
-      }
-      .dialog-type-youth_engagement{
-         border-bottom: 5px solid #ffcc33;
-      }
-
-      .app-name{
-        cursor: pointer;
-      }
-
-      .content{
-        min-height: calc(100vh - 64px);
-        height: auto;
-
-        position: relative;
-        box-sizing: border-box;
-      }
-       @media (min-width: 600px) {
-         .content{
-          padding-bottom: 510px;
-        }
-       }
-       @media (min-width: 1040px) {
-         .content{
-          padding-bottom: 326px;
-        }
-       }
-
+  }
   </style>
-
 </head>
 
 <body unresolved>
   <!-- build:remove -->
   <span id="browser-sync-binding"></span>
   <!-- endbuild -->
-
   <template is="dom-bind" id="app">
     <iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query>
     <iron-media-query query="(min-width: 400px)" query-matches="{{wide}}"></iron-media-query>
     <iron-media-query query="(min-width: 1040px)" query-matches="{{wide}}"></iron-media-query>
     <div class="mainView" wide-layout$="{{wide}}">
-      <firebase-app
-      api-key='AIzaSyBoZQn8DD6KfFRAr0tWOUJeK0cNNEMngSk'
-      auth-domain ='innovation-fund2.firebaseapp.com'
-      database-url='https://innovation-fund2.firebaseio.com'
-      name='test'>
+      <firebase-app api-key='AIzaSyBoZQn8DD6KfFRAr0tWOUJeK0cNNEMngSk' auth-domain='innovation-fund2.firebaseapp.com' database-url='https://innovation-fund2.firebaseio.com' name='test'>
       </firebase-app>
-
       <paper-drawer-panel id="paperDrawerPanel" force-narrow="true">
         <!-- Drawer Scroll Header Panel -->
         <paper-scroll-header-panel drawer fixed>
-
           <!-- Drawer Toolbar -->
           <paper-toolbar id="drawerToolbar">
             <span class="menu-name">UNICEF</span>
           </paper-toolbar>
-
           <!-- Drawer Content -->
           <paper-menu class="app-menu" selected="[[selected]]">
-
             <p class='menu-item' id='dashboard'>
               <!-- <iron-icon icon="dashboard"></iron-icon> -->
               <span>&nbsp;&nbsp;DASHBOARD</span>
             </p>
-
             <p class='menu-item' id='all_projects'>
               <!-- <iron-icon icon="assessment"></iron-icon> -->
               <span>&nbsp;&nbsp;ALL PROJECTS</span>
             </p>
-
             <p class='menu-item' id='about'>
               <!-- <iron-icon icon="info"></iron-icon> -->
               <span>&nbsp;&nbsp;ABOUT</span>
             </p>
-
             <p class='menu-item' id='submit'>
               <!-- <iron-icon icon="info"></iron-icon> -->
               <span>&nbsp;&nbsp;SUBMIT</span>
             </p>
           </paper-menu>
         </paper-scroll-header-panel>
-
         <!-- Main Area -->
         <paper-scroll-header-panel main id="headerPanelMain" fixed>
           <!-- Main Toolbar -->
           <paper-toolbar id="mainToolbar" class='dashboard'>
             <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
-
             <span class="space"></span>
-
             <!-- Application name -->
             <div class="middle middle-container" style='width:100%'>
               <div class="app-name" on-click="openOverlay">UNICEF INNOVATION FUND</div>
@@ -296,17 +270,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-tab id='submit'>SUBMIT</paper-tab>
               </paper-tabs>
             </div>
-
             <!-- Application sub title -->
             <div class="bottom bottom-container right horizontal layout">
               <!-- <div class="bottom-title">The future of the web today</div> -->
             </div>
           </paper-toolbar>
-
           <!-- Main Content -->
           <div class="content">
             <modal-warning></modal-warning>
-            <neon-animated-pages style='z-index:0;' class="flex" selected="[[selected]]"  exit-animation="fade-out-animation" entry-animation="slide-from-left-animation">
+            <neon-animated-pages style='z-index:0;' class="flex" selected="[[selected]]" exit-animation="fade-out-animation" entry-animation="slide-from-left-animation">
               <neon-animatable id='my_dashboard'>
                 <dashboard-top></dashboard-top>
               </neon-animatable>
@@ -320,7 +292,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <submit-page></submit-page>
               </neon-animatable>
             </neon-animated-pages>
-
             <!-- <iron-pages style='' class="flex" selected="[[selected]]">
               <section id='my_dashboard'>
                 <dashboard-top></dashboard-top>
@@ -332,16 +303,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <my-about></my-about>
               </section>
             </iron-pages> -->
-
             <mdl-footer></mdl-footer>
           </div>
         </paper-scroll-header-panel>
       </paper-drawer-panel>
-
       <paper-toast id="toast">
         <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
       </paper-toast>
-
       <!-- Uncomment next block to enable Service Worker support (1/2) -->
       <!--
       <paper-toast id="caching-complete"
@@ -359,7 +327,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </platinum-sw-cache>
       </platinum-sw-register>
       -->
-
       <paper-dialog class="project-view__dialog" id="projectModal" entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop>
         <button class="project-view__dialog-close" onclick="projectModal.close()"><i class="material-icons">&#xE5CD;</i></button>
         <paper-dialog-scrollable class="project-view__dialog-scrollable container">
@@ -372,69 +339,73 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>
   <script>
-    var scope = document.querySelector('template[is="dom-bind"]');
-    scope.selected = 0;
+  var scope = document.querySelector('template[is="dom-bind"]');
+  scope.selected = 0;
 
-    window.addEventListener('WebComponentsReady', function(e) {
-      $('paper-tabs#main-menu paper-tab').click(function(){
-        $('#mainContainer').scrollTop(0);
-        scope.selected = $('paper-tabs#main-menu paper-tab').index(this);
-        scope.page_id = this.id;
-        // Update css settings per tab
-        page_change(this.id);
-      });
-
-      $('.app-menu .menu-item').click(function(){
-        scope.selected = $('.app-menu .menu-item').index(this);
-        scope.page_id = this.id;
-        // Update css settings per tab
-        page_change(this.id);
-      });
-
-
-      $('.app-name').on('click', function(){
-        var overlay = document.querySelector('overlay-intro');
-        overlay.showOverlay(0);
-      })
+  window.addEventListener('WebComponentsReady', function(e) {
+    $('paper-tabs#main-menu paper-tab').click(function() {
+      $('#mainContainer').scrollTop(0);
+      scope.selected = $('paper-tabs#main-menu paper-tab').index(this);
+      scope.page_id = this.id;
+      // Update css settings per tab
+      page_change(this.id);
     });
 
-    function page_change(page_id) {
+    $('.app-menu .menu-item').click(function() {
+      scope.selected = $('.app-menu .menu-item').index(this);
+      scope.page_id = this.id;
+      // Update css settings per tab
+      page_change(this.id);
+    });
 
-      $(document).trigger('page-changed', page_id);
-      ar = ['dashboard', 'all_projects', 'about', 'submit']
 
-      ar.forEach(function(e){
-        $('#mainToolbar').removeClass(e);
-        $('#drawer').removeClass(e);
-        $('.link').removeClass(e);
-        $('hello-all-projects').removeClass(e);
-        $('hello-about').removeClass(e);
-      });
+    $('.app-name').on('click', function() {
+      var overlay = document.querySelector('overlay-intro');
+      overlay.showOverlay(0);
+    })
+  });
 
-      $('#mainToolbar').addClass(page_id);
-      $('#drawer').addClass(page_id);
-      $('.link').addClass(page_id);
-      if(page_id == 'all_projects'){
-        $('hello-all-projects').addClass(page_id);
-      }
-      if(page_id == 'about'){
-        $('hello-about').addClass(page_id);
-      }
-    };
+  function page_change(page_id) {
 
+    $(document).trigger('page-changed', page_id);
+    ar = ['dashboard', 'all_projects', 'about', 'submit']
+
+    ar.forEach(function(e) {
+      $('#mainToolbar').removeClass(e);
+      $('#drawer').removeClass(e);
+      $('.link').removeClass(e);
+      $('hello-all-projects').removeClass(e);
+      $('hello-about').removeClass(e);
+    });
+
+    $('#mainToolbar').addClass(page_id);
+    $('#drawer').addClass(page_id);
+    $('.link').addClass(page_id);
+    if (page_id == 'all_projects') {
+      $('hello-all-projects').addClass(page_id);
+    }
+    if (page_id == 'about') {
+      $('hello-about').addClass(page_id);
+    }
+  };
   </script>
-
   <script src="utility.js"></script>
   <!-- endbuild-->
   <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  (function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-    ga('create', 'UA-79740312-1', 'auto');
-    ga('send', 'pageview');
-
+  ga('create', 'UA-79740312-1', 'auto');
+  ga('send', 'pageview');
   </script>
 </body>
 
