@@ -210,6 +210,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       padding-bottom: 351px;
     }
   }
+
+  .app-menu{
+
+  }
+
+  .app-menu .menu-item{
+    margin: 0;
+    padding: 5px 10px;
+  }
+
+  #drawerToolbar .menu-name{
+    font-weight: 400;
+  }
   </style>
 </head>
 
@@ -224,30 +237,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class="mainView" wide-layout$="{{wide}}">
       <firebase-app api-key='AIzaSyBoZQn8DD6KfFRAr0tWOUJeK0cNNEMngSk' auth-domain='innovation-fund2.firebaseapp.com' database-url='https://innovation-fund2.firebaseio.com' name='test'>
       </firebase-app>
-      <paper-drawer-panel id="paperDrawerPanel" force-narrow="true">
+      <paper-drawer-panel id="paperDrawerPanel" force-narrow="true" drawer-width="320px">
         <!-- Drawer Scroll Header Panel -->
         <paper-scroll-header-panel drawer fixed>
           <!-- Drawer Toolbar -->
           <paper-toolbar id="drawerToolbar">
-            <span class="menu-name">UNICEF</span>
+            <span class="menu-name">UNICEF INNOVATION FUND</span>
           </paper-toolbar>
           <!-- Drawer Content -->
           <paper-menu class="app-menu" selected="[[selected]]">
             <p class='menu-item' id='dashboard'>
               <!-- <iron-icon icon="dashboard"></iron-icon> -->
-              <span>&nbsp;&nbsp;DASHBOARD</span>
+              <span>DASHBOARD</span>
             </p>
             <p class='menu-item' id='all_projects'>
               <!-- <iron-icon icon="assessment"></iron-icon> -->
-              <span>&nbsp;&nbsp;ALL PROJECTS</span>
+              <span>ALL PROJECTS</span>
             </p>
             <p class='menu-item' id='about'>
               <!-- <iron-icon icon="info"></iron-icon> -->
-              <span>&nbsp;&nbsp;ABOUT</span>
+              <span>ABOUT</span>
             </p>
             <p class='menu-item' id='submit'>
               <!-- <iron-icon icon="info"></iron-icon> -->
-              <span>&nbsp;&nbsp;SUBMIT</span>
+              <span>SUBMIT</span>
             </p>
           </paper-menu>
         </paper-scroll-header-panel>
@@ -352,6 +365,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     $('.app-menu .menu-item').click(function() {
       scope.selected = $('.app-menu .menu-item').index(this);
       scope.page_id = this.id;
+      document.querySelector('paper-drawer-panel').togglePanel();
+      //$('#drawer').togglePanel();
       // Update css settings per tab
       page_change(this.id);
     });
