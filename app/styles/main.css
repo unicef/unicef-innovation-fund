@@ -121,7 +121,7 @@ paper-tab{
 }
 
 .amount .youth_engagement{
-  color: #ffcc33;
+  color: #dca603;
 }
 
 .amount .youth_engagement{
@@ -159,7 +159,7 @@ paper-tab{
 }
 
 .portfolio-card--youth_engagement .featured_project_name {
-  color: #ffcc33;
+  color: #dca603;
 }
 
 .portfolio-card--real-time-information .featured_project_name {
@@ -216,7 +216,7 @@ paper-tab{
 }
 
 .youth_engagement{
-  color: #ffcc33;
+  color: #dca603;
 }
 .real_time_information{
   color: #ff3366;
@@ -454,7 +454,7 @@ paper-tab{
 
 /* use !important to override mdl's default styles */
 .page--yellow .input-content.paper-input-container label, .page--yellow .input-content.label-is-highlighted.paper-input-container .paper-input-label {
-  color: #ffcc33 !important;
+  color: #dca603 !important;
 }
 .page--red .input-content.paper-input-container label, .page--red .input-content.label-is-highlighted.paper-input-container .paper-input-label {
   color: #ff3366 !important;
