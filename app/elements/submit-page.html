@@ -189,7 +189,7 @@
         margin: 1.3rem 0 0.5rem;
     }
 
-    .section__auth-alert--visible {
+    .is-visible {
         display: block;
     }
 
@@ -757,7 +757,7 @@
       if (this.countryOfficesAuthenticated === true) {
           this.toggleVisible(toHide, toShow);
       } else {
-          this.errorMessageClass = 'section__auth-alert--visible';
+          this.errorMessageClass = 'is-visible';
       }
 
     },
