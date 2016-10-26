@@ -65,10 +65,6 @@
       margin: 1rem 0 2.5rem;
     }
 
-    .section__description--no-bottom-margin {
-        margin-bottom: 0;
-    }
-
     .section__submit {
         text-align: center;
     }
@@ -188,14 +184,13 @@
 
     .section__auth-alert {
         color: red;
-        font-size: 1.2rem;
-        margin-bottom: 0.5rem;
-        opacity: 0;
-        transition: opacity 0.2s;
+        display: none;
+        font-size: 1.3rem;
+        margin: 1.3rem 0 0.5rem;
     }
 
-    .section__auth-alert--visible {
-        opacity: 1;
+    .is-visible {
+        display: block;
     }
 
     .faq__name {
@@ -530,10 +525,10 @@
       <button on-tap="changeSection" class="section__back" id="back-from-office" data-display="main" data-hide="office">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="container mdl-cell mdl-cell--12-col">
-        <p class="section__description section__description--no-bottom-margin">Please submit your email address to continue</p>
-        <p class$="section__auth-alert [[errorMessageClass]]">This email is not valid</p>
+        <p class="section__description">Please submit your email address to continue</p>
         <form is="iron-form" class="section__form" on-submit="submitEmail">
           <input type="text" class$="section__input [[inputAuthClass]]" placeholder="email address" on-input="checkAuth">
+          <p class$="section__auth-alert [[errorMessageClass]]">This email is not valid</p>
           <button type="submit" class="section__confirm-email" data-display="office-submited" data-hide="office">continue</button>
         </form>
       </div>
@@ -762,7 +757,7 @@
       if (this.countryOfficesAuthenticated === true) {
           this.toggleVisible(toHide, toShow);
       } else {
-          this.errorMessageClass = 'section__auth-alert--visible';
+          this.errorMessageClass = 'is-visible';
       }
 
     },
