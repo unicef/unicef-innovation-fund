@@ -149,6 +149,10 @@ paper-tab{
   cursor: pointer;
 }
 
+.featured_project_expand .material-icons {
+  font-size: 18px;
+}
+
 .featured_project_name {
   font-weight:500;
   font-size:16px;
