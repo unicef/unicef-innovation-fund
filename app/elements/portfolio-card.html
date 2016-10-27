@@ -164,6 +164,9 @@
           margin-bottom: 16px;
         }
       }
+      .project__mini-chart{
+        cursor: pointer;
+      }
     </style>
 
     <iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query>
@@ -223,10 +226,12 @@
       </div>
 
       <div data-content="graph" class="project__section js-hidden">
-        <div class='growth_rate pc_left'>
-          {{chart_description}}
+        <div class="project__mini-chart"  on-tap="_handleTap">
+          <div class='growth_rate pc_left'>
+            {{chart_description}}
+          </div>
+          <chart-line  data="[[prepare(svg, featured, dataSet)]]" options=[[_prepareChartOptions()]] style='width:95%; font-size:30px;padding-left:5px;'></chart-line>
         </div>
-        <chart-line  data="[[prepare(svg, featured, dataSet)]]" style='width:95%; font-size:30px;padding-left:5px;'></chart-line>
         <firebase-document
           app-name="test"
           path="/content/{{tooltip_target}}"
@@ -287,7 +292,7 @@
   }
 
   function prepareGitCommits(dataSet, featured, color){
-    points_labels = gitPointsAndLabels(dataSet)
+    points_labels = gitPointsAndLabels(dataSet);
     return {labels: points_labels.labels, datasets:[{
       label: featured,
       backgroundColor: color,
@@ -459,6 +464,17 @@
 
     _getProgressValue: function(value) {
       return cleanToMil(value);
+    },
+    _prepareChartOptions: function(){
+      return {
+        legend: {
+          display: true,
+          position: 'top',
+          onClick: function(){
+            return false;
+          }
+        }
+      }
     }
   })
 
