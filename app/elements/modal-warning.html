@@ -39,7 +39,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <div class='mdl-cell mdl-cell--12-col'>
               <p>
                 <div style='font-size:18px;'>
-                  This website works in Chrome, Firefox, IE 11+/Edge, Safari 7+.<br>Please, install or upgrade Your current browser.
+                  This website works in Chrome, Firefox, IE 11+/Edge, Safari 7+.<br>More compatibility coming soon.
                 </div>
               </p>
             </div>
@@ -101,7 +101,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 }
 
                 detectedBrowser = browserData[2] ? [browserData[1], browserData[2]]: [navigator.appName, navigator.appVersion, '-?'];
-                var SafariVersion = userAgent.match(/version\/?\s*(\d+)/i)
+                var SafariVersion = userAgent.match(/version\/?\s*(\d+)/i);
 
                 if (SafariVersion) {
                     detectedBrowser.push(SafariVersion[1]);
