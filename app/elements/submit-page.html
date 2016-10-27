@@ -62,7 +62,8 @@
       color: #5D5D5D;
       font-size: 1.595rem;
       line-height: 1.5;
-      margin: 1rem 0 2.5rem;
+      margin-bottom: 0;
+      margin-top: 1rem;
     }
 
     .section__submit {
@@ -184,13 +185,14 @@
 
     .section__auth-alert {
         color: red;
-        display: none;
-        font-size: 1.3rem;
-        margin: 1.3rem 0 0.5rem;
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        opacity: 0;
+        transition: opacity 0.25s;
     }
 
     .is-visible {
-        display: block;
+        opacity: 1;
     }
 
     .faq__name {
@@ -526,9 +528,9 @@
       <div class="mdl-layout-spacer"></div>
       <div class="container mdl-cell mdl-cell--12-col">
         <p class="section__description">Please submit your email address to continue</p>
+        <p class$="section__auth-alert [[errorMessageClass]]">[[errorMessage]]</p>
         <form is="iron-form" class="section__form" on-submit="submitEmail">
           <input type="text" class$="section__input [[inputAuthClass]]" placeholder="email address" on-input="checkAuth">
-          <p class$="section__auth-alert [[errorMessageClass]]">This email is not valid</p>
           <button type="submit" class="section__confirm-email" data-display="office-submited" data-hide="office">continue</button>
         </form>
       </div>
@@ -665,6 +667,10 @@
             type: String,
             value: ''
         },
+        errorMessage: {
+            type: String,
+            value: 'Email is not valid'
+        },
         inputAuthClass: {
             type: String,
             value: ''
@@ -699,19 +705,23 @@
                 self.inputAuthClass = '';
                 self.errorMessageClass = '';
                 self.countryOfficesAuthenticated = false;
+                self.errorMessage = 'Email is not valid';
             }
         });
     },
     checkAuth: function (event) {
         var regxTest = /.{1,}@unicef\.org$/gi;
         var inputValue = event.target.value;
-        var authErrorClass = 'is-alert';
 
         if (regxTest.test(inputValue) === true) {
             this.errorMessageClass = '';
             this.inputAuthClass = 'section__input--authenticated';
             this.countryOfficesAuthenticated = true;
+        } else if (inputValue.indexOf('@') !== -1) {
+            this.errorMessage = "Email is not permitted";
         } else {
+            this.errorMessage = "Email is not valid";
+            this.errorMessageClass = '';
             this.inputAuthClass = '';
             this.countryOfficesAuthenticated = false;
         }
