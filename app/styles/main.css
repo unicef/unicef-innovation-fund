@@ -640,3 +640,18 @@ svg.has-filter g {
 paper-listbox paper-item {
   cursor: pointer;
 }
+
+paper-item.current-investment::after, paper-item.past-investment::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #3366CB;
+    border: 1px solid #3366CB;
+    box-sizing: border-box;
+    margin-left: 0.5rem;
+}
+
+paper-item.past-investment::after {
+  background-color: transparent;
+}
