@@ -126,6 +126,14 @@
       }
 
     </style>
+    <style is="custom-style">
+      :root {
+        --paper-tooltip: {
+          font-size: 14px;
+          width:auto;
+        };
+      }
+    </style>
 
     <firebase-document
       app-name="test"
@@ -138,6 +146,13 @@
       path="/budget"
       data="{{financials}}">
     </firebase-document>
+
+     <firebase-document
+      app-name="test"
+      path="/content/{{tooltip_target}}"
+      data="{{db_tooltip}}"
+      log>
+     </firebase-document>
 
     <div class$="project-card__container mdl-shadow--4dp {{ _hasSelectedClass(selected) }} {{ _isActiveClass(selected, svg) }}">
       <div class-name="project-card__edge edge edge--{{svg}}"></div>
@@ -153,10 +168,12 @@
           <div class="vcenter">
             <div class="card__info-value">
                 <span>{{ _getProjectInfoValue(projects) }}</span>
-                <span class='card__info-icon'>Knowledge products will help guide the Innovation Fund’s investments.</span>
-                <div class="card__icon" on-mouseover="handleInfoTooltip" on-mouseout="handleInfoTooltip">
+                <div class="card__icon">
                     <i id="tooltip" class="icon-info"></i>
                 </div>
+            </div>
+            <div>
+               <paper-tooltip class="custom" for="tooltip" offset="0">{{db_tooltip}}</paper-tooltip>
             </div>
           </div>
           <div class="vcenter">
@@ -253,11 +270,5 @@
       }
       return projects.length + ' project' + (projects.length > 1 ? 's' : '');
     },
-    handleInfoTooltip: function () {
-        var description = ".card__info-icon";
-        var visibleClass = "is-visible";
-        this.$$(description).classList.toggle(visibleClass);
-        console.log(this.$$(description));
-    }
   })
 </script>
