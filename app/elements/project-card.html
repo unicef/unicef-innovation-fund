@@ -98,6 +98,33 @@
         margin-bottom: -0.33em;
       }
 
+      .card__info-icon {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        left: 50%;
+        margin: 0;
+        opacity: 0;
+        padding: 0.2rem;
+        position: absolute;
+        top: 1%;
+        transition: opacity 0.2s;
+        z-index: 10;
+      }
+
+      .card__icon {
+        float: right;
+        margin-right: 10%;
+        position: relative;
+      }
+
+      .card__icon i {
+        vertical-align: -1px;
+      }
+
+      .is-visible {
+          opacity: 1;
+      }
+
     </style>
 
     <firebase-document
@@ -124,7 +151,13 @@
       <div class="project-card__info">
         <div class="vcenter__container">
           <div class="vcenter">
-            <div class="project-card__info-value"><span>{{ _getProjectInfoValue(projects) }}</span></div>
+            <div class="card__info-value">
+                <span>{{ _getProjectInfoValue(projects) }}</span>
+                <span class='card__info-icon'>Knowledge products will help guide the Innovation Fund’s investments.</span>
+                <div class="card__icon" on-mouseover="handleInfoTooltip" on-mouseout="handleInfoTooltip">
+                    <i id="tooltip" class="icon-info"></i>
+                </div>
+            </div>
           </div>
           <div class="vcenter">
             <div class="project-card__progress">
@@ -220,5 +253,11 @@
       }
       return projects.length + ' project' + (projects.length > 1 ? 's' : '');
     },
+    handleInfoTooltip: function () {
+        var description = ".card__info-icon";
+        var visibleClass = "is-visible";
+        this.$$(description).classList.toggle(visibleClass);
+        console.log(this.$$(description));
+    }
   })
 </script>
