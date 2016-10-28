@@ -14,6 +14,10 @@ function amountToInt(string) {
   return parseInt(string.replace(/\$|\,/g, ''));
 }
 
+function slugify(string) {
+  return string.replace(/\s/, "-").toLowerCase();
+}
+
 function prepareUreport(dataSet, featured, color){
 
     months = {}
@@ -26,7 +30,7 @@ function prepareUreport(dataSet, featured, color){
     dataSet.global.forEach(function(elem){
       months[elem[0]] += elem[1];
     })
-    
+
     var labels = Object.keys(months);
     var points = Object.keys(months).map(function(k){return months[k]});
     points.map(function(e, i){

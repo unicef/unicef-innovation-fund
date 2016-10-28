@@ -306,14 +306,14 @@
                   <paper-listbox id="statusFilterListbox" class="dropdown-content" attr-for-selected="value">
                     <paper-item value="">All</paper-item>
                     <template is="dom-repeat" id='statusItems' items="{{_getStatusList()}}">
-                      <paper-item value="{{item.value}}">{{item.label}}</paper-item>
+                      <paper-item class$="{{ _getStatusClass(item.label) }}" value="{{item.value}}">{{item.label}}</paper-item>
                     </template>
                   </paper-listbox>
                 </paper-dropdown-menu>
                 <!-- /status filter -->
 
                 <!-- region filter -->
-                <paper-dropdown-menu id="regionFilter" class="project-filter__menu" label="Region">
+                <paper-dropdown-menu id="regionFilter" class="project-filter__menu" label="Country">
                   <paper-listbox id="regionFilterListbox" class="dropdown-content" attr-for-selected="value">
                     <paper-item value="">All regions</paper-item>
                     <template is="dom-repeat" id='regionItems' items="{{_getUniqueRegions(projects)}}">
@@ -734,6 +734,12 @@
       }
 
       return show ? '' : 'is-hidden';
+    },
+    
+    _getStatusClass: function(label) {
+      return slugify(label);
     }
   })
+
+
 </script>
