@@ -1,5 +1,6 @@
 {
   "projects": {
-    "staging": "innovation-fund2"
+    "staging": "innovation-fund2",
+    "production": "unicef-innovation-fund"
   }
 }
