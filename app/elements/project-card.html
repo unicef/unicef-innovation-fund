@@ -98,6 +98,41 @@
         margin-bottom: -0.33em;
       }
 
+      .card__info-icon {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        left: 50%;
+        margin: 0;
+        opacity: 0;
+        padding: 0.2rem;
+        position: absolute;
+        top: 1%;
+        transition: opacity 0.2s;
+        z-index: 10;
+      }
+
+      .card__icon {
+        float: right;
+        margin-right: 10%;
+        position: relative;
+      }
+
+      .card__icon i {
+        vertical-align: -1px;
+      }
+
+      .is-visible {
+          opacity: 1;
+      }
+
+    </style>
+    <style is="custom-style">
+      :root {
+        --paper-tooltip: {
+          font-size: 14px;
+          width:auto;
+        };
+      }
     </style>
 
     <firebase-document
@@ -112,6 +147,13 @@
       data="{{financials}}">
     </firebase-document>
 
+     <firebase-document
+      app-name="test"
+      path="/content/{{tooltip_target}}"
+      data="{{db_tooltip}}"
+      log>
+     </firebase-document>
+
     <div class$="project-card__container mdl-shadow--4dp {{ _hasSelectedClass(selected) }} {{ _isActiveClass(selected, svg) }}">
       <div class-name="project-card__edge edge edge--{{svg}}"></div>
       <div class="project-card__body">
@@ -124,7 +166,15 @@
       <div class="project-card__info">
         <div class="vcenter__container">
           <div class="vcenter">
-            <div class="project-card__info-value"><span>{{ _getProjectInfoValue(projects) }}</span></div>
+            <div class="card__info-value">
+                <span>{{ _getProjectInfoValue(projects) }}</span>
+                <div class="card__icon">
+                    <i id="tooltip" class="icon-info"></i>
+                </div>
+            </div>
+            <div>
+               <paper-tooltip class="custom" for="tooltip" offset="0">{{db_tooltip}}</paper-tooltip>
+            </div>
           </div>
           <div class="vcenter">
             <div class="project-card__progress">
