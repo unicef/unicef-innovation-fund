@@ -251,6 +251,19 @@
         color: #000;
       }
 
+      [data-status$="Investment"]::after {
+          content: '';
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background-color: #3366CB;
+          border: 1px solid #3366CB;
+          box-sizing: border-box;
+      }
+
+      [data-status="Past Investment"]::after {
+          background-color: transparent;
+      }
     </style>
 
     <firebase-document
@@ -306,14 +319,14 @@
                   <paper-listbox id="statusFilterListbox" class="dropdown-content" attr-for-selected="value">
                     <paper-item value="">All</paper-item>
                     <template is="dom-repeat" id='statusItems' items="{{_getStatusList()}}">
-                      <paper-item value="{{item.value}}">{{item.label}}</paper-item>
+                      <paper-item value="{{item.value}}" data-status="{{item.label}}">{{item.label}}</paper-item>
                     </template>
                   </paper-listbox>
                 </paper-dropdown-menu>
                 <!-- /status filter -->
 
                 <!-- region filter -->
-                <paper-dropdown-menu id="regionFilter" class="project-filter__menu" label="Region">
+                <paper-dropdown-menu id="regionFilter" class="project-filter__menu" label="Country">
                   <paper-listbox id="regionFilterListbox" class="dropdown-content" attr-for-selected="value">
                     <paper-item value="">All regions</paper-item>
                     <template is="dom-repeat" id='regionItems' items="{{_getUniqueRegions(projects)}}">
