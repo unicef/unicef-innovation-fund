@@ -124,13 +124,12 @@
       .is-visible {
           opacity: 1;
       }
-
     </style>
+
     <style is="custom-style">
       :root {
         --paper-tooltip: {
-          font-size: 14px;
-          width:auto;
+          font-size: 11px;
         };
       }
     </style>
@@ -150,8 +149,7 @@
      <firebase-document
       app-name="test"
       path="/content/{{tooltip_target}}"
-      data="{{db_tooltip}}"
-      log>
+      data="{{db_tooltip}}">
      </firebase-document>
 
     <div class$="project-card__container mdl-shadow--4dp {{ _hasSelectedClass(selected) }} {{ _isActiveClass(selected, svg) }}">
@@ -167,13 +165,15 @@
         <div class="vcenter__container">
           <div class="vcenter">
             <div class="card__info-value">
-                <span>{{ _getProjectInfoValue(projects) }}</span>
+              <span>{{ _getProjectInfoValue(projects) }}</span>
+              <template id="projectTooltip" is="dom-if" if="{{!_isObjectEmpty(db_tooltip)}}">
                 <div class="card__icon">
-                    <i id="tooltip" class="icon-info"></i>
+                  <i id="tooltipIcon" class="icon-info"></i>
                 </div>
-            </div>
-            <div>
-               <paper-tooltip class="custom" for="tooltip" offset="0">{{db_tooltip}}</paper-tooltip>
+                <div>
+                  <paper-tooltip class="custom" for="tooltipIcon">{{db_tooltip}}</paper-tooltip>
+                </div>
+              </template>
             </div>
           </div>
           <div class="vcenter">
@@ -225,6 +225,15 @@
     },
     _getPath: function(svg) {
       return "portfolios/" + svg + '/projects';
+    },
+    _isObjectEmpty: function(obj) {
+      for(var prop in obj) {
+        if(obj.hasOwnProperty(prop)) {
+          return false;
+        }
+      }
+
+      return JSON.stringify(obj) === JSON.stringify({});
     },
     _handleTap: function(e){
       if (this.selected != this.svg) {
