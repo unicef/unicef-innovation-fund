@@ -1,0 +1,11 @@
+---
+- hosts: all
+  vars:
+    document_root: /vagrant
+  pre_tasks:
+    - name: update apt cache
+      become: yes
+      apt: update_cache=yes
+  roles:
+    - node
+    - tmuxinator

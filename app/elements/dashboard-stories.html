@@ -15,6 +15,12 @@
         height:375px;
         text-align:center;
       }
+      .itemz a:link {
+          text-decoration: none;
+      }
+      .itemz a:hover {
+          text-decoration: underline;
+      }
       .featured_blog_posts{
         font-weight:300;
         font-size:28px;
@@ -23,6 +29,12 @@
       .story_title{
         font-weight:400px;
         font-size:14px;
+      }
+
+      @media (max-width: 1040px) {
+          :host {
+              display: none;
+          }
       }
     </style>
     <iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query>
@@ -39,57 +51,57 @@
       </div>
     </div>
     <div class='mdl-grid'>
-      <div class='mdl-cell--12-col mdl-cell--6-col-tablet'>
+      <div class='mdl-cell--12-col'>
         <div class="owl-carousel">
           <div class="itemz" >
-            <h4>
+            <a class="title--tiny" href={{story1.url}} title={{story1.title}} target="_blank">
               <div class="demo-card-square mdl-card mdl-shadow--2dp">
                 <img src="{{story1.thumbnail_images.medium_large.url}}"/>
                 <div class="mdl-card__supporting-text">
                   <div class="mdl-card__title-text story_title">{{story1.title}}</div>
                 </div>
               </div>
-            </h4>
+            </a>
           </div>
           <div class="itemz">
-            <h4 >
+            <a class="title--tiny" href={{story2.url}} title={{story2.title}} target="_blank">
               <div class="demo-card-square mdl-card mdl-shadow--2dp">
                 <img src="{{story2.thumbnail_images.medium_large.url}}" />
                 <div class="mdl-card__supporting-text">
                   <div class="mdl-card__title-text story_title">{{story2.title}}</div>
                 </div>
               </div>
-            </h4>
+            </a>
           </div>
           <div class="itemz">
-            <h4>
+            <a class="title--tiny" href={{story3.url}} title={{story3.title}} target="_blank">
               <div class="demo-card-square mdl-card mdl-shadow--2dp">
                 <img src="{{story3.thumbnail_images.medium_large.url}}" />
                 <div class="mdl-card__supporting-text">
                   <div class="mdl-card__title-text story_title">{{story3.title}}</div>
                 </div>
               </div>
-            </h4>
+            </a>
           </div>
           <div class="itemz">
-            <h4>
+            <a class="title--tiny" href={{story4.url}} title={{story4.title}} target="_blank">
               <div class="demo-card-square mdl-card mdl-shadow--2dp">
                 <img src="{{story4.thumbnail_images.medium_large.url}}" />
                 <div class="mdl-card__supporting-text">
                   <div class="mdl-card__title-text story_title">{{story4.title}}</div>
                 </div>
               </div>
-            </h4>
+            </a>
           </div>
           <div class="itemz">
-            <h4>
+            <a class="title--tiny" href={{story5.url}} title={{story5.title}} target="_blank">
               <div class="demo-card-square mdl-card mdl-shadow--2dp">
                 <img src="{{story5.thumbnail_images.medium_large.url}}" />
                 <div class="mdl-card__supporting-text">
                   <div class="mdl-card__title-text story_title">{{story5.title}}</div>
                 </div>
               </div>
-            </h4>
+            </a>
           </div>
         </div>
       </div>

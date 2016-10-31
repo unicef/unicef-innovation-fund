@@ -1,0 +1,180 @@
+
+<dom-module id='circular-progress'>
+  <template>
+    <style>
+
+      :host {
+        --circular-progress-padding: 20px;
+        --circular-progress-width: 120px;
+        --circular-progress-height: 120px;
+      }
+
+      :host.is-hidden {
+        display: none;
+      }
+
+      #content {
+        position: absolute;
+        top: var(--circular-progress-padding);
+        left: var(--circular-progress-padding);
+        right: var(--circular-progress-padding);
+        bottom: var(--circular-progress-padding);
+      }
+
+      #progressBar {
+        position: relative;
+        width: var(--circular-progress-width);
+        min-height: var(--circular-progress-height);
+      }
+
+      #filters {
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+      }
+
+      .circular-progress__content {
+        color: #dca603;
+        line-height: 0.66em;
+        font-size: 24px;
+        text-align: center;
+      }
+      .circular-progress__content--real_time_information {
+        color: #ff3366;
+      }
+      .circular-progress__content--infrastructure {
+        color: #66cc66;
+      }
+      .circular-progress__content--knowledge_products {
+        color: #33cccc;
+      }
+
+
+    </style>
+    <div id="filters">
+      <svg width="100%" height="100%" viewBox="0 0 100 100">
+          <defs id="defs">
+            <filter id="inset-shadow" x0="-50%" y0="-50%" width="200%" height="200%">
+        			<feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"></feGaussianBlur>
+        			<feOffset dy="1.5" dx="1"></feOffset>
+        			<feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3=".9" result="shadowDiff"></feComposite>
+        		  <feComposite in2="shadowDiff" operator="in"></feComposite>
+        		  <feComposite in2="SourceGraphic" operator="over" result="firstfilter"></feComposite>
+        		</filter>
+        </defs>
+      </svg>
+    </div>
+
+    <div id="progressBar">
+      <div class$="circular-progress__content circular-progress__content--{{ type }}" id="content">
+        <div class="vcenter__container">
+          <div class="vcenter">
+            <content></content>
+          </div>
+        </div>
+      </div>
+      <div id="progressBarCanvas" class="circular-progress__canvas">
+      </div>
+    </div>
+
+
+
+  </template>
+</dom-module>
+
+<script src="../bower_components/progressbar.js/dist/progressbar.min.js" type="text/javascript"></script>
+<script>
+
+  Polymer({
+    is: 'circular-progress',
+    properties: {
+      max: {
+        type: Number,
+        value: 0
+      },
+      value: {
+        type: Number,
+        value: 0
+      },
+      type: {
+        type: String,
+        value: null
+      },
+      progress: {
+        type: Object,
+        value: null
+      }
+    },
+    observers: [
+      '_dataChanged(max, value, type)'
+    ],
+    ready: function () {
+      var that = this;
+
+      //set up observer to watch content changes
+      var observer = new MutationObserver(function (mutations) {
+        that.fire('contentChanged', {content: mutations[0].target.parentNode.innerHTML});
+      }).observe(this, { childList: true, subtree: true, characterData: true });
+
+      this.addEventListener('contentChanged', this._contentChanged);
+
+      // $(window).on('resize', function(){
+      //   that.redraw();
+      // });
+    },
+    redraw: function() {
+      var max = this.max;
+      var value = this.value;
+      var type = this.type;
+
+      if (this.progress) {
+        this.progress.destroy();
+      }
+
+      var progressValue = value / max;
+
+      this.progress = new ProgressBar.Circle(this.$.progressBarCanvas, {
+        strokeWidth: 8,
+        easing: 'easeInOut',
+        duration: 1400,
+        color: this._getColorForType(type),
+        trailColor: '#eee',
+        trailWidth: 8,
+        svgStyle: null
+      });
+      this.progress.path.setAttribute('stroke-linecap', 'round');
+
+      var group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      group.appendChild(this.progress.trail);
+      group.appendChild(this.progress.path);
+      this.progress.svg.appendChild(this.$.defs);
+      this.progress.svg.appendChild(group);
+
+      //svg filters are stable only in chrome
+      if(isChrome() && this.progress.svg.classList) {
+        this.progress.svg.classList.add('has-filter');
+      }
+
+      this.progress.animate(progressValue);
+    },
+    _contentChanged: function(e) {
+      var content = e.detail.content;
+    },
+    _dataChanged: function(max, value, type) {
+      this.redraw();
+    },
+    _getColorForType: function(type) {
+      if (type == 'real_time_information') {
+        return '#ff3366';
+      } else if (type == 'infrastructure') {
+        return '#66cc66';
+      } else if (type == 'knowledge_products') {
+        return '#33cccc';
+      } else {
+        return '#ffcc33';
+      }
+    }
+  });
+
+</script>

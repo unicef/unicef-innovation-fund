@@ -1,63 +1,3 @@
-function clickUserElement(proj, portfolio_name){
-  console.log(proj);
-  var kind = '';
-  $('#card_linechart').css('display','none');
-  $('#card-iogt').css('display','none');
-  $('#card-github').css('display','none');
-  $('#project_link').css('display', 'none');
-  var country = proj.country.replace(/\s+/g, "").toLowerCase()
-  //Get the bound item from the DOM element clicked
-
-  if(proj.slug.match(/u_report/)){
-    kind = 'ureport';
-    color = 'rgba(255, 204, 51, 0.2)';
-  }else if(proj.slug.match(/iogt/)){
-    kind = 'iogt';
-    color = 'rgba(133, 214, 133, 0.2)';
-  } else{
-    kind = 'github';
-    color = 'rgba(255, 143, 171, 0.2)';
-  }
-
-  document.getElementById('portfolio_project_kind').innerHTML = kind;
-  document.getElementById('portfolio_project_color').innerHTML = color;
-  document.getElementById('portfolio_project_country').innerHTML = proj.country;
-  document.getElementById('portfolio_project_name').innerHTML = proj.name;
-  document.getElementById('portfolio_project_amount').innerHTML = '$' + proj.amount;
-  document.getElementById('portfolio_project_description').innerHTML = proj.description;
-
-  if(proj.link_href){
-    $('#project_link').attr('href', proj.link_href);
-    $('#project_link').text(proj.link_text);
-    $('#project_link').css('display', 'block');
-  }
-  // $('#portfolio_project_image').attr('src', data.image);
-
-  // DOM elements located in main-app.html
-  if(proj.slug.match(/u_report/i)){
-    $('#card_linechart').css('display','block');
-    $('#fire_for_modal').attr('path', 'ureport/' + country);
-  }else if(proj.slug.match(/iogt/i)){
-    $('#card-iogt').css('display','block');
-    $('#fire_for_modal').attr('path', 'iogt');
-    $('#geo_for_modal').attr('path', 'iogt_all/newUsers')
-  }else if(proj.github){
-    $('#card_linechart').css('display','block');
-    // $('#fire_for_git_commits').attr(
-    $('#fire_for_modal').attr(
-      'path',
-      '/git/' +
-      proj.slug
-    )
-  }
-
-  $('#modal-top').removeClass();
-  $('#modal-top').addClass("modal_top_" + portfolio_name);
-
-  document.getElementById('modal_ureport').click();
-  // alert(JSON.stringify(data))
-}
-
 function cleanToMil(num) {
   if(num >= 1000000){
     num =  Math.max( Math.round((num/1000000) * 10) / 10, 0 ).toFixed(1);
@@ -70,22 +10,27 @@ function cleanToMil(num) {
   }
 }
 
+function amountToInt(string) {
+  return parseInt(string.replace(/\$|\,/g, ''));
+}
+
+function slugify(string) {
+  return string.replace(/\s/, "-").toLowerCase();
+}
+
 function prepareUreport(dataSet, featured, color){
 
     months = {}
     // Create months hash
-    Object.keys(dataSet).forEach(function(country){
-      dataSet[country].forEach(function(elem){
-        months[elem[0]] = 0;
-      })
+    dataSet.global.forEach(function(elem){
+      months[elem[0]] = 0;
     })
 
     // Assign count to each month
-    Object.keys(dataSet).forEach(function(country){
-      dataSet[country].forEach(function(elem){
-        months[elem[0]] += elem[1];
-      })
+    dataSet.global.forEach(function(elem){
+      months[elem[0]] += elem[1];
     })
+
     var labels = Object.keys(months);
     var points = Object.keys(months).map(function(k){return months[k]});
     points.map(function(e, i){
@@ -132,8 +77,9 @@ function prepare(svg, featured, dataSet){
   }
 }
 
-function data_for_linechart(label, labels, points, color){
+function getDataForLineChart(label, labels, points, color, data){
   return {
+  data: data,
   labels: labels,
   datasets: [
       {
@@ -212,8 +158,8 @@ function humanize_label(label){
   var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   month = parseInt(label.split(/-/)[1]);
   human_month = months[month-1];
-  year_contraction = label.substr(2,2);
-  return human_month + " '" + year_contraction;
+  year_contraction = label.substr(0,4);
+  return human_month + " " + year_contraction;
 }
 
 
@@ -238,44 +184,37 @@ function gitPointsAndLabels(dataSet){
   account = Object.keys(dataSet)[0];
   repo = Object.keys(dataSet[account])[0]
   commits = dataSet[account][repo].commits
+
+  var dates = [];
   commits.forEach(function(commit){
     var date = new Date(commit.week*1000)
     var month = date.getMonth();
-    var year = date.getFullYear()-2000;
+    var year = date.getFullYear();
+
 
     week_sum = commit.days.reduce(function(total, day){
       return total + day
     }, 0)
-    var label = months[month] + " '" +  year;
+    var label = months[month] + " " +  year;
     humanized_months.push(label);
+
+    var date = year + "-" + month;
+    dates.push([date]);
+
     if (commit_months[label]){
       commit_months[label] += week_sum;
     }else{
       commit_months[label] = week_sum;
     }
-  })
+  });
 
   var labels = humanized_months.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
   var points = labels.map(function(l){
     return commit_months[l];
   })
 
-  return {points: points, labels: labels}
+  return {points: points, labels: labels, dates: dates}
 }
-
-function cleanToMil(num) {
-  if(num >= 1000000){
-    num =  Math.max( Math.round((num/1000000) * 10) / 10, 0 ).toFixed(1);
-    num =  num  % 1 === 0 ? parseInt(num) : num;
-    return "$" + num + "M";
-  }else{
-
-    num = Math.round((num/1000))    // num =  Math.max( Math.round((num/100000) * 10) / 10, 0 ).toFixed(0);
-    num = num  % 1 === 0 ? parseInt(num) : num;
-    return "$" + num + "K";
-  }
-}
-
 
 function formalize(term) {
   return term.replace(/_/g, ' ');
@@ -297,9 +236,22 @@ function clickHandler(e) {
   if (!button.hasAttribute('data-dialog')) {
     return;
   }
+
   var id = button.getAttribute('data-dialog');
+
   var dialog = document.getElementById(id);
   if (dialog) {
     dialog.open();
   }
+}
+
+function isIE() {
+  if( !(window.ActiveXObject) && "ActiveXObject" in window ) {
+    return true;
+  }
+  return false;
+}
+
+function isChrome() {
+  return /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 }

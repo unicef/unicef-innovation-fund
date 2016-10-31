@@ -1,39 +1,18 @@
 <dom-module id="hello-all-projects">
   <template>
-    <style is="custom-style">
-      /*.hello_ap{
-        display:none;
-      }
-
-      .hello_ap.all_projects{
-        display:inline;
-      }*/
-    </style>
-      <div class='all_projects-ribbon' style='height:153px;'>
-        <div class='mdl-grid' style='position:relative;'>
-          <div class="mdl-layout-spacer"></div>
-          <div class="mdl-cell--bottom mdl-cell--10-col" style='width:600px;'>
-            <div class='mdl-grid' >
-              <div class="mdl-cell mdl-cell--12-col" style='text-align:left;'>
-                <span class='cloud_page_title' >
-                  All projects
-                </span>
-              </div>
-            </div>
-            <div style='height:30px;'>
-            </div>
-            <div class='mdl-grid mdl-shadow--4dp' style='color:black;border-radius:15px;background-color:white;'>
-              <div class="mdl-cell mdl-cell--12-col cloud_text_box">
-                <span class='about_cloud_content'>
-                  {{all_projects_cloud_content}}
-                </span>
-              </div>
-            </div>
+    <style is="custom-style" include="style-fade-in"></style>
+    <header class='page__header page__header--blue'>
+      <div class='mdl-grid container' style='position:relative;'>
+        <div class="mdl-layout-spacer"></div>
+        <div class="mdl-cell mdl-cell--10-col">
+          <h1 class='hello__title title--big fade-in'>All projects</h1>
+          <div class="page__header-content fade-in">
+            <p>{{all_projects_cloud_content}}</p>
           </div>
-          <div class="mdl-layout-spacer"></div>
         </div>
+        <div class="mdl-layout-spacer"></div>
       </div>
-
+    </header>
   </template>
   <script>
     Polymer({

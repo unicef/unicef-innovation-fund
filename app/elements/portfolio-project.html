@@ -1,58 +1,119 @@
 <dom-module id='portfolio-project'>
   <template>
     <style>
+
+      :host {
+        background-color: #fff;
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        transition: all .175s ease-in;
+        margin-bottom: 0;
+        height: 125px;
+        position: relative;
+        bottom: 0;
+      }
+
+      :host.is-expanded {
+        bottom: -16px;
+      }
+
+      :host.is-expanded .portfolio-project__icon {
+        opacity: 0 !important;
+      }
+
       ul{
         list-style: none;
       }
-      .project_sub_text{
-        font-size:12px;
+
+      .portfolio-project__content {
+        padding: 16px 32px;
+        line-height: 1.5;
+        height: 100%;
+        box-sizing: border-box;
+      }
+
+      .portfolio-project__container {
+        transition: box-shadow .175s ease-in;
+        cursor: pointer;
+        height: 100%;
+      }
+
+      .portfolio-project__sub-text {
         color:gray;
       }
-      .hover{
-        background-color: red;
+
+      .portfolio-project__status {
+        color: #3366CB;
+      }
+
+      .portfolio-project__name {
+        text-align: left;
+        margin: 0;
+        padding: 0;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: block;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .portfolio-project__icon {
+        position: absolute;
+        top: 17px;
+        right: 16px;
+        opacity: 0;
+        transition: opacity .175s ease-out;
+      }
+
+      :host:hover .portfolio-project__icon {
+        opacity: 1;
+      }
+
+      .portfolio-project__content.status-active::before, .portfolio-project__content.status-inactive::before {
+        content: '';
+        display: block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: #3366CB;
+        border: 1px solid #3366CB;
+        box-sizing: border-box;
+        position: absolute;
+        left: 14px;
+        top: 21px;
+      }
+
+      .portfolio-project__content.status-inactive::before {
+        background: transparent;
       }
 
     </style>
-    <li class="mdl-list__item" style='cursor:pointer;padding:0px;margin:0px;'>
-      <div class="mdl-grid"  style='padding-top:0px;margin-top:0px;'>
-        <div class="mdl-cell mdl-cell--12-col" style='padding-top:0px;margin-top:0px;'>
-          <div class-name='divider_{{svg}}' style='text-align:left;padding-top:10px;' on-tap="clickUserElement" on-mouseenter='onHovered' on-mouseleave='onUnHovered'>
-              <div class='mdl-grid' style='padding:0px; margin:0px;text-align:right;'>
-                <div class='mdl-cell mdl-cell--11-col mdl-cell--7-col-tablet mdl-cell--3-col-phone' style='height:42px;padding:0px; margin:0px;text-align:left;'>
-                  <span data-page="{{svg}}" style='text-align:left;'><b>{{item.name}}</b></span>
-                </div>
 
-                <div class='mdl-cell mdl-cell--1-col' style='display:{{hovered}};'>
-                  <img src='/images/launch.png' style='margin:0px;padding:0px;'/>
-                </div>
-              </div>
-
-            <div class='project_sub_text'>
-              {{item.country}}
-            </div>
-            <div class='project_sub_text'>
-              {{to_mil(item.amount)}}
-            </div>
-          </div>
+    <div class-name='divider divider--{{svg}} portfolio-project__container mdl-shadow--4dp' on-tap="_handleTap" on-mouseenter='_onMouseEnter' on-mouseleave='_onMouseLeave'>
+      <div class$="portfolio-project__content {{ _getStatusClass(item.investment_status) }}">
+        <div class="portfolio-project__icon">
+          <i class="material-icons">&#xE56B;</i>
+        </div>
+        <div title="{{item.name}}" class='description__title--small portfolio-project__name'>
+          <span data-page="{{svg}}"><b>{{item.name}}</b></span>
+        </div>
+        <div class='description__text--small'>
+          {{item.country}}
+        </div>
+        <div class='description__text--small'>
+          {{to_mil(item.amount)}}
+        </div>
+        <div class='portfolio-project__sub-text portfolio-project__status'>
+          {{_getProjectStatus(item.status)}}
         </div>
       </div>
-    </li>
+    </div>
+
   </template>
 </dom-module>
 
 <script>
-
-  function cleanToMil(num) {
-    if(num >= 1000000){
-      num =  Math.max( Math.round((num/1000000) * 10) / 10, 0 ).toFixed(1);
-      num =  num  % 1 === 0 ? parseInt(num) : num;
-      return "$" + num + "M";
-    }else{
-      num = Math.round((num/1000))    // num =  Math.max( Math.round((num/100000) * 10) / 10, 0 ).toFixed(0);
-      num = num  % 1 === 0 ? parseInt(num) : num;
-      return "$" + num + "K";
-    }
-  }
 
   Polymer({
     is: 'portfolio-project',
@@ -61,10 +122,6 @@
       svg: {
         value: '',
         notify: true
-      },
-
-      hovered: {
-        value: 'none'
       }
     },
 
@@ -72,18 +129,108 @@
       return(cleanToMil(num.replace(/\$|,/g, '')))
     },
 
-    onHovered: function(e) {
-      this.$$('li').classList.add('mdl-shadow--8dp');
-      this.hovered = 'block';
+    _onMouseEnter: function(e) {
+      this.$$('.portfolio-project__container').classList.add('mdl-shadow--8dp');
     },
 
-    onUnHovered: function(e) {
-      this.$$('li').classList.remove('mdl-shadow--8dp');
-      this.hovered = 'none';
+    _onMouseLeave: function(e) {
+      this.$$('.portfolio-project__container').classList.remove('mdl-shadow--8dp');
     },
 
-    clickUserElement:function(){
-      clickUserElement(this.item, this.svg);
+    _handleTap: function(e){
+      var that = this;
+      var projectViewContainer = document.querySelector('#projectListProjectViewContainer');
+
+      if (!this.classList.contains('is-expanded')) {
+        var expandedProjects = document.querySelectorAll('portfolio-project.is-expanded');
+        if (expandedProjects && expandedProjects.length) {
+          var count = 0;
+          for(var i = 0; i < expandedProjects.length; i++){
+            var project = expandedProjects[i];
+            project.deactivate(function(){
+              count++;
+              if (count == expandedProjects.length) {
+                //Delay opening of new project
+                setTimeout(function(){
+                  that.expandProjectView(that);
+                }, 300);
+              }
+            });
+          }
+        } else {
+          this.expandProjectView(this);
+        }
+
+      } else {
+        this.deactivate();
+      }
+    },
+    deactivate: function(callback) {
+      if (!this.classList.contains('is-expanded')) {
+        return;
+      }
+      this.classList.remove('is-expanded');
+      var projectViewContainer = document.querySelector('#projectListProjectViewContainer');
+      var projectView = document.querySelector('#projectListProjectView');
+      projectViewContainer.classList.remove('is-active');
+      projectView.project = {};
+      projectView.type = null;
+      this.style.marginBottom = 0;
+      projectView.onDomChange = null;
+      projectViewContainer.classList.remove('is-active');
+      var removeProjectViewClass;
+      removeProjectViewClass = (function(){
+        if (typeof callback == 'function') {
+          callback();
+        }
+        this.removeEventListener('transitionend', removeProjectViewClass);
+      }).bind(this);
+      this.addEventListener('transitionend', removeProjectViewClass);
+    },
+    expandProjectView: function(relativeElement) {
+      var projectViewContainer = document.querySelector('#projectListProjectViewContainer');
+      var projectView = document.querySelector('#projectListProjectView');
+      var posY = $(relativeElement).position().top + $(relativeElement).height();
+      var posX = $(relativeElement).position().left + $(relativeElement).width() / 2;
+      $(projectViewContainer).css({top: posY, 'transform-origin': posX+'px -130px'});
+
+      var scrollTo = $(relativeElement).position().top + $(this).offsetParent().position().top - 16;
+
+      $('#mainContainer').animate({scrollTop: scrollTo});
+
+      projectView.project = this.item;
+      projectView.type = this.svg;
+      this.classList.add('is-expanded');
+      projectViewContainer.classList.add('is-active');
+      $(this).css({marginBottom: projectView.offsetHeight + 8});
+
+      projectView.onDomChange = (function(){
+        $(this).css({marginBottom: projectView.offsetHeight + 8});
+      }).bind(this);
+    },
+    _getProjectStatus: function(status) {
+      switch(status) {
+        case "active":
+          return "Current Investment";
+        case "inactive":
+          return "Past Investment";
+        case "completed":
+          return "Funding Completed";
+        default:
+          return "";
+      }
+    },
+    _getStatusClass: function(status) {
+      switch(status) {
+        case "active":
+          return "status-active";
+        case "inactive":
+          return "status-inactive";
+        case "completed":
+          return "status-completed";
+        default:
+          return "";
+      }
     }
   });
 

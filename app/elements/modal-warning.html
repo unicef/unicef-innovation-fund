@@ -8,8 +8,8 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/paper-styles/typography.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-styles/typography.html">
 
 <dom-module id="modal-warning">
   <template>
@@ -36,24 +36,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <p>
           <div class='mdl-grid' style='width:600px;margin: auto;'>
-            <div class='mdl-cell mdl-cell--3-col' style='text-align:center;vertical-align:middle;' >
-              <img src='/images/chrome.png' style='width:150px;vertical-align:middle;margin:auto; ' />
-            </div>
-            <div class='mdl-cell mdl-cell--9-col'>
+            <div class='mdl-cell mdl-cell--12-col'>
               <p>
                 <div style='font-size:18px;'>
-                  This website only works in Google Chrome
-                </div>
-                <div style='font-size:12px;color:gray;'>
-                  More browser compatibility soon.
+                  This website works in Chrome, Firefox, IE 11+/Edge, Safari 7+.<br>More compatibility coming soon.
                 </div>
               </p>
-              <div style='max-width:100px;'>
-                {{user_agent}}
-              </div>
-              <a target='_blank' href='https://www.google.com/chrome/browser/'>
-                <img src='/images/download_google_chrome.png' style='width:60%;' />
-              </a>
             </div>
           </div>
         </p>
@@ -95,12 +83,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
 
         ready: function() {
-          this.user_agent = navigator.userAgent;
-           if(navigator.userAgent.indexOf("Chrome") === -1 ){
-            // alert('hi')
-            //  this.$.warning_button.click();
-            this.$.actions.open();
-          }
+            navigator.detectBrowser = (function(){
+                var temp;
+                var detectedBrowser;
+
+                var userAgent = navigator.userAgent;
+                var browserData = userAgent.match(/(chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+
+                if(/trident/i.test(browserData[1])){
+                    temp = /\brv[ :]+(\d+)/g.exec(userAgent) || [];
+                    return 'IE ' + (temp[1] || '');
+                }
+
+                if(browserData[1] === 'Chrome'){
+                    temp = userAgent.match(/\b(OPR|Edge)\/(\d+)/);
+                    if(temp !== null) return temp.slice(1).join(' ').replace('OPR', 'Opera');
+                }
+
+                detectedBrowser = browserData[2] ? [browserData[1], browserData[2]]: [navigator.appName, navigator.appVersion, '-?'];
+                var SafariVersion = userAgent.match(/version\/?\s*(\d+)/i);
+
+                if (SafariVersion) {
+                    detectedBrowser.push(SafariVersion[1]);
+                }
+                return detectedBrowser;
+            })();
+
+            var browser = navigator.detectBrowser;
+
+            var browserName = ["Chrome", "Firefox", "Safari"].indexOf(browser[0]);
+
+            if(/(IE|Edge)/i.test(browser) === false && browserName === -1) { // Detect browser other than IE/Edge/Chrome/Firefox/Safari
+                this.$.actions.open();
+            } else if (browserName === 2 && browser[2] < 7) { // Detect Safari < 7
+                this.$.actions.open();
+            } else if (/IE/i.test(browser) && /11/.test(browser) === false) { // Detect IE < 11
+                this.$.actions.open();
+            }
         }
       });
     })();

@@ -1,12 +1,7 @@
 <dom-module id='all-projects'>
 
   <template>
-    <style>
-      .projects-card {
-        border-radius: 15px;
-        background-color:white;
-      }
-
+    <style include="style-fade-in">
       :host{
         display: block;
       }
@@ -14,52 +9,372 @@
       :host([active]) {
         display: block;
       }
+
+      .project-info circular-progress {
+        --circular-progress-width: 100px;
+        --circular-progress-height: 100px;
+      }
+
+      .project-info.is-hidden {
+        display: none;
+      }
+
+      .project-info.fade-in {
+        animation-delay: 25ms;
+      }
+
+      .project-info {
+        background-color: #fff;
+        padding: 16px;
+        position: relative;
+        z-index: 2;
+        margin-top: -8px;
+      }
+
+      .project-info__title {
+        margin: 8px 0;
+      }
+
+      .project-info__close {
+        position: absolute;
+        right: 32px;
+        top: 26px;
+        display: block;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        border: none;
+        background: none;
+        outline: none;
+        cursor: pointer;
+      }
+
+      .project-info__close::after {
+        content: '\e901';
+        font-family: 'icomoon';
+        line-height: 32px;
+        font-size: 32px;
+        font-weight: 400;
+      }
+
+      .project-list {
+        position: relative;
+        min-height: 143px;
+        margin-top: -16px;
+      }
+
+      .project-list__item {
+        opacity: 0;
+        z-index: -1;
+        transition: all .175s ease-in;
+        transform: translateY(16px);
+      }
+
+      .project-list__item.is-hidden {
+        display: none;
+      }
+
+      .project-list:not(.is-loaded) .project-list__item {
+        /* used !important to override style attribute */
+        transition-delay: 0s !important;
+      }
+
+      .project-list.is-loaded .project-list__item {
+        opacity: 1;
+        transform: translateY(0);
+        z-index: 1;
+      }
+
+      .project-filter {
+        border-top: 1px solid #d7d7d7;
+        margin: 16px -16px 0;
+        padding: 16px;
+        height: 84px;
+      }
+
+      .project-filter.is-hidden {
+        display: none;
+      }
+
+      .project-filter__menu {
+        margin-right: 16px;
+      }
+
+      .project-filter__menu.is-hidden { display: none; }
+
+      .project-filter__menu paper-item {
+        min-width: 170px;
+      }
+
+      .project-info__progress {
+        float: left;
+      }
+
+      .project-info__progress.is-hidden {
+        display: none;
+      }
+
+      .project-info__filters {
+        padding-top: 8px;
+        float: right;
+      }
+
+      .project-info__filters.is-hidden {
+        display: none;
+      }
+
+      .page--yellow paper-range-slider {
+        --paper-range-slider-active-color: #ffcc33;
+        --paper-range-slider-pin-color: #ffcc33;
+        --paper-range-slider-knob-color: #ffcc33;
+      }
+      .page--yellow paper-dropdown-menu {
+        --primary-color: #ffcc33;
+      }
+
+      .page--red paper-range-slider {
+        --paper-range-slider-active-color: #ff3366;
+        --paper-range-slider-pin-color: #ff3366;
+        --paper-range-slider-knob-color: #ff3366;
+      }
+      .page--red paper-dropdown-menu {
+        --primary-color: #ff3366;
+      }
+
+      .page--green paper-range-slider {
+        --paper-range-slider-active-color: #66cc66;
+        --paper-range-slider-pin-color: #66cc66;
+        --paper-range-slider-knob-color: #66cc66;
+      }
+      .page--green paper-dropdown-menu {
+        --primary-color: #66cc66;
+      }
+
+      .page--blue paper-range-slider {
+        --paper-range-slider-active-color: #33cccc;
+        --paper-range-slider-pin-color: #33cccc;
+        --paper-range-slider-knob-color: #33cccc;
+      }
+      .page--blue paper-dropdown-menu {
+        --primary-color: #33cccc;
+      }
+
+      .content-column:nth-child(1) {
+        animation-delay: 550ms;
+      }
+      .content-column:nth-child(2) {
+        animation-delay: 575ms;
+      }
+      .content-column:nth-child(3) {
+        animation-delay: 600ms;
+      }
+      .content-column:nth-child(4) {
+        animation-delay: 625ms;
+      }
+
+      .project-list__project-view {
+        position: absolute;
+        left: 8px;
+        right: 8px;
+        visibility: hidden;
+        opacity: 0;
+        z-index: -1;
+        transition: transform 0.175s ease-in, opacity 0.175s ease-in, visibility 0s linear 0.175s, z-index 0s linear 0.175s;
+        transform: scale(0, 0);
+      }
+
+      .project-list__project-view.is-active {
+        transition-delay: 0s;
+        opacity: 1;
+        z-index: 1;
+        visibility: visible;
+        transform: scale(1, 1);
+      }
+
+      .project-list__project-view > div {
+        height: 100%;
+      }
+
+      .project-list__project-view project-view {
+        background-color: #fff;
+        display: inline-block;
+        width: 100%;
+      }
+
+      project-card {
+        display: inline-block;
+        transition: opacity .175s ease-out;
+        opacity: 1;
+      }
+
+      .project-card__list.has-selected project-card {
+        opacity: 0.33;
+      }
+
+      .project-card__list.has-selected project-card:hover {
+        opacity: 1;
+      }
+
+      .project-card__list.has-selected project-card.is-active {
+        opacity: 1;
+      }
+
+      .project-info__progress-subtitle {
+        text-transform: uppercase;
+        font-size: 12px;
+        color: #333333;
+        line-height: 1.1em;
+        margin-bottom: -0.3em;
+        display: inline-block;
+      }
+
+      .project-list__project-view-close {
+        position: absolute;
+        top: 24px;
+        right: 20px;
+        font-size: 18px;
+        background: none;
+        outline: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      .title--medium{
+        margin: 0;
+        font-size: 26px;
+        line-height: 32px;
+        margin-top: 10px;
+        font-weight: 400;
+        color: #000;
+      }
+
     </style>
 
-    <div class='hello_holder'>
-      <hello-all-projects all_projects_cloud_content="{{content.all_projects_cloud_content}}" style='position:relative:bottom:30px;'></hello-all-projects>
-      <div style='height:120px;'>
-      </div>
+    <firebase-document
+      app-name="test"
+      path="content"
+      data="{{content}}">
+    </firebase-document>
 
-      <iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query>
-      <iron-media-query full query="print" query-matches="{{print}}"></iron-media-query>
-      <template is="dom-if" if="{{!wide}}">
-        <br />
-        <br />
-      </template>
-      <firebase-document
-        app-name="test"
-        path="content"
-        data="{{content}}">
-      </firebase-document>
+    <firebase-document
+      app-name="test"
+      path="{{ location }}"
+      data="{{ projectsData }}">
+    </firebase-document>
 
-      <div class="mdl-grid" style='max-width:1200px;'>
-        <div class="projects-card content-column mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-cell--top">
-          <portfolio-projects content="{{content.youth_engagement}}" phrase='Products For Youth' fb='ureport' svg="youth_engagement" rgb='255, 204, 51, 0.2'>
-          </portfolio-projects>
+    <firebase-document
+      app-name="test"
+      path="/budget"
+      data="{{financials}}">
+    </firebase-document>
+
+    <div class$='page {{ _getColorClass(selected) }}'>
+      <hello-all-projects all_projects_cloud_content="{{content.all_projects_cloud_content}}"></hello-all-projects>
+      <div class="page__content container">
+        <div class$="project-card__list {{ _getProjectCardListClass(selected) }} mdl-grid">
+          <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+
+
+
+            <project-card class$="{{ _projectCardActiveClass(selected, 'youth_engagement') }}" selected={{selected}} type="youth_engagement" content="{{content.youth_engagement}}" phrase='Products For Youth' fb='ureport' svg="youth_engagement" rgb='255, 204, 51, 0.2'></project-card>
+          </div>
+          <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+            <project-card class$="{{ _projectCardActiveClass(selected, 'real_time_information') }}" selected={{selected}} type="realtime_information" content="{{content.real_time_info}}" phrase='Real-time Information' svg="real_time_information" rgb='255, 204, 51, 0.2'></project-card>
+          </div>
+          <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+            <project-card class$="{{ _projectCardActiveClass(selected, 'infrastructure') }}" selected={{selected}} type="infrastructure" content="{{content.infrastructure}}" phrase='Infrastructure' fb='iogt'  svg="infrastructure" rgb='255, 204, 51, 0.2'></project-card>
+          </div>
+          <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+            <project-card class$="{{ _projectCardActiveClass(selected, 'knowledge_products') }}" selected={{selected}} type="knowledge_p" content="{{content.knowledge_p}}" phrase='Knowledge Products' fb='iogt'  svg="knowledge_products" rgb='255, 204, 51, 0.2' tooltip_target='db_tooltip_knowledge_products'></project-card>
+          </div>
         </div>
-        <div class="projects-card content-column mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-cell--top">
-          <portfolio-projects content="{{content.real_time_info}}" phrase='Real-time Information' svg="real_time_information" rgb='255, 204, 51, 0.2'>
-          </portfolio-projects>
+        <div class="mdl-grid">
+          <div id="projectInfo" class$="project-info fade-in mdl-cell mdl-cell--12-col mdl-shadow--4dp {{ _getProjectInfoClass(selected, projects) }}">
+            <button on-tap="_closeProjectInfo" class="project-info__close"></button>
+            <h2 class="project-info__title title--medium">{{ _getProjectInfoValue(projects) }}</h2>
+            <div class="project-filter project-filter--yellow">
+              <div class$="project-info__progress {{ _getInfoProgressClass(selected) }}">
+                <circular-progress value="[[ _getProgressValue(financials, selected) ]]" max="[[ _getProgressMax(financials, selected) ]]" type="[[ selected ]]">
+                    {{ _getProgressContent(financials, selected) }}
+                    <span class="project-info__progress-subtitle">Invested</span>
+                </circular-progress>
+              </div>
+              <div class$="project-info__filters {{ _showFiltersClass(projects) }}">
+
+                  <!-- status filter -->
+                <paper-dropdown-menu id="statusFilter" class$="project-filter__menu {{ _showStatusFilterClass(projects) }}" label="Investment Status">
+                  <paper-listbox id="statusFilterListbox" class="dropdown-content" attr-for-selected="value">
+                    <paper-item value="">All</paper-item>
+                    <template is="dom-repeat" id='statusItems' items="{{_getStatusList()}}">
+                      <paper-item class$="{{ _getStatusClass(item.label) }}" value="{{item.value}}">{{item.label}}</paper-item>
+                    </template>
+                  </paper-listbox>
+                </paper-dropdown-menu>
+                <!-- /status filter -->
+
+                <!-- region filter -->
+                <paper-dropdown-menu id="regionFilter" class="project-filter__menu" label="Country">
+                  <paper-listbox id="regionFilterListbox" class="dropdown-content" attr-for-selected="value">
+                    <paper-item value="">All regions</paper-item>
+                    <template is="dom-repeat" id='regionItems' items="{{_getUniqueRegions(projects)}}">
+                      <paper-item value="{{item}}">{{item}}</paper-item>
+                    </template>
+                  </paper-listbox>
+                </paper-dropdown-menu>
+                <!-- /region filter -->
+
+                <!-- amount filter -->
+                <paper-dropdown-menu class="project-filter__menu" label="Amount" on-paper-dropdown-close="_amountFilterClosed">
+                  <paper-listbox id="amountFilterListbox" class="dropdown-content">
+                    <paper-item>${{ filterAmountMin }}-${{ filterAmountMax }}</paper-item>
+                    <paper-item on-tap="_onAmountFilterTap">
+                      <paper-range-slider class="slider" id="amountFilter" step='1000'></paper-range-slider>
+                    </paper-item>
+                  </paper-listbox>
+                </paper-dropdown-menu>
+                <!-- /amount filter -->
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="projects-card content-column mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-cell--top">
-          <portfolio-projects content="{{content.infrastructure}}" phrase='Infrastructure' fb='iogt'  svg="infrastructure"   rgb='255, 204, 51, 0.2'>
-          </portfolio-projects>
-        </div>
-        <div class="projects-card content-column mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-cell--top">
-          <portfolio-projects content="{{content.knowledge_p}}" phrase='Knowledge Products' fb='iogt'  svg="knowledge_products"   rgb='255, 204, 51, 0.2'>
-          </portfolio-projects>
+        <div class="project-list mdl-grid" id="projectList">
+          <template is="dom-repeat" id='templateProjects' items="{{projects}}">
+            <div class$="project-list__item mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone {{ _getFilterClass(item, index, filterAmountMin, filterAmountMax, filterRegion, filterStatus) }}">
+              <portfolio-project data={{projectsData}} index={{index}} svg={{selected}} item={{item}}></portfolio-project>
+            </div>
+          </template>
+          <div class="project-list__project-view" id="projectListProjectViewContainer">
+            <div class="mdl-cell mdl-cell--12-col">
+              <button id="projectViewClose" on-tap="_closeProjectView" class="project-list__project-view-close"><i class="icon-shrink"></i></button>
+              <project-view class="mdl-shadow--4dp" id="projectListProjectView"></project-view>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </template>
 </dom-module>
-
 <script>
+
+  var projectCards = [
+    { label: 'Products For Youth', key: 'youth_engagement', svg: 'youth_engagement' },
+    { label: 'Real-time Information', key: 'real_time_info', svg: 'real_time_information' },
+    { label: 'Infrastructure', key: 'infrastructure', svg: 'infrastructure' },
+    { label: 'Knowledge Products', key: 'knowledge_p', svg: 'knowledge_products' }
+  ];
 
   Polymer({
     is: 'all-projects',
     properties: {
+      selected: {
+        type: String,
+        value: null,
+        notify: true,
+        observer: '_selectedChange'
+      },
       svg: {
         value: '',
         notify: true
@@ -71,27 +386,88 @@
         type: Boolean,
         value: false,
         reflectToAttribute: true
+      },
+      location: {
+        type: String,
+        computed: '_computeLocation(selected)'
+      },
+      projectsData:{
+        type: Object,
+        observer: '_assignProjects'
+      },
+      projects: {
+        type: Array,
+        value: [],
+        notify: true
+      },
+      projectCards: {
+        type: Array,
+        value: projectCards
+      },
+      filterAmountMin: {
+        type: Number,
+        value: null
+      },
+      filterAmountMax: {
+        type: Number,
+        value: null
+      },
+      filterRegion: {
+        type: String,
+        value: null
+      },
+      filterStatus: {
+        type: String,
+        value: null
       }
     },
 
-    prepare: function(svg, featured, dataSet){
+    ready: function(){
+      var self = this;
+      var stagger = 50;
+      var projectList = this.querySelector('.project-list');
 
-      if(Object.keys(dataSet) == 0){return;}
-      // var color = ''
-      // if(svg == 'youth_engagement') {
-      //   color = "rgba(255, 204, 51, 0.2)";
-      // }else if(svg == 'real_time_information') {
-      //   color = "rgba(255, 143, 171, 0.2)";
-      // }else{
-      //   color = "rgba(133, 214, 133, 0.2)";
-      // }
+      this.$.templateProjects.addEventListener('dom-change', (function(){
+        var projectItems = this.querySelectorAll('.project-list__item');
+        for (var i = 0; i < projectItems.length; i++) {
+            projectItems[i].style.transitionDelay = (i*stagger)+'ms';
+        }
 
-      if (svg == 'youth_engagement'){
-        return prepareUreport(dataSet, featured, "rgba(255, 204, 51, 0.2)")
-      }else if(svg == 'real_time_information'){
-        return prepareGitCommits(dataSet, featured, "rgba(255, 143, 171, 0.2)");
-      }else{
-        return prepareIOGT(dataSet, featured, "rgba(133, 214, 133, 0.2)")
+        //This line is used to force DOM redraw (Not working in IE)
+        $(projectList).hide().show(0);
+
+        if (this.selected) {
+          $(projectList).addClass('is-loaded');
+        }
+
+      }).bind(this));
+
+      $(document).on('page-changed', function(e, page_id){
+        if (page_id != 'all_projects') {
+          self.selected = null;
+          if (!self.selected) {
+            projectList.classList.remove('is-loaded');
+          }
+        }
+      });
+
+      this._initFilters();
+    },
+
+    _assignProjects: function(obj, oldObj){
+      if(Object.keys(obj).length > 0){
+        //Used to stagger item transition
+        var projectList = this.querySelector('.project-list');
+        projectList.classList.remove('is-loaded');
+
+        this._setAmountMinMax(obj);
+        this._resetFilters();
+        this._hideExpandedProjects();
+
+        //Timeout waits for transition to finish
+        setTimeout((function(){
+          this.projects = obj;
+        }).bind(this), 350);
       }
     },
 
@@ -99,8 +475,274 @@
       return [data.totals[kind], data.spents[kind]]
     },
 
-    _computeClasses: function(wide) {
-       return (!wide) ? 'layout vertical': 'layout';
+    _computeLocation: function(route) {
+       return "portfolios/" + route + '/projects';
+    },
+
+    _getProjectInfoValue: function(projects) {
+      if (!projects.length) {
+        return '';
+      }
+      return projects.length + ' project' + (projects.length > 1 ? 's' : '');
+    },
+
+    _getProjectContent: function(content, key) {
+      return content[key];
+    },
+
+    _initFilters: function() {
+      var that = this;
+
+      this.$.amountFilter.addEventListener('updateValues', (function(e){
+        this.filterAmountMin = this.$.amountFilter.valueMin;
+        this.filterAmountMax = this.$.amountFilter.valueMax;
+        this.$.amountFilterListbox.select(null);
+      }).bind(this));
+
+      this.$.regionFilterListbox.addEventListener('iron-select', function(e){
+        that.filterRegion = this.selected;
+      });
+
+      this.$.statusFilterListbox.addEventListener('iron-select', function(e){
+        that.filterStatus = this.selected;
+      });
+    },
+
+    _amountFilterClosed: function(e) {
+      if (this.filterAmountMin && this.filterAmountMax) {
+        this.$.amountFilterListbox.selectIndex(0);
+      }
+    },
+
+    _onAmountFilterTap: function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    },
+
+    _setAmountMinMax: function(elements) {
+      var values = elements.map((function(item){
+        return this._getIntFromAmount(item.amount);
+      }).bind(this));
+
+      var min = Math.min.apply(null, values);
+      var max = Math.max.apply(null, values);
+
+      //Dividing by 1000 to assure slider is working properly
+      this.$.amountFilter.setMin(min);
+      this.$.amountFilter.setMax(max);
+      this.$.amountFilter.setValues(min,max);
+
+      this.filterAmountMin = min;
+      this.filterAmountMax = max;
+      this.$.amountFilterListbox.select(null);
+    },
+
+    _getIntFromAmount: function(value) {
+      return parseInt(value.replace(/\$|\,/g, ''));
+    },
+
+    _getColorClass: function(selected) {
+      switch (selected) {
+        case 'real_time_information':
+          return 'page--red';
+        case 'infrastructure':
+          return 'page--green';
+        case 'knowledge_products':
+          return 'page--blue';
+        default:
+          return 'page--yellow';
+      }
+    },
+
+    _selectedChange: function(e) {
+        var menuFilter = this.querySelectorAll('.project-filter__menu, .slider');
+        for (var i = 0; i < menuFilter.length; i++) {
+          menuFilter[i].updateStyles();
+        }
+
+        var projectView = document.getElementById('projectListProjectViewContainer');
+        if (projectView) {
+          projectView.classList.remove('is-active');
+        }
+
+        if (this.selected) {
+          setTimeout((function(){
+            var scrollTo = $(this.$.projectInfo.parentNode).position().top - 48;
+            $('#mainContainer').animate({scrollTop: scrollTo});
+          }).bind(this), 100);
+        } else {
+          $('#mainContainer').animate({scrollTop: 0});
+          this.projects = [];
+          this._closeProjectInfo();
+        }
+    },
+
+    _showFiltersClass: function(projects) {
+      if (projects && projects.length > 1) {
+        return '';
+      }
+      return 'is-hidden';
+    },
+
+    _getFilterClass: function(item, index, filterAmountMin, filterAmountMax, filterRegion, filterStatus) {
+      var portfolioProjects = document.querySelectorAll('portfolio-project');
+      var element = portfolioProjects[index];
+
+      var amount = this._getIntFromAmount(item.amount);
+      if ((filterAmountMin && filterAmountMax) && (amount < filterAmountMin || amount > filterAmountMax)) {
+        element.deactivate();
+        return 'is-hidden';
+      }
+
+      if (filterRegion && filterRegion != item.country) {
+        element.deactivate();
+        return 'is-hidden';
+      }
+
+      if (filterStatus && filterStatus.length) {
+        if (filterStatus != item.investment_status) {
+          element.deactivate();
+          return 'is-hidden';
+        }
+      }
+
+      return '';
+    },
+
+    _getUniqueRegions: function(projects) {
+      var uniqueRegions = [];
+      for (var i = 0; i < projects.length; i++) {
+          if(uniqueRegions.indexOf(projects[i].country) < 0) {
+              uniqueRegions.push(projects[i].country);
+          }
+      }
+      uniqueRegions.sort(function(a, b){
+        if(a < b) return -1;
+        if(a > b) return 1;
+        return 0;
+      });
+      return uniqueRegions;
+    },
+
+    _resetFilters: function() {
+      this.filterRegion = null;
+      this.filterStatus = null;
+      this.$.regionFilterListbox.select(null);
+      this.$.statusFilterListbox.select(null);
+    },
+
+    _hideExpandedProjects: function() {
+      var expandedProjects = document.querySelectorAll('portfolio-project.is-expanded');
+      if (expandedProjects.length) {
+        expandedProjects[0].deactivate();
+      }
+    },
+
+    _getProjectInfoClass: function(selected, projects) {
+      if (!selected || !projects.length) {
+        return 'is-hidden';
+      }
+      return '';
+    },
+
+    _getProjectCardListClass: function(selected) {
+      if (!selected) {
+        return '';
+      }
+
+      return 'has-selected';
+    },
+
+    _projectCardActiveClass: function(selected, type) {
+      if (selected == type) {
+        return 'is-active';
+      }
+
+      return '';
+    },
+    _getProgressValue: function(financials, type) {
+      //sorry for this. backend inconsistency
+      if(type == 'real_time_information') {
+        type = 'realtime_information'
+      }
+      if(!financials || !type)
+        return;
+      return financials.spents[type];
+    },
+    _getProgressMax: function(financials, type) {
+      //sorry for this. backend inconsistency
+      if(type == 'real_time_information') {
+        type = 'realtime_information'
+      }
+      if(!financials || !type)
+        return;
+      return financials.totals[type];
+    },
+    _getProgressContent: function(financials, type) {
+      //sorry for this. backend inconsistency
+      if(type == 'real_time_information') {
+        type = 'realtime_information'
+      }
+      if(!financials || !type)
+        return;
+      return cleanToMil(financials.spents[type]);
+    },
+
+    _getInfoProgressClass: function(selected) {
+      if(selected == 'knowledge_products') {
+        return 'is-hidden';
+      }
+    },
+
+    _redrawProgress: function() {
+      var progress = document.querySelectorAll('circular-progress');
+      for (var i = 0; i < progress.length; i++) {
+        var item = progress[i];
+        item.redraw();
+      }
+    },
+
+    _closeProjectInfo: function() {
+      this.selected = null;
+      var projectList = this.querySelector('.project-list');
+      projectList.classList.remove('is-loaded');
+    },
+
+    _getStatusList: function() {
+      return [
+        { value: "active", label: "Current Investment" },
+        { value: "inactive", label: "Past Investment" },
+        //{ value: "completed", label: "Funding Completed" }
+      ]
+    },
+
+    _closeProjectView: function() {
+      var activeProject = document.querySelector('portfolio-project.is-expanded');
+      activeProject.deactivate();
+    },
+
+    _showStatusFilterClass: function(projects) {
+      var show = false;
+      if (!projects || !projects.length) {
+        return show;
+      }
+
+      for(var i = 0; i < projects.length; i++) {
+        var project = projects[i];
+        if (typeof project.investment_status == 'string' && project.investment_status.length > 0) {
+          show = true;
+          break;
+        }
+      }
+
+      return show ? '' : 'is-hidden';
+    },
+    
+    _getStatusClass: function(label) {
+      return slugify(label);
     }
   })
+
+
 </script>
