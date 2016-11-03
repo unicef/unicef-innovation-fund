@@ -19,18 +19,19 @@
         <div class="mdl-layout-spacer"></div>
       </div>
 
-      <template is="dom-if" if="{{wide}}">
-        <div class='dashboard-ribbon'>
-          &nbsp;
-        </div>
-      </template>
-        <div class='demo-ribbon'>
+      <div class='demo-ribbon'>
         <dashboard-business></dashboard-business>
         <template is="dom-if" if="{{wide}}">
           <dashboard-stories></dashboard-stories>
         </template>
         <br /><br />
       </div>
+
+      <template is="dom-if" if="{{wide}}">
+        <div class='dashboard-ribbon'>
+          &nbsp;
+        </div>
+      </template>
     </section>
   </template>
 </dom-module>
