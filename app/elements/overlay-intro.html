@@ -49,8 +49,13 @@
         padding-bottom: 0.7em;
         -webkit-font-smoothing: antialiased;
       }
+
       .overlay__content p:last-child {
         padding-bottom: 0;
+      }
+
+      .overlay__content p:empty {
+        display: none;
       }
       
       .overlay__content[mobile-layout] p {
@@ -168,6 +173,7 @@
             <p><echo-html html$="{{content.overlay_p1}}"></echo-html></p>
             <p><echo-html html$="{{content.overlay_p2}}"></echo-html></p>
             <p><echo-html html$="{{content.overlay_p3}}"></echo-html></p>
+            <p><echo-html html$="{{content.overlay_p4}}"></echo-html></p>
           </div>
           <ul class="overlay__list" mobile-layout$="{{wide}}">
             <li class="overlay__item">
