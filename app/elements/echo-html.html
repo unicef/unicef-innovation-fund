@@ -1,0 +1,31 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="echo-html">
+    <template>
+        <style>
+        </style>
+    </template>
+</dom-module>
+
+<script>
+(function() {
+    Polymer({
+        is: 'echo-html',
+        properties: {
+            /**
+             * Plain HTML that is directly dumped into the DOM
+             */
+            html: {
+                type: String,
+                value: '',
+                observer: '_refreshHtml'
+            }
+        },
+        _refreshHtml: function() {
+            if (this.html) {
+               this.outerHTML = this.html;
+            }
+        }
+    });
+})();
+</script>
