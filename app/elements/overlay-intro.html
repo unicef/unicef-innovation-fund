@@ -43,7 +43,7 @@
       }
       
       .overlay__content p {
-        font-size: 30px;
+        font-size: 24px;
         line-height: 1.22em;
         font-weight: 300;
         padding-bottom: 0.7em;
@@ -156,8 +156,8 @@
         width: 32px;
         height: 18px;
       }
-
     </style>
+
     <firebase-document
       id="firebase-content"
       app-name="test"
@@ -211,6 +211,7 @@
     contentChanged: function (newData, oldData) {
       if (this._isObjectEmpty(newData) == false) {
         this.startCounter();
+        this.addOverlayLinks();
       }
     },
     _isObjectEmpty: function(obj) {
@@ -281,7 +282,23 @@
         var counter = counters[x];
         counter.innerHTML = "0";
       }
-    }
+    },
+    addOverlayLinks: function() {
+      var self = this;
+      $('.overlay_link').on('click', function(event) {
+        var menu = this.getAttribute('data-menu');
+        var selectedMenu = $('paper-tabs#main-menu paper-tab#'+menu);
+
+        if (menu && selectedMenu) {
+          event.preventDefault();
+          scope.selected = $('paper-tabs#main-menu paper-tab').index(selectedMenu);
+          scope.page_id = menu;
+          // Update css settings per tab
+          page_change(menu);
+          self.hideOverlay();
+        }
+      })
+    },
   })
   </script>
 </dom-module>
