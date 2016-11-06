@@ -13,7 +13,8 @@
         animation-delay: 0.625s;
       }
 
-      .about__description {
+      .about__description,
+      .about__description--narrow {
         font-size: 1.2rem;
         letter-spacing: 0.02rem;
         line-height: 1.8;
@@ -29,6 +30,11 @@
       .about__tile {
         display: inline-block;
         width: 33%;
+        text-align: center;
+      }
+
+      .about__tiles {
+        margin-top: 2em;
       }
 
       .about__name {
@@ -77,7 +83,7 @@
         .about__description--narrow {
           margin-left: auto;
           margin-right: auto;
-          width: 50%;
+          width: 70%;
         }
       }
 
@@ -112,7 +118,7 @@
                   <img src="../images/icons/real_time_information.svg" alt="Real time information" class="about__image">
               </div>
           </div>
-          <p class="about__description">{{paragraph_3}}</p>
+          <p class="about__description--narrow">{{paragraph_3}}</p>
 
           <hr class="about__divider">
 
@@ -153,8 +159,8 @@
         is: 'my-about',
 
         attached: function(self) {
-          window.sr = ScrollReveal();
-          window.sr.reveal('.about__description',{container: '#mainContainer'});
+          var scrollReveal = ScrollReveal({container: '#mainContainer'});
+          scrollReveal.reveal('.about__description, .about__description--narrow, .about__tiles');
         }
       });
     })();
