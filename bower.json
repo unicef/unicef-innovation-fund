@@ -16,7 +16,8 @@
     "iron-media-query": "PolymerElements/iron-media-query#^1.0.8",
     "progress-bubble": "^1.3.0",
     "paper-range-slider": "IftachSadeh/paper-range-slider#^0.1.2",
-    "progressbar.js": "^1.0.1"
+    "progressbar.js": "^1.0.1",
+    "scrollreveal": "^3.3.2"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
