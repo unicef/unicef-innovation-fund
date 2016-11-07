@@ -115,11 +115,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   .all_projects {
     background-color: #3366CB;
-    /*height:250px;*/
   }
 
   #mainToolbar .all_projects,
-  #mainToolbar.about {
+  #mainToolbar.about,
+  #mainToolbar.news {
     background-color: #3366CB;
   }
 
@@ -127,6 +127,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     background-color: #333333;
   }
 
+  .news,
   .about,
   .submit {
     background-color: #333333;
@@ -247,19 +248,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <!-- Drawer Content -->
           <paper-menu class="app-menu" selected="[[selected]]">
             <p class='menu-item' id='dashboard'>
-              <!-- <iron-icon icon="dashboard"></iron-icon> -->
               <span>DASHBOARD</span>
             </p>
             <p class='menu-item' id='all_projects'>
-              <!-- <iron-icon icon="assessment"></iron-icon> -->
               <span>ALL PROJECTS</span>
             </p>
+            <p class='menu-item' id='news'>
+              <span>NEWS</span>
+            </p>
             <p class='menu-item' id='about'>
-              <!-- <iron-icon icon="info"></iron-icon> -->
               <span>ABOUT</span>
             </p>
             <p class='menu-item' id='submit'>
-              <!-- <iron-icon icon="info"></iron-icon> -->
               <span>SUBMIT</span>
             </p>
           </paper-menu>
@@ -277,6 +277,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <paper-tabs id="main-menu" selected="[[selected]]" class="bottom self-end">
                 <paper-tab id='dashboard'>DASHBOARD</paper-tab>
                 <paper-tab id='all_projects'>ALL PROJECTS</paper-tab>
+                <paper-tab id='news'>NEWS</paper-tab>
                 <paper-tab id='about'>ABOUT</paper-tab>
                 <paper-tab id='submit'>SUBMIT</paper-tab>
               </paper-tabs>
@@ -297,23 +298,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <all-projects></all-projects>
               </neon-animatable>
               <neon-animatable>
+                <news-page></news-page>
+              </neon-animatable>
+              <neon-animatable>
                 <my-about></my-about>
               </neon-animatable>
               <neon-animatable>
                 <submit-page></submit-page>
               </neon-animatable>
             </neon-animated-pages>
-            <!-- <iron-pages style='' class="flex" selected="[[selected]]">
-              <section id='my_dashboard'>
-                <dashboard-top></dashboard-top>
-              </section>
-              <section>
-                <all-projects></all-projects>
-              </section>
-              <section>
-                <my-about></my-about>
-              </section>
-            </iron-pages> -->
             <mdl-footer></mdl-footer>
           </div>
         </paper-scroll-header-panel>
@@ -321,23 +314,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <paper-toast id="toast">
         <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
       </paper-toast>
-      <!-- Uncomment next block to enable Service Worker support (1/2) -->
-      <!--
-      <paper-toast id="caching-complete"
-                   duration="6000"
-                   text="Caching complete! This app will work offline.">
-      </paper-toast>
-
-      <platinum-sw-register auto-register
-                            clients-claim
-                            skip-waiting
-                            base-uri="bower_components/platinum-sw/bootstrap"
-                            on-service-worker-installed="displayInstalledToast">
-        <platinum-sw-cache default-cache-strategy="fastest"
-                           cache-config-file="cache-config.json">
-        </platinum-sw-cache>
-      </platinum-sw-register>
-      -->
       <paper-dialog class="project-view__dialog" id="projectModal" entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop>
         <button class="project-view__dialog-close" onclick="projectModal.close()"><i class="material-icons">&#xE5CD;</i></button>
         <paper-dialog-scrollable class="project-view__dialog-scrollable container">
@@ -345,28 +321,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </paper-dialog-scrollable>
       </paper-dialog>
     </div>
+    <overlay-intro></overlay-intro>
   </template>
-  <overlay-intro></overlay-intro>
+  
 
   <script src="scripts/app.js"></script>
   <script>
-  var scope = document.querySelector('template[is="dom-bind"]');
-  scope.selected = 0;
+  "use strict"
+  var app = document.getElementById('app');
+  app.selected = 0;
 
   window.addEventListener('WebComponentsReady', function(e) {
     $('paper-tabs#main-menu paper-tab').click(function() {
       $('#mainContainer').scrollTop(0);
-      scope.selected = $('paper-tabs#main-menu paper-tab').index(this);
-      scope.page_id = this.id;
+      app.selected = $('paper-tabs#main-menu paper-tab').index(this);
+      app.page_id = this.id;
       // Update css settings per tab
       page_change(this.id);
     });
 
     $('.app-menu .menu-item').click(function() {
-      scope.selected = $('.app-menu .menu-item').index(this);
-      scope.page_id = this.id;
+      app.selected = $('.app-menu .menu-item').index(this);
+      app.page_id = this.id;
       document.querySelector('paper-drawer-panel').togglePanel();
-      //$('#drawer').togglePanel();
       // Update css settings per tab
       page_change(this.id);
     });
@@ -381,7 +358,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   function page_change(page_id) {
 
     $(document).trigger('page-changed', page_id);
-    ar = ['dashboard', 'all_projects', 'about', 'submit']
+    var ar = ['dashboard', 'all_projects', 'news', 'about', 'submit'];
 
     ar.forEach(function(e) {
       $('#mainToolbar').removeClass(e);
@@ -389,6 +366,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       $('.link').removeClass(e);
       $('hello-all-projects').removeClass(e);
       $('hello-about').removeClass(e);
+      $('hello-news').removeClass(e);
     });
 
     $('#mainToolbar').addClass(page_id);
@@ -399,6 +377,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
     if (page_id == 'about') {
       $('hello-about').addClass(page_id);
+    }
+    if (page_id == 'news') {
+      $('hello-news').addClass(page_id);
     }
   };
   </script>
