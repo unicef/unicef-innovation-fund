@@ -10,5 +10,19 @@
         "destination": "/index.html"
       }
     ]
+  },
+  "config": {
+    "production": {
+      "api_key": "AIzaSyDCAbha2hrDSEMjQEUXLyOSPRR9WLXorJo",
+      "auth_domain": "unicef-innovation-fund.firebaseapp.com",
+      "database_url": "https://unicef-innovation-fund.firebaseio.com",
+      "name": "unicef-innovation-fund"
+    },
+    "staging": {
+      "api_key": "AIzaSyBoZQn8DD6KfFRAr0tWOUJeK0cNNEMngSk",
+      "auth_domain": "innovation-fund2.firebaseapp.com",
+      "database_url": "https://innovation-fund2.firebaseio.com",
+      "name": "unicef-innovation-fund"
+    }
   }
 }

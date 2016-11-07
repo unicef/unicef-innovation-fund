@@ -23,7 +23,17 @@
 - gulp serve
 
 ## Data Source
-Data is served to browsers from a [Firebase](firebase.google.com)  account using [Polymerfire](https://github.com/firebase/polymerfire). Credentials are set in the firebase-app tag in app/index.html.
+Data is served to browsers from a [Firebase](firebase.google.com)  account using [Polymerfire](https://github.com/firebase/polymerfire). 
+
+## Firebase Credentials
+The Firebase credentials are kept in the firebase.json file. By using gulp the {app,dist}/config/firebase-config.html file is created, to be used by the web application:
+
+`gulp firebase` -- uses staging configuration
+`gulp firebase --production` -- uses staging configuration
+`gulp` -- builds the application with staging configuration
+`gulp --production` -- builds the application with production configuration
+`gulp serve` -- locally serves the application with staging configuration
+`gulp serve --production` -- locally serves the application with production configuration
 
 ## Firebase deployment
 > Deploy to [staging server](https://innovation-fund2.firebaseapp.com/) hosted on [Firebase](firebase.google.com)
@@ -31,6 +41,8 @@ Data is served to browsers from a [Firebase](firebase.google.com)  account using
 > Requires Google account with access to Firebase project
 
 - sudo npm install -g firebase-tools
+- firebase use staging - for staging settings
+- firebase use production - for production settings
 - firebase deploy
 
 
