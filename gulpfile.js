@@ -16,6 +16,7 @@ require('es6-promise').polyfill();
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var del = require('del');
+var argv = require('yargs').argv;
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
@@ -59,6 +60,21 @@ var styleTask = function(stylesPath, srcs) {
     .pipe(gulp.dest(dist(stylesPath)))
     .pipe($.size({title: stylesPath}));
 };
+
+gulp.task('firebase', function() {
+  var environment = 'staging';
+  if (argv.production) {
+    environment = 'production';
+  }
+
+  var fs = require('fs');
+  var firebase = JSON.parse(fs.readFileSync('./firebase.json'));
+  return gulp.src('app/config/firebase-config.template.html')
+        .pipe($.template(firebase.config[environment]))
+        .pipe($.rename('firebase-config.html'))
+        .pipe(gulp.dest('app/config'))
+        .pipe(gulp.dest('dist/config'));
+});
 
 var imageOptimizeTask = function(src, dest) {
   return gulp.src(src)
@@ -214,7 +230,7 @@ gulp.task('clean', function() {
 });
 
 // Watch files for changes & reload
-gulp.task('serve', ['styles'], function() {
+gulp.task('serve', ['styles','firebase'], function() {
   browserSync({
     port: 5000,
     notify: false,
@@ -273,6 +289,7 @@ gulp.task('default', ['clean'], function(cb) {
     ['ensureFiles', 'copy', 'styles'],
     ['images', 'fonts', 'html'],
     'vulcanize', // 'cache-config',
+    'firebase',
     cb);
 });
 
