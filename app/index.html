@@ -249,23 +249,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <!-- Drawer Content -->
           <paper-menu class="app-menu" selected="[[selected]]">
             <p class='menu-item' id='dashboard'>
-              <!-- <iron-icon icon="dashboard"></iron-icon> -->
               <span>DASHBOARD</span>
             </p>
             <p class='menu-item' id='all_projects'>
-              <!-- <iron-icon icon="assessment"></iron-icon> -->
               <span>ALL PROJECTS</span>
             </p>
             <p class='menu-item' id='news'>
-              <!-- <iron-icon icon="assessment"></iron-icon> -->
               <span>NEWS</span>
             </p>
             <p class='menu-item' id='about'>
-              <!-- <iron-icon icon="info"></iron-icon> -->
               <span>ABOUT</span>
             </p>
             <p class='menu-item' id='submit'>
-              <!-- <iron-icon icon="info"></iron-icon> -->
               <span>SUBMIT</span>
             </p>
           </paper-menu>
@@ -333,21 +328,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script src="scripts/app.js"></script>
   <script>
-  var scope = document.querySelector('template[is="dom-bind"]');
-  scope.selected = 0;
+  "use strict"
+  var app = document.getElementById('app');
+  app.selected = 0;
 
   window.addEventListener('WebComponentsReady', function(e) {
     $('paper-tabs#main-menu paper-tab').click(function() {
       $('#mainContainer').scrollTop(0);
-      scope.selected = $('paper-tabs#main-menu paper-tab').index(this);
-      scope.page_id = this.id;
+      app.selected = $('paper-tabs#main-menu paper-tab').index(this);
+      app.page_id = this.id;
       // Update css settings per tab
       page_change(this.id);
     });
 
     $('.app-menu .menu-item').click(function() {
-      scope.selected = $('.app-menu .menu-item').index(this);
-      scope.page_id = this.id;
+      app.selected = $('.app-menu .menu-item').index(this);
+      app.page_id = this.id;
       document.querySelector('paper-drawer-panel').togglePanel();
       // Update css settings per tab
       page_change(this.id);
@@ -363,7 +359,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   function page_change(page_id) {
 
     $(document).trigger('page-changed', page_id);
-    ar = ['dashboard', 'all_projects', 'news', 'about', 'submit']
+    var ar = ['dashboard', 'all_projects', 'news', 'about', 'submit'];
 
     ar.forEach(function(e) {
       $('#mainToolbar').removeClass(e);

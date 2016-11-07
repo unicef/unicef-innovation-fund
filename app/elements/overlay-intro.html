@@ -288,11 +288,12 @@
       $('.overlay_link').on('click', function(event) {
         var menu = this.getAttribute('data-menu');
         var selectedMenu = $('paper-tabs#main-menu paper-tab#'+menu);
+        var app = document.getElementById('app');
 
         if (menu && selectedMenu) {
           event.preventDefault();
-          scope.selected = $('paper-tabs#main-menu paper-tab').index(selectedMenu);
-          scope.page_id = menu;
+          app.selected = $('paper-tabs#main-menu paper-tab').index(selectedMenu);
+          app.page_id = menu;
           // Update css settings per tab
           page_change(menu);
           self.hideOverlay();
