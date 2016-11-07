@@ -368,12 +368,8 @@
     .faq__list {
         color: #5D5D5D;
         margin-top: 2rem;
-        padding-left: 1.75rem;
+        padding-left: 2.75rem;
         text-align: left;
-    }
-
-    .faq__list--unstyled {
-        list-style-type: none;
     }
 
     .faq__step {
@@ -409,6 +405,10 @@
         line-height: 1.7;
         padding-left: 0.8rem;
         word-spacing: 0.155rem;
+    }
+
+    .faq__requirement--unstyled {
+        list-style-type: none;
     }
 
     .faq__link {
@@ -449,15 +449,18 @@
 
     .section__break--thin {
         color: #7ADEDE;
-        margin: 4rem 0 3.5rem;
+        margin: 4rem 0 3.5rem 4.2rem;
     }
 
     .summary {
+        align-items: flex-start;
         display: flex;
+        margin-left: 5.6rem;
     }
 
     .summary__icon {
-        width: 13%;
+        padding-top: 0.8rem;
+        width: 14%;
     }
 
     .summary__content {
@@ -528,6 +531,22 @@
       .section__back {
         float: none;
       }
+
+      .faq__list {
+          padding-left: 0;
+      }
+
+      .section__break--thin {
+          margin-left: 0;
+      }
+
+      .summary, .summary__content {
+          margin-left: 0;
+      }
+
+      .summary__icon {
+          width: 20%;
+      }
     }
 
     @media (min-width: 680px) {
@@ -580,6 +599,18 @@
       .role__description {
           font-size: 1.2rem;
       }
+
+      .faq__button {
+          margin: 1rem auto;
+      }
+
+      .summary {
+          text-align: center;
+      }
+
+      .summary__icon, .summary__link {
+          display: none;
+      }
     }
 
     @media (max-width: 480px) {
@@ -593,6 +624,10 @@
 
         .section__confirm-email {
             width: 100%;
+        }
+
+        .section__icon--wide {
+            display: none;
         }
     }
 
@@ -770,7 +805,7 @@
                 <strong class="faq__description">Check Eligibility</strong>
                 <strong class="faq__sub-description">Check that your company/institution and project meet all the eligibility requirements</strong>
                 <ul class="faq__list">
-                    <li class="faq__requirement">Your company/institution must be registered in a UNICEF programme country (<a href="" class="faq__link">see list here</a>)</li>
+                    <li class="faq__requirement">Your company/institution must be registered in a UNICEF programme country (<a href="http://unicefstories.org/" class="faq__link">see list here</a>)</li>
                     <li class="faq__requirement">You’re working on open source technology solutions or willing to be open source under the following licenses:<br>
                         <strong>Software:</strong>  BSD, AGPL, LGPL<br>
                         <strong>Content and designs:</strong> Content and designs:
@@ -782,27 +817,29 @@
                 <h3 class="faq__name">Step 2</h3>
                 <strong class="faq__description">Read the full request for Expression of Interest document</strong>
                 <ul class="faq__list">
-                    <li class="faq__requirement">Read the full <a href="" class="faq__link">Request for Expressions of Interest (REOI)</a> document to understand the submission process and to learn more about the kinds of projects that qualify and how the scoring will be done.</li>
+                    <li class="faq__requirement">Read the full <a href="http://unicefstories.org/" class="faq__link">Request for Expressions of Interest (REOI)</a> document to understand the submission process and to learn more about the kinds of projects that qualify and how the scoring will be done.</li>
                 </ul>
             </li>
             <li class="faq__step">
                 <h3 class="faq__name">Step 3</h3>
                 <strong class="faq__description">Any questions?</strong>
                 <ul class="faq__list">
-                    <li class="faq__requirement">Read our <a href="" class="faq__link">FAQ’s</a> about the process</li>
-                    <li class="faq__requirement"><a href="" class="faq__link">Submit any questions you may have.</a> Responses will be posted regularly.<br>
+                    <li class="faq__requirement">Read our <a href="http://unicefstories.org/" class="faq__link">FAQ’s</a> about the process</li>
+                    <li class="faq__requirement"><a href="http://unicefstories.org/" class="faq__link">Submit any questions you may have.</a> Responses will be posted regularly.<br>
                         <em class="faq__emphasis">Please note that the period to submit questions for the REOI closes on 16 February, 2016.</em>
                         <a href="" class="faq__button">Ask now</a>
-                        See the <a href="" class="faq__link">answers</a> to what others have asked
+                        See the <a href="http://unicefstories.org/" class="faq__link">answers</a> to what others have asked <a href="http://unicefstories.org/" class="faq__link">&#8594;</a>
                     </li>
                 </ul>
             </li>
             <li class="faq__step">
                 <h3 class="faq__name">Step 4</h3>
                 <strong class="faq__description">Submit</strong>
-                <ul class="faq__list faq__list--unstyled">
-                    <li class="faq__requirement"><a href="" class="faq__link">Submit</a> your expression of interest by completing the form.<br>
-                        Preview the questions to prepare your submission, <a href="" class="faq__link">preview questions</a></li>
+                <ul class="faq__list">
+                    <li class="faq__requirement faq__requirement--unstyled">
+                        <a href="http://unicefstories.org/" class="faq__link">Submit</a> your expression of interest by completing the form.<br>
+                        Preview the questions to prepare your submission, <a href="http://unicefstories.org/" class="faq__link">preview questions</a>
+                    </li>
                 </ul>
             </li>
         </ol>
@@ -811,13 +848,13 @@
         </div>
         <hr class="section__break--thin">
         <div class="summary">
-            <img src="../images/icons/country_offices.svg" alt="" class="summary__icon">
+            <img src="../images/icons/country_offices-alt.svg" alt="" class="summary__icon">
             <div class="summary__content">
                 <h3 class="summary__title">Got questions?</h3>
                 <p class="summary__description">Responses will be posted regularly.</p>
                 <em class="summary__description summary__emphassis">Please note that the period to submit questions for the REOI closes on DD MONTH, YYYY.</em>
                 <p class="summary__description">UNICEF will not answer any questions submitted after this date.</p>
-                <a href="" class="summary__link">Ask now</a>
+                <a href="http://unicefstories.org/" class="summary__link">Ask now</a>
             </div>
         </div>
       </div>
