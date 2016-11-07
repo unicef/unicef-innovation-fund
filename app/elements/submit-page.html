@@ -66,13 +66,17 @@
       margin-top: 1rem;
     }
 
+    .section__description-startup {
+        margin-top: 3.7rem;
+        text-align: left;
+    }
+
     .section__submit {
         text-align: center;
     }
 
     .section__submit-link {
       background-color: #0099FF;
-      color: #FFFFFF !important;
       /* Overwrite MDL default style */
       font-size: 1.15rem;
       font-weight: 400;
@@ -118,6 +122,12 @@
 
     .section__icon {
       width: 15%;
+    }
+
+    .section__icon--wide {
+        margin-bottom: 1rem;
+        margin-top: 4.3rem;
+        width: 90%;
     }
 
     .section__link {
@@ -237,7 +247,7 @@
         transition: all 0.5s;
     }
 
-    .accordion__header:hover {
+    .accordion__hhttps://github.com/unicef/unicef-innovation-fund/pull/71eader:hover {
         color: #33B8B8;
     }
 
@@ -249,7 +259,7 @@
         font-weight: 600;
         font-size: 1.5em;
         left: -6.75rem;
-        line-height: 0.50;
+        line-hehttps://github.com/unicef/unicef-innovation-fund/pull/71ight: 0.50;
         padding: 1.65rem;
         position: absolute;
         transform: translateY(-25%);
@@ -349,47 +359,139 @@
     }
 
     /*Submit startups*/
-    .faq {}
+    .faq {
+        margin-top: 5.8rem;
+        list-style-type: none;
+        padding-left: 2rem;
+    }
 
-    .faq__list {}
+    .faq__list {
+        color: #5D5D5D;
+        margin-top: 2rem;
+        padding-left: 1.75rem;
+        text-align: left;
+    }
 
-    .faq__step {}
+    .faq__list--unstyled {
+        list-style-type: none;
+    }
 
-    .faq__name {}
+    .faq__step {
+        margin: 5.25rem 0;
+    }
+    .faq__step:last-of-type {
+        margin-bottom: 0;
+    }
 
-    .faq__description {}
+    .faq__name {
+        color: #7ADEDE;
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 0.45;
+    }
 
-    .faq__sub-description {}
+    .faq__description {
+        color: #000000;
+        display: block;
+        font-size: 1.465rem;
+    }
 
-    .faq__list {}
+    .faq__sub-description {
+        color: #5D5D5D;
+        display: block;
+        font-size: 1.4rem;
+        letter-spacing: 0.02rem;
+    }
 
-    .faq__requirement {}
+    .faq__requirement {
+        font-size: 1.46rem;
+        list-style-type: disc;
+        line-height: 1.7;
+        padding-left: 0.8rem;
+        word-spacing: 0.155rem;
+    }
 
-    .faq__link {}
+    .faq__link {
+        color: #7ADEDE;
+        text-decoration: none;
+    }
 
-    .faq__strong {}
+    .faq__submit {
+        text-align: center;
+    }
 
-    .faq__emphasis {}
+    .faq__submit-link {
+        background-color: #0099FF;
+        color: #FFFFFF !important;
+        font-size: 1.5rem;
+        font-weight: 400;
+        height: 55px;
+        line-height: 55px;
+        margin-top: 2.5rem;
+        max-width: 245px;
+        text-transform: uppercase;
+        width: 100%;
+    }
 
-    .faq__button {}
+    .faq__emphasis {
+        word-spacing: normal;
+    }
 
-    .faq__list--unstyled {}
+    .faq__button {
+        border: 2px solid #7ADEDE;
+        color: #7ADEDE;
+        display: table;
+        font-weight: 800;
+        margin: 1rem 0;
+        padding: 0.2rem 4.25rem;
+        text-decoration: none;
+    }
 
-    .section__break--thin {}
+    .section__break--thin {
+        color: #7ADEDE;
+        margin: 4rem 0 3.5rem;
+    }
 
-    .summary {}
+    .summary {
+        display: flex;
+    }
 
-    .summary__icon {}
+    .summary__icon {
+        width: 13%;
+    }
 
-    .summary__content {}
+    .summary__content {
+        margin-bottom: 4rem;
+        margin-left: 2rem;
+        text-align: left;
+    }
 
-    .summary__title {}
+    .summary__title {
+        font-size: 2rem;
+        font-weight: 600;
+        line-height: 2;
+        margin: 0;
+    }
 
-    .summary__description {}
+    .summary__description {
+        font-size: 1.45rem;
+    }
 
-    .summary__description--emphasis {}
+    .summary__emphassis {
+        display: block;
+        margin-bottom: 0.8rem;
+    }
 
-    .summary__link {}
+    .summary__link {
+        border: 2px solid #7ADEDE;
+        color: #7ADEDE;
+        display: table;
+        font-size: 1.7rem;
+        font-weight: 500;
+        margin-top: 2.2rem;
+        padding: 0.7rem 3.9rem;
+        text-decoration: none;
+    }
 
 
     @media (max-width: 1200px) {
@@ -518,7 +620,7 @@
     </style>
     <style is="custom-style" include="style-fade-in"></style>
     <firebase-document
-      app-name="test"
+      app-name=1.4"test"
       path="/summary/portfolios/invested_youth_engagement"
       data="{{emails}}">
     </firebase-document>
@@ -660,18 +762,18 @@
       <button on-tap="changeSection" class="section__back" data-display="main" data-hide="startup">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="container mdl-cell mdl-cell--12-col">
-        <p class="section__description">The purpose of the Innovation Fund is to support new solutions from small businesses in markets that many companies or investors consider risky while UNICEF sees these markets as sources of opportunity. UNICEF will support companies registered in these markets in UNICEF’s programme countries- with a small amount of money to move solutions to the stage where these are proven to be workable and can be implemented.</p>
-        <img src="" alt="" class="section__icon">
+        <p class="section__description section__description-startup">The purpose of the Innovation Fund is to support new solutions from small businesses in markets that many companies or investors consider risky while UNICEF sees these markets as sources of opportunity. UNICEF will support companies registered in these markets in UNICEF’s programme countries- with a small amount of money to move solutions to the stage where these are proven to be workable and can be implemented.</p>
+        <img src="../images/icons/startups_steps.svg" alt="Steps for startup" class="section__icon--wide">
         <ol class="faq faq__list">
             <li class="faq__step">
-                <h3 class="faq__name">Step</h3>
+                <h3 class="faq__name">Step 1</h3>
                 <strong class="faq__description">Check Eligibility</strong>
                 <strong class="faq__sub-description">Check that your company/institution and project meet all the eligibility requirements</strong>
                 <ul class="faq__list">
                     <li class="faq__requirement">Your company/institution must be registered in a UNICEF programme country (<a href="" class="faq__link">see list here</a>)</li>
                     <li class="faq__requirement">You’re working on open source technology solutions or willing to be open source under the following licenses:<br>
-                        <strong class="faq__strong">Software:</strong>  BSD, AGPL, LGPL<br>
-                        <strong class="faq__strong">Content and designs:</strong> Content and designs:
+                        <strong>Software:</strong>  BSD, AGPL, LGPL<br>
+                        <strong>Content and designs:</strong> Content and designs:
                     </li>
                     <li class="faq__requirement">Your project generates publicly-exposed real-time data that can be/is measured</li>
                 </ul>
@@ -681,8 +783,6 @@
                 <strong class="faq__description">Read the full request for Expression of Interest document</strong>
                 <ul class="faq__list">
                     <li class="faq__requirement">Read the full <a href="" class="faq__link">Request for Expressions of Interest (REOI)</a> document to understand the submission process and to learn more about the kinds of projects that qualify and how the scoring will be done.</li>
-                    <li class="faq__requirement">Your</li>
-                    <li class="faq__requirement">Your</li>
                 </ul>
             </li>
             <li class="faq__step">
@@ -706,16 +806,16 @@
                 </ul>
             </li>
         </ol>
-        <div class="section__submit">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank">Submission Form</a>
+        <div class="faq__submit">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="faq__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank">Submission Form</a>
         </div>
         <hr class="section__break--thin">
         <div class="summary">
-            <img src="" alt="" class="summary__icon">
+            <img src="../images/icons/country_offices.svg" alt="" class="summary__icon">
             <div class="summary__content">
                 <h3 class="summary__title">Got questions?</h3>
                 <p class="summary__description">Responses will be posted regularly.</p>
-                <em class="summary__description--emphasis">Please note that the period to submit questions for the REOI closes on DD MONTH, YYYY.</em>
+                <em class="summary__description summary__emphassis">Please note that the period to submit questions for the REOI closes on DD MONTH, YYYY.</em>
                 <p class="summary__description">UNICEF will not answer any questions submitted after this date.</p>
                 <a href="" class="summary__link">Ask now</a>
             </div>
