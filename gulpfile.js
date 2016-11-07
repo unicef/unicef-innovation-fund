@@ -287,9 +287,9 @@ gulp.task('default', ['clean'], function(cb) {
   // Uncomment 'cache-config' if you are going to use service workers.
   runSequence(
     ['ensureFiles', 'copy', 'styles'],
-    ['images', 'fonts', 'html'],
+    ['images', 'fonts', 'html', 'firebase'],
     'vulcanize', // 'cache-config',
-    'firebase',
+    
     cb);
 });
 
