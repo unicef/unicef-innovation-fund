@@ -158,8 +158,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .project-list__portfolio.page--yellow .portfolio-project--new {
-    border: 2px solid #dca603;
-    box-shadow: 0 -8px #dca603 inset;
+    border: 2px solid #ffcc33;
+    border-bottom: 8px solid #ffcc33;
 }
 
 .project-list__portfolio.page--yellow .portfolio-project__status--visible {
@@ -168,7 +168,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .project-list__portfolio.page--red .portfolio-project--new {
     border: 2px solid #ff3366;
-    box-shadow: 0 -8px #ff3366 inset;
+    border-bottom: 8px solid #ff3366;
 }
 
 .project-list__portfolio.page--red .portfolio-project__status--visible {
@@ -177,7 +177,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .project-list__portfolio.page--green .portfolio-project--new {
     border: 2px solid #66cc66;
-    box-shadow: 0 -8px #66cc66 inset;
+    border-bottom: 8px solid #66cc66;
 }
 
 .project-list__portfolio.page--green .portfolio-project__status--visible {
@@ -186,7 +186,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .project-list__portfolio.page--blue .portfolio-project--new {
     border: 2px solid #33cccc;
-    box-shadow: 0 -8px #33cccc inset;
+    border-bottom: 8px solid #33cccc;
 }
 .project-list__portfolio.page--blue .portfolio-project__status--visible {
     color: #33cccc;
