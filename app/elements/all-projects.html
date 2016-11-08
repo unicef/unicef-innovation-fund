@@ -343,7 +343,7 @@
         <div class="project-list mdl-grid" id="projectList">
           <template is="dom-repeat" id='templateProjects' items="{{projects}}">
             <div class$="project-list__item mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone {{ _getFilterClass(item, index, filterAmountMin, filterAmountMax, filterRegion, filterStatus) }}">
-              <portfolio-project data={{projectsData}} index={{index}} svg={{selected}} item={{item}}></portfolio-project>
+              <portfolio-project data={{projectsData}} index={{index}} svg={{selected}} item={{item}} class$="project-list__portfolio {{ _getColorClass(selected) }}"></portfolio-project>
             </div>
           </template>
           <div class="project-list__project-view" id="projectListProjectViewContainer">

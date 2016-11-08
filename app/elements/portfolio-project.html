@@ -22,6 +22,10 @@
         opacity: 0 !important;
       }
 
+      .portfolio-project--new .portfolio-project__icon {
+          bottom: 0;
+      }
+
       ul{
         list-style: none;
       }
@@ -31,6 +35,7 @@
         line-height: 1.5;
         height: 100%;
         box-sizing: border-box;
+        position: relative;
       }
 
       .portfolio-project__container {
@@ -39,8 +44,22 @@
         height: 100%;
       }
 
+
+      .portfolio-project__status--hidden {
+          display: none;
+      }
+
+      .portfolio-project__status--visible {
+          font-weight: 600;
+          position: absolute;
+          right: 5px;
+          top: 17px;
+      }
+
       .portfolio-project__sub-text {
         color:gray;
+        padding-left: 18px;
+        position: relative;
       }
 
       .portfolio-project__status {
@@ -60,8 +79,8 @@
 
       .portfolio-project__icon {
         position: absolute;
-        top: 17px;
-        right: 16px;
+        bottom: 8px;
+        right: 5px;
         opacity: 0;
         transition: opacity .175s ease-out;
       }
@@ -70,7 +89,7 @@
         opacity: 1;
       }
 
-      .portfolio-project__content.status-active::before, .portfolio-project__content.status-inactive::before {
+      .portfolio-project__sub-text.status-active::before, .portfolio-project__sub-text.status-inactive::before {
         content: '';
         display: block;
         width: 12px;
@@ -80,18 +99,20 @@
         border: 1px solid #3366CB;
         box-sizing: border-box;
         position: absolute;
-        left: 14px;
-        top: 21px;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
       }
 
-      .portfolio-project__content.status-inactive::before {
+      .portfolio-project__sub-text.status-inactive::before {
         background: transparent;
       }
 
     </style>
 
     <div class-name='divider divider--{{svg}} portfolio-project__container mdl-shadow--4dp' on-tap="_handleTap" on-mouseenter='_onMouseEnter' on-mouseleave='_onMouseLeave'>
-      <div class$="portfolio-project__content {{ _getStatusClass(item.investment_status) }}">
+      <div class$="portfolio-project__content {{ newProjectClass }}">
+       <div class$="{{newProjectTextClass}}">NEW!</div>
         <div class="portfolio-project__icon">
           <i class="material-icons">&#xE56B;</i>
         </div>
@@ -104,7 +125,7 @@
         <div class='description__text--small'>
           {{to_mil(item.amount)}}
         </div>
-        <div class='portfolio-project__sub-text portfolio-project__status'>
+        <div class$='portfolio-project__sub-text portfolio-project__status {{ _getStatusClass(item.investment_status) }}'>
           {{_getProjectStatus(item.investment_status)}}
         </div>
       </div>
@@ -122,7 +143,20 @@
       svg: {
         value: '',
         notify: true
+      },
+      newProjectClass: {
+          value: ''
+      },
+      newProjectTextClass: {
+          value: 'portfolio-project__status--hidden'
       }
+    },
+
+    ready: function() {
+        if (this.index <= 3) {
+            this.newProjectClass = 'portfolio-project--new';
+            this.newProjectTextClass = 'portfolio-project__status--visible'
+        }
     },
 
     to_mil: function(num){
