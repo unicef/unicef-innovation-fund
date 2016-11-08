@@ -157,6 +157,41 @@ h1, h2, h3, h4, h5, h6 {
   color: #66cc66;
 }
 
+.project-list__portfolio.page--yellow .portfolio-project--new {
+    border: 2px solid #dca603;
+    box-shadow: 0 -8px #dca603 inset;
+}
+
+.project-list__portfolio.page--yellow .portfolio-project__status--visible {
+    color: #dca603;
+}
+
+.project-list__portfolio.page--red .portfolio-project--new {
+    border: 2px solid #ff3366;
+    box-shadow: 0 -8px #ff3366 inset;
+}
+
+.project-list__portfolio.page--red .portfolio-project__status--visible {
+    color: #ff3366;
+}
+
+.project-list__portfolio.page--green .portfolio-project--new {
+    border: 2px solid #66cc66;
+    box-shadow: 0 -8px #66cc66 inset;
+}
+
+.project-list__portfolio.page--green .portfolio-project__status--visible {
+    color: #66cc66;
+}
+
+.project-list__portfolio.page--blue .portfolio-project--new {
+    border: 2px solid #33cccc;
+    box-shadow: 0 -8px #33cccc inset;
+}
+.project-list__portfolio.page--blue .portfolio-project__status--visible {
+    color: #33cccc;
+}
+
 .dashboard #main-menu #selectionBar {
   background-color: black;
 }
@@ -653,4 +688,8 @@ paper-item.current-investment::after, paper-item.past-investment::after {
 
 paper-item.past-investment::after {
   background-color: transparent;
+}
+
+.input-content.paper-input-container label.paper-input {
+    font-size: 14px;
 }
