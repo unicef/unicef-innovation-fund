@@ -571,6 +571,7 @@
             var scrollTo = $(this.$.projectInfo.parentNode).position().top - 48;
             $('#mainContainer').animate({scrollTop: scrollTo});
           }).bind(this), 100);
+          this.projects = [];
         } else {
           $('#mainContainer').animate({scrollTop: 0});
           this.projects = [];

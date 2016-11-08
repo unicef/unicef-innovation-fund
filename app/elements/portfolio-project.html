@@ -111,6 +111,7 @@
     </style>
 
     <div class-name='divider divider--{{svg}} portfolio-project__container mdl-shadow--4dp' on-tap="_handleTap" on-mouseenter='_onMouseEnter' on-mouseleave='_onMouseLeave'>
+        <strong>{{project}}</strong>
       <div class$="portfolio-project__content {{ newProjectClass }}">
        <div class$="{{newProjectTextClass}}">NEW!</div>
         <div class="portfolio-project__icon">
@@ -152,8 +153,8 @@
       }
     },
 
-    ready: function() {
-        if (this.index <= 3) {
+    attributeChanged: function() {
+        if (this.item.isNew === true) {
             this.newProjectClass = 'portfolio-project--new';
             this.newProjectTextClass = 'portfolio-project__status--visible'
         }
