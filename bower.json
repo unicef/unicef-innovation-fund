@@ -17,7 +17,8 @@
     "progress-bubble": "^1.3.0",
     "paper-range-slider": "IftachSadeh/paper-range-slider#0.2.4",
     "progressbar.js": "^1.0.1",
-    "owl.carousel": "^2.2.0"
+    "owl.carousel": "^2.2.0",
+    "scrollreveal": "^3.3.2"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
