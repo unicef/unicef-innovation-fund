@@ -284,13 +284,15 @@
           </template>
           <div class="project-view__divider project-view__divider--left"></div>
           <neon-animated-pages class$="project-view__chart-container {{ _getChartContainerClass(chartData, geoData) }}" style='z-index:0;' selected="{{tabName}}" attr-for-selected="tab-name" exit-animation="fade-out-animation" entry-animation="slide-from-left-animation">
-            <template is="dom-repeat" items="[[gitDataSet]]">
-                <neon-animatable tab-name="git-[[index]]">
-                    <div value="{{item}}" class="project-view__item">
-                        <p>[[item.label]]</p>
-                        <p>[[item.text]]</p>
-                    </div>
-                </neon-animatable>
+            <template is="dom-if" if="[[gitDataSet.length]]">
+                <template is="dom-repeat" items="{{gitDataSet}}">
+                    <neon-animatable tab-name="git-[[index]]">
+                        <div value="{{item}}" class="project-view__item">
+                            <p>[[item.label]]</p>
+                            <p>[[item.text]]</p>
+                        </div>
+                    </neon-animatable>
+                </template>
             </template>
             <neon-animatable tab-name="graph">
               <!-- line chart -->
