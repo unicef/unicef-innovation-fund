@@ -287,6 +287,7 @@
             <template is="dom-repeat" items="[[gitDataSet]]">
                 <neon-animatable tab-name="git-[[index]]">
                     <div value="{{item}}" class="project-view__item">
+                        <p>[[item.label]]</p>
                         <p>[[item.text]]</p>
                     </div>
                 </neon-animatable>
@@ -579,7 +580,7 @@
                 for (var profile in data) {
                     for (var repo in data[profile]) {
                         var newEntry = {
-                            label: data[profile][repo].label || "Git",
+                            label: data[profile][repo].label || repo,
                             text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti voluptatem vel, sequi, voluptate illo mollitia unde at atque cumque, magni eius nesciunt tempore neque harum eum blanditiis, deleniti veniam? Expedita."
                         };
                         dataSet.push(newEntry);
