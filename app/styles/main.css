@@ -267,6 +267,20 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #33cccc;
 }
 
+.counter--youth_engagement{
+  color: #dca603;
+}
+.counter--real_time_information{
+  color: #ff3366;
+}
+.counter--infrastructure{
+  color: #66cc66;
+}
+
+.counter--knowledge_products{
+  color: #33cccc;
+}
+
 .progress-youth_engagement{
   border-color: #ffcc33;
 }

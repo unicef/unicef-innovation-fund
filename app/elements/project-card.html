@@ -67,6 +67,7 @@
 
       .project-card__body {
         padding: 16px;
+        position: relative;
       }
 
       .project-card__title {
@@ -94,8 +95,24 @@
         font-size: 10px;
         color: #333;
         display: block;
+        text-align: center;
         text-transform: uppercase;
         margin-bottom: -0.33em;
+      }
+
+      .project-card__counter {
+          display: block;
+          font-size: 0.95rem;
+          line-height: 0.95;
+          position: absolute;
+          right: 15px;
+          text-align: right;
+          top: 20px;
+          width: 25%;
+      }
+
+      .project-card__counter::first-letter {
+          font-size: 1.7rem;
       }
 
       .card__info-icon {
@@ -156,6 +173,7 @@
       <div class-name="project-card__edge edge edge--{{svg}}"></div>
       <div class="project-card__body">
         <img class="project-card__icon" src="/images/icons/{{svg}}.svg" />
+        <span class-name="project-card__counter counter--{{svg}}">{{ _getNewProjectsCount(projects) }}</span>
         <div style='project-card__content'>
           <h4 class="project-card__title">{{phrase}}</h4>
           <span class="description__text--small">{{content}}</span>
@@ -181,8 +199,8 @@
               <template id="cardProgressContainer" is="dom-if" if="[[ _canShowProgress(financials, type) ]]">
                 <circular-progress id="cardProgress" class="project-card__progress-item" value="[[ _getProgressValue(financials, type) ]]" max="[[ _getProgressMax(financials, type) ]]" type="[[ svg ]]">
                   <span class="project-card__progress-value">{{ _getProgressContent(financials, type) }}</span>
-                  <span class="project-card__progress-subtitle">Invested</span>
                 </circular-progress>
+                <span class="project-card__progress-subtitle">Invested</span>
               </template>
             </div>
           </div>
@@ -279,5 +297,18 @@
       }
       return projects.length + ' project' + (projects.length > 1 ? 's' : '');
     },
+    _getNewProjectsCount: function (projects) {
+        if (!projects.length) {
+          return '';
+        }
+        var count = projects.filter(function (project) {
+            return (project.country === "Global");
+        })
+        if (count.length === 1) {
+            return count.length + " new project!";
+        } else if (count.length > 1) {
+            return count.length + " new projects!";
+        }
+    }
   })
 </script>

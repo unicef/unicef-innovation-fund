@@ -35,6 +35,20 @@
         margin: 8px 0;
       }
 
+      .project-info__summary--divider {
+          color: #5D5D5D;
+      }
+
+      .project-info__summary {
+          display: inline-block;
+          font-size: 0.95rem;
+          font-weight: 700;
+      }
+
+      .project-info__summary::first-letter {
+          font-size: 1.5rem;
+      }
+
       .project-info__close {
         position: absolute;
         right: 32px;
@@ -110,6 +124,8 @@
       }
 
       .project-info__progress {
+        align-items: center;
+        display: flex;
         float: left;
       }
 
@@ -124,6 +140,35 @@
 
       .project-info__filters.is-hidden {
         display: none;
+      }
+
+      .project-info__legend {
+          margin-left: 2.5rem;
+      }
+
+      .project-info__status {
+          color: gray;
+          padding-left: 18px;
+          position: relative;
+      }
+
+      .project-info__status.status-active::before, .project-info__status.status-inactive::before {
+          content: '';
+          display: block;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background-color: #3366CB;
+          border: 1px solid #3366CB;
+          box-sizing: border-box;
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+      }
+
+      .project-info__status.status-inactive::before {
+          background-color: transparent;
       }
 
       .page--yellow paper-range-slider {
@@ -294,13 +339,17 @@
         <div class="mdl-grid">
           <div id="projectInfo" class$="project-info fade-in mdl-cell mdl-cell--12-col mdl-shadow--4dp {{ _getProjectInfoClass(selected, projects) }}">
             <button on-tap="_closeProjectInfo" class="project-info__close"></button>
-            <h2 class="project-info__title title--medium">{{ _getProjectInfoValue(projects) }}</h2>
+            <h2 class="project-info__title title--medium">{{ _getProjectInfoValue(projects) }} <span class="project-info__summary--divider">|</span> <strong class="project-info__summary">{{_getNewProjectsCount(projects)}}</strong></h2>
             <div class="project-filter project-filter--yellow">
               <div class$="project-info__progress {{ _getInfoProgressClass(selected) }}">
                 <circular-progress value="[[ _getProgressValue(financials, selected) ]]" max="[[ _getProgressMax(financials, selected) ]]" type="[[ selected ]]">
                     {{ _getProgressContent(financials, selected) }}
                     <span class="project-info__progress-subtitle">Invested</span>
                 </circular-progress>
+                <div class="project-info__legend">
+                    <p class='project-info__status status-active'>Current Investment</p>
+                    <p class='project-info__status status-inactive'>Past Investment</p>
+                </div>
               </div>
               <div class$="project-info__filters {{ _showFiltersClass(projects) }}">
 
@@ -742,6 +791,20 @@
 
     _getStatusClass: function(label) {
       return slugify(label);
+    },
+
+    _getNewProjectsCount: function (projects) {
+      if (!projects.length) {
+        return '';
+      }
+      var count = projects.filter(function (project) {
+          return (project.country === "Global");
+      })
+      if (count.length === 1) {
+          return count.length + " Startup";
+      } else if (count.length > 1) {
+          return count.length + " Startups";
+      }
     }
   })
 
