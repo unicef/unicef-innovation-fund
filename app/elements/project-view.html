@@ -275,8 +275,22 @@
               <paper-tab tab-name="map">MAP</paper-tab>
             </paper-tabs>
           </template>
+          <template is="dom-if" if="[[gitDataSet.length]]">
+              <paper-tabs class="project-view__tabs" selected="{{tabName}}" attr-for-selected="tab-name">
+                  <template is="dom-repeat" items="{{gitDataSet}}" as="Git">
+                      <paper-tab tab-name="git-{{index}}">{{Git.label}}</paper-tab>
+                  </template>
+              </paper-tabs>
+          </template>
           <div class="project-view__divider project-view__divider--left"></div>
           <neon-animated-pages class$="project-view__chart-container {{ _getChartContainerClass(chartData, geoData) }}" style='z-index:0;' selected="{{tabName}}" attr-for-selected="tab-name" exit-animation="fade-out-animation" entry-animation="slide-from-left-animation">
+            <template is="dom-repeat" items="[[gitDataSet]]">
+                <neon-animatable tab-name="git-[[index]]">
+                    <div value="{{item}}" class="project-view__item">
+                        <p>[[item.text]]</p>
+                    </div>
+                </neon-animatable>
+            </template>
             <neon-animatable tab-name="graph">
               <!-- line chart -->
               <template id="projectChartTemplate" is="dom-if" if="{{ _showLineChart(chartData) }}">
@@ -565,7 +579,7 @@
                 for (var profile in data) {
                     for (var repo in data[profile]) {
                         var newEntry = {
-                            label: data[profile][repo].label,
+                            label: data[profile][repo].label || "Git",
                             text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti voluptatem vel, sequi, voluptate illo mollitia unde at atque cumque, magni eius nesciunt tempore neque harum eum blanditiis, deleniti veniam? Expedita."
                         };
                         dataSet.push(newEntry);
