@@ -237,25 +237,25 @@
           <chart-line  data="[[prepare(svg, featured, dataSet)]]" options=[[_prepareChartOptions()]] style='width:95%; font-size:30px;padding-left:5px;'></chart-line>
         </div>
         <firebase-document
-          app-name="test"
+          app-name="unicef-innovation-fund"
           path="/content/{{tooltip_target}}"
           data="{{db_tooltip}}">
         </firebase-document>
 
         <firebase-document
-          app-name="test"
+          app-name="unicef-innovation-fund"
           path="{{location_featured_content}}"
           data="{{featured_content}}">
         </firebase-document>
 
         <firebase-document
-          app-name="test"
+          app-name="unicef-innovation-fund"
           path="/portfolio_projects/{{svg}}/projects_hash/{{featured_slug}}"
           data="{{featured_project}}">
         </firebase-document>
 
         <firebase-document
-          app-name="test"
+          app-name="unicef-innovation-fund"
           path="{{location_featured_data}}"
           data="{{dataSet}}">
         </firebase-document>

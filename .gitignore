@@ -2,6 +2,7 @@ node_modules/
 dist/
 bower_components/
 build/
+app/config/firebase-config.html
 .DS_Store
 .tmp
 .publish/

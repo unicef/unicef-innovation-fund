@@ -1,0 +1,15 @@
+<dom-module id="firebase-config">
+  <template>
+    <firebase-app
+      name="<%= name %>"
+      api-key="<%= api_key %>"
+      auth-domain="<%= auth_domain %>"
+      database-url="<%= database_url %>">
+    </firebase-app>
+  </template>
+  <script>
+    Polymer({
+      is: "firebase-config",
+    })
+  </script>
+</dom-module>  
