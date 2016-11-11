@@ -339,6 +339,10 @@
         color: #000;
       }
 
+      #regionFilter,
+      .project-filter__menu.amount-filter {
+        width: 110px;
+      }
     </style>
 
     <firebase-document
@@ -419,7 +423,7 @@
                 <!-- /region filter -->
 
                 <!-- amount filter -->
-                <paper-dropdown-menu class="project-filter__menu" label="Amount" on-paper-dropdown-close="_amountFilterClosed">
+                <paper-dropdown-menu class="project-filter__menu amount-filter" label="Amount" on-paper-dropdown-close="_amountFilterClosed">
                   <paper-listbox id="amountFilterListbox" class="dropdown-content">
                     <paper-item>${{ filterAmountMin }}-${{ filterAmountMax }}</paper-item>
                     <paper-item on-tap="_onAmountFilterTap">
