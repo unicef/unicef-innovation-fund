@@ -18,7 +18,15 @@
         },
         _refreshHtml: function() {
             if (this.html) {
-               this.outerHTML = this.html;
+                var value = ''
+                if ((this.html.constructor == Array) && (this.html.length == 1)) {
+                    value = this.html[0];
+                } else  {
+                    value = this.html;
+                }
+                if (this.parentNode) {
+                    this.outerHTML = value;
+                }
             }
         }
     });

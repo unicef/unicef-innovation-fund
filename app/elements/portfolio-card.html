@@ -107,6 +107,10 @@
          vertical-align: -1px;
        }
 
+       .icon-info {
+        color: #3366CB;
+       }
+
     </style>
 
     <style is="custom-style">
@@ -171,6 +175,20 @@
       .project__mini-chart{
         cursor: pointer;
       }
+
+      .new-project {
+        background-color: #3366CA;
+        font-size: 14px;
+        color:white;
+        display: block;
+        width: 30px;
+        padding: 1px 4px 1px 4px;
+        margin-left:15px;
+      }
+
+      .new-project.hide {
+        display: none;
+      }
     </style>
 
     <iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query>
@@ -217,6 +235,7 @@
               <div class="featured_project_expand" on-tap="_handleTap">
                 <i class="material-icons">&#xE89E;</i>
               </div>
+              <div class$='new-project {{_getClassForNewLabel(featured_project)}} fade-in page__header-content'>NEW!</div>
               <div class='featured_project_name pc_left' on-tap="_handleTap">
                 {{featured}}
               </div>
@@ -479,9 +498,13 @@
           }
         }
       }
+    },
+    _getClassForNewLabel: function(featured_project) {
+      if (featured_project.new_investment) {
+        return 'show';
+      } else {
+        return 'show';
+      }
     }
-  })
-
-
-
+  });
 </script>
