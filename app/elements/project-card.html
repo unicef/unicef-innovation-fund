@@ -302,7 +302,7 @@
           return '';
         }
         var count = projects.filter(function (project) {
-            return (project.country === "Global");
+            return (project.new_investment === 1);
         })
         if (count.length === 1) {
             return count.length + " new project!";
