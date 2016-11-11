@@ -39,14 +39,57 @@
           color: #5D5D5D;
       }
 
+      .project-info__summary::after {
+        position: relative;
+        left: -93px;
+        content: '\00a0';
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 22px;
+        height: 22px;
+        line-height: 32px;
+      }
+
+      .project-info__summary:empty {
+        display: none;
+      }
+
+      .page--red .project-info__summary::after {
+        background-image: url('../images/icons/startups-red.svg');
+      }
+
+      .page--yellow .project-info__summary::after {
+        background-image: url('../images/icons/startups-yellow.svg');
+      }
+
+      .page--green .project-info__summary::after {
+        background-image: url('../images/icons/startups-green.svg');
+      }
+
+      .page--blue .project-info__summary::after {
+        background-image: url('../images/icons/startups-blue.svg');
+      }
+
+      .project-info__summary:empty::after {
+        content: '';
+        display: none;
+      }
+
       .project-info__summary {
           display: inline-block;
           font-size: 0.95rem;
-          font-weight: 700;
+          font-weight: 600;
+          margin-left: 30px;
+          border-left: 2px #6d6e71 solid;
+          padding-left: 39px;
+          height: 32px;
+          margin-top: 0px;
+          margin-left: 2px;
       }
 
       .project-info__summary::first-letter {
-          font-size: 1.5rem;
+          font-size: 1.8rem;
       }
 
       .project-info__close {
@@ -339,7 +382,7 @@
         <div class="mdl-grid">
           <div id="projectInfo" class$="project-info fade-in mdl-cell mdl-cell--12-col mdl-shadow--4dp {{ _getProjectInfoClass(selected, projects) }}">
             <button on-tap="_closeProjectInfo" class="project-info__close"></button>
-            <h2 class="project-info__title title--medium">{{ _getProjectInfoValue(projects) }} <span class="project-info__summary--divider">|</span> <strong class="project-info__summary">{{_getNewProjectsCount(projects)}}</strong></h2>
+            <h2 class="project-info__title title--medium">{{ _getProjectInfoValue(projects) }} <strong class="project-info__summary">{{_getNewProjectsCount(projects)}}</strong></h2>
             <div class="project-filter project-filter--yellow">
               <div class$="project-info__progress {{ _getInfoProgressClass(selected) }}">
                 <circular-progress value="[[ _getProgressValue(financials, selected) ]]" max="[[ _getProgressMax(financials, selected) ]]" type="[[ selected ]]">
