@@ -1,8 +1,7 @@
 
 <dom-module id='project-card'>
   <template>
-    <style>
-
+    <style include="style-fade-in">
       :host {
         width: 100%;
         height: 100%;
@@ -173,7 +172,7 @@
       <div class-name="project-card__edge edge edge--{{svg}}"></div>
       <div class="project-card__body">
         <img class="project-card__icon" src="/images/icons/{{svg}}.svg" />
-        <span class-name="project-card__counter counter--{{svg}}">{{ _getNewProjectsCount(projects) }}</span>
+        <span class-name="project-card__counter fade-in delayed-1-2 counter--{{svg}}">{{ _getNewProjectsCount(projects) }}</span>
         <div style='project-card__content'>
           <h4 class="project-card__title">{{phrase}}</h4>
           <span class="description__text--small">{{content}}</span>
