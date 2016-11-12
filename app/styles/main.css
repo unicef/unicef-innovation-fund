@@ -202,7 +202,7 @@ h1, h2, h3, h4, h5, h6 {
   display: none;
 }
 
-.project-filter__menu.amount-filter
+.project-filter__menu.amount-filter,
 .dashboard #main-menu #selectionBar {
   background-color: black;
 }
