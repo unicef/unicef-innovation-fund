@@ -188,8 +188,13 @@ h1, h2, h3, h4, h5, h6 {
     border: 2px solid #33cccc;
     border-bottom: 8px solid #33cccc;
 }
+
 .project-list__portfolio.page--blue .portfolio-project__status--visible {
     color: #33cccc;
+}
+
+.page--blue portfolio-project {
+  height: 100px;
 }
 
 .page--blue .portfolio-project.description__text--amount,
