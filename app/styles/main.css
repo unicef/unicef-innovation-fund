@@ -192,6 +192,12 @@ h1, h2, h3, h4, h5, h6 {
     color: #33cccc;
 }
 
+.page--blue .portfolio-project.description__text--amount,
+.page--blue .project-filter__menu.amount-filter {
+  display: none;
+}
+
+.project-filter__menu.amount-filter
 .dashboard #main-menu #selectionBar {
   background-color: black;
 }

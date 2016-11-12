@@ -107,7 +107,6 @@
       .portfolio-project__sub-text.status-inactive::before {
         background: transparent;
       }
-
     </style>
 
     <div class-name='divider divider--{{svg}} portfolio-project__container mdl-shadow--4dp' on-tap="_handleTap" on-mouseenter='_onMouseEnter' on-mouseleave='_onMouseLeave'>
@@ -120,10 +119,10 @@
         <div title="{{item.name}}" class='description__title--small portfolio-project__name'>
           <span data-page="{{svg}}"><b>{{item.name}}</b></span>
         </div>
-        <div class='description__text--small'>
+        <div class='description__text--small description__text--country'>
           {{item.country}}
         </div>
-        <div class='description__text--small'>
+        <div class='description__text--small description__text--amount'>
           {{to_mil(item.amount)}}
         </div>
         <div class$='portfolio-project__sub-text portfolio-project__status {{ _getStatusClass(item.investment_status) }}'>
