@@ -562,7 +562,7 @@
 
         //Timeout waits for transition to finish
         setTimeout((function(){
-          this.projects = obj;
+          this.projects = Object.keys(obj).map(function (key) { return obj[key]; });
         }).bind(this), 350);
       }
     },
@@ -572,7 +572,7 @@
     },
 
     _computeLocation: function(route) {
-       return "portfolios/" + route + '/projects';
+       return "portfolio_projects/" + route + '/projects_hash';
     },
 
     _getProjectInfoValue: function(projects) {
@@ -617,8 +617,8 @@
     },
 
     _setAmountMinMax: function(elements) {
-      var values = elements.map((function(item){
-        return this._getIntFromAmount(item.amount);
+      var values = Object.keys(elements).map((function(key, index){
+        return this._getIntFromAmount(elements[key].amount);
       }).bind(this));
 
       var min = Math.min.apply(null, values);
