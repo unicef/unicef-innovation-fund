@@ -1,4 +1,3 @@
-
 <dom-module id='project-card'>
   <template>
     <style include="style-fade-in">
@@ -241,7 +240,7 @@
       var that = this;
     },
     _getPath: function(svg) {
-      return "portfolios/" + svg + '/projects';
+      return 'portfolio_projects/' + svg + '/projects_hash';
     },
     _isObjectEmpty: function(obj) {
       for(var prop in obj) {
@@ -291,23 +290,37 @@
       return cleanToMil(financials.spents[type]);
     },
     _getProjectInfoValue: function(projects) {
-      if (!projects.length) {
+      var projectsArray = [];
+      if (!Array.isArray(projects)) {
+        projectsArray = Object.keys(projects).map(function (key) { return projects[key]; });
+      } else {
+        projectsArray = projects;
+      }
+      if (!projectsArray.length) {
         return '';
       }
-      return projects.length + ' project' + (projects.length > 1 ? 's' : '');
+      return projectsArray.length + ' project' + (projectsArray.length > 1 ? 's' : '');
     },
     _getNewProjectsCount: function (projects) {
-        if (!projects.length) {
-          return '';
+      projectsArray = Object.keys(projects);
+      if (projectsArray.length == 0) {
+        return '';
+      }
+
+      var count = 0;
+
+      for(var p in projectsArray) {
+        var project = projects[projectsArray[p]];
+        if (project.new_investment) {
+          count++;
         }
-        var count = projects.filter(function (project) {
-            return (project.new_investment === 1);
-        })
-        if (count.length === 1) {
-            return count.length + " new project!";
-        } else if (count.length > 1) {
-            return count.length + " new projects!";
-        }
+      }
+
+      if (count === 1) {
+        return count + " new project!";
+      } else if (count > 1) {
+        return count + " new projects!";
+      }
     }
   })
 </script>
