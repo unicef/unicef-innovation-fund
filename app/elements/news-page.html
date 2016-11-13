@@ -396,7 +396,7 @@
 
           <hr class="news__divider">
           <h1 class="section__header cta">{{content.news_cta_text}}</h1>
-          <a class="news__button--anchor"href="{{content.news_cta_link}}" target="_blank">
+          <a class="news__button--anchor" href="#" target="_blank" data-menu="submit">
             <button class="news__button">{{content.news_cta_button}}</button>
           </a>
         </div>
@@ -447,6 +447,9 @@
           if (this.description.length > 150) {
             this.description = this.description.substring(0, 150);
           }
+          $('.news__button--anchor').on('click', function(event) {
+            menu_navigate(this, event)
+          });
         },
         _handleTap:function(event){
           var slug = event.target.attributes['data-taplink'].value;

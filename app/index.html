@@ -382,6 +382,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       $('hello-news').addClass(page_id);
     }
   };
+  var menu_navigate = function (element, event) {
+    var menu = element.getAttribute('data-menu');
+    var selectedMenu = $('paper-tabs#main-menu paper-tab#'+menu);
+    var app = document.getElementById('app');
+
+    if (menu && selectedMenu) {
+      event.preventDefault();
+      app.selected = $('paper-tabs#main-menu paper-tab').index(selectedMenu);
+      app.page_id = menu;
+      page_change(menu);
+    }
+  };
+
   </script>
   <script src="utility.js"></script>
 
