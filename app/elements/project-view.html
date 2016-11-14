@@ -227,6 +227,10 @@
         margin-bottom: -16px;
       }
 
+      .project-view__tabs.git {
+        display: none;
+      }
+
       @media only screen and (max-width: 839px) {
         .project-view__col--main {
           border-right: none;
@@ -276,7 +280,7 @@
             </paper-tabs>
           </template>
           <template is="dom-if" if="[[gitDataSet.length]]">
-              <paper-tabs class="project-view__tabs" selected="{{tabName}}" attr-for-selected="tab-name">
+              <paper-tabs class="project-view__tabs git" selected="{{tabName}}" attr-for-selected="tab-name">
                   <template is="dom-repeat" items="{{gitDataSet}}" as="Git">
                       <paper-tab tab-name="git-{{index}}">{{Git.label}}</paper-tab>
                   </template>
