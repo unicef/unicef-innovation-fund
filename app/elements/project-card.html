@@ -1,8 +1,6 @@
-
 <dom-module id='project-card'>
   <template>
-    <style>
-
+    <style include="style-fade-in">
       :host {
         width: 100%;
         height: 100%;
@@ -67,6 +65,7 @@
 
       .project-card__body {
         padding: 16px;
+        position: relative;
       }
 
       .project-card__title {
@@ -79,13 +78,13 @@
       }
 
       circular-progress {
-        --circular-progress-width: 80px;
-        --circular-progress-height: 80px;
+        --circular-progress-width: 60px;
+        --circular-progress-height: 60px;
         --circular-progress-padding: 10px;
       }
 
       .project-card__progress-value {
-        font-size: 20px;
+        font-size: 16px;
         display: block;
         line-height: 1em;
       }
@@ -94,8 +93,24 @@
         font-size: 10px;
         color: #333;
         display: block;
+        text-align: center;
         text-transform: uppercase;
         margin-bottom: -0.33em;
+      }
+
+      .project-card__counter {
+          display: block;
+          font-size: 0.95rem;
+          line-height: 0.95;
+          position: absolute;
+          right: 15px;
+          text-align: right;
+          top: 20px;
+          width: 25%;
+      }
+
+      .project-card__counter::first-letter {
+          font-size: 1.7rem;
       }
 
       .card__info-icon {
@@ -156,6 +171,7 @@
       <div class-name="project-card__edge edge edge--{{svg}}"></div>
       <div class="project-card__body">
         <img class="project-card__icon" src="/images/icons/{{svg}}.svg" />
+        <span class-name="project-card__counter fade-in delayed-1-2 counter--{{svg}}">{{ _getNewProjectsCount(projects) }}</span>
         <div style='project-card__content'>
           <h4 class="project-card__title">{{phrase}}</h4>
           <span class="description__text--small">{{content}}</span>
@@ -181,8 +197,8 @@
               <template id="cardProgressContainer" is="dom-if" if="[[ _canShowProgress(financials, type) ]]">
                 <circular-progress id="cardProgress" class="project-card__progress-item" value="[[ _getProgressValue(financials, type) ]]" max="[[ _getProgressMax(financials, type) ]]" type="[[ svg ]]">
                   <span class="project-card__progress-value">{{ _getProgressContent(financials, type) }}</span>
-                  <span class="project-card__progress-subtitle">Invested</span>
                 </circular-progress>
+                <span class="project-card__progress-subtitle">Invested</span>
               </template>
             </div>
           </div>
@@ -224,7 +240,7 @@
       var that = this;
     },
     _getPath: function(svg) {
-      return "portfolios/" + svg + '/projects';
+      return 'portfolio_projects/' + svg + '/projects_hash';
     },
     _isObjectEmpty: function(obj) {
       for(var prop in obj) {
@@ -274,10 +290,37 @@
       return cleanToMil(financials.spents[type]);
     },
     _getProjectInfoValue: function(projects) {
-      if (!projects.length) {
+      var projectsArray = [];
+      if (!Array.isArray(projects)) {
+        projectsArray = Object.keys(projects).map(function (key) { return projects[key]; });
+      } else {
+        projectsArray = projects;
+      }
+      if (!projectsArray.length) {
         return '';
       }
-      return projects.length + ' project' + (projects.length > 1 ? 's' : '');
+      return projectsArray.length + ' project' + (projectsArray.length > 1 ? 's' : '');
     },
+    _getNewProjectsCount: function (projects) {
+      projectsArray = Object.keys(projects);
+      if (projectsArray.length == 0) {
+        return '';
+      }
+
+      var count = 0;
+
+      for(var p in projectsArray) {
+        var project = projects[projectsArray[p]];
+        if (project.new_investment) {
+          count++;
+        }
+      }
+
+      if (count === 1) {
+        return count + " new project!";
+      } else if (count > 1) {
+        return count + " new projects!";
+      }
+    }
   })
 </script>
