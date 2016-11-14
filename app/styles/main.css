@@ -690,6 +690,34 @@ paper-item.past-investment::after {
   background-color: transparent;
 }
 
+.dashboard .menu-notification {
+  color: #3366CB;
+}
+
+.dashboard paper-tab.menu-notification::after,
+.app-menu .menu-notification::after {
+  background-image: url('../images/icons/notification.svg');
+}
+
+.menu-notification::after {
+  content: '\00a0';
+  background-image: url('../images/icons/notification-white.svg');
+  background-size: 10px 10px;
+  background-repeat: no-repeat;
+  width: 12px;
+  display: inline-block;
+  position: relative;
+  top: -6px;
+}
+
+.iron-selected.menu-notification::after {
+  display: none;
+}
+
+.iron-selected.menu-notification img {
+  display: none;
+}
+
 .input-content.paper-input-container label.paper-input {
     font-size: 14px;
 }

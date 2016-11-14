@@ -327,61 +327,74 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script src="scripts/app.js"></script>
   <script>
-  "use strict"
-  var app = document.getElementById('app');
-  app.selected = 0;
+    "use strict"
+    var app = document.getElementById('app');
+    app.selected = 0;
 
-  window.addEventListener('WebComponentsReady', function(e) {
-    $('paper-tabs#main-menu paper-tab').click(function() {
-      $('#mainContainer').scrollTop(0);
-      app.selected = $('paper-tabs#main-menu paper-tab').index(this);
-      app.page_id = this.id;
-      // Update css settings per tab
-      page_change(this.id);
+    window.addEventListener('WebComponentsReady', function(e) {
+      $('paper-tabs#main-menu paper-tab').click(function() {
+        $('#mainContainer').scrollTop(0);
+        app.selected = $('paper-tabs#main-menu paper-tab').index(this);
+        app.page_id = this.id;
+        // Update css settings per tab
+        page_change(this.id);
+      });
+
+      $('.app-menu .menu-item').click(function() {
+        app.selected = $('.app-menu .menu-item').index(this);
+        app.page_id = this.id;
+        document.querySelector('paper-drawer-panel').togglePanel();
+        // Update css settings per tab
+        page_change(this.id);
+      });
+
+
+      $('.app-name').on('click', function() {
+        var overlay = document.querySelector('overlay-intro');
+        overlay.showOverlay(0);
+      })
     });
 
-    $('.app-menu .menu-item').click(function() {
-      app.selected = $('.app-menu .menu-item').index(this);
-      app.page_id = this.id;
-      document.querySelector('paper-drawer-panel').togglePanel();
-      // Update css settings per tab
-      page_change(this.id);
-    });
+    var page_change = function(page_id) {
+      $(document).trigger('page-changed', page_id);
 
+      var ar = ['dashboard', 'all_projects', 'news', 'about', 'submit'];
+      ar.forEach(function(e) {
+        $('#mainToolbar').removeClass(e);
+        $('#drawer').removeClass(e);
+        $('.link').removeClass(e);
+        $('hello-all-projects').removeClass(e);
+        $('hello-about').removeClass(e);
+        $('hello-news').removeClass(e);
+      });
 
-    $('.app-name').on('click', function() {
-      var overlay = document.querySelector('overlay-intro');
-      overlay.showOverlay(0);
-    })
-  });
+      $('#mainToolbar').addClass(page_id);
+      $('#drawer').addClass(page_id);
+      $('.link').addClass(page_id);
+      if (page_id == 'all_projects') {
+        $('hello-all-projects').addClass(page_id);
+      }
+      if (page_id == 'about') {
+        $('hello-about').addClass(page_id);
+      }
+      if (page_id == 'news') {
+        $('.menu-notification').removeClass('menu-notification');
+        $('hello-news').addClass(page_id);
+      }
+    };
 
-  function page_change(page_id) {
+    var menu_navigate = function (element, event) {
+      var menu = element.getAttribute('data-menu');
+      var selectedMenu = $('paper-tabs#main-menu paper-tab#'+menu);
+      var app = document.getElementById('app');
 
-    $(document).trigger('page-changed', page_id);
-    var ar = ['dashboard', 'all_projects', 'news', 'about', 'submit'];
-
-    ar.forEach(function(e) {
-      $('#mainToolbar').removeClass(e);
-      $('#drawer').removeClass(e);
-      $('.link').removeClass(e);
-      $('hello-all-projects').removeClass(e);
-      $('hello-about').removeClass(e);
-      $('hello-news').removeClass(e);
-    });
-
-    $('#mainToolbar').addClass(page_id);
-    $('#drawer').addClass(page_id);
-    $('.link').addClass(page_id);
-    if (page_id == 'all_projects') {
-      $('hello-all-projects').addClass(page_id);
-    }
-    if (page_id == 'about') {
-      $('hello-about').addClass(page_id);
-    }
-    if (page_id == 'news') {
-      $('hello-news').addClass(page_id);
-    }
-  };
+      if (menu && selectedMenu) {
+        event.preventDefault();
+        app.selected = $('paper-tabs#main-menu paper-tab').index(selectedMenu);
+        app.page_id = menu;
+        page_change(menu);
+      }
+    };
   </script>
   <script src="utility.js"></script>
 
