@@ -261,7 +261,7 @@
     <firebase-document
       id='geoData'
       app-name="unicef-innovation-fund"
-      path="git/[[ project.slug ]]"
+      path="chart_data/[[ project.slug ]]"
       data="{{gitDataSet}}">
     </firebase-document>
 
@@ -471,11 +471,9 @@
             return 'ureport/' + country;
           } else if (project.slug.match(/iogt/i)) {
             return 'iogt';
-          } else if (project.github) {
-            return 'git/' + project.slug;
+          } else {
+            return 'chart_data/' + project.slug;
           }
-
-          return null;
         },
         _getGeoDataPath: function(project) {
           this.geoData = [];
@@ -579,14 +577,12 @@
             var that = this;
             if (Object.keys(data).length > 0 && data.constructor === Object) {
                 var dataSet = [];
-                for (var profile in data) {
-                    for (var repo in data[profile]) {
-                        var newEntry = {
-                            label: data[profile][repo].label || repo,
-                            text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti voluptatem vel, sequi, voluptate illo mollitia unde at atque cumque, magni eius nesciunt tempore neque harum eum blanditiis, deleniti veniam? Expedita."
-                        };
-                        dataSet.push(newEntry);
-                    }
+                for (var repo in data) {
+                      var newEntry = {
+                          label: data[repo].label || repo,
+                          text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti voluptatem vel, sequi, voluptate illo mollitia unde at atque cumque, magni eius nesciunt tempore neque harum eum blanditiis, deleniti veniam? Expedita."
+                      };
+                      dataSet.push(newEntry);
                 }
                 return that.gitDataSet = dataSet;
             }
