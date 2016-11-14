@@ -18,10 +18,14 @@
         },
         _refreshHtml: function() {
             if (this.html) {
+                var value = ''
                 if ((this.html.constructor == Array) && (this.html.length == 1)) {
-                    this.outerHTML = this.html[0];
+                    value = this.html[0];
                 } else  {
-                    this.outerHTML = this.html;
+                    value = this.html;
+                }
+                if (this.parentNode) {
+                    this.outerHTML = value;
                 }
             }
         }
