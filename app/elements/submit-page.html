@@ -713,7 +713,7 @@
       <button on-tap="changeSection" class="section__back" id="back-from-office" data-display="main" data-hide="office">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="container mdl-cell mdl-cell--12-col">
-        <p class="section__description">[[startups.submit_email_text]]</p>
+        <p class="section__description"><echo-html html="[[startups.submit_email_text]]"></echo-html></p>
         <p class$="section__auth-alert [[errorMessageClass]]">[[errorMessage]]</p>
         <form is="iron-form" class="section__form" on-submit="submitEmail">
           <input type="text" class$="section__input [[inputAuthClass]]" placeholder="email address" on-input="checkAuth">
@@ -726,81 +726,81 @@
       <button on-tap="changeSection" class="section__back" data-display="main" data-hide="office-submited">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="submit__office container mdl-cell mdl-cell--12-col">
-        [[countryOffices.intro]]
+        <echo-html html="[[countryOffices.intro]]"></echo-html>
         <div class="section__submit">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank">[[countryOffices.button_submission]]</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank"><echo-html html="[[countryOffices.button_submission]]"></echo-html></a>
         </div>
         <hr class="section__break">
-        <h3 class="section__subheader">[[countryOffices.section_1]]</h3>
+        <h3 class="section__subheader"><echo-html html="[[countryOffices.section_1]]"></echo-html>"</h3>
         <ol class="accordion">
             <li class="accordion__section">
                 <h4 class="accordion__header" data-open="eligibility" on-tap="accordionOpen">
-                    <p class="accordion__number">1</p>[[countryOffices.1-a]]
+                    <p class="accordion__number">1</p><echo-html html="[[countryOffices.1-a]]"></echo-html>
                     <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
                 </h4>
                 <div class="accordion__content accordion__content--toggle" data-accordion="eligibility">
-                    <p class="accordion__summary">[[countryOffices.1-b]]</p>
+                    <p class="accordion__summary"><echo-html html="[[countryOffices.1-b]]"></echo-html>"</p>
                     <ul class="description__list">
-                        [[countryOffices.1-c]]
+                        <echo-html html="[[countryOffices.1-c]]"></echo-html>
                     </ul>
                 </div>
             </li>
             <li class="accordion__section">
                 <h4 class="accordion__header" data-open="submit" on-tap="accordionOpen">
-                    <p class="accordion__number">2</p>[[countryOffices.2-a]]
+                    <p class="accordion__number">2</p>[<echo-html html="[countryOffices.2-a]]"></echo-html>
                     <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
                 </h4>
                 <div class="accordion__content accordion__content--toggle" data-accordion="submit">
-                    <p class="accordion__summary">[[countryOffices.2-b]]</p>
+                    <p class="accordion__summary"><echo-html html="[[countryOffices.2-b]]"></echo-html>"</p>
                     <ul class="description__list">
-                        [[countryOffices.2-c]]
+                        <echo-html html="[[countryOffices.2-c]]"></echo-html>
                     </ul>
                 </div>
             </li>
             <li class="accordion__section">
                 <h4 class="accordion__header" data-open="iterate" on-tap="accordionOpen">
-                    <p class="accordion__number">3</p>[[countryOffices.3-a]]
+                    <p class="accordion__number">3</p><echo-html html="[[countryOffices.3-a]]"></echo-html>
                     <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
                 </h4>
                 <div class="accordion__content accordion__content--toggle" data-accordion="iterate">
-                    <p class="accordion__summary--gray">[[countryOffices.3-b]]</p>
+                    <p class="accordion__summary--gray"><echo-html html="[[countryOffices.3-b]]"></echo-html>"</p>
                     <ul class="description__list">
-                        [[countryOffices.3-c]]
+                        <echo-html html="[[countryOffices.3-c]]"></echo-html>
                     </ul>
                 </div>
             </li>
             <li class="accordion__section">
                 <h4 class="accordion__header" data-open="decision" on-tap="accordionOpen">
-                    <p class="accordion__number">4</p>[[countryOffices.4-a]]
+                    <p class="accordion__number">4</p><echo-html html="[[countryOffices.4-a]]"></echo-html>
                     <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
                 </h4>
                 <div class="accordion__content accordion__content--toggle" data-accordion="decision">
-                    <p class="accordion__summary--gray">[[countryOffices.4-b]]</p>
+                    <p class="accordion__summary--gray"><echo-html html="[[countryOffices.4-b]]"></echo-html>"</p>
                 </div>
             </li>
         </ol>
         <hr class="section__break">
-        <h3 class="section__subheader">[[countryOffices.section_2]]</h3>
+        <h3 class="section__subheader"><echo-html html="[[countryOffices.section_2]]"></echo-html></h3>
         <ul class="role__list">
             <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/real-time.svg" alt="Real-time information" class="role__image">[[countryOffices.realtime_1]]</h4>
-                <p class="role__description">[[countryOffices.realtime_2]]</p>
+                <h4 class="role__name"><img src="../images/icons/real-time.svg" alt="Real-time information" class="role__image"><echo-html html="[[countryOffices.realtime_1]]"></echo-html></h4>
+                <p class="role__description"><echo-html html="[[countryOffices.realtime_2]]"></echo-html></p>
             </li>
             <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/implement.svg" alt="Implement" class="role__image">[[countryOffices.implement_1]]</h4>
-                <p class="role__description">[[countryOffices.implement_2]]</p>
+                <h4 class="role__name"><img src="../images/icons/implement.svg" alt="Implement" class="role__image"><echo-html html="[[countryOffices.implement_1]]"></echo-html></h4>
+                <p class="role__description"><echo-html html="[[countryOffices.implement_2]]"></echo-html></p>
             </li>
             <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/report.svg" alt="Report" class="role__image">[[countryOffices.report_1]]</h4>
-                <p class="role__description">[[countryOffices.report_2]]</p>
+                <h4 class="role__name"><img src="../images/icons/report.svg" alt="Report" class="role__image"><echo-html html="[[countryOffices.report_1]]"></echo-html></h4>
+                <p class="role__description"><echo-html html="[[countryOffices.report_2]]"></echo-html></p>
             </li>
             <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/spend.svg" alt="Spend" class="role__image">[[countryOffices.send_1]]</h4>
-                <p class="role__description">[[countryOffices.send_2]]</p>
+                <h4 class="role__name"><img src="../images/icons/spend.svg" alt="Spend" class="role__image"><echo-html html="[[countryOffices.send_1]]"></echo-html></h4>
+                <p class="role__description"><echo-html html="[[countryOffices.send_2]]"></echo-html></p>
             </li>
             <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/share.svg" alt="Share" class="role__image">[[countryOffices.share_1]]</h4>
-                <p class="role__description">[[countryOffices.share_2]]</p>
+                <h4 class="role__name"><img src="../images/icons/share.svg" alt="Share" class="role__image"><echo-html html="[[countryOffices.share_1]]"></echo-html></h4>
+                <p class="role__description"><echo-html html="[[countryOffices.share_2]]"></echo-html></p>
             </li>
         </ul>
       </div>
@@ -810,47 +810,47 @@
       <button on-tap="changeSection" class="section__back" data-display="main" data-hide="startup">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="container mdl-cell mdl-cell--12-col">
-        [[startups.submit_startup_2_1]]
+        <echo-html html="[[startups.submit_startup_2_1]]"></echo-html>
         <img src="../images/icons/startups_steps.svg" alt="Steps for startup" class="section__icon--wide">
         <ol class="faq faq__list">
             <li class="faq__step">
-                <h3 class="faq__name">[[startups.submit_startup_step_titles.0]]</h3>
-                <strong class="faq__description">[[startups.submit_startup_step_bold.0]]</strong>
+                <h3 class="faq__name"><echo-html html="[[startups.submit_startup_step_titles.0]]"></echo-html></h3>
+                <strong class="faq__description"><echo-html html="[[startups.submit_startup_step_bold.0]]"></echo-html></strong>
                 <ul class="faq__list">
-                    [[startups.submit_startup_step_content.0]]
+                    <echo-html html="[[startups.submit_startup_step_content.0]]"></echo-html>
                 </ul>
             </li>
             <li class="faq__step">
-                <h3 class="faq__name">[[startups.submit_startup_step_titles.1]]</h3>
-                <strong class="faq__description">[[startups.submit_startup_step_bold.1]]</strong>
+                <h3 class="faq__name"><echo-html html="[[startups.submit_startup_step_titles.1]]"></echo-html></h3>
+                <strong class="faq__description"><echo-html html="[[startups.submit_startup_step_bold.1]]"></echo-html></strong>
                 <ul class="faq__list">
-                    [[startups.submit_startup_step_content.1]]
+                    <echo-html html="[[startups.submit_startup_step_content.1]]"></echo-html>
                 </ul>
             </li>
             <li class="faq__step">
-                <h3 class="faq__name">[[startups.submit_startup_step_titles.2]]</h3>
-                <strong class="faq__description">[[startups.submit_startup_step_bold.2]]</strong>
+                <h3 class="faq__name"><echo-html html="[[startups.submit_startup_step_titles.2]]"></echo-html></h3>
+                <strong class="faq__description"><echo-html html="[[startups.submit_startup_step_bold.2]]"></echo-html></strong>
                 <ul class="faq__list">
-                    [[startups.submit_startup_step_content.2]]
+                    <echo-html html="[[startups.submit_startup_step_content.2]]"></echo-html>
                 </ul>
             </li>
             <li class="faq__step">
-                <h3 class="faq__name">[[startups.submit_startup_step_titles.3]]</h3>
-                <strong class="faq__description">[[startups.submit_startup_step_bold.3]]</strong>
+                <h3 class="faq__name"><echo-html html="[[startups.submit_startup_step_titles.3]]"></echo-html></h3>
+                <strong class="faq__description"><echo-html html="[[startups.submit_startup_step_bold.3]]"></echo-html></strong>
                 <ul class="faq__list">
-                    [[startups.submit_startup_step_content.3]]
+                    <echo-html html="[[startups.submit_startup_step_content.3]]"></echo-html>
                 </ul>
             </li>
         </ol>
         <div class="faq__submit">
-            <a href="https://form.jotform.com/62704508221145" class="faq__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank">[[startups.submit_startup_submit_button]]</a>
+            <a href="https://form.jotform.com/62704508221145" class="faq__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank"><echo-html html="[[startups.submit_startup_submit_button]]"></echo-html></a>
         </div>
         <hr class="section__break--thin">
         <div class="summary">
             <img src="../images/icons/country_offices-alt.svg" alt="" class="summary__icon">
             <div class="summary__content">
-                <h3 class="summary__title">[[startups.submit_startup_conclusion_title]]</h3>
-                [[startups.submit_startup_conclusion_content]]
+                <h3 class="summary__title"><echo-html html="[[startups.submit_startup_conclusion_title]]"></echo-html></h3>
+                <echo-html html="[[startups.submit_startup_conclusion_content]]"></echo-html>
             </div>
         </div>
       </div>
