@@ -206,6 +206,12 @@ h1, h2, h3, h4, h5, h6 {
   background-color: black;
 }
 
+.submit__office.container p {
+  color: #5D5D5D;
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
 #main-menu #selectionBar {
   background-color: white;
 }
