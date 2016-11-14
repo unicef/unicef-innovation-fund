@@ -59,14 +59,6 @@ function prepareUreport(dataSet, featured, color){
 
 function prepare(svg, featured, dataSet){
   if(Object.keys(dataSet) == 0){return;}
-  // var color = ''
-  // if(svg == 'youth_engagement') {
-  //   color = "rgba(255, 204, 51, 0.2)";
-  // }else if(svg == 'real_time_information') {
-  //   color = "rgba(255, 143, 171, 0.2)";
-  // }else{
-  //   color = "rgba(133, 214, 133, 0.2)";
-  // }
 
   if (svg == 'youth_engagement'){
     return prepareUreport(dataSet, featured, "rgba(255, 204, 51, 0.2)")
@@ -181,37 +173,26 @@ function gitPointsAndLabels(dataSet){
       }, {})
 
   commit_months = {};
-  account = Object.keys(dataSet)[0];
-  repo = Object.keys(dataSet[account])[0]
-  commits = dataSet[account][repo].commits
+  repo = Object.keys(dataSet)[0];
+  commits = dataSet[repo].data;
+  prettyCommits = dataSet[repo].data_pretty;
 
   var dates = [];
-  commits.forEach(function(commit){
-    var date = new Date(commit.week*1000)
-    var month = date.getMonth();
-    var year = date.getFullYear();
+  var points = [];
+  var labels = [];
+  var total = 0;
+  for (var i = 0; i< commits.length; i++) {
+    var commit = commits[i];
+    var prettyCommit = prettyCommits[i];
 
+    var date = new Date(commit[0]);
+    var sum = commit[1];
+    total += sum;
 
-    week_sum = commit.days.reduce(function(total, day){
-      return total + day
-    }, 0)
-    var label = months[month] + " " +  year;
-    humanized_months.push(label);
-
-    var date = year + "-" + month;
     dates.push([date]);
-
-    if (commit_months[label]){
-      commit_months[label] += week_sum;
-    }else{
-      commit_months[label] = week_sum;
-    }
-  });
-
-  var labels = humanized_months.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
-  var points = labels.map(function(l){
-    return commit_months[l];
-  })
+    points.push(total);
+    labels.push(prettyCommit[0]);
+  };
 
   return {points: points, labels: labels, dates: dates}
 }
