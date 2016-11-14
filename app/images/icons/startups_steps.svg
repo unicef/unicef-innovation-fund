@@ -18,12 +18,12 @@
 	.st12{fill:#0099FF;}
 	.st13{fill:none;stroke:#33CCCC;stroke-miterlimit:10;}
 	.st14{fill:none;stroke:#33CCCC;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-	.st15{font-family:'SourceSansPro-Bold';}
+	.st15{font-family:'sans-serif'; font-weight: 500}
 	.st16{font-size:24px;}
 </style>
 <font horiz-adv-x="1000">
 <!-- Source is a trademark of Adobe Systems Incorporated in the United States and/or other countries. -->
-<font-face font-family="SourceSansPro-Bold" units-per-em="1000" underline-position="-100" underline-thickness="50"/>
+<font-face font-family="sans-serif" font-weight="500" units-per-em="1000" underline-position="-100" underline-thickness="50"/>
 <missing-glyph horiz-adv-x="690" d="M80,0l530,0l0,660l-530,0M178,155l0,371l95,-186M417,340l94,186l0,-371M263,91l39,77l41,98l4,0l41,-98l39,-77M343,414l-43,95l-31,59l152,0l-32,-59l-42,-95z"/>
 <glyph unicode="A" horiz-adv-x="571" d="M213,270l16,60C247,395 265,471 280,540l4,0C302,472 319,395 337,330l16,-60M423,0l156,0l-205,652l-176,0l-205,-652l150,0l40,155l200,0z"/>
 <glyph unicode="B" horiz-adv-x="604" d="M76,0l242,0C460,0 572,59 572,192C572,279 523,328 430,345l0,4C506,369 540,432 540,490C540,615 435,652 299,652l-223,0M224,389l0,149l70,0C362,538 396,518 396,469C396,420 364,389 292,389M224,114l0,171l82,0C387,285 428,260 428,203C428,144 386,114 306,114z"/>
@@ -75,7 +75,7 @@
 	<g>
 		<line class="st11" x1="225.416" y1="93.096" x2="269.966" y2="93.096"/>
 		<g>
-			<polygon class="st12" points="260.688,104.548 258.778,102.497 268.891,93.099 258.778,83.698 260.688,81.648 273.002,93.099 			
+			<polygon class="st12" points="260.688,104.548 258.778,102.497 268.891,93.099 258.778,83.698 260.688,81.648 273.002,93.099
 				"/>
 		</g>
 	</g>
@@ -84,7 +84,7 @@
 	<g>
 		<line class="st11" x1="385.452" y1="93.736" x2="430.002" y2="93.736"/>
 		<g>
-			<polygon class="st12" points="420.724,105.188 418.814,103.137 428.927,93.739 418.814,84.338 420.724,82.287 433.038,93.739 			
+			<polygon class="st12" points="420.724,105.188 418.814,103.137 428.927,93.739 418.814,84.338 420.724,82.287 433.038,93.739
 				"/>
 		</g>
 	</g>
@@ -93,7 +93,7 @@
 	<g>
 		<line class="st11" x1="558.955" y1="93.736" x2="603.505" y2="93.736"/>
 		<g>
-			<polygon class="st12" points="594.227,105.188 592.317,103.137 602.43,93.739 592.317,84.338 594.227,82.287 606.541,93.739 			
+			<polygon class="st12" points="594.227,105.188 592.317,103.137 602.43,93.739 592.317,84.338 594.227,82.287 606.541,93.739
 				"/>
 		</g>
 	</g>
