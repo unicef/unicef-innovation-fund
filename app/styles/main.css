@@ -89,24 +89,7 @@ h1, h2, h3, h4, h5, h6 {
 .blue paper-toolbar {
   background: #FFF;
   color:#3366cc;
-/*        border-bottom: solid blue 1px;*/
 }
-paper-tab{
-  width:100px;
-}
-
-
-
-
-/*      paper-material {
-  border-radius: 2px;
-  height: 100%;
-  padding: 16px 0 16px 0;
-  width: calc(98.66% - 16px);
-  margin: 0px auto;
-  background: white;
-
-}     */
 
 .amount_invested{
   text-align: center;
@@ -172,6 +155,57 @@ paper-tab{
 
 .portfolio-card--infrastructure .featured_project_name {
   color: #66cc66;
+}
+
+.project-list__portfolio.page--yellow .portfolio-project--new {
+    border: 2px solid #ffcc33;
+    border-bottom: 8px solid #ffcc33;
+}
+
+.project-list__portfolio.page--yellow .portfolio-project__status--visible {
+    color: #dca603;
+}
+
+.project-list__portfolio.page--red .portfolio-project--new {
+    border: 2px solid #ff3366;
+    border-bottom: 8px solid #ff3366;
+}
+
+.project-list__portfolio.page--red .portfolio-project__status--visible {
+    color: #ff3366;
+}
+
+.project-list__portfolio.page--green .portfolio-project--new {
+    border: 2px solid #66cc66;
+    border-bottom: 8px solid #66cc66;
+}
+
+.project-list__portfolio.page--green .portfolio-project__status--visible {
+    color: #66cc66;
+}
+
+.project-list__portfolio.page--blue .portfolio-project--new {
+    border: 2px solid #33cccc;
+    border-bottom: 8px solid #33cccc;
+}
+.project-list__portfolio.page--blue .portfolio-project__status--visible {
+    color: #33cccc;
+}
+
+.dashboard #main-menu #selectionBar {
+  background-color: black;
+}
+
+#main-menu #selectionBar {
+  background-color: white;
+}
+
+.overlay_link {
+  color: white;
+  text-decoration: none;
+}
+.new-projects {
+  color: rgb(68,138,255);
 }
 
 .featured_project_blurb {
@@ -654,4 +688,36 @@ paper-item.current-investment::after, paper-item.past-investment::after {
 
 paper-item.past-investment::after {
   background-color: transparent;
+}
+
+.dashboard .menu-notification {
+  color: #3366CB;
+}
+
+.dashboard paper-tab.menu-notification::after,
+.app-menu .menu-notification::after {
+  background-image: url('../images/icons/notification.svg');
+}
+
+.menu-notification::after {
+  content: '\00a0';
+  background-image: url('../images/icons/notification-white.svg');
+  background-size: 10px 10px;
+  background-repeat: no-repeat;
+  width: 12px;
+  display: inline-block;
+  position: relative;
+  top: -6px;
+}
+
+.iron-selected.menu-notification::after {
+  display: none;
+}
+
+.iron-selected.menu-notification img {
+  display: none;
+}
+
+.input-content.paper-input-container label.paper-input {
+    font-size: 14px;
 }

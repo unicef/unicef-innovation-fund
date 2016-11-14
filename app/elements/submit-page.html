@@ -66,13 +66,17 @@
       margin-top: 1rem;
     }
 
+    .section__description-startup {
+        margin-top: 3.7rem;
+        text-align: left;
+    }
+
     .section__submit {
         text-align: center;
     }
 
     .section__submit-link {
       background-color: #0099FF;
-      color: #FFFFFF !important;
       /* Overwrite MDL default style */
       font-size: 1.15rem;
       font-weight: 400;
@@ -118,6 +122,12 @@
 
     .section__icon {
       width: 15%;
+    }
+
+    .section__icon--wide {
+        margin-bottom: 1rem;
+        margin-top: 4.3rem;
+        width: 90%;
     }
 
     .section__link {
@@ -193,27 +203,6 @@
 
     .is-visible {
         opacity: 1;
-    }
-
-    .faq__name {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin: 1.3rem 0;
-      text-align: left;
-    }
-
-    .faq__link {
-      float: right;
-      font-weight: 400;
-      text-decoration: none;
-    }
-
-    .faq__description {
-      font-size: 1.25rem;
-      line-height: 1.4;
-      letter-spacing: 0.094rem;
-      margin-bottom: 4.1rem;
-      text-align: left;
     }
 
     .js-visible {
@@ -369,6 +358,145 @@
         line-height: 1.5;
     }
 
+    /*Submit startups*/
+    .faq {
+        margin-top: 5.8rem;
+        list-style-type: none;
+        padding-left: 2rem;
+    }
+
+    .faq__list {
+        color: #5D5D5D;
+        margin-top: 2rem;
+        padding-left: 2.75rem;
+        text-align: left;
+    }
+
+    .faq__step {
+        margin: 5.25rem 0;
+    }
+    .faq__step:last-of-type {
+        margin-bottom: 0;
+    }
+
+    .faq__name {
+        color: #7ADEDE;
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 0.45;
+    }
+
+    .faq__description {
+        color: #000000;
+        display: block;
+        font-size: 1.465rem;
+    }
+
+    .faq__sub-description {
+        color: #5D5D5D;
+        display: block;
+        font-size: 1.4rem;
+        letter-spacing: 0.02rem;
+    }
+
+    .faq__requirement {
+        font-size: 1.46rem;
+        list-style-type: disc;
+        line-height: 1.7;
+        padding-left: 0.8rem;
+        word-spacing: 0.155rem;
+    }
+
+    .faq__requirement--unstyled {
+        list-style-type: none;
+    }
+
+    .faq__link {
+        color: #7ADEDE;
+        text-decoration: none;
+    }
+
+    .faq__submit {
+        text-align: center;
+    }
+
+    .faq__submit-link {
+        background-color: #0099FF;
+        color: #FFFFFF !important;
+        font-size: 1.5rem;
+        font-weight: 400;
+        height: 55px;
+        line-height: 55px;
+        margin-top: 2.5rem;
+        max-width: 245px;
+        text-transform: uppercase;
+        width: 100%;
+    }
+
+    .faq__emphasis {
+        word-spacing: normal;
+    }
+
+    .faq__button {
+        border: 2px solid #7ADEDE;
+        color: #7ADEDE;
+        display: table;
+        font-weight: 800;
+        margin: 1rem 0;
+        padding: 0.2rem 4.25rem;
+        text-decoration: none;
+    }
+
+    .section__break--thin {
+        color: #7ADEDE;
+        margin: 4rem 0 3.5rem 4.2rem;
+    }
+
+    .summary {
+        align-items: flex-start;
+        display: flex;
+        margin-left: 5.6rem;
+    }
+
+    .summary__icon {
+        padding-top: 0.8rem;
+        width: 14%;
+    }
+
+    .summary__content {
+        margin-bottom: 4rem;
+        margin-left: 2rem;
+        text-align: left;
+    }
+
+    .summary__title {
+        font-size: 2rem;
+        font-weight: 600;
+        line-height: 2;
+        margin: 0;
+    }
+
+    .summary__description {
+        font-size: 1.45rem;
+    }
+
+    .summary__emphassis {
+        display: block;
+        margin-bottom: 0.8rem;
+    }
+
+    .summary__link {
+        border: 2px solid #7ADEDE;
+        color: #7ADEDE;
+        display: table;
+        font-size: 1.7rem;
+        font-weight: 500;
+        margin-top: 2.2rem;
+        padding: 0.7rem 3.9rem;
+        text-decoration: none;
+    }
+
+
     @media (max-width: 1200px) {
       .submit__container {
         padding-top: 3rem;
@@ -402,6 +530,22 @@
     @media (max-width: 920px) {
       .section__back {
         float: none;
+      }
+
+      .faq__list {
+          padding-left: 0;
+      }
+
+      .section__break--thin {
+          margin-left: 0;
+      }
+
+      .summary, .summary__content {
+          margin-left: 0;
+      }
+
+      .summary__icon {
+          width: 20%;
       }
     }
 
@@ -455,6 +599,18 @@
       .role__description {
           font-size: 1.2rem;
       }
+
+      .faq__button {
+          margin: 1rem auto;
+      }
+
+      .summary {
+          text-align: center;
+      }
+
+      .summary__icon, .summary__link {
+          display: none;
+      }
     }
 
     @media (max-width: 480px) {
@@ -468,6 +624,10 @@
 
         .section__confirm-email {
             width: 100%;
+        }
+
+        .section__icon--wide {
+            display: none;
         }
     }
 
@@ -495,7 +655,7 @@
     </style>
     <style is="custom-style" include="style-fade-in"></style>
     <firebase-document
-      app-name="test"
+      app-name="unicef-innovation-fund"
       path="/summary/portfolios/invested_youth_engagement"
       data="{{emails}}">
     </firebase-document>
@@ -637,16 +797,66 @@
       <button on-tap="changeSection" class="section__back" data-display="main" data-hide="startup">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="container mdl-cell mdl-cell--12-col">
-        <h3 class="section__header">STARTUP</h3>
-        <p class="section__description">The next call for submissions from start-ups and academic institutions is planned for December 2016. Please follow us on Twitter <a target="_blank" href="https://twitter.com/unicefinnovate" class="section__link">@unicefinnovate</a>, where we will share updates about the Fund and future submission opportunities and deadlines.</p>
-        <p class="section__description">If you submitted an Expression of Interest in the last round (closed on 26 February 2016), only selected companies/institutions have been contacted with information about next steps. Thank you for your submission nd interest in the Innovation Fund.</p>
-        <hr class="section__break">
-        <h3 class="section__subheader">Resources</h3>
-        <img src="../images/icons/resources.svg" alt="" class="section__icon">
-        <h4 class="faq__name">Short Background Note<a target="_blank" href="https://drive.google.com/file/d/0BwC3tr7jXADzNXJTNzk4d01qams/view?usp=sharing" class="faq__link">Download</a></h4>
-        <p class="faq__description">The Innovation Fund allows UNICEF to quickly assess, fund and scale open-source solutions that have been developed by companies in new and emerging markets. The Innovation Fund supports the generation of open source, public goods that address the most pressing challenges facing children. The Innovation Fund brings together models of financing and methodologies used by Venture Capital funds and the principles of UNICEF'S award winning Innovation Unit. </p>
-        <h4 class="faq__name">Innovation Principles<a target="_blank" href="http://www.unicefstories.org/principles/" class="faq__link">Download</a></h4>
-        <p class="faq__description">The following set of principles represents a concerted effort by donors to capture the most important lessons learned by the development community in the implementation of technology-enabled programs. Having evolved from a previous set of implementer precepts endorsed by over 300 organizations, these principles seek to serve as a set of living guidelines that are meant to inform, but not dictate, the design of technology-enabled development programs.</p>
+        <p class="section__description section__description-startup">The purpose of the Innovation Fund is to support new solutions from small businesses in markets that many companies or investors consider risky while UNICEF sees these markets as sources of opportunity. UNICEF will support companies registered in these markets in UNICEF’s programme countries- with a small amount of money to move solutions to the stage where these are proven to be workable and can be implemented.</p>
+        <img src="../images/icons/startups_steps.svg" alt="Steps for startup" class="section__icon--wide">
+        <ol class="faq faq__list">
+            <li class="faq__step">
+                <h3 class="faq__name">Step 1</h3>
+                <strong class="faq__description">Check Eligibility</strong>
+                <strong class="faq__sub-description">Check that your company/institution and project meet all the eligibility requirements</strong>
+                <ul class="faq__list">
+                    <li class="faq__requirement">Your company/institution must be registered in a UNICEF programme country (<a href="http://unicefstories.org/" class="faq__link">see list here</a>)</li>
+                    <li class="faq__requirement">You’re working on open source technology solutions or willing to be open source under the following licenses:<br>
+                        <strong>Software:</strong>  BSD, AGPL, LGPL<br>
+                        <strong>Content and designs:</strong> Content and designs:
+                    </li>
+                    <li class="faq__requirement">Your project generates publicly-exposed real-time data that can be/is measured</li>
+                </ul>
+            </li>
+            <li class="faq__step">
+                <h3 class="faq__name">Step 2</h3>
+                <strong class="faq__description">Read the full request for Expression of Interest document</strong>
+                <ul class="faq__list">
+                    <li class="faq__requirement">Read the full <a href="http://unicefstories.org/" class="faq__link">Request for Expressions of Interest (REOI)</a> document to understand the submission process and to learn more about the kinds of projects that qualify and how the scoring will be done.</li>
+                </ul>
+            </li>
+            <li class="faq__step">
+                <h3 class="faq__name">Step 3</h3>
+                <strong class="faq__description">Any questions?</strong>
+                <ul class="faq__list">
+                    <li class="faq__requirement">Read our <a href="http://unicefstories.org/" class="faq__link">FAQ’s</a> about the process</li>
+                    <li class="faq__requirement"><a href="http://unicefstories.org/" class="faq__link">Submit any questions you may have.</a> Responses will be posted regularly.<br>
+                        <em class="faq__emphasis">Please note that the period to submit questions for the REOI closes on 16 February, 2016.</em>
+                        <a href="" class="faq__button">Ask now</a>
+                        See the <a href="http://unicefstories.org/" class="faq__link">answers</a> to what others have asked <a href="http://unicefstories.org/" class="faq__link">&#8594;</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="faq__step">
+                <h3 class="faq__name">Step 4</h3>
+                <strong class="faq__description">Submit</strong>
+                <ul class="faq__list">
+                    <li class="faq__requirement faq__requirement--unstyled">
+                        <a href="http://unicefstories.org/" class="faq__link">Submit</a> your expression of interest by completing the form.<br>
+                        Preview the questions to prepare your submission, <a href="http://unicefstories.org/" class="faq__link">preview questions</a>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <div class="faq__submit">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="faq__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank">Submission Form</a>
+        </div>
+        <hr class="section__break--thin">
+        <div class="summary">
+            <img src="../images/icons/country_offices-alt.svg" alt="" class="summary__icon">
+            <div class="summary__content">
+                <h3 class="summary__title">Got questions?</h3>
+                <p class="summary__description">Responses will be posted regularly.</p>
+                <em class="summary__description summary__emphassis">Please note that the period to submit questions for the REOI closes on DD MONTH, YYYY.</em>
+                <p class="summary__description">UNICEF will not answer any questions submitted after this date.</p>
+                <a href="http://unicefstories.org/" class="summary__link">Ask now</a>
+            </div>
+        </div>
       </div>
       <div class="mdl-layout-spacer"></div>
     </div>

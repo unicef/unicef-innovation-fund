@@ -1,0 +1,34 @@
+<dom-module id="echo-html">
+    <template>
+        <style>
+        </style>
+    </template>
+</dom-module>
+
+<script>
+(function() {
+    Polymer({
+        is: 'echo-html',
+        properties: {
+            html: {
+                type: Object,
+                value: '',
+                observer: '_refreshHtml'
+            }
+        },
+        _refreshHtml: function() {
+            if (this.html) {
+                var value = ''
+                if ((this.html.constructor == Array) && (this.html.length == 1)) {
+                    value = this.html[0];
+                } else  {
+                    value = this.html;
+                }
+                if (this.parentNode) {
+                    this.outerHTML = value;
+                }
+            }
+        }
+    });
+})();
+</script>

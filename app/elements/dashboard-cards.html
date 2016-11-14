@@ -1,36 +1,57 @@
 <dom-module id='dashboard-cards'>
-  <style>
-  .mdl-card {
-    margin-left: auto;
-    margin-right: auto;
-  }
+  <style include="style-fade-in">
+    .mdl-card {
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-  .portfolio-card--youth_engagement {
+    .label-container {
+      position: relative;
+    }
+
+    .portfolio-card--youth_engagement {
       --portfolio-card-lead-color: #ffcc33;
-  }
+    }
 
-  .portfolio-card--real-time-information {
+    .portfolio-card--real-time-information {
       --portfolio-card-lead-color: #ff3366;
-  }
+    }
 
-  .portfolio-card--infrastructure {
+    .portfolio-card--infrastructure {
       --portfolio-card-lead-color: #66cc66;
-  }
+    }
 
-  .project__container {
+    .project__container {
       box-shadow: 0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.2);
       transition: all 0.175s ;
-  }
+    }
 
-  .project__container:hover {
+    .project__container:hover {
       box-shadow: 0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12),0 5px 5px -3px rgba(0,0,0,.2);
-  }
+    }
 
-  @media (max-width: 840px) {
+    .project-counter {
+      font-size: 14px;
+      right: 15px;
+      position: absolute;
+      color: #3366CB;
+      top: 7px;
+      text-decoration: none;
+    }
+
+    .project-counter::empty {
+      display: none;
+    }
+
+    .project-counter strong {
+      font-size: 21px;
+    }
+
+    @media (max-width: 840px) {
       .mdl-card {
-          border-radius: 0;
+        border-radius: 0;
       }
-  }
+    }
   </style>
 
   <template>
@@ -39,7 +60,7 @@
       <iron-media-query full query="print" query-matches="{{print}}"></iron-media-query>
 
       <firebase-document
-        app-name="test"
+        app-name="unicef-innovation-fund"
         path="/budget"
         data="{{financials}}">
       </firebase-document>
@@ -49,8 +70,11 @@
           <div class="mdl-cell mdl-cell--3-col">
             <h4 class="title--tiny dashboard__title">Summary</h4>
           </div>
-          <div class="mdl-cell mdl-cell--9-col">
+          <div class="mdl-cell mdl-cell--9-col label-container">
             <h4 class="title--tiny dashboard__title">Portfolios</h4>
+            <a href="#" data-menu="news" class="project-counter fade-in page__header-content">
+              <strong></strong> <span></span>
+            </a>
           </div>
         </div>
         <div class="mdl-grid container">
@@ -78,17 +102,12 @@
         </div>
       </main>
     </div>
+    <firebase-document
+      app-name="unicef-innovation-fund"
+      path='/portfolio_projects'
+      data="{{projects}}">
+    </firebase-document>
 
-
-<!--     <iron-ajax
-        auto
-        url="{{url}}"
-        handle-as="json"
-        loading="{{loading}}"
-        on-response="handle_response"
-        last-response="data"
-        ></iron-ajax>
- -->
   </template>
 
 </dom-module>
@@ -103,25 +122,69 @@
         type: String,
         notify: true
       },
-
       svg: {
         value: '',
         notify: true
       },
       url: {
         value: '/stats'
+      },
+      projects: {
+        type: Object,
+        observer: 'prepareCounter'
       }
 
     },
 
+    prepareCounter: function() {
+      if (!Object.keys(this.projects).length) {
+        return;
+      }
+      var projectCount = this._computeNewProjectsCount();
+      var counterElement = $('.project-counter');
+
+      if (projectCount > 0) {
+        counterElement.find('strong').html(projectCount);
+        counterElement.find('span').html(
+          'NEW Project' + ((projectCount > 1)?'s':'')
+        );
+        counterElement.removeClass('fade-in');
+        counterElement.addClass('fade-in');
+        counterElement.on('click', function(event) {
+          menu_navigate(this, event)
+        });
+      } else {
+        counterElement.find('strong').html('');
+        counterElement.find('span').html('');
+      }
+    },
     _financial: function(budget, kind){
       if(budget.spents){
         return [budget.totals[kind], budget.spents[kind]]
       }
     },
-
     _computeClasses: function(wide) {
        return (!wide) ? 'layout vertical': 'layout';
+    },
+    _computeNewProjectsCount: function() {
+      var self = this;
+      var projectCount = 0;
+      var categories = Object.keys(self.projects);
+      for(var c in categories) {
+        var projects_hash = self.projects[categories[c]].projects_hash;
+        for(var p in projects_hash) {
+          if (!projects_hash.hasOwnProperty(p)) {
+            continue;
+          }
+          if (projects_hash[p].new_investment) {
+            projects_hash[p].category = categories[c];
+            projectCount++;
+          }
+        }
+      }
+
+      $(document).trigger('new-projects-count-computed', projectCount);
+      return projectCount;
     }
   })
 </script>
