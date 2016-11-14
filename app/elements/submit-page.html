@@ -2,12 +2,13 @@
   <template>
     <style is="custom-style">
     .container {
-      max-width: 1030px;
+      max-width: 795px;
       position: relative;
       text-align: center;
     }
 
     .container--wide {
+      margin: 0 auto;
       max-width: 1920px;
     }
 
@@ -67,7 +68,22 @@
     }
 
     .section__description-startup {
-        margin-top: 3.7rem;
+        margin-top: 0;
+        font-size: 1.35rem;
+        font-weight: 400;
+        line-height: 1.85;
+        text-align: left;
+    }
+
+    .section__description-startup br {
+        line-height: 3.3;
+    }
+
+    .section__description--bold {
+        display: block;
+        font-size: 1.35rem;
+        font-weight: 700;
+        line-height: 1.8;
         text-align: left;
     }
 
@@ -113,6 +129,20 @@
       margin: 4rem 0 4.75rem;
     }
 
+    .section__break--short {
+        display: inline-block;
+        margin-top: 6.7rem;
+        margin-bottom: 3.5rem;
+        text-align: center;
+        width: 20%;
+    }
+
+    .section__break--thin {
+        color: #7ADEDE;
+        margin-bottom: 3.5rem;
+        margin-top: 4.5rem;
+    }
+
     .section__subheader {
       font-size: 2.3rem;
       font-weight: 500;
@@ -120,13 +150,22 @@
       margin-bottom: 2.5rem;
     }
 
+    .section__subheader-startup {
+        color: #5D5D5D;
+        font-size: 2rem;
+        letter-spacing: 0;
+        margin-top: 3.5rem;
+        margin-bottom: 0;
+        text-align: left;
+    }
+
     .section__icon {
       width: 15%;
     }
 
     .section__icon--wide {
-        margin-bottom: 1rem;
-        margin-top: 4.3rem;
+        margin-bottom: 0.9rem;
+        margin-top: 2rem;
         width: 90%;
     }
 
@@ -380,7 +419,7 @@
     }
 
     .faq__name {
-        color: #7ADEDE;
+        color: #000000;
         font-size: 2rem;
         font-weight: 800;
         line-height: 0.45;
@@ -390,13 +429,6 @@
         color: #000000;
         display: block;
         font-size: 1.465rem;
-    }
-
-    .faq__sub-description {
-        color: #5D5D5D;
-        display: block;
-        font-size: 1.4rem;
-        letter-spacing: 0.02rem;
     }
 
     .faq__requirement {
@@ -412,7 +444,7 @@
     }
 
     .faq__link {
-        color: #7ADEDE;
+        color: #333399;
         text-decoration: none;
     }
 
@@ -438,8 +470,8 @@
     }
 
     .faq__button {
-        border: 2px solid #7ADEDE;
-        color: #7ADEDE;
+        border: 2px solid #2EAFAC;
+        color: #2EAFAC;
         display: table;
         font-weight: 800;
         margin: 1rem 0;
@@ -447,20 +479,15 @@
         text-decoration: none;
     }
 
-    .section__break--thin {
-        color: #7ADEDE;
-        margin: 4rem 0 3.5rem 4.2rem;
-    }
-
     .summary {
         align-items: flex-start;
         display: flex;
-        margin-left: 5.6rem;
+        margin-top: 4.3rem;
     }
 
     .summary__icon {
         padding-top: 0.8rem;
-        width: 14%;
+        width: 17%;
     }
 
     .summary__content {
@@ -486,16 +513,15 @@
     }
 
     .summary__link {
-        border: 2px solid #7ADEDE;
-        color: #7ADEDE;
+        border: 2px solid #2EAFAC;
+        color: #2EAFAC;
         display: table;
-        font-size: 1.7rem;
-        font-weight: 500;
+        font-size: 1.5rem;
+        font-weight: 700;
         margin-top: 2.2rem;
         padding: 0.7rem 3.9rem;
         text-decoration: none;
     }
-
 
     @media (max-width: 1200px) {
       .submit__container {
@@ -797,13 +823,20 @@
       <button on-tap="changeSection" class="section__back" data-display="main" data-hide="startup">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="container mdl-cell mdl-cell--12-col">
-        <p class="section__description section__description-startup">The purpose of the Innovation Fund is to support new solutions from small businesses in markets that many companies or investors consider risky while UNICEF sees these markets as sources of opportunity. UNICEF will support companies registered in these markets in UNICEF’s programme countries- with a small amount of money to move solutions to the stage where these are proven to be workable and can be implemented.</p>
+        <h3 class="section__subheader section__subheader-startup">Looking for seed investments for your open source tech startup?</h3>
+        <b class="section__description section__description--bold">Financial and technological support from UNICEF’s Venture Fund is available for companies that can show a strong founding team and a clear path to improving the lives of children.</b>
+        <p class="section__description section__description-startup">If you’ve got a start-up registered in a developing market/economy (where UNICEF runs its programmes, see complete list here) and have a working, open source prototype (hardware or software) showing promising results, Deadline for submissions is the <strong>1 January 2017, 23:59hrs EST.</strong></p>
+        <h3 class="section__subheader section__subheader-startup">Lorem Ipsum dolor sit amet</h3>
+        <img src="../images/icons/startups_steps.svg" alt="Steps for startup" class="section__icon--wide">
+        <p class="section__description section__description-startup">
+            We invest in solutions that can impact the lives of the most vulnerable children. We find these solutions clustered around $100billion industries like emergency and epidemic response, transport & delivery, identity, finance, learning and personal data. We are seeking open-source projects that have already been started - you’ve been running it for a while - it shows some positive indicators - but you need funding to take it to a level where it can really attract additional investment and funding by generating real data. You might need a small amount of money to get your prototype to the stage where the company has proof that the solution works for other people. Maybe another developer or two are needed, design help to communicate what the project can do or some server space. Refactoring something into a new language because the initial one won’t scale. Testing it in a new area. Getting some data points. The UNICEF Innovation Fund can help with these kinds of investments between $50,000 and $90,000 to support the acceleration of your company’s work.<br>The next stage after that proof would be going for more funding (this could be private sector investment or grant-funding, or other; depending on the type of technology and solution.
+        </p>
+        <hr class="section__break--short">
         <img src="../images/icons/startups_steps.svg" alt="Steps for startup" class="section__icon--wide">
         <ol class="faq faq__list">
             <li class="faq__step">
                 <h3 class="faq__name">Step 1</h3>
-                <strong class="faq__description">Check Eligibility</strong>
-                <strong class="faq__sub-description">Check that your company/institution and project meet all the eligibility requirements</strong>
+                <strong class="faq__description">Check that your company and project meet all the eligibility requirements</strong>
                 <ul class="faq__list">
                     <li class="faq__requirement">Your company/institution must be registered in a UNICEF programme country (<a href="http://unicefstories.org/" class="faq__link">see list here</a>)</li>
                     <li class="faq__requirement">You’re working on open source technology solutions or willing to be open source under the following licenses:<br>
@@ -852,7 +885,7 @@
             <div class="summary__content">
                 <h3 class="summary__title">Got questions?</h3>
                 <p class="summary__description">Responses will be posted regularly.</p>
-                <em class="summary__description summary__emphassis">Please note that the period to submit questions for the REOI closes on DD MONTH, YYYY.</em>
+                <em class="summary__description summary__emphassis">Please note that the period to submit questions for the REOI closes on 20 December 2016.</em>
                 <p class="summary__description">UNICEF will not answer any questions submitted after this date.</p>
                 <a href="http://unicefstories.org/" class="summary__link">Ask now</a>
             </div>
