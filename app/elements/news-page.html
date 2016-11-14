@@ -510,10 +510,14 @@
           return array[index].category;
         },
         __getNewProjectImage: function(array, index) {
-          return array[index].image;
+          var projectImage = array[index].graph_format;
+          if (projectImage == '') projectImage = array[index].image;
+          return projectImage;
         },
         __getNewProjectDescription: function(array, index) {
-          return array[index].description;
+          var projectDescription = array[index].announcement_blurb;
+          if (projectDescription == '') projectDescription = array[index].description;
+          return projectDescription;
         },
         __getNewProjectLink: function(array, index) {
           return array[index].link_href;
