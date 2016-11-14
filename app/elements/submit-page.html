@@ -54,12 +54,6 @@
       display: block;
     }
 
-    .section__header {
-      color: #0099FF;
-      font-size: 1.57rem;
-      line-height: 4rem;
-    }
-
     .section__description {
       color: #5D5D5D;
       font-size: 1.595rem;
@@ -95,11 +89,10 @@
     .section__submit-link {
       background-color: #0099FF;
       color: white;
-      /* Overwrite MDL default style */
       font-size: 1.15rem;
       font-weight: 400;
       height: 44px;
-      line-height: 44px;
+      line-height: 2.75;
       margin-top: 2.5rem;
       max-width: 260px;
       text-transform: uppercase;
@@ -458,7 +451,7 @@
         font-size: 1.5rem;
         font-weight: 400;
         height: 55px;
-        line-height: 55px;
+        line-height: 2.65;
         margin-top: 2.5rem;
         max-width: 245px;
         text-transform: uppercase;
@@ -742,15 +735,15 @@
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank"><echo-html html$="{{countryOffices.button_submission}}"></echo-html></a>
         </div>
         <hr class="section__break">
-        <h3 class="section__subheader">[[countryOffices.section_1]]</h3>
+        <h3 class="section__subheader"><echo-html html="[[countryOffices.section_1]]"></echo-html>"</h3>
         <ol class="accordion">
             <li class="accordion__section">
                 <h4 class="accordion__header" data-open="eligibility" on-tap="accordionOpen">
-                    <p class="accordion__number">1</p>[[countryOffices.1-a]]
+                    <p class="accordion__number">1</p><echo-html html="[[countryOffices.1-a]]"></echo-html>
                     <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
                 </h4>
                 <div class="accordion__content accordion__content--toggle" data-accordion="eligibility">
-                    <p class="accordion__summary">[[countryOffices.1-b]]</p>
+                    <p class="accordion__summary"><echo-html html="[[countryOffices.1-b]]"></echo-html>"</p>
                     <ul class="description__list">
                         <echo-html html$="{{countryOffices.1-c}}"></echo-html>
                     </ul>
@@ -758,11 +751,11 @@
             </li>
             <li class="accordion__section">
                 <h4 class="accordion__header" data-open="submit" on-tap="accordionOpen">
-                    <p class="accordion__number">2</p>[[countryOffices.2-a]]
+                    <p class="accordion__number">2</p>[<echo-html html="[countryOffices.2-a]]"></echo-html>
                     <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
                 </h4>
                 <div class="accordion__content accordion__content--toggle" data-accordion="submit">
-                    <p class="accordion__summary">[[countryOffices.2-b]]</p>
+                    <p class="accordion__summary"><echo-html html="[[countryOffices.2-b]]"></echo-html>"</p>
                     <ul class="description__list">
                         <echo-html html$="{{countryOffices.2-c}}"></echo-html>
                     </ul>
@@ -770,11 +763,11 @@
             </li>
             <li class="accordion__section">
                 <h4 class="accordion__header" data-open="iterate" on-tap="accordionOpen">
-                    <p class="accordion__number">3</p>[[countryOffices.3-a]]
+                    <p class="accordion__number">3</p><echo-html html="[[countryOffices.3-a]]"></echo-html>
                     <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
                 </h4>
                 <div class="accordion__content accordion__content--toggle" data-accordion="iterate">
-                    <p class="accordion__summary--gray">[[countryOffices.3-b]]</p>
+                    <p class="accordion__summary--gray"><echo-html html="[[countryOffices.3-b]]"></echo-html>"</p>
                     <ul class="description__list">
                         <echo-html html$="{{countryOffices.3-c}}"></echo-html>
                     </ul>
@@ -782,11 +775,11 @@
             </li>
             <li class="accordion__section">
                 <h4 class="accordion__header" data-open="decision" on-tap="accordionOpen">
-                    <p class="accordion__number">4</p>[[countryOffices.4-a]]
+                    <p class="accordion__number">4</p><echo-html html="[[countryOffices.4-a]]"></echo-html>
                     <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
                 </h4>
                 <div class="accordion__content accordion__content--toggle" data-accordion="decision">
-                    <p class="accordion__summary--gray">[[countryOffices.4-b]]</p>
+                    <p class="accordion__summary--gray"><echo-html html="[[countryOffices.4-b]]"></echo-html>"</p>
                 </div>
             </li>
         </ol>
@@ -794,24 +787,24 @@
         <h3 class="section__subheader"><echo-html html$="{{countryOffices.section_2}}"></echo-html></h3>
         <ul class="role__list">
             <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/real-time.svg" alt="Real-time information" class="role__image">[[countryOffices.realtime_1]]</h4>
-                <p class="role__description">[[countryOffices.realtime_2]]</p>
+                <h4 class="role__name"><img src="../images/icons/real-time.svg" alt="Real-time information" class="role__image"><echo-html html="[[countryOffices.realtime_1]]"></echo-html></h4>
+                <p class="role__description"><echo-html html="[[countryOffices.realtime_2]]"></echo-html></p>
             </li>
             <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/implement.svg" alt="Implement" class="role__image">[[countryOffices.implement_1]]</h4>
-                <p class="role__description">[[countryOffices.implement_2]]</p>
+                <h4 class="role__name"><img src="../images/icons/implement.svg" alt="Implement" class="role__image"><echo-html html="[[countryOffices.implement_1]]"></echo-html></h4>
+                <p class="role__description"><echo-html html="[[countryOffices.implement_2]]"></echo-html></p>
             </li>
             <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/report.svg" alt="Report" class="role__image">[[countryOffices.report_1]]</h4>
-                <p class="role__description">[[countryOffices.report_2]]</p>
+                <h4 class="role__name"><img src="../images/icons/report.svg" alt="Report" class="role__image"><echo-html html="[[countryOffices.report_1]]"></echo-html></h4>
+                <p class="role__description"><echo-html html="[[countryOffices.report_2]]"></echo-html></p>
             </li>
             <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/spend.svg" alt="Spend" class="role__image">[[countryOffices.send_1]]</h4>
-                <p class="role__description">[[countryOffices.send_2]]</p>
+                <h4 class="role__name"><img src="../images/icons/spend.svg" alt="Spend" class="role__image"><echo-html html="[[countryOffices.send_1]]"></echo-html></h4>
+                <p class="role__description"><echo-html html="[[countryOffices.send_2]]"></echo-html></p>
             </li>
             <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/share.svg" alt="Share" class="role__image">[[countryOffices.share_1]]</h4>
-                <p class="role__description">[[countryOffices.share_2]]</p>
+                <h4 class="role__name"><img src="../images/icons/share.svg" alt="Share" class="role__image"><echo-html html="[[countryOffices.share_1]]"></echo-html></h4>
+                <p class="role__description"><echo-html html="[[countryOffices.share_2]]"></echo-html></p>
             </li>
         </ul>
       </div>
