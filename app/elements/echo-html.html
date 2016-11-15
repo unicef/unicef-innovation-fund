@@ -21,7 +21,7 @@
             if (this.html) {
                 var value = '';
                 var container = Polymer.dom(this).parentNode;
-                var classList = Array.from($(container)[0].classList).filter(function(el) {
+                var classList = [].slice.call($(container)[0].classList).filter(function(el) {
                     return ((el != 'echo-html') && (el != 'style-scope'));
                 });
                 var lastClass = classList[classList.length - 1];
