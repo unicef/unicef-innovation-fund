@@ -445,22 +445,27 @@
       route = target ? route + target : route
       // Special case for mom connect.
       // Does not have it's own root node in firebase
-      if(route == 'mom_connect'){
-        return '/git/momconnect'
+      if(target == null) {
+        return '/chart_data/' + route;
+      } else {
+        return route;
       }
-       return route;
     },
 
     prepare: function(svg, featured, dataSet){
       if(Object.keys(dataSet) == 0){ return; }
       
+      var color = '';
+
       if (svg == 'youth_engagement') {
-        return prepareUreport(dataSet, featured, "rgba(255, 204, 51, 0.2)")
+        color = "rgba(255, 204, 51, 0.2)";
       } else if(svg == 'real_time_information') {
-        return prepareGitCommits(dataSet, featured, "rgba(255, 143, 171, 0.2)");
+        color = "rgba(255, 143, 171, 0.2)";
       } else {
-        return prepareIOGT(dataSet, featured, "rgba(133, 214, 133, 0.2)")
+        color = "rgba(133, 214, 133, 0.2)";
       }
+
+      return prepareGitCommits(dataSet, featured, color );
     },
 
     to_mil: function(num){
@@ -493,7 +498,7 @@
       if (featured_project.new_investment) {
         return 'show';
       } else {
-        return 'show';
+        return 'hide';
       }
     }
   });

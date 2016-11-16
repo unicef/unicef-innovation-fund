@@ -15,20 +15,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="Polymer Starter Kit">
-  <title>UNICEF INNOVATION FUND</title>
+  <title>UNICEF Innovation Fund</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="fonts/icomoon/style.css">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700" rel="stylesheet">
   <!-- Place favicon.ico in the `app/` directory -->
   <!-- Chrome for Android theme color -->
-  <meta name="theme-color" content="#2E3AA1">
+  <meta name="theme-color" content="#ffffff">
   <!-- Web Application Manifest -->
   <link rel="manifest" href="manifest.json">
   <!-- Tile color for Win8 -->
   <meta name="msapplication-TileColor" content="#3372DF">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="PSK">
+  <meta name="application-name" content="UNICEF Innovation Fund">  
   <link rel="icon" sizes="16x16" href="favicon.ico">
   <link rel="icon" sizes="16x16" href="images/touch/favicon-16x16.png">
   <link rel="icon" sizes="32x32" href="images/touch/favicon-32x32.png">
@@ -58,25 +58,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript">
-  google.charts.load('current', {
-    'packages': ['geochart', 'controls', 'corechart']
-  });
+    google.charts.load('current', {
+      'packages': ['geochart', 'controls', 'corechart']
+    });
 
-  function humanize_label(label) {
-    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    month = parseInt(label.split(/-/)[1]);
-    human_month = months[month - 1];
-    year_contraction = label.substr(2, 2);
-    return human_month + " '" + year_contraction;
-  }
+    function humanize_label(label) {
+      var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      month = parseInt(label.split(/-/)[1]);
+      human_month = months[month - 1];
+      year_contraction = label.substr(2, 2);
+      return human_month + " '" + year_contraction;
+    }
 
 
-  function humanize_labels(ary) {
-    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    return ary.map(function(e) {
-      return humanize_label(e);
-    })
-  }
+    function humanize_labels(ary) {
+      var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      return ary.map(function(e) {
+        return humanize_label(e);
+      })
+    }
   </script>
 
   <!-- Because this project uses vulcanize this should be your only html import
@@ -85,141 +85,141 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- For shared styles, shared-styles.html import in elements.html -->
   <style is="custom-style" include="shared-styles"></style>
   <style is="custom-style">
-  body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-  .spacer {
-    @apply(--layout-flex);
-  }
+    .spacer {
+      @apply(--layout-flex);
+    }
 
-  neon-animated-pages .iron-selected {
-    position: static;
-  }
+    neon-animated-pages .iron-selected {
+      position: static;
+    }
 
-  .owl-nav {
-    display: none;
-  }
+    .owl-nav {
+      display: none;
+    }
 
-  .owl-carousel .item {
-    padding: 1rem;
-    width: 400px;
-    height: 600px;
-  }
+    .owl-carousel .item {
+      padding: 1rem;
+      width: 400px;
+      height: 600px;
+    }
 
-  ul {
-    padding: 0;
-    list-style-type: none;
-  }
+    ul {
+      padding: 0;
+      list-style-type: none;
+    }
 
-  .dashboard {
-    background-color: #EDEDED;
-    color: black;
-    height: auto;
-  }
+    .dashboard {
+      background-color: #EDEDED;
+      color: black;
+      height: auto;
+    }
 
-  #mainToolbar .dashboard {
-    background-color: #EDEDED;
-    height: auto;
-  }
+    #mainToolbar .dashboard {
+      background-color: #EDEDED;
+      height: auto;
+    }
 
-  .all_projects {
-    background-color: #3366CB;
-  }
+    .all_projects {
+      background-color: #3366CB;
+    }
 
-  #mainToolbar .all_projects,
-  #mainToolbar.about,
-  #mainToolbar.news {
-    background-color: #3366CB;
-  }
+    #mainToolbar .all_projects,
+    #mainToolbar.about,
+    #mainToolbar.news {
+      background-color: #3366CB;
+    }
 
-  #mainToolbar.submit {
-    background-color: #333333;
-  }
+    #mainToolbar.submit {
+      background-color: #333333;
+    }
 
-  .news,
-  .about,
-  .submit {
-    background-color: #333333;
-  }
+    .news,
+    .about,
+    .submit {
+      background-color: #333333;
+    }
 
-  .mainView paper-tabs {
-    display: none;
-  }
+    .mainView paper-tabs {
+      display: none;
+    }
 
-  .mainView[wide-layout] paper-tabs {
-    display: inline;
-  }
+    .mainView[wide-layout] paper-tabs {
+      display: inline;
+    }
 
-  .mainView #paperToggle {
-    display: inline;
-  }
+    .mainView #paperToggle {
+      display: inline;
+    }
 
-  .mainView[wide-layout] #paperToggle {
-    display: none;
-  }
+    .mainView[wide-layout] #paperToggle {
+      display: none;
+    }
 
-  .menu-item {
-    font-family: Source Sans Pro;
-  }
+    .menu-item {
+      font-family: Source Sans Pro;
+    }
 
-  .menu-item.iron-selected {
-    background-color: #0099FF;
-    color: white;
-  }
+    .menu-item.iron-selected {
+      background-color: #0099FF;
+      color: white;
+    }
 
-  .project-view__dialog-close {
-    position: absolute;
-    top: 14px;
-    right: 16px;
-    color: #333;
-    font-size: 16px;
-    z-index: 1;
-    margin: 0;
-    padding: 0;
-    background: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
-  }
+    .project-view__dialog-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      color: #333;
+      font-size: 16px;
+      z-index: 1;
+      margin: 0;
+      padding: 0;
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
 
-  .project-view__dialog .project-view__dialog-scrollable {
-    margin-bottom: 0 !important;
-  }
+    .project-view__dialog .project-view__dialog-scrollable {
+      margin-bottom: 0 !important;
+    }
 
-  .dialog-type-infrastructure {
-    border-bottom: 5px solid #66cc66;
-  }
+    .dialog-type-infrastructure {
+      border-bottom: 5px solid #66cc66;
+    }
 
-  .dialog-type-real_time_information {
-    border-bottom: 5px solid #ff3366;
-  }
+    .dialog-type-real_time_information {
+      border-bottom: 5px solid #ff3366;
+    }
 
-  .dialog-type-youth_engagement {
-    border-bottom: 5px solid #ffcc33;
-  }
+    .dialog-type-youth_engagement {
+      border-bottom: 5px solid #ffcc33;
+    }
 
-  .app-name {
-    cursor: pointer;
-  }
+    .app-name {
+      cursor: pointer;
+    }
 
-  .content {
-    min-height: calc(100vh - 64px);
-    height: auto;
-    position: relative;
-    box-sizing: border-box;
-  }
+    .content {
+      min-height: calc(100vh - 64px);
+      height: auto;
+      position: relative;
+      box-sizing: border-box;
+    }
 
-  .app-menu .menu-item{
-    margin: 0;
-    padding: 5px 10px;
-    padding-left: 16px;
-  }
+    .app-menu .menu-item{
+      margin: 0;
+      padding: 5px 10px;
+      padding-left: 16px;
+    }
 
-  #drawerToolbar .menu-name{
-    font-weight: 400;
-  }
+    #drawerToolbar .menu-name{
+      font-weight: 400;
+    }
   </style>
 </head>
 
@@ -322,92 +322,92 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script src="scripts/app.js"></script>
   <script>
-  "use strict"
-  var app = document.getElementById('app');
-  app.selected = 0;
-
-  window.addEventListener('WebComponentsReady', function(e) {
-    $('paper-tabs#main-menu paper-tab').click(function() {
-      $('#mainContainer').scrollTop(0);
-      app.selected = $('paper-tabs#main-menu paper-tab').index(this);
-      app.page_id = this.id;
-      // Update css settings per tab
-      page_change(this.id);
-    });
-
-    $('.app-menu .menu-item').click(function() {
-      app.selected = $('.app-menu .menu-item').index(this);
-      app.page_id = this.id;
-      document.querySelector('paper-drawer-panel').togglePanel();
-      // Update css settings per tab
-      page_change(this.id);
-    });
-
-
-    $('.app-name').on('click', function() {
-      var overlay = document.querySelector('overlay-intro');
-      overlay.showOverlay(0);
-    })
-  });
-
-  function page_change(page_id) {
-
-    $(document).trigger('page-changed', page_id);
-    var ar = ['dashboard', 'all_projects', 'news', 'about', 'submit'];
-
-    ar.forEach(function(e) {
-      $('#mainToolbar').removeClass(e);
-      $('#drawer').removeClass(e);
-      $('.link').removeClass(e);
-      $('hello-all-projects').removeClass(e);
-      $('hello-about').removeClass(e);
-      $('hello-news').removeClass(e);
-    });
-
-    $('#mainToolbar').addClass(page_id);
-    $('#drawer').addClass(page_id);
-    $('.link').addClass(page_id);
-    if (page_id == 'all_projects') {
-      $('hello-all-projects').addClass(page_id);
-    }
-    if (page_id == 'about') {
-      $('hello-about').addClass(page_id);
-    }
-    if (page_id == 'news') {
-      $('hello-news').addClass(page_id);
-    }
-  };
-  var menu_navigate = function (element, event) {
-    var menu = element.getAttribute('data-menu');
-    var selectedMenu = $('paper-tabs#main-menu paper-tab#'+menu);
+    "use strict"
     var app = document.getElementById('app');
+    app.selected = 0;
 
-    if (menu && selectedMenu) {
-      event.preventDefault();
-      app.selected = $('paper-tabs#main-menu paper-tab').index(selectedMenu);
-      app.page_id = menu;
-      page_change(menu);
-    }
-  };
+    window.addEventListener('WebComponentsReady', function(e) {
+      $('paper-tabs#main-menu paper-tab').click(function() {
+        $('#mainContainer').scrollTop(0);
+        app.selected = $('paper-tabs#main-menu paper-tab').index(this);
+        app.page_id = this.id;
+        // Update css settings per tab
+        page_change(this.id);
+      });
+
+      $('.app-menu .menu-item').click(function() {
+        app.selected = $('.app-menu .menu-item').index(this);
+        app.page_id = this.id;
+        document.querySelector('paper-drawer-panel').togglePanel();
+        // Update css settings per tab
+        page_change(this.id);
+      });
+
+
+      $('.app-name').on('click', function() {
+        var overlay = document.querySelector('overlay-intro');
+        overlay.showOverlay(0);
+      })
+    });
+
+    function page_change(page_id) {
+
+      $(document).trigger('page-changed', page_id);
+      var ar = ['dashboard', 'all_projects', 'news', 'about', 'submit'];
+
+      ar.forEach(function(e) {
+        $('#mainToolbar').removeClass(e);
+        $('#drawer').removeClass(e);
+        $('.link').removeClass(e);
+        $('hello-all-projects').removeClass(e);
+        $('hello-about').removeClass(e);
+        $('hello-news').removeClass(e);
+      });
+
+      $('#mainToolbar').addClass(page_id);
+      $('#drawer').addClass(page_id);
+      $('.link').addClass(page_id);
+      if (page_id == 'all_projects') {
+        $('hello-all-projects').addClass(page_id);
+      }
+      if (page_id == 'about') {
+        $('hello-about').addClass(page_id);
+      }
+      if (page_id == 'news') {
+        $('hello-news').addClass(page_id);
+      }
+    };
+    var menu_navigate = function (element, event) {
+      var menu = element.getAttribute('data-menu');
+      var selectedMenu = $('paper-tabs#main-menu paper-tab#'+menu);
+      var app = document.getElementById('app');
+
+      if (menu && selectedMenu) {
+        event.preventDefault();
+        app.selected = $('paper-tabs#main-menu paper-tab').index(selectedMenu);
+        app.page_id = menu;
+        page_change(menu);
+      }
+    };
 
   </script>
   <script src="utility.js"></script>
 
   <script>
-  (function(i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function() {
-      (i[r].q = i[r].q || []).push(arguments)
-    }, i[r].l = 1 * new Date();
-    a = s.createElement(o),
-      m = s.getElementsByTagName(o)[0];
-    a.async = 1;
-    a.src = g;
-    m.parentNode.insertBefore(a, m)
-  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-79740312-1', 'auto');
-  ga('send', 'pageview');
+    ga('create', 'UA-79740312-1', 'auto');
+    ga('send', 'pageview');
   </script>
 </body>
 
