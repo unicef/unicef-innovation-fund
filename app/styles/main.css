@@ -89,7 +89,24 @@ h1, h2, h3, h4, h5, h6 {
 .blue paper-toolbar {
   background: #FFF;
   color:#3366cc;
+/*        border-bottom: solid blue 1px;*/
 }
+paper-tab{
+  width:100px;
+}
+
+
+
+
+/*      paper-material {
+  border-radius: 2px;
+  height: 100%;
+  padding: 16px 0 16px 0;
+  width: calc(98.66% - 16px);
+  margin: 0px auto;
+  background: white;
+
+}     */
 
 .amount_invested{
   text-align: center;
@@ -157,73 +174,6 @@ h1, h2, h3, h4, h5, h6 {
   color: #66cc66;
 }
 
-.project-list__portfolio.page--yellow .portfolio-project--new {
-    border: 2px solid #ffcc33;
-    border-bottom: 8px solid #ffcc33;
-}
-
-.project-list__portfolio.page--yellow .portfolio-project__status--visible {
-    color: #dca603;
-}
-
-.project-list__portfolio.page--red .portfolio-project--new {
-    border: 2px solid #ff3366;
-    border-bottom: 8px solid #ff3366;
-}
-
-.project-list__portfolio.page--red .portfolio-project__status--visible {
-    color: #ff3366;
-}
-
-.project-list__portfolio.page--green .portfolio-project--new {
-    border: 2px solid #66cc66;
-    border-bottom: 8px solid #66cc66;
-}
-
-.project-list__portfolio.page--green .portfolio-project__status--visible {
-    color: #66cc66;
-}
-
-.project-list__portfolio.page--blue .portfolio-project--new {
-    border: 2px solid #33cccc;
-    border-bottom: 8px solid #33cccc;
-}
-
-.project-list__portfolio.page--blue .portfolio-project__status--visible {
-    color: #33cccc;
-}
-
-.page--blue portfolio-project {
-  height: 100px;
-}
-
-.page--blue .portfolio-project.description__text--amount,
-.page--blue .project-filter__menu.amount-filter {
-  display: none;
-}
-
-.dashboard #main-menu #selectionBar {
-  background-color: black;
-}
-
-.submit__office.container p {
-  color: #5D5D5D;
-  font-size: 1.5rem;
-  line-height: 1.5;
-}
-
-#main-menu #selectionBar {
-  background-color: white;
-}
-
-.overlay_link {
-  color: white;
-  text-decoration: none;
-}
-.new-projects {
-  color: rgb(68,138,255);
-}
-
 .featured_project_blurb {
   font-weight:400;
   font-size:14px;
@@ -281,20 +231,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .knowledge_products{
   background-color: #33cccc;
-}
-
-.counter--youth_engagement{
-  color: #dca603;
-}
-.counter--real_time_information{
-  color: #ff3366;
-}
-.counter--infrastructure{
-  color: #66cc66;
-}
-
-.counter--knowledge_products{
-  color: #33cccc;
 }
 
 .progress-youth_engagement{
@@ -718,36 +654,4 @@ paper-item.current-investment::after, paper-item.past-investment::after {
 
 paper-item.past-investment::after {
   background-color: transparent;
-}
-
-.dashboard .menu-notification {
-  color: #3366CB;
-}
-
-.dashboard paper-tab.menu-notification::after,
-.app-menu .menu-notification::after {
-  background-image: url('../images/icons/notification.svg');
-}
-
-.menu-notification::after {
-  content: '\00a0';
-  background-image: url('../images/icons/notification-white.svg');
-  background-size: 10px 10px;
-  background-repeat: no-repeat;
-  width: 12px;
-  display: inline-block;
-  position: relative;
-  top: -6px;
-}
-
-.iron-selected.menu-notification::after {
-  display: none;
-}
-
-.iron-selected.menu-notification img {
-  display: none;
-}
-
-.input-content.paper-input-container label.paper-input {
-    font-size: 14px;
 }

@@ -13,8 +13,7 @@
         animation-delay: 0.625s;
       }
 
-      .about__description,
-      .about__description--narrow {
+      .about__description {
         font-size: 1.2rem;
         letter-spacing: 0.02rem;
         line-height: 1.8;
@@ -30,11 +29,6 @@
       .about__tile {
         display: inline-block;
         width: 33%;
-        text-align: center;
-      }
-
-      .about__tiles {
-        margin-top: 2em;
       }
 
       .about__name {
@@ -61,7 +55,7 @@
 
       @media (min-width: 920px) {
         .about__content {
-          padding: 0;
+          padding: 3.5rem 0 6.5rem;
         }
 
         .about__description {
@@ -83,7 +77,7 @@
         .about__description--narrow {
           margin-left: auto;
           margin-right: auto;
-          width: 70%;
+          width: 50%;
         }
       }
 
@@ -98,10 +92,12 @@
     </style>
     <div class="hello_holder">
       <hello-about></hello-about>
+
       <div class="mdl-grid about__section fade-in">
         <div class="mdl-layout-spacer" ></div>
         <div class="mdl-cell--bottom mdl-cell--10-col mdl-cell--8-col-tablet about__content">
-          <p class="about__description">{{paragraph_1}}</p>
+          <p class="about__description">{{paragraph_1}}
+          </p>
 
           <p class="about__description">{{paragraph_2}}</p>
           <div class="about__tiles">
@@ -128,40 +124,33 @@
       </div>
     </div>
     <firebase-document
-      app-name="unicef-innovation-fund"
+      app-name="test"
       path='/content/about_paragraph_1'
       data="{{paragraph_1}}">
     </firebase-document>
     <firebase-document
-      app-name="unicef-innovation-fund"
+      app-name="test"
       path='/content/about_paragraph_2'
       data="{{paragraph_2}}">
     </firebase-document>
     <firebase-document
-      app-name="unicef-innovation-fund"
+      app-name="test"
       path='/content/about_paragraph_3'
       data="{{paragraph_3}}">
     </firebase-document>
     <firebase-document
-      app-name="unicef-innovation-fund"
+      app-name="test"
       path='/content/about_paragraph_4'
       data="{{paragraph_4}}">
     </firebase-document>
   </template>
-
-  <script src="../bower_components/scrollreveal/dist/scrollreveal.min.js" type="text/javascript"></script>
 
   <script>
     (function() {
       'use strict';
 
       Polymer({
-        is: 'my-about',
-
-        attached: function(self) {
-          var scrollReveal = ScrollReveal({container: '#mainContainer'});
-          scrollReveal.reveal('.about__description, .about__description--narrow, .about__tiles');
-        }
+        is: 'my-about'
       });
     })();
   </script>

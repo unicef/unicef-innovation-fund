@@ -1,6 +1,8 @@
+
 <dom-module id='portfolio-card'>
   <template>
-    <style include="style-fade-in">
+    <style>
+
       :host {
         border-top: 16px solid #ffcc33;
         display: flex;
@@ -65,11 +67,11 @@
        .portfolio-card__progress-info::before {
          display: inline-block;
          content: '';
-         width: 3px;
-         height: 18px;
+         width: 1px;
+         height: 14px;
          background-color: #ffcc33;
          position: absolute;
-         left: 49%;
+         left: 50%;
          bottom: -16px;
        }
 
@@ -87,10 +89,9 @@
 
        .portfolio-card__progress-subtitle, .portfolio-card__progress-info {
          text-transform: uppercase;
-         font-size: 14px;
-         color: black;
-         font-weight: 600;
-         line-height: 1.3em;
+         font-size: 12px;
+         color: #333333;
+         line-height: 1.1em;
        }
 
        .portfolio-card__progress-subtitle {
@@ -104,10 +105,6 @@
 
        .portfolio-card__icon i {
          vertical-align: -1px;
-       }
-
-       .icon-info {
-        color: #3366CB;
        }
 
     </style>
@@ -174,20 +171,6 @@
       .project__mini-chart{
         cursor: pointer;
       }
-
-      .new-project {
-        background-color: #3366CA;
-        font-size: 14px;
-        color:white;
-        display: block;
-        width: 30px;
-        padding: 1px 4px 1px 4px;
-        margin-left:15px;
-      }
-
-      .new-project.hide {
-        display: none;
-      }
     </style>
 
     <iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query>
@@ -234,7 +217,6 @@
               <div class="featured_project_expand" on-tap="_handleTap">
                 <i class="material-icons">&#xE89E;</i>
               </div>
-              <div class$='new-project {{_getClassForNewLabel(featured_project)}} fade-in page__header-content'>NEW!</div>
               <div class='featured_project_name pc_left' on-tap="_handleTap">
                 {{featured}}
               </div>
@@ -255,29 +237,30 @@
           <chart-line  data="[[prepare(svg, featured, dataSet)]]" options=[[_prepareChartOptions()]] style='width:95%; font-size:30px;padding-left:5px;'></chart-line>
         </div>
         <firebase-document
-          app-name="unicef-innovation-fund"
+          app-name="test"
           path="/content/{{tooltip_target}}"
           data="{{db_tooltip}}">
         </firebase-document>
 
         <firebase-document
-          app-name="unicef-innovation-fund"
+          app-name="test"
           path="{{location_featured_content}}"
           data="{{featured_content}}">
         </firebase-document>
 
         <firebase-document
-          app-name="unicef-innovation-fund"
+          app-name="test"
           path="/portfolio_projects/{{svg}}/projects_hash/{{featured_slug}}"
           data="{{featured_project}}">
         </firebase-document>
 
         <firebase-document
-          app-name="unicef-innovation-fund"
+          app-name="test"
           path="{{location_featured_data}}"
           data="{{dataSet}}">
         </firebase-document>
       </div>
+      <!-- <geo-ureport></geo-ureport> -->
     </div>
 
   </template>
@@ -445,27 +428,30 @@
       route = target ? route + target : route
       // Special case for mom connect.
       // Does not have it's own root node in firebase
-      if(target == null) {
-        return '/chart_data/' + route;
-      } else {
-        return route;
+      if(route == 'mom_connect'){
+        return '/git/momconnect'
       }
+       return route;
     },
 
     prepare: function(svg, featured, dataSet){
-      if(Object.keys(dataSet) == 0){ return; }
-      
-      var color = '';
+      if(Object.keys(dataSet) == 0){return;}
+      // var color = ''
+      // if(svg == 'youth_engagement') {
+      //   color = "rgba(255, 204, 51, 0.2)";
+      // }else if(svg == 'real_time_information') {
+      //   color = "rgba(255, 143, 171, 0.2)";
+      // }else{
+      //   color = "rgba(133, 214, 133, 0.2)";
+      // }
 
-      if (svg == 'youth_engagement') {
-        color = "rgba(255, 204, 51, 0.2)";
-      } else if(svg == 'real_time_information') {
-        color = "rgba(255, 143, 171, 0.2)";
-      } else {
-        color = "rgba(133, 214, 133, 0.2)";
+      if (svg == 'youth_engagement'){
+        return prepareUreport(dataSet, featured, "rgba(255, 204, 51, 0.2)")
+      }else if(svg == 'real_time_information'){
+        return prepareGitCommits(dataSet, featured, "rgba(255, 143, 171, 0.2)");
+      }else{
+        return prepareIOGT(dataSet, featured, "rgba(133, 214, 133, 0.2)")
       }
-
-      return prepareGitCommits(dataSet, featured, color );
     },
 
     to_mil: function(num){
@@ -493,13 +479,9 @@
           }
         }
       }
-    },
-    _getClassForNewLabel: function(featured_project) {
-      if (featured_project.new_investment) {
-        return 'show';
-      } else {
-        return 'hide';
-      }
     }
-  });
+  })
+
+
+
 </script>

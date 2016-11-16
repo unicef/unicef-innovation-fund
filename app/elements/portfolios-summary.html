@@ -1,120 +1,94 @@
 <dom-module id='portfolios-summary'>
   <style>
-    :host {
-      padding: 16px 8px;
-    }
 
-    .top_sum {
-      font-weight: 400;
-      font-size: 34px;
-      line-height: 1.2em;
-      margin-bottom: 8px;
-      color: #888;
-    }
+  :host {
+    padding: 16px 8px;
+  }
 
-    .top_title {
-      line-height: 1.2em;
-    }
+  .top_sum {
+    font-weight:400;
+    font-size:34px;
+    line-height: 1.2em;
+    margin-bottom: 8px;
+    color: #888;
+  }
 
-    .pie_explanation {
-      text-align:center;
-      font-size: 18px;
-      line-height: 24px;
-      font-weight: 400;
-      padding: 16px;
-      margin-bottom: 16px;
-    }
+  .top_title {
+    line-height: 1.2em;
+  }
 
-    .separator {
-      text-align: center;
-    }
+  .pie_explanation{
+    text-align:center;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight:400;
+    padding:16px;
+    margin-bottom: 16px;
+  }
 
-    .separator hr {
-      width: 80%;
-      margin: 1em auto;
-    }
+  .portfolios{
+    font-size:12px;
+    font-weight:500;
+    padding-left:5px;
+  }
 
-    .portfolios {
-      font-size: 12px;
-      font-weight: 500;
-      padding-left: 5px;
-    }
+  .portfolio_stats{
+    font-size:12px;
+  }
 
-    .portfolio_stats {
-      font-size: 12px;
-    }
+  .project-youth_engagement{
+    border-radius: 50%;background-color:#ffcc33;max-width:20px;max-height:20px;
+  }
+  .project-real_time_information{
+    border-radius: 50%;background-color:#ff3366;max-width:20px; max-height:20px;
+  }
+  .project-infrastructure{
+    border-radius: 50%;background-color:#66cc66;max-width:20px;max-height:20px;
+  }
 
-    .project-youth_engagement,
-    .project-real_time_information,
-    .project-infrastructure,
-    .project-technical_assistance,
-    .project-fund_management,
-    .project-knowledge_products {
-      border-radius: 50%;
-      max-width: 20px;
-      max-height: 20px;
-    }
+  .project-technical_assistance{
+    border-radius: 50%;background-color:#555555;max-width:20px;max-height:20px;
+  }
+  .project-fund_management{
+    border-radius: 50%;background-color:#b1b1b1;max-width:20px; max-height:20px;
+  }
+  .project-knowledge_products{
+    border-radius: 50%;background-color:teal;max-width:20px;max-height:20px;
+  }
+  .cell{
+    font-size:12px;text-align:left; padding:5px;
+  }
 
-    .project-youth_engagement {
-      background-color: #ffcc33;
-    }
+  .row{
+    margin-bottom:5px;
+  }
 
-    .project-real_time_information {
-      background-color: #ff3366;
-    }
+  .mdl-grid{
+    padding:0px;
+  }
 
-    .project-infrastructure {
-      background-color: #66cc66;
-    }
-
-    .project-technical_assistance {
-      background-color: #555555;
-    }
-
-    .project-fund_management {
-      background-color: #b1b1b1;
-    }
-
-    .project-knowledge_products {
-      background-color: teal;
-    }
-
-    .cell {
-      font-size: 12px;
-      text-align: left;
-      padding: 5px;
-    }
-
-    .row{
-      margin-bottom:5px;
-    }
-
-    .mdl-grid {
-      padding:0px;
-    }
-
-    .portfolio_amount {
+  .portfolio_amount {
       text-align: right;
-    }
+  }
 
-    .portfolio_name, .portfolio_amount {
+  .portfolio_name, .portfolio_amount {
       color: #333333;
       font-size: 12px;
       font-weight: 600;
       text-transform: uppercase;
-    }
+  }
 
-    @media (max-width: 479px) {
+  @media (max-width: 479px) {
       div .portfolio_amount.mdl-cell {
-        width: 30%;
+          width: 30%;
       }
-    }
+  }
   </style>
 
   <template style='max-width:900px;'>
     <iron-media-query query="(min-width: 600px)" query-matches="{{wide}}"></iron-media-query>
     <firebase-document
-      app-name="unicef-innovation-fund"
+      app-name="test"
       path="/summary"
       data="{{summary}}">
     </firebase-document>
@@ -141,9 +115,10 @@
         </div>
       </div>
     </div>
+</p>
 
-    <div class="separator">
-      <hr>
+    <div style='text-align:center;'>
+      <hr style='width:80%; margin: 1em auto;'/>
     </div>
 
     <div class='pie_explanation mdl-grid'>
@@ -165,6 +140,7 @@
     </div>
     <br>
     <div>
+
       <div class='portfolio_stats'>
         <div class='mdl-grid'>
           <div class="mdl-cell mdl-cell--12-col" >
@@ -213,6 +189,9 @@
         <br>
         <div class='mdl-grid'>
           <div class="mdl-cell mdl-cell--12-col" >
+            <div class='portfolios'>
+              OTHERS
+            </div>
             <div style='text-align:center;'>
               <hr  />
             </div>
@@ -223,14 +202,48 @@
             &nbsp;
           </div>
           <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--2-col-phone portfolio_name">
-            OPERATIONAL RESEARCH
+            TECHNICAL ASSISTANCE
           </div>
           <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone portfolio_amount">
             {{to_mil(summary.portfolios.invested_technical_assistance.amount)}}
           </div>
         </div>
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--2-col project-fund_management">
+            &nbsp;
+          </div>
+          <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--2-col-phone portfolio_name">
+            FUND MANAGEMENT
+          </div>
+          <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone portfolio_amount">
+            {{to_mil(summary.portfolios.invested_fund_management.amount)}}
+          </div>
+        </div>
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--2-col project-knowledge_products">
+            &nbsp;
+          </div>
+          <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--2-col-phone portfolio_name">
+            KNOWLEDGE PRODUCTS
+          </div>
+          <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone portfolio_amount">
+            {{to_mil(summary.portfolios.invested_knowledge_products.amount)}}
+          </div>
+        </div>
       </div>
     </div>
+    <br>
+    <!-- <hr style='padding:0px;margin:0px;'/>
+    <div class="mdl-grid see_all_projects">
+      <div class="mdl-layout-spacer"></div>
+      <div class="mdl-cell mdl-cell--8-col cell">
+        <span style='font-size:14px;font-weight:14px;'>See All Projects</span>
+      </div>
+      <div class="mdl-cell mdl-cell--2-col cell" >
+        <i class="material-icons" style="background-color:white; color:#0099ff;">chevron_right</i>
+      </div>
+    </div>
+  </div> -->
   </template>
 
 </dom-module>
@@ -271,6 +284,7 @@
         labels: portfolios.map(function(e){return data[e].label}),
         datasets: [
           {
+            // data: portfolios.map(function(e){return divide_by_100k(data[e].amount)}),
             data: portfolios.map(function(e){return divide_by_100k(data[e].amount)}),
             backgroundColor: portfolios.map(function(e){return data[e].color}),
             hoverBackgroundColor: portfolios.map(function(e){return data[e].color})

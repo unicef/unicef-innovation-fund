@@ -1,144 +1,176 @@
 <dom-module id='mdl-footer'>
   <template>
     <style>
+    :host {
+      position: relative;
+    }
+    
+    @media (min-width: 600px) {
       :host {
-        position: relative;
-      }
-
-      @media (min-width: 600px) {
-        :host {
-          width: 100%;
-        }
-      }
-
-      .img_share {
-        width: 30px;
-      }
-
-      .share {
-        padding: 5px;
-        margin: 5px;
-        max-width: 30px;
-      }
-
-      ul {
-        list-style: none;
-        padding-left: 0;
-      }
-
-      .footer_area[wide-layout] .one_third {
-        max-width: 400px;
-      }
-
-      .mdl-mini-footer {
-        background-color: white;
-      }
-
-      .footer_area[wide-layout] .mdl-mini-footer--left-section {
-        order: 0;
-      }
-
-      .footer_area[small-desktop] .mdl-mini-footer--left-section {
-        order: 0;
-        width: 30%;
-      }
-
-      .footer_area[wide-layout] .mdl-mini-footer--center-section {
-        order: 2;
-      }
-
-      .footer_area[small-desktop] .mdl-mini-footer--center-section {
-        width: auto;
-        order: 0;
-        width: 56%;
-      }
-
-      .footer_area .mdl-mini-footer--right-section {
+        position: absolute;
+        left: 0;
         width: 100%;
+        bottom: 0;
       }
-
-      .footer_area[wide-layout] .mdl-mini-footer--right-section {
-        order: 1;
-        width: 117px;
-      }
-
-      .footer_area[small-desktop] .mdl-mini-footer--right-section {
-        order: 2;
-      }
-
-      .sponsor__link {
-        vertical-align: middle;
+    }
+    
+    img {
+      list-style: none;
+    }
+    
+    .img_share {
+      width: 30px;
+    }
+    
+    .share {
+      padding: 5px;
+      margin: 5px;
+      max-width: 30px;
+    }
+    
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    
+    .footer_area[wide-layout] .one_third {
+      max-width: 400px;
+    }
+    
+    .footer_area[wide-layout] .mdl-mini-footer--left-section {
+      -webkit-order: 0;
+      -moz-order: 0;
+      -ms-order: 0;
+      -o-order: 0;
+      order: 0;
+    }
+    
+    .footer_area[small-desktop] .mdl-mini-footer--left-section {
+      -webkit-order: 0;
+      -moz-order: 0;
+      -ms-order: 0;
+      -o-order: 0;
+      order: 0;
+      width: 30%;
+    }
+    
+    .footer_area[wide-layout] .mdl-mini-footer--center-section {
+      -webkit-order: 2;
+      -moz-order: 2;
+      -ms-order: 2;
+      -o-order: 2;
+      order: 2;
+    }
+    
+    .footer_area[small-desktop] .mdl-mini-footer--center-section {
+      width: auto;
+      -webkit-order: 0;
+      -moz-order: 0;
+      -ms-order: 0;
+      -o-order: 0;
+      order: 0;
+      width: 56%;
+    }
+    
+    .footer_area .mdl-mini-footer--right-section {
+      width: 100%;
+    }
+    
+    .footer_area[wide-layout] .mdl-mini-footer--right-section {
+      -webkit-order: 1;
+      -moz-order: 1;
+      -ms-order: 1;
+      -o-order: 1;
+      order: 1;
+      width: 117px;
+    }
+    
+    .footer_area[small-desktop] .mdl-mini-footer--right-section {
+      -webkit-order: 2;
+      -moz-order: 2;
+      -ms-order: 2;
+      -o-order: 2;
+      order: 2;
+    }
+    
+    .footer_area[wide-layout] .one_third {}
+    
+    .sponsor__link {
+      vertical-align: middle;
+      display: block;
+    }
+    
+    .sponsor__link:nth-child(1) {
+      width: 110px;
+    }
+    
+    .sponsor__link:nth-child(2) {
+      width: 190px;
+    }
+    
+    .sponsor__link:nth-child(3) {
+      width: 140px;
+    }
+    
+    .sponsor__link img {
+      width: 100%;
+      display: block;
+    }
+    
+    .footer_area[wide-layout] .sponsor__link {
+      text-decoration: none;
+      display: inline-block;
+      text-align: left;
+    }
+    
+    .footer_area[wide-layout] .sponsol__link {}
+    
+    .footer_area[wide-layout] .sponsor--margin {
+      margin: 0 2rem;
+    }
+    
+    .social {
+      margin-top: 16px;
+    }
+    
+    .social-list {
+      position: relative;
+      overflow: hidden;
+      padding-left: 13px;
+    }
+    
+    .social-list__item {
+      float: left;
+      margin: 0 3px;
+    }
+    
+    .social-list__link {
+      display: inline-block;
+    }
+    
+    .social-list__icon {
+      width: 45px;
+      display: inline-block;
+    }
+    
+    @media (max-width: 540px) {
+      .sponsor {
         display: block;
+        margin: 2rem 0;
       }
-
-      .sponsor__link:nth-child(1) {
-        width: 110px;
+      .sponsor--margin {
+        margin: 0;
       }
-
-      .sponsor__link:nth-child(2) {
-        width: 190px;
-      }
-
-      .sponsor__link:nth-child(3) {
-        width: 140px;
-      }
-
-      .sponsor__link img {
-        width: 100%;
-        display: block;
-      }
-
-      .footer_area[wide-layout] .sponsor__link {
-        text-decoration: none;
-        display: inline-block;
-        text-align: left;
-      }
-
-      .footer_area[wide-layout] .sponsor--margin {
-        margin: 0 2rem;
-      }
-
-      .social {
-        margin-top: 16px;
-      }
-
-      .social-list {
-        position: relative;
-        overflow: hidden;
-        padding-left: 13px;
-      }
-
-      .social-list__item {
-        float: left;
-        margin: 0 3px;
-      }
-
-      .social-list__link {
-        display: inline-block;
-      }
-
-      .social-list__icon {
-        width: 45px;
-        display: inline-block;
-      }
-
-      @media (max-width: 540px) {
-        .sponsor {
-          display: block;
-          margin: 2rem 0;
-        }
-
-        .sponsor--margin {
-          margin: 0;
-        }
-      }
+    }
     </style>
     <iron-media-query query="(min-width: 600px)" query-matches="{{wide}}"></iron-media-query>
     <iron-media-query query="(min-width: 1040px)" query-matches="{{small-desktop}}"></iron-media-query>
-    <firebase-document app-name="unicef-innovation-fund" path='/content' data="{{content}}">
+    <firebase-document app-name="test" path='/content/footer_text' data="{{footer_text}}">
+    </firebase-document>
+    <firebase-document app-name="test" path='/content/footer_donor_text' data="{{footer_donor_text}}">
     </firebase-document>
     <div class="footer_area" wide-layout$="{{wide}}" small-desktop$="{{small-desktop}}">
-      <footer class='mdl-mini-footer'>
+      <footer class='mdl-mini-footer' style='background-color:white;'>
         <div class='mdl-mini-footer--left-section'>
           <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--12-col">
@@ -146,30 +178,24 @@
             </div>
           </div>
           <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col one_third">
-              <echo-html html$={{content.footer_text}}></echo-html>
-            </div>
-          </div>
-          <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--12-col">
-              CONTACT
-            </div>
-          </div>
-          <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col one_third">
-              <echo-html html$={{content.footer_contact_text}}></echo-html>
+              <div class='one_third' id='footer_text'>
+                {{footer_text}}
+              </div>
             </div>
           </div>
         </div>
         <div class='mdl-mini-footer--center-section'>
           <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--12-col">
-              SUPPORTERS &amp; INVESTORS
+              SUPPORTERS & INVESTORS
             </div>
           </div>
           <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col one_third">
-              <echo-html html$={{content.footer_donor_text}}></echo-html>
+            <div class="mdl-cell mdl-cell--12-col">
+              <div class='one_third'>
+                {{footer_donor_text}}
+              </div>
             </div>
           </div>
           <div class="mdl-grid">
@@ -213,11 +239,23 @@
             </ul>
           </div>
       </footer>
-    </div>
+      </div>
+      <div id='testito'>
+      </div>
   </template>
 </dom-module>
 <script>
 Polymer({
-  is: 'mdl-footer'
+  is: 'mdl-footer',
+  properties: {
+    footer_text: {
+      value: String,
+      observer: 'interpolate_footer_text'
+    }
+  },
+  interpolate_footer_text: function(text) {
+    this.$.footer_text.innerHTML = text;
+  }
+
 })
 </script>
