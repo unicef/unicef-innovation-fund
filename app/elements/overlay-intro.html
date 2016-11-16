@@ -31,6 +31,7 @@
         padding-left: 15px;
         padding-right: 15px;
         margin: 0 auto;
+        position: relative;
       }
       
       .overlay__content {
@@ -156,6 +157,24 @@
         width: 32px;
         height: 18px;
       }
+      .overlay__close {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        right: 5px;
+        top: -50px;
+        background: transparent;
+        color: #fff;
+        border: 0;
+        margin: 0;
+        outline: none;
+        padding: 5px;
+        cursor: pointer;
+      }
+
+      .overlay__close i {
+        font-size: 40px;
+      }
     </style>
 
     <firebase-document
@@ -169,6 +188,9 @@
     <section class="overlay" on-tap="hideOverlay">
       <div class="overlay__scroll-content">
         <div class="overlay__container">
+          <button type="button" class="overlay__close" on-tap="hideOverlay">
+            <i class="material-icons">close</i>
+          </button>
           <div class="overlay__content" mobile-layout$="{{wide}}">
             <p><echo-html html$="{{content.overlay_p1}}"></echo-html></p>
             <p><echo-html html$="{{content.overlay_p2}}"></echo-html></p>
