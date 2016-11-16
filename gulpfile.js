@@ -169,7 +169,7 @@ gulp.task('fonts', function() {
 // Scan your HTML for assets & optimize them
 gulp.task('html', function() {
   return optimizeHtmlTask(
-    ['app/**/*.html', '!app/{elements,test,bower_components}/**/*.html'],
+    ['app/**/*.{html,js}', 'app/*.{html,js}', '!app/{elements,test,bower_components}/**/*.{html,js}'],
     dist());
 });
 
