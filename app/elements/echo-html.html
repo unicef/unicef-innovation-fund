@@ -18,9 +18,10 @@
         },
 
         _refreshHtml: function() {
-            if (this.html) {
+            var container = Polymer.dom(this).parentNode;
+
+            if ((this.html) && ($(container)) && ($(container).length)) {
                 var value = '';
-                var container = Polymer.dom(this).parentNode;
                 var classList = Array.from($(container)[0].classList).filter(function(el) {
                     return ((el != 'echo-html') && (el != 'style-scope'));
                 });
@@ -44,7 +45,6 @@
 
                 // Second step - change the DOM
                 $(container).find('*').removeClass('echo-html').addClass(lastClass);
-                console.log(lastClass);
             }
         },
     });
