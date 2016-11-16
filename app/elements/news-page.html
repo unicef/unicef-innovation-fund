@@ -356,84 +356,68 @@
                 </div>
                 <div class="mdl-layout-spacer"></div>
             </div>
-          </div>
-        </template>
-
-            <div class="mdl-grid news__section fade-in" id="newsPageCards">
-                <div class="mdl-layout-spacer"></div>
-                <template is="dom-repeat" items=[[newProjects]]>
-                    <div class="mdl-cell shadow-card">
-                        <div class="news__card">
-                            <div class="news__card--box">
-                                <span class$="edge--{{__getNewProjectCategory(newProjects, index)}} news__card--label" on-tap="_handleTap" data-taplink$="{{__getNewProjectSlug(newProjects, index)}}" data-taplink-category$="{{__getNewProjectCategory(newProjects, index)}}">VIEW PROJECT</span>
-                                <img src$="{{__getNewProjectImage(newProjects, index)}}">
-                            </div>
-                            <div class="news__card--text">
-                                <p class="more">{{__getNewProjectDescription(newProjects, index)}}</p>
-                                <a href$="{{__getNewProjectLink(newProjects, index)}}" class="morelink" target="_blank"> READ MORE</a>
-                            </div>
+        </div>
+        <div class="mdl-grid news__section fade-in" id="newsPageCards">
+            <div class="mdl-layout-spacer"></div>
+            <template is="dom-repeat" items=[[newProjects]]>
+                <div class="mdl-cell shadow-card">
+                    <div class="news__card">
+                        <div class="news__card--box">
+                            <span class$="edge--{{__getNewProjectCategory(newProjects, index)}} news__card--label" on-tap="_handleTap" data-taplink$="{{__getNewProjectSlug(newProjects, index)}}" data-taplink-category$="{{__getNewProjectCategory(newProjects, index)}}">VIEW PROJECT</span>
+                            <img src$="{{__getNewProjectImage(newProjects, index)}}">
+                        </div>
+                        <div class="news__card--text">
+                            <p class="more">{{__getNewProjectDescription(newProjects, index)}}</p>
+                            <a href$="{{__getNewProjectLink(newProjects, index)}}" class="morelink" target="_blank"> READ MORE</a>
                         </div>
                     </div>
-                </template>
-
-                <div class="mdl-cell shadow-card">
-                    <div class="news__card news__card--extra">
-                        <a href="#" data-menu="submit" class="internal-link">
-                            <div class="icon"></div>
-                            <h2> {{content.news_eoi_title}}</h2>
-                            <p> {{content.news_eoi_text}}</p>
-                        </a>
-                    </div>
                 </div>
+            </template>
 
-                <div class="mdl-layout-spacer"></div>
-
-            </div>
-            <div class="mdl-grid news__section fade-in">
-                <div class="mdl-layout-spacer"></div>
-                <div class="mdl-cell--bottom mdl-cell--10-col mdl-cell--8-col-tablet news__content--bottom">
-                    <hr>
-                    <h3 class="section__header">{{content.news_section2_title}}</h3>
-                    <div id="newsResources">
-
-                        <template is="dom-repeat" items={{content.news_section2_entry_titles}}>
-                            <hr>
-                            <span></span>
-                            <span class="news__section-entry--title">{{_getElementFromArray(content.news_section2_entry_titles, index)}}</span>
-                            <a class="news__section-entry--link" target="_blank" href="[[_getElementFromArray(content.news_section2_entry_link, index)]]">LINK {{_getIndex(index)}}</a>
-                            <p class="news__section-entry--description">
-                                <echo-html html$="{{_getElementFromArray(content.news_section2_entry_description, index)}}""></echo-html>
-                            </p>
-                        </template>
-                    </div>
-
-                    <hr class="news__divider">
-                    <h1 class="section__header cta">{{content.news_cta_text}}</h1>
-                    <a class="news__button--anchor internal-link" href="#" target="_blank" data-menu="submit">
-                        <button class="news__button">{{content.news_cta_button}}</button>
+            <div class="mdl-cell shadow-card">
+                <div class="news__card news__card--extra">
+                    <a href="#" data-menu="submit" class="internal-link">
+                        <div class="icon"></div>
+                        <h2> {{content.news_eoi_title}}</h2>
+                        <p> {{content.news_eoi_text}}</p>
                     </a>
                 </div>
+            </div>
+
+            <div class="mdl-layout-spacer"></div>
+
+        </div>
+        <div class="mdl-grid news__section fade-in">
+            <div class="mdl-layout-spacer"></div>
+            <div class="mdl-cell--bottom mdl-cell--10-col mdl-cell--8-col-tablet news__content--bottom">
+                <hr>
+                <h3 class="section__header">{{content.news_section2_title}}</h3>
+                <div id="newsResources">
+
+                    <template is="dom-repeat" items={{content.news_section2_entry_titles}}>
+                        <hr>
+                        <span></span>
+                        <span class="news__section-entry--title">{{_getElementFromArray(content.news_section2_entry_titles, index)}}</span>
+                        <a class="news__section-entry--link" target="_blank" href="[[_getElementFromArray(content.news_section2_entry_link, index)]]">LINK {{_getIndex(index)}}</a>
+                        <p class="news__section-entry--description">
+                            <echo-html html$="{{_getElementFromArray(content.news_section2_entry_description, index)}}""></echo-html>
+                        </p>
+                    </template>
+                </div>
+
+                <hr class="news__divider">
+                <h1 class="section__header cta">{{content.news_cta_text}}</h1>
+                <a class="news__button--anchor internal-link" href="#" target="_blank" data-menu="submit">
+                    <button class="news__button">{{content.news_cta_button}}</button>
+                </a>
+            </div>
             <div class="mdl-layout-spacer"></div>
         </div>
-      <div class="mdl-layout-spacer"></div>
-    </div>
 
         <firebase-document
             app-name="unicef-innovation-fund"
             path="/content"
             data="{{content}}">
-        </firebase-document>
-
-        <firebase-document
-            app-name="unicef-innovation-fund"
-            path='/portfolio_projects/real_time_information/projects_hash/momconnect/description'
-            data="{{description}}">
-        </firebase-document>
-
-        <firebase-document
-            app-name="unicef-innovation-fund"
-            path="/portfolio_projects/real_time_information/projects_hash/momconnect"
-            data="{{featured_project}}">
         </firebase-document>
 
          <firebase-document
@@ -459,9 +443,6 @@
                     }
                 },
                 attached: function() {
-                    if (this.description.length > 150) {
-                        this.description = this.description.substring(0, 150);
-                    }
                     $('.internal-link').on('click', function(event) {
                         menu_navigate(this, event)
                     });

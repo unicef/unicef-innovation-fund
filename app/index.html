@@ -144,8 +144,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       background-color: #333333;
     }
 
-    .mainView paper-tabs {
-      display: none;
+    @media only screen and (max-width:720px) {
+      .mainView paper-tabs {
+        display: none;
+      }
+    }
+
+    @media only screen and (min-width:721px) {
+      .mainView paper-tabs {
+        display: inline;
+      }
     }
 
     .mainView[wide-layout] paper-tabs {
@@ -279,7 +287,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </div>
             <!-- Application sub title -->
             <div class="bottom bottom-container right horizontal layout">
-              <!-- <div class="bottom-title">The future of the web today</div> -->
             </div>
           </paper-toolbar>
           <!-- Main Content -->
