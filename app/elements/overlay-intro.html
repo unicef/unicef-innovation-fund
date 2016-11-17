@@ -175,6 +175,16 @@
       .overlay__close i {
         font-size: 40px;
       }
+
+      .welcome echo-html {
+        font-size: 32px;
+        font-weight: 300;
+        line-height: 2.8;
+        transition-delay: 2s;
+        text-align: center;
+        margin: 0 auto;
+        display: block;
+      }
     </style>
 
     <firebase-document
@@ -192,7 +202,9 @@
             <i class="material-icons">close</i>
           </button>
           <div class="overlay__content" mobile-layout$="{{wide}}">
-            <p><echo-html html$="{{content.overlay_p1}}"></echo-html></p>
+            <p class="welcome"><echo-html html$="{{content.overlay_p1}}"
+              startvalue="<strong>UNICEF Innovation Fund.</strong> <br> Welcome."></echo-html>
+            </p>
             <p><echo-html html$="{{content.overlay_p2}}"></echo-html></p>
             <p><echo-html html$="{{content.overlay_p3}}"></echo-html></p>
             <p><echo-html html$="{{content.overlay_p4}}"></echo-html></p>
