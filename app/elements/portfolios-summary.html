@@ -1,321 +1,310 @@
 <dom-module id='portfolios-summary'>
-  <style>
+    <style>
+        :host {
+            padding: 16px 8px;
+        }
 
-  :host {
-    padding: 16px 8px;
-  }
+        .top_sum {
+            font-weight: 400;
+            font-size: 34px;
+            line-height: 1.2em;
+            margin-bottom: 8px;
+            color: #888;
+        }
 
-  .top_sum {
-    font-weight:400;
-    font-size:34px;
-    line-height: 1.2em;
-    margin-bottom: 8px;
-    color: #888;
-  }
+        .top_title {
+            line-height: 1.2em;
+        }
 
-  .top_title {
-    line-height: 1.2em;
-  }
+        .pie_explanation {
+            text-align:center;
+            font-size: 18px;
+            line-height: 24px;
+            font-weight: 400;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
 
-  .pie_explanation{
-    text-align:center;
-    font-size: 18px;
-    line-height: 24px;
-    font-weight:400;
-    padding:16px;
-    margin-bottom: 16px;
-  }
+        .top_container_in_card {
+            text-align: center;
+        }
 
-  .portfolios{
-    font-size:12px;
-    font-weight:500;
-    padding-left:5px;
-  }
+        .top_container_in_card .content-grid {
+            font-weight:800;
+            font-size:12px;
+        }
 
-  .portfolio_stats{
-    font-size:12px;
-  }
+        .separator {
+            text-align: center;
+        }
 
-  .project-youth_engagement{
-    border-radius: 50%;background-color:#ffcc33;max-width:20px;max-height:20px;
-  }
-  .project-real_time_information{
-    border-radius: 50%;background-color:#ff3366;max-width:20px; max-height:20px;
-  }
-  .project-infrastructure{
-    border-radius: 50%;background-color:#66cc66;max-width:20px;max-height:20px;
-  }
+        .separator hr {
+            width: 80%;
+            margin: 1em auto;
+        }
 
-  .project-technical_assistance{
-    border-radius: 50%;background-color:#555555;max-width:20px;max-height:20px;
-  }
-  .project-fund_management{
-    border-radius: 50%;background-color:#b1b1b1;max-width:20px; max-height:20px;
-  }
-  .project-knowledge_products{
-    border-radius: 50%;background-color:teal;max-width:20px;max-height:20px;
-  }
-  .cell{
-    font-size:12px;text-align:left; padding:5px;
-  }
+        .container,
+        .hr {
+            text-align: center;
+        }
 
-  .row{
-    margin-bottom:5px;
-  }
+        .portfolios {
+            font-size: 12px;
+            font-weight: 500;
+            padding-left: 5px;
+        }
 
-  .mdl-grid{
-    padding:0px;
-  }
+        .portfolio_stats {
+            font-size: 12px;
+        }
 
-  .portfolio_amount {
-      text-align: right;
-  }
+        .project-youth_engagement,
+        .project-real_time_information,
+        .project-infrastructure,
+        .project-technical_assistance,
+        .project-fund_management,
+        .project-knowledge_products {
+            border-radius: 50%;
+            max-width: 20px;
+            max-height: 20px;
+        }
 
-  .portfolio_name, .portfolio_amount {
-      color: #333333;
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-  }
+        .project-youth_engagement {
+            background-color: #ffcc33;
+        }
 
-  @media (max-width: 479px) {
-      div .portfolio_amount.mdl-cell {
-          width: 30%;
-      }
-  }
-  </style>
+        .project-real_time_information {
+            background-color: #ff3366;
+        }
 
-  <template style='max-width:900px;'>
-    <iron-media-query query="(min-width: 600px)" query-matches="{{wide}}"></iron-media-query>
-    <firebase-document
-      app-name="test"
-      path="/summary"
-      data="{{summary}}">
-    </firebase-document>
+        .project-infrastructure {
+            background-color: #66cc66;
+        }
 
-    <div class='top_container_in_card'>
-      <div style='text-align:center;'>
-        <div class="content-grid mdl-grid" style='font-weight:800;font-size:12px;'>
-          <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet">
-            <div class='top_sum'>
-              {{to_mil(summary.stats.total_available)}}
+        .project-technical_assistance {
+            background-color: #555555;
+        }
+
+        .project-fund_management {
+            background-color: #b1b1b1;
+        }
+
+        .project-knowledge_products {
+            background-color: teal;
+        }
+
+        .cell {
+            font-size: 12px;
+            text-align: left;
+            padding: 5px;
+        }
+
+        .row{
+            margin-bottom:5px;
+        }
+
+        .mdl-grid {
+            padding:0px;
+        }
+
+        .portfolio_amount {
+            text-align: right;
+        }
+
+        .portfolio_name, .portfolio_amount {
+            color: #333333;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .chart-pie {
+            text-align: center;
+        }
+
+        .chart-pie chart-pie {
+            display:block !important;
+        }
+
+        @media (max-width: 479px) {
+            div .portfolio_amount.mdl-cell {
+                width: 30%;
+            }
+        }
+    </style>
+
+    <template style='max-width:900px;'>
+        <iron-media-query query="(min-width: 600px)" query-matches="{{wide}}"></iron-media-query>
+        <firebase-document
+            app-name="unicef-innovation-fund"
+            path="/summary"
+            data="{{summary}}">
+        </firebase-document>
+
+        <div class='top_container_in_card'>
+            <div class="content-grid mdl-grid">
+                <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet">
+                    <div class='top_sum'>
+                        {{to_mil(summary.stats.total_available)}}
+                    </div>
+                    <div class="top_title">
+                        INNOVATION</br>FUND
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet">
+                    <div class='top_sum'>
+                        {{to_mil(summary.stats.co_funding)}}
+                    </div>
+                    <div class="top_title">
+                        CO FUNDING<br/>LEVERAGED
+                    </div>
+                </div>
             </div>
-            <div class="top_title">
-              INNOVATION</br>FUND
-            </div>
-          </div>
-          <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet">
-            <div class='top_sum'>
-              {{to_mil(summary.stats.co_funding)}}
-            </div>
-            <div class="top_title">
-              CO FUNDING<br/>LEVERAGED
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</p>
-
-    <div style='text-align:center;'>
-      <hr style='width:80%; margin: 1em auto;'/>
-    </div>
-
-    <div class='pie_explanation mdl-grid'>
-      <div class="mdl-layout-spacer"></div>
-      <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet">
-        {{to_mil(summary.stats.total_invested)}}<br/>invested
-      </div>
-      <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet">
-        {{summary.stats.num_projects}}<br/>projects
-      </div>
-      <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet">
-        {{summary.stats.num_countries}}<br/>countries
-      </div>
-      <div class="mdl-layout-spacer"></div>
-    </div>
-    <div style='text-align:center;'>
-
-      <chart-pie data="[[process_for_pie(summary)]]" options="[[options]]" style="display:block !important;"></chart-pie>
-    </div>
-    <br>
-    <div>
-
-      <div class='portfolio_stats'>
-        <div class='mdl-grid'>
-          <div class="mdl-cell mdl-cell--12-col" >
-            <div class='portfolios'>
-              PORTFOLIOS
-            </div>
-            <div style='text-align:center;'>
-              <hr  />
-            </div>
-          </div>
-        </div>
-        <div class="mdl-grid">
-          <div class="mdl-cell mdl-cell--2-col project-youth_engagement" >
-            &nbsp;
-          </div>
-          <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--2-col-phone portfolio_name">
-            PRODUCTS FOR YOUTH
-          </div>
-          <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone portfolio_amount">
-            {{to_mil(summary.portfolios.invested_youth_engagement.amount)}}
-          </div>
-        </div>
-        <div class="mdl-grid">
-          <div class="mdl-cell mdl-cell--2-col project-real_time_information" >
-            &nbsp;
-          </div>
-          <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--2-col-phone portfolio_name">
-            REAL-TIME INFORMATION
-          </div>
-          <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone portfolio_amount">
-            {{to_mil(summary.portfolios.invested_real_time_information.amount)}}
-          </div>
-        </div>
-        <div class="mdl-grid">
-          <div class="mdl-cell mdl-cell--2-col project-infrastructure">
-            &nbsp;
-          </div>
-          <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--2-col-phone portfolio_name">
-            INFRASTRUCTURE
-          </div>
-          <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone portfolio_amount">
-            {{to_mil(summary.portfolios.invested_infrastructure.amount)}}
-          </div>
         </div>
 
+        <div class="separator">
+            <hr>
+        </div>
+
+        <div class='pie_explanation mdl-grid'>
+            <div class="mdl-layout-spacer"></div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet">
+                {{to_mil(summary.stats.total_invested)}}<br/>invested
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet">
+                {{summary.stats.num_projects}}<br/>projects
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet">
+                {{summary.stats.num_countries}}<br/>countries
+            </div>
+            <div class="mdl-layout-spacer"></div>
+        </div>
+        <div class='chart-pie'>
+            <chart-pie data="[[process_for_pie(summary)]]" options="[[options]]"></chart-pie>
+        </div>
         <br>
-        <div class='mdl-grid'>
-          <div class="mdl-cell mdl-cell--12-col" >
-            <div class='portfolios'>
-              OTHERS
+        <div>
+            <div class='portfolio_stats'>
+                <div class='mdl-grid'>
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <div class='hr'>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--2-col project-youth_engagement">
+                        &nbsp;
+                    </div>
+                    <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--2-col-phone portfolio_name">
+                        {{summary.portfolios.invested_youth_engagement.label}}
+                    </div>
+                    <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone portfolio_amount">
+                        {{to_mil(summary.portfolios.invested_youth_engagement.amount)}}
+                    </div>
+                </div>
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--2-col project-real_time_information" >
+                        &nbsp;
+                    </div>
+                    <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--2-col-phone portfolio_name">
+                        {{summary.portfolios.invested_real_time_information.label}}
+                    </div>
+                    <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone portfolio_amount">
+                        {{to_mil(summary.portfolios.invested_real_time_information.amount)}}
+                    </div>
+                </div>
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--2-col project-infrastructure">
+                        &nbsp;
+                    </div>
+                    <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--2-col-phone portfolio_name">
+                        {{summary.portfolios.invested_infrastructure.label}}
+                    </div>
+                    <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone portfolio_amount">
+                        {{to_mil(summary.portfolios.invested_infrastructure.amount)}}
+                    </div>
+                </div>
+
+                <br>
+                <div class='mdl-grid'>
+                    <div class="mdl-cell mdl-cell--12-col" >
+                        <div class='hr'>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--2-col project-technical_assistance">
+                        &nbsp;
+                    </div>
+                    <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--2-col-phone portfolio_name">
+                        {{summary.portfolios.management_and_operational_research.label}}
+                    </div>
+                    <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone portfolio_amount">
+                        {{to_mil(summary.portfolios.management_and_operational_research.amount)}}
+                    </div>
+                </div>
             </div>
-            <div style='text-align:center;'>
-              <hr  />
-            </div>
-          </div>
         </div>
-        <div class="mdl-grid">
-          <div class="mdl-cell mdl-cell--2-col project-technical_assistance">
-            &nbsp;
-          </div>
-          <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--2-col-phone portfolio_name">
-            TECHNICAL ASSISTANCE
-          </div>
-          <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone portfolio_amount">
-            {{to_mil(summary.portfolios.invested_technical_assistance.amount)}}
-          </div>
-        </div>
-        <div class="mdl-grid">
-          <div class="mdl-cell mdl-cell--2-col project-fund_management">
-            &nbsp;
-          </div>
-          <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--2-col-phone portfolio_name">
-            FUND MANAGEMENT
-          </div>
-          <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone portfolio_amount">
-            {{to_mil(summary.portfolios.invested_fund_management.amount)}}
-          </div>
-        </div>
-        <div class="mdl-grid">
-          <div class="mdl-cell mdl-cell--2-col project-knowledge_products">
-            &nbsp;
-          </div>
-          <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--2-col-phone portfolio_name">
-            KNOWLEDGE PRODUCTS
-          </div>
-          <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone portfolio_amount">
-            {{to_mil(summary.portfolios.invested_knowledge_products.amount)}}
-          </div>
-        </div>
-      </div>
-    </div>
-    <br>
-    <!-- <hr style='padding:0px;margin:0px;'/>
-    <div class="mdl-grid see_all_projects">
-      <div class="mdl-layout-spacer"></div>
-      <div class="mdl-cell mdl-cell--8-col cell">
-        <span style='font-size:14px;font-weight:14px;'>See All Projects</span>
-      </div>
-      <div class="mdl-cell mdl-cell--2-col cell" >
-        <i class="material-icons" style="background-color:white; color:#0099ff;">chevron_right</i>
-      </div>
-    </div>
-  </div> -->
-  </template>
+    </template>
 
 </dom-module>
 
 <script>
-  function divide_by_100k(str_dollar_amount){
-    if(!str_dollar_amount)
-      return 0;
-    var num = Number(str_dollar_amount.replace(/[^0-9\.]+/g,""))
-    // return num/1000;
-    return num/1;
-  }
+    Polymer({
+        is: 'portfolios-summary',
+        properties: {
+            options: {
+                type: Object,
+                notify: true,
+                value: function() {
+                    return {
+                         'width':1400,
+                         'legend':'none'
+                    }
+                }
+            },
+            summary: {
+                type: Object,
+                notify: true
+            },
+            svg: {
+                value: '',
+                notify: true
+            }
+        },
+        to_mil: function(num){
+            if(num){
+                num = Number(num.replace(/[^0-9\.]+/g,""))
+                return cleanToMil(num);
+            }
+            return;
+        },
+        divide_by_100k: function(str_dollar_amount){
+            if(!str_dollar_amount)
+                return 0;
+            var num = Number(str_dollar_amount.replace(/[^0-9\.]+/g,""));
+            return num/1;
+        },
+        process_for_pie: function(data){
+            var self = this;
+            data = data.portfolios;
 
-  Polymer({
-    is: 'portfolios-summary',
-
-    to_mil: function(num){
-      if(num){
-        num = Number(num.replace(/[^0-9\.]+/g,""))
-        return cleanToMil(num);
-      }
-      return;
-    },
-    _summary: function(summary){
-
-    },
-
-    process_for_pie: function(data){
-
-      data = data.portfolios;
-
-      if(!data){
-        return;
-      }
-      var portfolios = Object.keys(data);
-
-      return {
-        labels: portfolios.map(function(e){return data[e].label}),
-        datasets: [
-          {
-            // data: portfolios.map(function(e){return divide_by_100k(data[e].amount)}),
-            data: portfolios.map(function(e){return divide_by_100k(data[e].amount)}),
-            backgroundColor: portfolios.map(function(e){return data[e].color}),
-            hoverBackgroundColor: portfolios.map(function(e){return data[e].color})
-          }
-        ]
-      }
-
-    },
-
-    properties: {
-      options: {
-        type: Object,
-        notify: true,
-        value: function() {
-          return {
-             'width':1400,
-             'legend':'none'
-          }
+            if(!data){
+                return;
+            }
+            var portfolios = Object.keys(data);
+            return {
+                labels: portfolios.map(function(e){return data[e].label}),
+                datasets: [
+                    {
+                        data: portfolios.map(function(e){return self.divide_by_100k(data[e].amount)}),
+                        backgroundColor: portfolios.map(function(e){return data[e].color}),
+                        hoverBackgroundColor: portfolios.map(function(e){return data[e].color})
+                    }
+                ]
+            }
         }
-      },
-
-      summary: {
-        type: Object,
-        notify: true,
-        observer: '_summary'
-      },
-
-      svg: {
-        value: '',
-        notify: true
-      }
-    }
-  })
+    });
 </script>

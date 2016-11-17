@@ -1,0 +1,36 @@
+<dom-module id="hello-news">
+  <template>
+    <style is="custom-style" include="style-fade-in">
+      .hello__title {
+        color: white;
+        text-align: center;
+      }
+
+      .hello__description {
+        text-align: center;
+      }
+    </style>
+    <header class='page__header page__header--blue'>
+      <div class='mdl-grid container' style='position:relative;'>
+        <div class="mdl-layout-spacer"></div>
+        <div class="mdl-cell mdl-cell--12-col">
+          <h1 class='title--big hello__title fade-in'>{{content.news_header_title}}</h1>
+          <div class="page__header-content fade-in">
+            <p class="hello__description">{{content.news_header_description}}</p>
+          </div>
+        </div>
+        <div class="mdl-layout-spacer"></div>
+      </div>
+    </header>
+    <firebase-document
+      app-name="unicef-innovation-fund"
+      path='/content'
+      data="{{content}}">
+    </firebase-document>
+  </template>
+  <script>
+    Polymer({
+      is: "hello-news",
+    })
+  </script>
+</dom-module>
