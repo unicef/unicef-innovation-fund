@@ -100,9 +100,9 @@
       <div class="mdl-grid about__section fade-in">
         <div class="mdl-layout-spacer" ></div>
         <div class="mdl-cell--bottom mdl-cell--10-col mdl-cell--8-col-tablet about__content">
-          <p class="about__description"><echo-htm html$="{{contentAbout.about_paragraph_1}}"></echo-htm></p>
+          <p class="about__description"><echo-html html$="{{contentAbout.about_paragraph_1}}"></echo-html></p>
 
-          <p class="about__description"><echo-htm html$="{{contentAbout.about_paragraph_2}}"></echo-htm></p>
+          <p class="about__description"><echo-html html$="{{contentAbout.about_paragraph_2}}"></echo-html></p>
           <div class="about__tiles">
               <div class="about__tile">
                   <strong class="about__name">Products for youth</strong>
@@ -117,11 +117,11 @@
                   <img src="../images/icons/real_time_information.svg" alt="Real time information" class="about__image">
               </div>
           </div>
-          <p class="about__description"><echo-htm html$="{{contentAbout.about_paragraph_3}}"></echo-htm></p>
+          <p class="about__description"><echo-html html$="{{contentAbout.about_paragraph_3}}"></echo-html></p>
 
           <hr class="about__divider">
 
-          <p class="about__description"><echo-htm html$="{{contentAbout.about_paragraph_4}}"></echo-htm></p>
+          <p class="about__description"><echo-html html$="{{contentAbout.about_paragraph_4}}"></echo-html></p>
         </div>
         <div class="mdl-layout-spacer"></div>
       </div>
@@ -139,10 +139,21 @@
 
       Polymer({
         is: 'my-about',
-
-        attached: function(self) {
-          var scrollReveal = ScrollReveal({container: '#mainContainer'});
-          scrollReveal.reveal('.about__description, .about__description--narrow, .about__tiles');
+        attached: function() {
+          var self = this;
+          self.initScrollReveal();
+          $(document).on('page-changed', function(e, page_id) {
+            if (page_id == 'about') {
+              self.initScrollReveal();
+            }
+          });
+        },
+        initScrollReveal: function() {
+          var config = { container: '#mainContainer' };
+          if(!window.scrollReveal) {
+            window.scrollReveal = new ScrollReveal();
+          }
+          window.scrollReveal.reveal('.about__description, .about__description--narrow, .about__tiles', config);
         }
       });
     })();
