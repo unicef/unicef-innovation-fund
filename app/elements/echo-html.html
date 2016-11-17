@@ -15,8 +15,15 @@
                 value: '',
                 observer: '_refreshHtml'
             },
+            startvalue: {
+                type: Object
+            }
         },
-
+        ready: function() {
+            if (this.startvalue) {
+                this.innerHTML = this.startvalue;
+            }
+        },
         _refreshHtml: function() {
             var container = Polymer.dom(this).parentNode;
             if ((this.html) && ($(container)) && ($(container).length) ) {
