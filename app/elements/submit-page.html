@@ -928,8 +928,21 @@
         });
     },
     attached: function() {
-        var scrollReveal = ScrollReveal({container: '#mainContainer'});
-        scrollReveal.reveal('.accordion__section, .role__list, .section__subheader, .faq__step, .faq__submit, .summary, .section__description');
+        var self = this;
+        self.initScrollReveal();
+        $(document).on('page-changed', function(e, page_id) {
+          if (page_id == 'submit') {
+            self.initScrollReveal();
+          }
+        });
+    },
+    initScrollReveal: function() {
+        var config = { container: '#mainContainer' };
+        if (!window.scrollReveal) {
+          window.scrollReveal = new ScrollReveal();
+        }
+        window.scrollReveal.reveal('.accordion__section, .role__list, .section__subheader:not(:first-child), .faq__step, '
+            + '.faq__submit, .summary, .section__description', config);
     },
     checkAuth: function (event) {
         var regxTest = /.{1,}@unicef\.org$/gi;

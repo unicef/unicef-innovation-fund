@@ -358,7 +358,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     });
 
     function page_change(page_id) {
-
       $(document).trigger('page-changed', page_id);
       var ar = ['dashboard', 'all_projects', 'news', 'about', 'submit'];
 
@@ -384,6 +383,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         $('hello-news').addClass(page_id);
       }
     };
+
     var menu_navigate = function (element, event) {
       var menu = element.getAttribute('data-menu');
       var selectedMenu = $('paper-tabs#main-menu paper-tab#'+menu);
