@@ -101,7 +101,6 @@
         <div class="mdl-layout-spacer" ></div>
         <div class="mdl-cell--bottom mdl-cell--10-col mdl-cell--8-col-tablet about__content">
           <p class="about__description"><echo-html html$="{{contentAbout.about_paragraph_1}}"></echo-html></p>
-
           <p class="about__description"><echo-html html$="{{contentAbout.about_paragraph_2}}"></echo-html></p>
           <div class="about__tiles">
               <div class="about__tile">
@@ -118,9 +117,7 @@
               </div>
           </div>
           <p class="about__description"><echo-html html$="{{contentAbout.about_paragraph_3}}"></echo-html></p>
-
           <hr class="about__divider">
-
           <p class="about__description"><echo-html html$="{{contentAbout.about_paragraph_4}}"></echo-html></p>
         </div>
         <div class="mdl-layout-spacer"></div>
@@ -153,7 +150,7 @@
           if(!window.scrollReveal) {
             window.scrollReveal = new ScrollReveal();
           }
-          window.scrollReveal.reveal('.about__description, .about__description--narrow, .about__tiles', config);
+          window.scrollReveal.reveal('.about__description:not(:first-child), .about__description--narrow, .about__tiles:not(:first-child)', config);
         }
       });
     })();
