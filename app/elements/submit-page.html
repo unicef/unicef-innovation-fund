@@ -64,7 +64,7 @@
       text-align: center;
     }
 
-    .section__description-startup {
+    .section__description-startup, .section__description-startup p, .section__subheader-startup p {
         margin-top: 0;
         font-size: 1.35rem;
         font-weight: 400;
@@ -76,11 +76,12 @@
         line-height: 3.3;
     }
 
-    .section__description--bold {
-        display: block;
+    .section__description b {
+        display: inline;
         font-size: 1.35rem;
         font-weight: 700;
         line-height: 1.8;
+        margin-top: 1rem;
         text-align: left;
     }
 
@@ -127,9 +128,11 @@
     }
 
     .section__break--short {
-        display: inline-block;
+        display: block;
         margin-top: 6.7rem;
         margin-bottom: 3.5rem;
+        margin-left: auto;
+        margin-right: auto;
         text-align: center;
         width: 20%;
     }
@@ -438,7 +441,7 @@
         word-spacing: 0.155rem;
     }
 
-    .faq__link {
+    .faq a {
         color: #333399;
         text-decoration: none;
     }
@@ -460,7 +463,7 @@
         width: 100%;
     }
 
-    .faq__emphasis {
+    .faq em, .faq i {
         word-spacing: normal;
     }
 
@@ -498,16 +501,17 @@
         margin: 0;
     }
 
-    .summary__description {
+    .summary__content--container {
+        display: inline-block;
         font-size: 1.45rem;
+        margin-bottom: 1.15rem;
     }
 
-    .summary__emphassis {
+    .summary__content em, .summary__content i {
         display: block;
-        margin-bottom: 0.8rem;
     }
 
-    .summary__link {
+    .summary__content a {
         border: 2px solid #2EAFAC;
         color: #2EAFAC;
         display: table;
@@ -629,7 +633,7 @@
           text-align: center;
       }
 
-      .summary__icon, .summary__link {
+      .summary__icon {
           display: none;
       }
     }
@@ -677,22 +681,12 @@
     <style is="custom-style" include="style-fade-in"></style>
     <firebase-document
       app-name="unicef-innovation-fund"
-      path="/summary/portfolios/invested_youth_engagement"
-      data="{{emails}}">
-    </firebase-document>
-    <firebase-document
-      app-name="unicef-innovation-fund"
-      path="/submit_co"
-      data="{{countryOffices}}">
-    </firebase-document>
-    <firebase-document
-      app-name="unicef-innovation-fund"
-      path="/content"
-      data="{{startups}}">
+      path="/content/submit_content"
+      data="{{submit}}">
     </firebase-document>
 
     <header class='page__header page__header--dark'>
-      <div class='mdl-grid container' style='position:relative;'>
+      <div class='mdl-grid container'>
         <div class="mdl-layout-spacer"></div>
         <div class="mdl-cell mdl-cell--10-col">
           <h1 class='title--big hello__title fade-in'>Submit</h1>
@@ -720,7 +714,7 @@
       <div class="mdl-layout-spacer"></div>
       <div class="container mdl-cell mdl-cell--12-col">
         <p class$="section__auth-alert [[errorMessageClass]]">[[errorMessage]]</p>
-          <p class="section__description"><echo-html html$="{{startups.submit_email_text}}"></echo-html></p>
+          <p class="section__description"><echo-html html$="{{submit.country_offices.submit_email_text}}"></echo-html></p>
         <form is="iron-form" class="section__form" on-submit="submitEmail">
           <input type="text" class$="section__input [[inputAuthClass]]" placeholder="email address" on-input="checkAuth">
           <button type="submit" class="section__confirm-email" data-display="office-submited" data-hide="office">continue</button>
@@ -732,82 +726,41 @@
       <button on-tap="changeSection" class="section__back" data-display="main" data-hide="office-submited">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="submit__office container mdl-cell mdl-cell--12-col">
-        <echo-html html$="{{countryOffices.intro}}"></echo-html>
+        <p class="section__description">
+            <echo-html html$="{{submit.country_offices.text}}"></echo-html>
+        </p>
         <div class="section__submit">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank"><echo-html html$="{{countryOffices.button_submission}}"></echo-html></a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank"><echo-html html$="{{submit.country_offices.submit_button_text}}"></echo-html></a>
         </div>
         <hr class="section__break">
-        <h3 class="section__subheader"><echo-html html="[[countryOffices.section_1]]"></echo-html></h3>
+        <h3 class="section__subheader"><echo-html html$="{{submit.country_offices.steps_title}}"></echo-html></h3>
         <ol class="accordion">
-            <li class="accordion__section">
-                <h4 class="accordion__header" data-open="eligibility" on-tap="accordionOpen">
-                    <p class="accordion__number">1</p><echo-html html="[[countryOffices.1-a]]"></echo-html>
-                    <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
-                </h4>
-                <div class="accordion__content accordion__content--toggle" data-accordion="eligibility">
-                    <p class="accordion__summary"><echo-html html="[[countryOffices.1-b]]"></echo-html></p>
-                    <ul class="description__list">
-                        <echo-html html$="{{countryOffices.1-c}}"></echo-html>
-                    </ul>
-                </div>
-            </li>
-            <li class="accordion__section">
-                <h4 class="accordion__header" data-open="submit" on-tap="accordionOpen">
-                    <p class="accordion__number">2</p><echo-html html="[[countryOffices.2-a]]"></echo-html>
-                    <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
-                </h4>
-                <div class="accordion__content accordion__content--toggle" data-accordion="submit">
-                    <p class="accordion__summary"><echo-html html="[[countryOffices.2-b]]"></echo-html></p>
-                    <ul class="description__list">
-                        <echo-html html$="{{countryOffices.2-c}}"></echo-html>
-                    </ul>
-                </div>
-            </li>
-            <li class="accordion__section">
-                <h4 class="accordion__header" data-open="iterate" on-tap="accordionOpen">
-                    <p class="accordion__number">3</p><echo-html html="[[countryOffices.3-a]]"></echo-html>
-                    <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
-                </h4>
-                <div class="accordion__content accordion__content--toggle" data-accordion="iterate">
-                    <p class="accordion__summary--gray"><echo-html html="[[countryOffices.3-b]]"></echo-html></p>
-                    <ul class="description__list">
-                        <echo-html html$="{{countryOffices.3-c}}"></echo-html>
-                    </ul>
-                </div>
-            </li>
-            <li class="accordion__section">
-                <h4 class="accordion__header" data-open="decision" on-tap="accordionOpen">
-                    <p class="accordion__number">4</p><echo-html html="[[countryOffices.4-a]]"></echo-html>
-                    <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
-                </h4>
-                <div class="accordion__content accordion__content--toggle" data-accordion="decision">
-                    <p class="accordion__summary--gray"><echo-html html="[[countryOffices.4-b]]"></echo-html></p>
-                </div>
-            </li>
+            <template is="dom-repeat" items="{{submit.country_offices.steps_content}}" as="step">
+                <li class="accordion__section">
+                    <h4 class="accordion__header" data-open$="{{step.id}}" on-tap="accordionOpen">
+                        <p class="accordion__number">{{stepIndex(index)}}</p><echo-html html$="{{step.name}}"></echo-html>
+                        <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
+                    </h4>
+                    <div class="accordion__content accordion__content--toggle" data-accordion$="{{step.id}}">
+                        <p class="accordion__summary"><echo-html html$="{{step.description}}"></echo-html></p>
+                        <ul class="description__list">
+                            <template is="dom-repeat" items="{{step.requirements}}" as="requirement">
+                                <li class="description__item"><echo-html html$="{{requirement}}"></echo-html></li>
+                            </template>
+                        </ul>
+                    </div>
+                </li>
+            </template>
         </ol>
         <hr class="section__break">
-        <h3 class="section__subheader"><echo-html html$="{{countryOffices.section_2}}"></echo-html></h3>
+        <h3 class="section__subheader"><echo-html html$="{{submit.country_offices.role_title}}"></echo-html></h3>
         <ul class="role__list">
-            <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/real-time.svg" alt="Real-time information" class="role__image"><echo-html html="[[countryOffices.realtime_1]]"></echo-html></h4>
-                <p class="role__description"><echo-html html="[[countryOffices.realtime_2]]"></echo-html></p>
-            </li>
-            <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/implement.svg" alt="Implement" class="role__image"><echo-html html="[[countryOffices.implement_1]]"></echo-html></h4>
-                <p class="role__description"><echo-html html="[[countryOffices.implement_2]]"></echo-html></p>
-            </li>
-            <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/report.svg" alt="Report" class="role__image"><echo-html html="[[countryOffices.report_1]]"></echo-html></h4>
-                <p class="role__description"><echo-html html="[[countryOffices.report_2]]"></echo-html></p>
-            </li>
-            <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/spend.svg" alt="Spend" class="role__image"><echo-html html="[[countryOffices.send_1]]"></echo-html></h4>
-                <p class="role__description"><echo-html html="[[countryOffices.send_2]]"></echo-html></p>
-            </li>
-            <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/share.svg" alt="Share" class="role__image"><echo-html html="[[countryOffices.share_1]]"></echo-html></h4>
-                <p class="role__description"><echo-html html="[[countryOffices.share_2]]"></echo-html></p>
-            </li>
+            <template is="dom-repeat" items="{{submit.country_offices.role_content}}" as="role">
+                <li class="role__item">
+                    <h4 class="role__name"><img src="../images/icons/{{role.icon_name}}.svg" alt="Real-time information" class="role__image"><echo-html html$="{{role.name}}"></echo-html></h4>
+                    <p class="role__description"><echo-html html$="{{role.description}}"></echo-html></p>
+                </li>
+            </template>
         </ul>
       </div>
       <div class="mdl-layout-spacer"></div>
@@ -816,47 +769,51 @@
       <button on-tap="changeSection" class="section__back" data-display="main" data-hide="startup">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="container mdl-cell mdl-cell--12-col">
-        <echo-html html$="{{startups.submit_startup_2_1}}"></echo-html>
+            <h3 class="section__subheader section__subheader-startup">
+                <echo-html html$="{{submit.startups.title}}"></echo-html>
+            </h3>
+            <p class="section__description section__description-startup">
+                <echo-html html$="{{submit.startups.description}}"></echo-html>
+            </p>
+            <img src="../images/icons/startups_steps.svg" alt="Steps for startup" class="section__icon--wide">
+            <h3 class="section__subheader section__subheader-startup">
+                <echo-html html$="{{submit.startups.process_title}}"></echo-html>
+            </h3>
+            <p class="section__description section__description-startup">
+                <echo-html html$="{{submit.startups.process_description}}"></echo-html>
+            </p>
         <img src="../images/icons/startups_steps.svg" alt="Steps for startup" class="section__icon--wide">
+        <p class="section__description section__subheader-startup"></p>
         <ol class="faq faq__list">
-            <li class="faq__step">
-                <h3 class="faq__name"><echo-html html$="{{startups.submit_startup_step_titles.0}}"></echo-html></h3>
-                <strong class="faq__description"><echo-html html$="{{startups.submit_startup_step_bold.0}}"></echo-html></strong>
-                <ul class="faq__list">
-                    <echo-html html$="{{startups.submit_startup_step_content.0}}"></echo-html>
-                </ul>
-            </li>
-            <li class="faq__step">
-                <h3 class="faq__name"><echo-html html$="{{startups.submit_startup_step_titles.1}}"></echo-html></h3>
-                <strong class="faq__description"><echo-html html$="{{startups.submit_startup_step_bold.1}}"></echo-html></strong>
-                <ul class="faq__list">
-                    <echo-html html$="{{startups.submit_startup_step_content.1}}"></echo-html>
-                </ul>
-            </li>
-            <li class="faq__step">
-                <h3 class="faq__name"><echo-html html$="{{startups.submit_startup_step_titles.2}}"></echo-html></h3>
-                <strong class="faq__description"><echo-html html$="{{startups.submit_startup_step_bold.2}}"></echo-html></strong>
-                <ul class="faq__list">
-                    <echo-html html$="{{startups.submit_startup_step_content.2}}"></echo-html>
-                </ul>
-            </li>
-            <li class="faq__step">
-                <h3 class="faq__name"><echo-html html$="{{startups.submit_startup_step_titles.3}}"></echo-html></h3>
-                <strong class="faq__description"><echo-html html$="{{startups.submit_startup_step_bold.3}}"></echo-html></strong>
-                <ul class="faq__list">
-                    <echo-html html$="{{startups.submit_startup_step_content.3}}"></echo-html>
-                </ul>
-            </li>
+            <template is="dom-repeat" items="{{submit.startups.steps}}" as="step">
+                <li class="faq__step">
+                    <h3 class="faq__name"><echo-html html$="{{step.name}}"></echo-html></h3>
+                    <strong class="faq__description"><echo-html html$="{{step.description}}"></echo-html></strong>
+                    <ul class="faq__list">
+                        <template is="dom-repeat" items="{{step.requirements}}" as="requirement">
+                            <li class="faq__requirement">
+                                <echo-html html$="{{requirement}}"></echo-html>
+                            </li>
+                        </template>
+                    </ul>
+                </li>
+            </template>
         </ol>
         <div class="faq__submit">
-            <a href="https://form.jotform.com/62704508221145" class="faq__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank"><echo-html html$="{{startups.submit_startup_submit_button}}"></echo-html></a>
+            <a href="https://form.jotform.com/62704508221145" class="faq__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank">
+                <echo-html html$="{{submit.startups.submit_button_text}}"></echo-html>
+            </a>
         </div>
         <hr class="section__break--thin">
         <div class="summary">
             <img src="../images/icons/country_offices-alt.svg" alt="" class="summary__icon">
             <div class="summary__content">
-                <h3 class="summary__title"><echo-html html$="{{startups.submit_startup_conclusion_title}}"></echo-html></h3>
-                <echo-html html$="{{startups.submit_startup_conclusion_content}}"></echo-html>
+                <h3 class="summary__title"><echo-html html$="{{submit.startups.additional_info_title}}"></echo-html></h3>
+                <template is="dom-repeat" items="{{submit.startups.additional_info}}" as="info">
+                    <span class="summary__content--container">
+                        <echo-html html$="{{info}}"></echo-html>
+                    </span>
+                </template>
             </div>
         </div>
       </div>
@@ -870,10 +827,6 @@
         countryOfficesAuthenticated: {
             type: Boolean,
             value: false
-        },
-        emailVerificationMessage: {
-            type: String,
-            value: "Please submit your email address to continue"
         },
         errorMessageClass: {
             type: String,
@@ -891,15 +844,18 @@
             type: String,
             value: ''
         },
-        countryOffices: {
+        startups: {
             type: Object
         },
-        startups: {
+        submit: {
             type: Object
         }
     },
     listeners: {
       'iron-form-submit': 'submitEmail'
+    },
+    stepIndex: function (index) {
+        return index + 1;
     },
     ready: function () {
         var self = this;
