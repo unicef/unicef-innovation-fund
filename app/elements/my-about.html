@@ -150,7 +150,7 @@
           if(!window.scrollReveal) {
             window.scrollReveal = new ScrollReveal();
           }
-          window.scrollReveal.reveal('.about__description, .about__description--narrow, .about__tiles', config);
+          window.scrollReveal.reveal('.about__description:not(:first-child), .about__description--narrow, .about__tiles:not(:first-child)', config);
         }
       });
     })();
