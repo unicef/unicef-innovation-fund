@@ -63,6 +63,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     Polymer.Base.transform('scale(' + scaleMiddle + ') translateZ(0)', appName);
   });
 
+  // MAIN application menu shows notification when new projects are loaded
+  $(document).on('new-projects-count-computed', function(e, projectCount){
+    var menuNews = ['#news.menu-item', 'paper-tab#news'];
+    var menuClass = 'menu-notification';
+
+    menuNews.forEach(function(e) {
+      $(e).removeClass(menuClass);
+    });
+
+    if (projectCount > 0) {
+      menuNews.forEach(function(e) {
+        $(e).addClass(menuClass);
+      });
+    }
+  });
+
   // Scroll page to top and expand header
   app.scrollPageToTop = function() {
     app.$.headerPanelMain.scrollToTop(true);

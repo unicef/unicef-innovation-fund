@@ -227,6 +227,10 @@
         margin-bottom: -16px;
       }
 
+      .project-view__tabs.git {
+        display: none;
+      }
+
       @media only screen and (max-width: 839px) {
         .project-view__col--main {
           border-right: none;
@@ -246,16 +250,23 @@
 
     <firebase-document
       id='chartData'
-      app-name="test"
+      app-name="unicef-innovation-fund"
       path="[[ _getChartDataPath(project) ]]"
       data="{{chartDataSet}}">
     </firebase-document>
 
     <firebase-document
       id='geoData'
-      app-name="test"
+      app-name="unicef-innovation-fund"
       path="[[ _getGeoDataPath(project) ]]"
       data="{{geoDataSet}}">
+    </firebase-document>
+
+    <firebase-document
+      id='geoData'
+      app-name="unicef-innovation-fund"
+      path="chart_data/[[ project.slug ]]"
+      data="{{gitDataSet}}">
     </firebase-document>
 
     <div class$="project-view__container project-view__container--{{ type }} {{ _getColorClass(type) }}">
@@ -268,8 +279,25 @@
               <paper-tab tab-name="map">MAP</paper-tab>
             </paper-tabs>
           </template>
+          <template is="dom-if" if="[[gitDataSet.length]]">
+              <paper-tabs class="project-view__tabs git" selected="{{tabName}}" attr-for-selected="tab-name">
+                  <template is="dom-repeat" items="{{gitDataSet}}" as="Git">
+                      <paper-tab tab-name="git-{{index}}">{{Git.label}}</paper-tab>
+                  </template>
+              </paper-tabs>
+          </template>
           <div class="project-view__divider project-view__divider--left"></div>
           <neon-animated-pages class$="project-view__chart-container {{ _getChartContainerClass(chartData, geoData) }}" style='z-index:0;' selected="{{tabName}}" attr-for-selected="tab-name" exit-animation="fade-out-animation" entry-animation="slide-from-left-animation">
+            <template is="dom-if" if="[[gitDataSet.length]]">
+                <template is="dom-repeat" items="{{gitDataSet}}">
+                    <neon-animatable tab-name="git-[[index]]">
+                        <div value="{{item}}" class="project-view__item">
+                            <p>[[item.label]]</p>
+                            <p>[[item.text]]</p>
+                        </div>
+                    </neon-animatable>
+                </template>
+            </template>
             <neon-animatable tab-name="graph">
               <!-- line chart -->
               <template id="projectChartTemplate" is="dom-if" if="{{ _showLineChart(chartData) }}">
@@ -351,6 +379,11 @@
             type: Object,
             observer: '_handleGeoData',
             notify: true
+          },
+          gitDataSet: {
+              type: Object,
+              observer: '_fetchGitData',
+              notify: true
           },
           opt: {
             type: Object,
@@ -442,11 +475,9 @@
             return 'ureport/' + country;
           } else if (project.slug.match(/iogt/i)) {
             return 'iogt';
-          } else if (project.github) {
-            return 'git/' + project.slug;
+          } else {
+            return 'chart_data/' + project.slug;
           }
-
-          return null;
         },
         _getGeoDataPath: function(project) {
           this.geoData = [];
@@ -545,6 +576,20 @@
 
           this.geoData = data;
           this._drawGeoChart(this.geoData);
+        },
+        _fetchGitData: function (data) {
+            var that = this;
+            if (Object.keys(data).length > 0 && data.constructor === Object) {
+                var dataSet = [];
+                for (var repo in data) {
+                      var newEntry = {
+                          label: data[repo].label || repo,
+                          text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti voluptatem vel, sequi, voluptate illo mollitia unde at atque cumque, magni eius nesciunt tempore neque harum eum blanditiis, deleniti veniam? Expedita."
+                      };
+                      dataSet.push(newEntry);
+                }
+                return that.gitDataSet = dataSet;
+            }
         },
         _handleGitChartData: function(data) {
           if (Object.keys(data).length < 1) {
