@@ -94,16 +94,15 @@
             width: 100%;
           }
       }
-
     </style>
     <div class="hello_holder">
       <hello-about></hello-about>
       <div class="mdl-grid about__section fade-in">
         <div class="mdl-layout-spacer" ></div>
         <div class="mdl-cell--bottom mdl-cell--10-col mdl-cell--8-col-tablet about__content">
-          <p class="about__description">{{paragraph_1}}</p>
+          <p class="about__description"><echo-htm html$="{{contentAbout.about_paragraph_1}}"></echo-htm></p>
 
-          <p class="about__description">{{paragraph_2}}</p>
+          <p class="about__description"><echo-htm html$="{{contentAbout.about_paragraph_2}}"></echo-htm></p>
           <div class="about__tiles">
               <div class="about__tile">
                   <strong class="about__name">Products for youth</strong>
@@ -118,39 +117,22 @@
                   <img src="../images/icons/real_time_information.svg" alt="Real time information" class="about__image">
               </div>
           </div>
-          <p class="about__description">{{paragraph_3}}</p>
+          <p class="about__description"><echo-htm html$="{{contentAbout.about_paragraph_3}}"></echo-htm></p>
 
           <hr class="about__divider">
 
-          <p class="about__description">{{paragraph_4}}</p>
+          <p class="about__description"><echo-htm html$="{{contentAbout.about_paragraph_4}}"></echo-htm></p>
         </div>
         <div class="mdl-layout-spacer"></div>
       </div>
     </div>
     <firebase-document
       app-name="unicef-innovation-fund"
-      path='/content/about_paragraph_1'
-      data="{{paragraph_1}}">
-    </firebase-document>
-    <firebase-document
-      app-name="unicef-innovation-fund"
-      path='/content/about_paragraph_2'
-      data="{{paragraph_2}}">
-    </firebase-document>
-    <firebase-document
-      app-name="unicef-innovation-fund"
-      path='/content/about_paragraph_3'
-      data="{{paragraph_3}}">
-    </firebase-document>
-    <firebase-document
-      app-name="unicef-innovation-fund"
-      path='/content/about_paragraph_4'
-      data="{{paragraph_4}}">
+      path='/content/about'
+      data="{{contentAbout}}">
     </firebase-document>
   </template>
-
   <script src="../bower_components/scrollreveal/dist/scrollreveal.min.js" type="text/javascript"></script>
-
   <script>
     (function() {
       'use strict';
