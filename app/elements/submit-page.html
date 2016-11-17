@@ -63,7 +63,7 @@
       margin-top: 1rem;
     }
 
-    .section__description-startup {
+    .section__description-startup, .section__description-startup p, .section__subheader-startup p {
         margin-top: 0;
         font-size: 1.35rem;
         font-weight: 400;
@@ -76,7 +76,7 @@
     }
 
     .section__description b {
-        display: block;
+        display: inline;
         font-size: 1.35rem;
         font-weight: 700;
         line-height: 1.8;
@@ -440,7 +440,7 @@
         word-spacing: 0.155rem;
     }
 
-    .faq__link {
+    .faq a {
         color: #333399;
         text-decoration: none;
     }
@@ -462,7 +462,7 @@
         width: 100%;
     }
 
-    .faq__emphasis {
+    .faq em, .faq i {
         word-spacing: normal;
     }
 
@@ -500,16 +500,17 @@
         margin: 0;
     }
 
-    .summary__description {
+    .summary__content--container {
+        display: inline-block;
         font-size: 1.45rem;
+        margin-bottom: 1.15rem;
     }
 
-    .summary__emphassis {
+    .summary__content em, .summary__content i {
         display: block;
-        margin-bottom: 0.8rem;
     }
 
-    .summary__link {
+    .summary__content a {
         border: 2px solid #2EAFAC;
         color: #2EAFAC;
         display: table;
@@ -631,7 +632,7 @@
           text-align: center;
       }
 
-      .summary__icon, .summary__link {
+      .summary__icon {
           display: none;
       }
     }
@@ -679,7 +680,7 @@
     <style is="custom-style" include="style-fade-in"></style>
     <firebase-document
       app-name="unicef-innovation-fund"
-      path="/submit_content"
+      path="/content/submit_content"
       data="{{submit}}">
     </firebase-document>
 
@@ -724,7 +725,9 @@
       <button on-tap="changeSection" class="section__back" data-display="main" data-hide="office-submited">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="submit__office container mdl-cell mdl-cell--12-col">
-        <echo-html html$="{{submit.country_offices.text}}"></echo-html>
+        <p class="section__description">
+            <echo-html html$="{{submit.country_offices.text}}"></echo-html>
+        </p>
         <div class="section__submit">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank"><echo-html html$="{{submit.country_offices.submit_button_text}}"></echo-html></a>
         </div>
@@ -804,8 +807,9 @@
         <div class="summary">
             <img src="../images/icons/country_offices-alt.svg" alt="" class="summary__icon">
             <div class="summary__content">
+                <h3 class="summary__title"><echo-html html$="{{submit.startups.additional_info_title}}"></echo-html></h3>
                 <template is="dom-repeat" items="{{submit.startups.additional_info}}" as="info">
-                    <span class="summary__description-container">
+                    <span class="summary__content--container">
                         <echo-html html$="{{info}}"></echo-html>
                     </span>
                 </template>
@@ -822,10 +826,6 @@
         countryOfficesAuthenticated: {
             type: Boolean,
             value: false
-        },
-        emailVerificationMessage: {
-            type: String,
-            value: "Please submit your email address to continue"
         },
         errorMessageClass: {
             type: String,
