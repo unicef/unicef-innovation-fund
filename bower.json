@@ -1,5 +1,5 @@
 {
-  "name": "polymer-starter-kit",
+  "name": "unicef-innovation-fund",
   "private": true,
   "dependencies": {
     "iron-elements": "PolymerElements/iron-elements#^1.0.10",
@@ -9,7 +9,6 @@
     "platinum-elements": "PolymerElements/platinum-elements#^1.2.0",
     "polymer": "Polymer/polymer#^1.7.0",
     "app-router": "^2.6.1",
-    "firebase-element": "GoogleWebComponents/firebase-element#^1.0.14",
     "polymerfire": "firebase/polymerfire#^0.9.2",
     "Chart.js": "2.1.6",
     "chart-elements": "^3.0.2",
@@ -23,8 +22,5 @@
   "devDependencies": {
     "web-component-tester": "^4.0.0"
   },
-  "ignore": [],
-  "resolutions": {
-    "firebase": "^3.4.0"
-  }
+  "ignore": []
 }
