@@ -1,0 +1,52 @@
+<dom-module id="echo-html">
+    <template>
+        <style>
+        </style>
+    </template>
+</dom-module>
+
+<script>
+(function() {
+    Polymer({
+        is: 'echo-html',
+        properties: {
+            html: {
+                type: Object,
+                value: '',
+                observer: '_refreshHtml'
+            },
+        },
+
+        _refreshHtml: function() {
+            var container = Polymer.dom(this).parentNode;
+            if ((this.html) && ($(container)) && ($(container).length) ) {
+                var value = '';
+
+                var classList = Array.from($(container)[0].classList).filter(function(el) {
+                    return ((el != 'echo-html') && (el != 'style-scope'));
+                });
+                var lastClass = classList[classList.length - 1];
+
+                if ((this.html.constructor == Array) && (this.html.length == 1)) {
+                    value = this.html[0];
+                } else  {
+                    value = this.html;
+                }
+                if (this.parentNode) {
+                    this.outerHTML = value;
+                }
+                this.scopeSubtree(container, true);
+
+                // First step - change the Shadom DOM
+                Polymer.dom(container).classList.remove('echo-html');
+                if (Polymer.dom(container).classList.contains(lastClass)==false) {
+                    Polymer.dom(container).classList.add(lastClass);
+                }
+
+                // Second step - change the DOM
+                $(container).find('*').removeClass('echo-html').addClass(lastClass);
+            }
+        },
+    });
+})();
+</script>

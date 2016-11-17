@@ -19,6 +19,7 @@
 
     .submit__office {
         text-align: left;
+        padding-top: 40px;
     }
 
     .button__container {
@@ -64,6 +65,7 @@
       line-height: 1.5;
       margin-bottom: 0;
       margin-top: 1rem;
+      text-align: center;
     }
 
     .section__submit {
@@ -380,7 +382,7 @@
       }
 
       [data-target="startup"] .section__back {
-          top: 2.5%;
+          top: 1.5%;
       }
 
       [data-target="office"] .section__back {
@@ -708,6 +710,10 @@
                 self.errorMessage = 'Email is not valid';
             }
         });
+    },
+    attached: function() {
+        var scrollReveal = ScrollReveal({container: '#mainContainer'});
+        scrollReveal.reveal('.accordion__section, .role__list, .section__subheader, .faq__step, .faq__submit, .summary, .section__description');
     },
     checkAuth: function (event) {
         var regxTest = /.{1,}@unicef\.org$/gi;
