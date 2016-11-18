@@ -10,9 +10,9 @@
 
     </style>
     <div>
-      <div id="dashboard">
-        <div id="chart_div"></div>
-        <div id="control_div"></div>
+      <div id$="dashboard{{index}}">
+        <div id$="chart_div{{index}}"></div>
+        <div id$="control_div{{index}}"></div>
       </div>
     </div>
   </template>
@@ -36,6 +36,10 @@ Polymer({
     dashboard: {
       type: Object,
       value: {}
+    },
+    index: {
+      type: String,
+      value: ''
     }
   },
 
@@ -84,11 +88,11 @@ Polymer({
 
       var minRange = googleLabels[1].getTime() - googleLabels[0].getTime();
 
-      var dash = new google.visualization.Dashboard(document.getElementById('dashboard'));
+      var dash = new google.visualization.Dashboard(document.getElementById('dashboard'+self.index));
 
       var control = new google.visualization.ControlWrapper({
         controlType: 'DateRangeFilter',
-        containerId: 'control_div',
+        containerId: 'control_div'+self.index,
 
         options: {
           filterColumnIndex: 0,
@@ -113,7 +117,7 @@ Polymer({
 
       var chart = new google.visualization.ChartWrapper({
         chartType: 'AreaChart',
-        containerId: 'chart_div',
+        containerId: 'chart_div'+self.index,
         options: {
           pointSize: 5,
           chartArea: {
@@ -150,6 +154,10 @@ Polymer({
       }
     }
     drawChart();
+
+    $(window).on('project-view-tab-name-selected', function() {
+      drawChart();
+    });
 
     $(window).on('resize', function(){
       drawChart();

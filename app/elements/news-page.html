@@ -400,7 +400,7 @@
                         <span class="news__section-entry--title">{{_getElementFromArray(content.news_section2_entry_titles, index)}}</span>
                         <a class="news__section-entry--link" target="_blank" href="[[_getElementFromArray(content.news_section2_entry_link, index)]]">LINK {{_getIndex(index)}}</a>
                         <p class="news__section-entry--description">
-                            <echo-html html$="{{_getElementFromArray(content.news_section2_entry_description, index)}}""></echo-html>
+                            <echo-html html$="{{_getElementFromArray(content.news_section2_entry_description, index)}}"></echo-html>
                         </p>
                     </template>
                 </div>
@@ -456,6 +456,7 @@
 
                     projectView.node.project = project;
                     projectView.node.type = projectType;
+
                     $(projectModal.node).removeClass("dialog-type-infrastructure");
                     $(projectModal.node).removeClass("dialog-type-real_time_information");
                     $(projectModal.node).removeClass("dialog-type-youth_engagement");
