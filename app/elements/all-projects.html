@@ -562,7 +562,8 @@
 
         //Timeout waits for transition to finish
         setTimeout((function(){
-          this.projects = Object.keys(obj).map(function (key) { return obj[key]; });
+          this.projects = Object.keys(obj).map(function (key) { return obj[key]; })
+          .sort(function(a,b){return (a.order-b.order);});
         }).bind(this), 350);
       }
     },
