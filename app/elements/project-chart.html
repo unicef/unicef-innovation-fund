@@ -80,9 +80,12 @@ Polymer({
   },
 
   _convertRgbaToRgb: function(rgba){
-    var b = rgba.substring(5, rgba.length -1);
-    var c = b.split(', ');
-    return 'rgb('+c[0]+', '+c[1]+', '+c[2]+ ')'
+    var rgbWithSpecialChars = rgba.substring(5, rgba.length -1);
+    var rgb = rgbWithSpecialChars.split(', ');
+    var red = rgb[0],
+        green = rgb[1],
+        blue = rgb[2];
+    return 'rgb('+ red +', '+ green +', '+ blue + ')';
   },
 
   _prepareGoogleLabels: function(labels){
@@ -104,9 +107,6 @@ Polymer({
       var controlId = 'control_div'+self.index;
       var chartId = 'chart_div'+self.index;
 
-      if ((!datasets) || (!($(self).find('#'+controlId))) || (!($(self).find('#'+chartId)))) {
-        console.log('drawChart: dataset, control or chart empty');
-      }
       var labels = self.data.labels;
       var googleLabels = self._prepareGoogleLabels(labels);
 

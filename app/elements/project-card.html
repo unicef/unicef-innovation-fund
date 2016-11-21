@@ -323,7 +323,7 @@
       }
     },
     _getCategoryIconPath: function(category) {
-      if ((category === '') || (category === 0) || (category === false) || (category === null) || (category === undefined)) {
+      if (!category) {
         return '';
       }
       return '/images/icons/' + category + '.svg';
