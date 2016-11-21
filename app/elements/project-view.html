@@ -293,7 +293,7 @@
                                     </paper-dropdown-menu>
                                 </div>
                                 <div class="project-view__chart">
-                                    <project-chart data="[[ projectChart ]]" options="[[ opt ]]" index="[[ index ]]" id="projectChart-[[index]]"></project-chart>
+                                    <project-chart data="[[ projectChart ]]" options="[[ opt ]]" index="[[ index ]]" parentid="[[ id ]]" id="projectChart-[[id]]-[[index]]"></project-chart>
                                 </div>
                             </neon-animatable>
                         </template>
@@ -693,7 +693,7 @@
                     var index = event.target.attributes.label.value;
                     var year = object.item.value;
 
-                    var chart = document.getElementById('projectChart-' + index);
+                    var chart = document.getElementById('projectChart-' + this.id + '-' + index);
                     if (!chart) {
                         return;
                     }

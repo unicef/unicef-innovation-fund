@@ -1,18 +1,17 @@
 <dom-module id='project-chart'>
   <template>
     <style>
-    :host {
-      height: 400px;
-      width: 100%;
-      position: relative;
-      display: inline-block;
-    }
-
+      :host {
+        height: 400px;
+        width: 100%;
+        position: relative;
+        display: inline-block;
+      }
     </style>
     <div>
-      <div id$="dashboard{{index}}">
-        <div id$="chart_div{{index}}"></div>
-        <div id$="control_div{{index}}"></div>
+      <div id$="dashboard-{{parentid}}-{{index}}">
+        <div id$="chart_div-{{parentid}}-{{index}}"></div>
+        <div id$="control_div-{{parentid}}-{{index}}"></div>
       </div>
     </div>
   </template>
@@ -25,6 +24,11 @@ Polymer({
       type: Object,
       observer: '_dataChange',
       notify: true
+    },
+    parentid: {
+      type: String,
+      notify: true,
+      observer: '_dataChange'
     },
     googleLabels: {
       type: Array,
@@ -56,7 +60,7 @@ Polymer({
   _dataChange: function(){
     this.resetChart();
 
-    if(Object.keys(this.data).length >0){
+    if ((Object.keys(this.data).length) && (this.parentid)) {
        this._runGoogleChart();
     }
   },
@@ -109,8 +113,8 @@ Polymer({
 
     self.drawChart = function() {
       var datasets = self.data.datasets[0] || self.data.datasets['0'];
-      var controlId = 'control_div'+self.index;
-      var chartId = 'chart_div'+self.index;
+      var controlId = 'control_div'+'-'+self.parentid+'-'+self.index;
+      var chartId = 'chart_div'+'-'+self.parentid+'-'+self.index;
 
       var labels = self.data.labels;
       var googleLabels = self._prepareGoogleLabels(labels);
@@ -129,7 +133,7 @@ Polymer({
 
       var minRange = googleLabels[1].getTime() - googleLabels[0].getTime();
 
-      var dash = new google.visualization.Dashboard(document.getElementById('dashboard'+self.index));
+      var dash = new google.visualization.Dashboard(document.getElementById('dashboard'+'-'+self.parentid+'-'+self.index));
 
       var control = new google.visualization.ControlWrapper({
         controlType: 'DateRangeFilter',
@@ -228,20 +232,24 @@ Polymer({
   },
 
   filterByYear: function(year) {
-    this.control.setState({
-      lowValue: (new Date(year, 0, 0)),
-      highValue: (new Date(year, 11, 30)),
-    });
-    this.control.draw();
+    if(!($.isEmptyObject(this.control))) {
+      this.control.setState({
+        lowValue: (new Date(year, 0, 0)),
+        highValue: (new Date(year, 11, 30)),
+      });
+      this.control.draw();
+    }
   },
 
   resetFilter: function() {
     var googleLabels = this.googleLabels;
-    this.control.setState({
-      lowValue: googleLabels[0],
-      highValue: googleLabels[googleLabels.length-1]
-    });
-    this.control.draw();
+    if(!($.isEmptyObject(this.control))) {
+      this.control.setState({
+        lowValue: googleLabels[0],
+        highValue: googleLabels[googleLabels.length-1]
+      });
+      this.control.draw();
+    }
   },
 
   _dashboardReady: function(e) {
