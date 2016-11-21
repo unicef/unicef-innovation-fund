@@ -88,15 +88,14 @@
             <h4 class="title--tiny dashboard__title dashboard__title--margin">Portfolios</h4>
           </div>
           <div class="mdl-card mdl-shadow--3dp mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--4-col-phone db_card project__container">
-            <portfolio-card class="portfolio-card--youth_engagement" progress="{{_financial(financials, 'youth_engagement')}}" tooltip_target= 'db_tooltip_youth_engagement' phrase='Products For Youth' featured='U-Report' featured_slug='u_report_global' chart_description='NUMBER OF USERS' featured_source='u_report_global' svg="youth_engagement" rgb='255, 204, 51, 0.2'>
-            </portfolio-card>
+            <portfolio-card class="portfolio-card--youth_engagement" progress="{{_financial(financials, 'youth_engagement')}}" tooltip_target='db_tooltip_youth_engagement' phrase='Products For Youth' featured='{{featuredProjects.youth_engagement.name}}' featured_slug='{{featuredProjects.youth_engagement.slug}}' category="youth_engagement" rgb='255, 204, 51, 0.2'>
           </div>
           <div class="mdl-card mdl-shadow--3dp mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--4-col-phone db_card project__container">
-            <portfolio-card class="portfolio-card--real-time-information" progress="{{_financial(financials, 'realtime_information')}}" tooltip_target='db_tooltip_real_time_info' phrase='Real-time Information'  featured='IPAL, Information Technology University' featured_slug='ipal_itu'  chart_description='NUMBER OF GIT COMMITS' featured_source='ipal_itu' svg="real_time_information" rgb='255, 204, 51, 0.2'>
+            <portfolio-card class="portfolio-card--real-time-information" progress="{{_financial(financials, 'realtime_information')}}" tooltip_target='db_tooltip_real_time_info' phrase='Real-time Information' featured='{{featuredProjects.real_time_information.name}}' featured_slug='{{featuredProjects.real_time_information.slug}}' category="real_time_information" rgb='255, 204, 51, 0.2'>
             </portfolio-card>
           </div>
           <div class="mdl-card mdl-shadow--3dp mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--4-col-phone db_card project__container" >
-            <portfolio-card class="portfolio-card--infrastructure" progress="{{_financial(financials, 'infrastructure')}}" tooltip_target='db_tooltip_infrastructure' phrase='Infrastructure' featured='SayCel' chart_description='NUMBER OF USERS' featured_source='say_cel' featured_slug='say_cel' svg="infrastructure" rgb='255, 204, 51, 0.2'>
+            <portfolio-card class="portfolio-card--infrastructure" progress="{{_financial(financials, 'infrastructure')}}" tooltip_target='db_tooltip_infrastructure' phrase='Infrastructure' featured='{{featuredProjects.infrastructure.name}}' featured_slug='{{featuredProjects.infrastructure.slug}}' category="infrastructure" rgb='255, 204, 51, 0.2'>
             </portfolio-card>
           </div>
         </div>
@@ -122,7 +121,7 @@
         type: String,
         notify: true
       },
-      svg: {
+      category: {
         value: '',
         notify: true
       },
@@ -131,16 +130,31 @@
       },
       projects: {
         type: Object,
-        observer: 'prepareCounter'
+        observer: '_handleProjects',
+        notify: true
+      },
+      featuredProjects: {
+        type: Object,
+        value: {
+          youth_engagement: {},
+          real_time_info: {},
+          infrastructure: {}
+        },
+        notify: true
       }
-
     },
-
-    prepareCounter: function() {
+    _handleProjects: function() {
       if (!Object.keys(this.projects).length) {
         return;
       }
       var projectCount = this._computeNewProjectsCount();
+      this.featuredProjects = this._computeFeaturedProjects();
+      this.displayProjectCounter(projectCount);
+    },
+    _handleChartData: function() {
+      return true;
+    },
+    displayProjectCounter: function(projectCount) {
       var counterElement = $('.project-counter');
 
       if (projectCount > 0) {
@@ -185,6 +199,28 @@
 
       $(document).trigger('new-projects-count-computed', projectCount);
       return projectCount;
+    },
+    _computeFeaturedProjects: function() {
+      var self = this;
+      if (!Object.keys(self.projects)) {
+        return false;
+      }
+
+      var featuredProjects = {};
+      var selectedCategories = ['youth_engagement', 'real_time_information', 'infrastructure'];
+      for (var c in selectedCategories) {
+        var selectedCategory = selectedCategories[c];
+        var selectedProjects = self.projects[selectedCategory].projects_hash;
+        var featuredProjectSlugs = Object.keys(selectedProjects).filter(function(slug){return (selectedProjects[slug].featured == 1);});
+        if ((featuredProjectSlugs) && (featuredProjectSlugs.length)) {
+          var slug = featuredProjectSlugs[0];
+          featuredProjects[selectedCategory] = selectedProjects[slug];
+          featuredProjects[selectedCategory].slug = slug;
+        }
+      }
+      self.featuredProjects = featuredProjects;
+      $(document).trigger('featured-projects-computed', featuredProjects);
+      return featuredProjects;
     }
   })
 </script>

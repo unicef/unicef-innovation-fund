@@ -33,13 +33,13 @@
     </style>
 
   <div style='display:flex;justify-content: center;'>
-    <div id="progressBar" class$="progress-{{svg}}" style$="width:{{bar_size}}px;">
-      <div id="scrubber"  class$="scrubber-{{svg}}" style$="width:{{progress_length}}px;"></div>
+    <div id="progressBar" class$="progress-{{category}}" style$="width:{{bar_size}}px;">
+      <div id="scrubber"  class$="scrubber-{{category}}" style$="width:{{progress_length}}px;"></div>
     </div>
   </div>
 
   <div style='display:flex;justify-content: center;'>
-    <div id='line' class$="scrubber-{{svg}}" style='width:1px;'>&nbsp;</div>
+    <div id='line' class$="scrubber-{{category}}" style='width:1px;'>&nbsp;</div>
   </div>
 
 </template>
@@ -48,7 +48,7 @@
     Polymer({
       is: "progress-bar",
       properties: {
-        svg: {
+        category: {
           value: '',
           notify: true
         },

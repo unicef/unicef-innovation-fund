@@ -347,8 +347,8 @@
 
     <firebase-document
       app-name="unicef-innovation-fund"
-      path="content"
-      data="{{content}}">
+      path="content/all"
+      data="{{all_projects}}">
     </firebase-document>
 
     <firebase-document
@@ -364,23 +364,23 @@
     </firebase-document>
 
     <div class$='page {{ _getColorClass(selected) }}'>
-      <hello-all-projects all_projects_cloud_content="{{content.all_projects_cloud_content}}"></hello-all-projects>
+      <hello-all-projects all_projects_cloud_content="{{all_projects.all_projects_cloud_content}}"></hello-all-projects>
       <div class="page__content container">
         <div class$="project-card__list {{ _getProjectCardListClass(selected) }} mdl-grid">
           <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
 
 
 
-            <project-card class$="{{ _projectCardActiveClass(selected, 'youth_engagement') }}" selected={{selected}} type="youth_engagement" content="{{content.youth_engagement}}" phrase='Products For Youth' fb='ureport' svg="youth_engagement" rgb='255, 204, 51, 0.2'></project-card>
+            <project-card class$="{{ _projectCardActiveClass(selected, 'youth_engagement') }}" selected={{selected}} type="youth_engagement" content="{{all_projects.ap_youth_products}}" phrase='Products For Youth' fb='ureport' category="youth_engagement" rgb='255, 204, 51, 0.2'></project-card>
           </div>
           <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
-            <project-card class$="{{ _projectCardActiveClass(selected, 'real_time_information') }}" selected={{selected}} type="realtime_information" content="{{content.real_time_info}}" phrase='Real-time Information' svg="real_time_information" rgb='255, 204, 51, 0.2'></project-card>
+            <project-card class$="{{ _projectCardActiveClass(selected, 'real_time_information') }}" selected={{selected}} type="realtime_information" content="{{all_projects.ap_real_time_info}}" phrase='Real-time Information' category="real_time_information" rgb='255, 204, 51, 0.2'></project-card>
           </div>
           <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
-            <project-card class$="{{ _projectCardActiveClass(selected, 'infrastructure') }}" selected={{selected}} type="infrastructure" content="{{content.infrastructure}}" phrase='Infrastructure' fb='iogt'  svg="infrastructure" rgb='255, 204, 51, 0.2'></project-card>
+            <project-card class$="{{ _projectCardActiveClass(selected, 'infrastructure') }}" selected={{selected}} type="infrastructure" content="{{all_projects.ap_infrastructure}}" phrase='Infrastructure' fb='iogt'  category="infrastructure" rgb='255, 204, 51, 0.2'></project-card>
           </div>
           <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
-            <project-card class$="{{ _projectCardActiveClass(selected, 'knowledge_products') }}" selected={{selected}} type="knowledge_p" content="{{content.knowledge_p}}" phrase='Knowledge Products' fb='iogt'  svg="knowledge_products" rgb='255, 204, 51, 0.2' tooltip_target='db_tooltip_knowledge_products'></project-card>
+            <project-card class$="{{ _projectCardActiveClass(selected, 'knowledge_products') }}" selected={{selected}} type="knowledge_p" content="{{all_projects.ap_knowledge_p}}" phrase='Knowledge Products' fb='iogt'  category="knowledge_products" rgb='255, 204, 51, 0.2' tooltip_target='db_tooltip_knowledge_products'></project-card>
           </div>
         </div>
         <div class="mdl-grid">
@@ -439,7 +439,7 @@
         <div class="project-list mdl-grid" id="projectList">
           <template is="dom-repeat" id='templateProjects' items="{{projects}}">
             <div class$="project-list__item mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone {{ _getFilterClass(item, index, filterAmountMin, filterAmountMax, filterRegion, filterStatus) }}">
-              <portfolio-project data={{projectsData}} index={{index}} svg={{selected}} item={{item}} class$="project-list__portfolio {{ _getColorClass(selected) }}"></portfolio-project>
+              <portfolio-project data={{projectsData}} index={{index}} category={{selected}} item={{item}} class$="project-list__portfolio {{ _getColorClass(selected) }}"></portfolio-project>
             </div>
           </template>
           <div class="project-list__project-view" id="projectListProjectViewContainer">
@@ -456,10 +456,10 @@
 <script>
 
   var projectCards = [
-    { label: 'Products For Youth', key: 'youth_engagement', svg: 'youth_engagement' },
-    { label: 'Real-time Information', key: 'real_time_info', svg: 'real_time_information' },
-    { label: 'Infrastructure', key: 'infrastructure', svg: 'infrastructure' },
-    { label: 'Knowledge Products', key: 'knowledge_p', svg: 'knowledge_products' }
+    { label: 'Products For Youth', key: 'youth_engagement', category: 'youth_engagement' },
+    { label: 'Real-time Information', key: 'real_time_info', category: 'real_time_information' },
+    { label: 'Infrastructure', key: 'infrastructure', category: 'infrastructure' },
+    { label: 'Knowledge Products', key: 'knowledge_p', category: 'knowledge_products' }
   ];
 
   Polymer({
@@ -471,7 +471,7 @@
         notify: true,
         observer: '_selectedChange'
       },
-      svg: {
+      category: {
         value: '',
         notify: true
       },
@@ -562,7 +562,8 @@
 
         //Timeout waits for transition to finish
         setTimeout((function(){
-          this.projects = Object.keys(obj).map(function (key) { return obj[key]; });
+          this.projects = Object.keys(obj).map(function (key) { return obj[key]; })
+          .sort(function(a,b){return (a.order-b.order);});
         }).bind(this), 350);
       }
     },

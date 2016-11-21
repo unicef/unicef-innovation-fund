@@ -741,11 +741,11 @@
         <ol class="accordion">
             <template is="dom-repeat" items="{{submit.country_offices.steps_content}}" as="step">
                 <li class="accordion__section">
-                    <h4 class="accordion__header" data-open$="{{step.id}}" on-tap="accordionOpen">
+                    <h4 class="accordion__header" data-open$="accordion-{{index}}" on-tap="accordionOpen">
                         <p class="accordion__number">{{stepIndex(index)}}</p><echo-html html$="{{step.name}}"></echo-html>
                         <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
                     </h4>
-                    <div class="accordion__content accordion__content--toggle" data-accordion$="{{step.id}}">
+                    <div class="accordion__content accordion__content--toggle" data-accordion$="accordion-{{index}}">
                         <p class="accordion__summary"><echo-html html$="{{step.description}}"></echo-html></p>
                         <ul class="description__list">
                             <template is="dom-repeat" items="{{step.requirements}}" as="requirement">
@@ -762,7 +762,7 @@
             <template is="dom-repeat" items="{{submit.country_offices.role_content}}" as="role">
                 <li class="role__item">
                     <h4 class="role__name">
-                      <img src$="{{ _getSVGIconPath(role.icon_name) }}" alt="Real-time information" class="role__image">
+                      <img src$="{{ _getCategoryIconPath(role.icon_name) }}" alt="Real-time information" class="role__image">
                       <echo-html html$="{{role.name}}"></echo-html>
                     </h4>
                     <p class="role__description"><echo-html html$="{{role.description}}"></echo-html></p>
@@ -978,11 +978,11 @@
         arrow.classList.toggle('accordion__arrow--toggle')
         selected.classList.toggle('accordion__content--toggle');
     },
-    _getSVGIconPath: function(svg) {
-      if ((svg === '') || (svg === 0) || (svg === false) || (svg === null) || (svg === undefined)) {
+    _getCategoryIconPath: function(category) {
+      if ((category === '') || (category === 0) || (category === false) || (category === null) || (category === undefined)) {
         return '';
       }
-      return '/images/icons/' + svg + '.svg';
+      return '/images/icons/' + category + '.svg';
     },
   })
   </script>

@@ -58,12 +58,12 @@ function prepareUreport(dataSet, featured, color){
          // return [ [ "Month", "countries" ], [ "2015-07", 61054 ], [ "2015-08", 477420 ], [ "2015-09", 91082 ], [ "2015-10", 32660 ], [ "2015-11", 94476 ], [ "2015-12", 23081 ], [ "2016-01", 33204 ] ]
 }
 
-function prepare(svg, featured, dataSet){
+function prepare(category, featured, dataSet){
     if(Object.keys(dataSet) == 0){return;}
 
-    if (svg == 'youth_engagement'){
+    if (category == 'youth_engagement'){
         return prepareUreport(dataSet, featured, "rgba(255, 204, 51, 0.2)")
-    }else if(svg == 'real_time_information'){
+    }else if(category == 'real_time_information'){
         return prepareGitCommits(dataSet, featured, "rgba(255, 143, 171, 0.2)");
     }else{
         return prepareIOGT(dataSet, featured, "rgba(133, 214, 133, 0.2)")

@@ -14,9 +14,9 @@
       <div class='mdl-grid container' style='position:relative;'>
         <div class="mdl-layout-spacer"></div>
         <div class="mdl-cell mdl-cell--12-col">
-          <h1 class='title--big hello__title fade-in'>{{content.news_header_title}}</h1>
+          <h1 class='title--big hello__title fade-in'>{{news.news_header_title}}</h1>
           <div class="page__header-content fade-in">
-            <p class="hello__description">{{content.news_header_description}}</p>
+            <p class="hello__description">{{news.news_header_description}}</p>
           </div>
         </div>
         <div class="mdl-layout-spacer"></div>
@@ -24,8 +24,8 @@
     </header>
     <firebase-document
       app-name="unicef-innovation-fund"
-      path='/content'
-      data="{{content}}">
+      path='/content/news'
+      data="{{news}}">
     </firebase-document>
   </template>
   <script>
