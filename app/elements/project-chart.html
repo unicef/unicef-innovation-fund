@@ -10,9 +10,9 @@
 
     </style>
     <div>
-      <div id="dashboard">
-        <div id="chart_div"></div>
-        <div id="control_div"></div>
+      <div id$="dashboard{{index}}">
+        <div id$="chart_div{{index}}"></div>
+        <div id$="control_div{{index}}"></div>
       </div>
     </div>
   </template>
@@ -23,7 +23,8 @@ Polymer({
   properties: {
     data: {
       type: Object,
-      observer: '_dataChange'
+      observer: '_dataChange',
+      notify: true
     },
     googleLabels: {
       type: Array,
@@ -33,22 +34,63 @@ Polymer({
       type: Object,
       value: {}
     },
+    chart: {
+      type: Object,
+      value: {}
+    },
     dashboard: {
       type: Object,
       value: {}
+    },
+    index: {
+      type: String,
+      value: ''
+    },
+    drawChart: {
+      type: Object,
+      value: null,
+      notify: true
     }
   },
 
   _dataChange: function(){
+    this.resetChart();
+
     if(Object.keys(this.data).length >0){
        this._runGoogleChart();
     }
   },
 
+  resetChart: function() {
+    if (!$.isEmptyObject(this.chart)) {
+      if (this.chart.visualization) {
+        this.chart.visualization.clearChart();
+      }
+      this.chart = {};
+    }
+    if (!$.isEmptyObject(this.control)) {
+      if (this.control.visualization) {
+        this.control.visualization.dispose();
+      }
+      this.control = {};
+    }
+    if (!$.isEmptyObject(this.dashboard)) {
+      this.dashboard.dispose();
+    }
+    this.dashboard = {};
+
+    if (this.googleLabels.length) {
+      this.googleLabels.length = 0;
+    }
+  },
+
   _convertRgbaToRgb: function(rgba){
-    var b = rgba.substring(5, rgba.length -1);
-    var c = b.split(', ');
-    return 'rgb('+c[0]+', '+c[1]+', '+c[2]+ ')'
+    var rgbWithSpecialChars = rgba.substring(5, rgba.length -1);
+    var rgb = rgbWithSpecialChars.split(', ');
+    var red = rgb[0],
+        green = rgb[1],
+        blue = rgb[2];
+    return 'rgb('+ red +', '+ green +', '+ blue + ')';
   },
 
   _prepareGoogleLabels: function(labels){
@@ -65,8 +107,11 @@ Polymer({
   _runGoogleChart: function() {
     var self = this;
 
-    function drawChart() {
+    self.drawChart = function() {
       var datasets = self.data.datasets[0] || self.data.datasets['0'];
+      var controlId = 'control_div'+self.index;
+      var chartId = 'chart_div'+self.index;
+
       var labels = self.data.labels;
       var googleLabels = self._prepareGoogleLabels(labels);
 
@@ -84,11 +129,11 @@ Polymer({
 
       var minRange = googleLabels[1].getTime() - googleLabels[0].getTime();
 
-      var dash = new google.visualization.Dashboard(document.getElementById('dashboard'));
+      var dash = new google.visualization.Dashboard(document.getElementById('dashboard'+self.index));
 
       var control = new google.visualization.ControlWrapper({
         controlType: 'DateRangeFilter',
-        containerId: 'control_div',
+        containerId: controlId,
 
         options: {
           filterColumnIndex: 0,
@@ -109,11 +154,12 @@ Polymer({
 
       self.googleLabels = googleLabels;
       self.control = control;
+      google.visualization.events.removeListener(self.control, 'statechange');
       google.visualization.events.addListener(self.control, 'statechange', self._controlUpdate.bind(self));
 
       var chart = new google.visualization.ChartWrapper({
         chartType: 'AreaChart',
-        containerId: 'chart_div',
+        containerId: chartId,
         options: {
           pointSize: 5,
           chartArea: {
@@ -132,7 +178,7 @@ Polymer({
           width: '100%'
         }
       });
-
+      self.chart = {};
       self.chart = chart;
 
       function setOptions(wrapper) {
@@ -146,13 +192,38 @@ Polymer({
       self.dashboard = dash;
       if (!self.dashboard.initiated) {
         self.dashboard.initiated = true;
+        google.visualization.events.removeListener(self.dashboard, 'ready');
         google.visualization.events.addListener(self.dashboard, 'ready', self._dashboardReady.bind(self));
       }
-    }
-    drawChart();
 
-    $(window).on('resize', function(){
-      drawChart();
+    }
+
+    /* The code beneath probably needs deeper refactor - there are many events, in which the graph should be refreshed, but
+    there is a better way of doing that - one is applying Promises in order to provide a better synchronisation of events, listeners,
+    handlers and observers */
+
+    self.drawChart();
+
+    var eventsToListenArray = [
+      'project-view-tab-name-selected',
+      'project-view-modal-opened',
+      'paper-dialog-modal-opened'
+    ];
+
+    if (self.index == 0) {
+      for (var e in eventsToListenArray) {
+        $(window).off(eventsToListenArray[e]);
+      }
+    }
+
+    for (var e in eventsToListenArray) {
+      $(window).on(eventsToListenArray[e], function() {
+        setTimeout(self.drawChart(), 100);
+      });
+    }
+
+    $(window).on('resize', function() {
+      setTimeout(self.drawChart(), 100);
     });
   },
 

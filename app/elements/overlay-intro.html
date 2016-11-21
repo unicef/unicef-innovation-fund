@@ -234,31 +234,24 @@
   Polymer({
     is: "overlay-intro",
     properties: {
-      content: {
+      overlay: {
         type: Object,
-        observer: 'contentChanged'
+        observer: 'contentChanged',
+        notify: true
       }
     },
     attached: function() {
-      this.showOverlay(500);
+      this.showOverlay(300);
     },
     contentChanged: function (newData, oldData) {
-      if (this._isObjectEmpty(newData) == false) {
+      if (!($.isEmptyObject(newData))) {
         this.startCounter();
         this.addOverlayLinks();
-      }
-    },
-    _isObjectEmpty: function(obj) {
-      for(var prop in obj) {
-        if(obj.hasOwnProperty(prop)) {
-          return false;
-        }
       }
     },
     showOverlay: function(delay) {
       var self = this;
 
-      self.startCounter();
       setTimeout(function() {
         $('.overlay').css({
           display: 'block',
@@ -266,7 +259,9 @@
         })
         $('.overlay').stop().animate({
           opacity: 1
-        }, 300, function() {});
+        }, 300, function() {
+          self.startCounter();
+        });
       }, delay);
     },
     hideOverlay: function() {

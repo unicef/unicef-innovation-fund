@@ -42,73 +42,79 @@
       }
 
       .card_title {
-         height: 30px;
-         line-height: 30px;
-         padding-left:5px;
-       }
+        height: 30px;
+        line-height: 30px;
+        padding-left:5px;
+      }
 
-       circular-progress {
-         display: inline-block;
-       }
+      circular-progress {
+        display: inline-block;
+      }
 
-       .portfolio-card__progress {
-         text-align: center;
-         margin-bottom: 32px;
-         margin-top: 16px;
-       }
+      chart-line {
+        width: 95%;
+        font-size: 30px;
+        padding-left: 5px;
+      }
 
-       .portfolio-card__progress-info {
-         position: relative;
-         margin-bottom: 16px;
-       }
+      .portfolio-card__progress {
+        text-align: center;
+        margin-bottom: 32px;
+        margin-top: 16px;
+      }
 
-       .portfolio-card__progress-info::before {
-         display: inline-block;
-         content: '';
-         width: 3px;
-         height: 18px;
-         background-color: #ffcc33;
-         position: absolute;
-         left: 49%;
-         bottom: -16px;
-       }
+      .portfolio-card__progress-info {
+        position: relative;
+        margin-bottom: 16px;
+      }
 
-       .portfolio-card__progress-info--real_time_information::before {
-         background-color: #ff3366;
-       }
+      .portfolio-card__progress-info::before {
+        display: inline-block;
+        content: '';
+        width: 3px;
+        height: 18px;
+        background-color: #ffcc33;
+        position: absolute;
+        left: 49%;
+        bottom: -16px;
+      }
 
-       .portfolio-card__progress-info--infrastructure::before {
-         background-color: #66cc66;
-       }
+      .portfolio-card__progress-info--real_time_information::before {
+        background-color: #ff3366;
+      }
 
-       .portfolio-card__progress-info--knowledge_products::before {
-         background-color: #33cccc;
-       }
+      .portfolio-card__progress-info--infrastructure::before {
+        background-color: #66cc66;
+      }
 
-       .portfolio-card__progress-subtitle, .portfolio-card__progress-info {
-         text-transform: uppercase;
-         font-size: 14px;
-         color: black;
-         font-weight: 600;
-         line-height: 1.3em;
-       }
+      .portfolio-card__progress-info--knowledge_products::before {
+        background-color: #33cccc;
+      }
 
-       .portfolio-card__progress-subtitle {
-         display: block;
-         margin-top: 0.3em;
-       }
+      .portfolio-card__progress-subtitle, .portfolio-card__progress-info {
+        text-transform: uppercase;
+        font-size: 14px;
+        color: black;
+        font-weight: 600;
+        line-height: 1.3em;
+      }
 
-       .portfolio-card__icon {
-         float: right;
-       }
+      .portfolio-card__progress-subtitle {
+        display: block;
+        margin-top: 0.3em;
+      }
 
-       .portfolio-card__icon i {
-         vertical-align: -1px;
-       }
+      .portfolio-card__icon {
+        float: right;
+      }
 
-       .icon-info {
+      .portfolio-card__icon i {
+        vertical-align: -1px;
+      }
+
+      .icon-info {
         color: #3366CB;
-       }
+      }
 
     </style>
 
@@ -171,6 +177,7 @@
           margin-bottom: 16px;
         }
       }
+
       .project__mini-chart{
         cursor: pointer;
       }
@@ -188,6 +195,14 @@
       .new-project.hide {
         display: none;
       }
+
+      .categoryIcon {
+        padding-left:16px;
+      }
+
+      .mdl-grid .title_card {
+        text-align: left;
+      }
     </style>
 
     <iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query>
@@ -202,9 +217,9 @@
         </ul>
         <div data-content="description" class="project__section js-active">
           <div class='top_container_in_card hidden--tablet'>
-            <img src="/images/icons/{{category}}.svg" width="80" style='padding-left:16px;'>
+            <img class="categoryIcon" src$="{{ _getCategoryIconPath(category) }}" width="80">
             <div class='mdl-grid'>
-              <div class='mdl-cell mdl-cell--12-col title_card' style='text-align: left;'>
+              <div class='mdl-cell mdl-cell--12-col title_card'>
                 <span class$='portfolio_card_title'>{{phrase}}</span>
                 <div class="portfolio-card__icon">
                   <i id="tooltip" class="icon-info"></i>
@@ -252,7 +267,7 @@
           <div class='growth_rate pc_left'>
             {{ prepareChartDescription(dataSet, featured_slug) }}
           </div>
-          <chart-line  data="[[prepare(category, featured, dataSet)]]" options=[[_prepareChartOptions()]] style='width:95%; font-size:30px;padding-left:5px;'></chart-line>
+          <chart-line data="[[prepare(category, featured, dataSet)]]" options=[[_prepareChartOptions()]]></chart-line>
         </div>
         <firebase-document
           app-name="unicef-innovation-fund"
@@ -344,11 +359,14 @@
 
       projectView.node.project = project;
       projectView.node.type = projectType;
+
       $(projectModal.node).removeClass("dialog-type-infrastructure");
       $(projectModal.node).removeClass("dialog-type-real_time_information");
       $(projectModal.node).removeClass("dialog-type-youth_engagement");
       $(projectModal.node).addClass('dialog-type-' + projectType);
+
       projectModal.node.open();
+      $(window).trigger('project-view-modal-opened', project);
     },
     toggleSection: function (event) {
         var activeMenuItemClass = 'is-active';
@@ -420,11 +438,11 @@
 
       url: {
         computed: 'computeUrl(category)'
-    },
+      },
 
-    lead: {
+      lead: {
         type: String
-    }
+      }
     },
 
     _content_arrived: function(obj){
@@ -505,6 +523,11 @@
         return 'show';
       } else {
         return 'hide';
+      }
+    },
+    _getCategoryIconPath: function(category) {
+      if (category) {
+        return '/images/icons/' + category + '.svg';
       }
     }
   });
