@@ -347,8 +347,8 @@
 
     <firebase-document
       app-name="unicef-innovation-fund"
-      path="content"
-      data="{{content}}">
+      path="content/all"
+      data="{{all_projects}}">
     </firebase-document>
 
     <firebase-document
@@ -364,23 +364,23 @@
     </firebase-document>
 
     <div class$='page {{ _getColorClass(selected) }}'>
-      <hello-all-projects all_projects_cloud_content="{{content.all_projects_cloud_content}}"></hello-all-projects>
+      <hello-all-projects all_projects_cloud_content="{{all_projects.all_projects_cloud_content}}"></hello-all-projects>
       <div class="page__content container">
         <div class$="project-card__list {{ _getProjectCardListClass(selected) }} mdl-grid">
           <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
 
 
 
-            <project-card class$="{{ _projectCardActiveClass(selected, 'youth_engagement') }}" selected={{selected}} type="youth_engagement" content="{{content.youth_engagement}}" phrase='Products For Youth' fb='ureport' svg="youth_engagement" rgb='255, 204, 51, 0.2'></project-card>
+            <project-card class$="{{ _projectCardActiveClass(selected, 'youth_engagement') }}" selected={{selected}} type="youth_engagement" content="{{all_projects.ap_youth_products}}" phrase='Products For Youth' fb='ureport' svg="youth_engagement" rgb='255, 204, 51, 0.2'></project-card>
           </div>
           <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
-            <project-card class$="{{ _projectCardActiveClass(selected, 'real_time_information') }}" selected={{selected}} type="realtime_information" content="{{content.real_time_info}}" phrase='Real-time Information' svg="real_time_information" rgb='255, 204, 51, 0.2'></project-card>
+            <project-card class$="{{ _projectCardActiveClass(selected, 'real_time_information') }}" selected={{selected}} type="realtime_information" content="{{all_projects.ap_real_time_info}}" phrase='Real-time Information' svg="real_time_information" rgb='255, 204, 51, 0.2'></project-card>
           </div>
           <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
-            <project-card class$="{{ _projectCardActiveClass(selected, 'infrastructure') }}" selected={{selected}} type="infrastructure" content="{{content.infrastructure}}" phrase='Infrastructure' fb='iogt'  svg="infrastructure" rgb='255, 204, 51, 0.2'></project-card>
+            <project-card class$="{{ _projectCardActiveClass(selected, 'infrastructure') }}" selected={{selected}} type="infrastructure" content="{{all_projects.ap_infrastructure}}" phrase='Infrastructure' fb='iogt'  svg="infrastructure" rgb='255, 204, 51, 0.2'></project-card>
           </div>
           <div class="content-column fade-in mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
-            <project-card class$="{{ _projectCardActiveClass(selected, 'knowledge_products') }}" selected={{selected}} type="knowledge_p" content="{{content.knowledge_p}}" phrase='Knowledge Products' fb='iogt'  svg="knowledge_products" rgb='255, 204, 51, 0.2' tooltip_target='db_tooltip_knowledge_products'></project-card>
+            <project-card class$="{{ _projectCardActiveClass(selected, 'knowledge_products') }}" selected={{selected}} type="knowledge_p" content="{{all_projects.ap_knowledge_p}}" phrase='Knowledge Products' fb='iogt'  svg="knowledge_products" rgb='255, 204, 51, 0.2' tooltip_target='db_tooltip_knowledge_products'></project-card>
           </div>
         </div>
         <div class="mdl-grid">

@@ -135,7 +135,10 @@
     </style>
     <iron-media-query query="(min-width: 600px)" query-matches="{{wide}}"></iron-media-query>
     <iron-media-query query="(min-width: 1040px)" query-matches="{{small-desktop}}"></iron-media-query>
-    <firebase-document app-name="unicef-innovation-fund" path='/content' data="{{content}}">
+    <firebase-document
+        app-name="unicef-innovation-fund"
+        path="/content/footer"
+        data="{{footer}}">
     </firebase-document>
     <div class="footer_area" wide-layout$="{{wide}}" small-desktop$="{{small-desktop}}">
       <footer class='mdl-mini-footer'>
@@ -147,7 +150,7 @@
           </div>
           <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--12-col one_third">
-              <echo-html html$={{content.footer_text}}></echo-html>
+              <echo-html html$={{footer.footer_text}}></echo-html>
             </div>
           </div>
           <div class="mdl-grid">
@@ -157,7 +160,7 @@
           </div>
           <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--12-col one_third">
-              <echo-html html$={{content.footer_contact_text}}></echo-html>
+              <echo-html html$={{footer.footer_contact_text}}></echo-html>
             </div>
           </div>
         </div>
@@ -169,7 +172,7 @@
           </div>
           <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--12-col one_third">
-              <echo-html html$={{content.footer_donor_text}}></echo-html>
+              <echo-html html$={{footer.footer_donor_text}}></echo-html>
             </div>
           </div>
           <div class="mdl-grid">

@@ -256,7 +256,7 @@
         </div>
         <firebase-document
           app-name="unicef-innovation-fund"
-          path="/content/{{tooltip_target}}"
+          path="/content/db/{{tooltip_target}}"
           data="{{db_tooltip}}">
         </firebase-document>
 
@@ -402,7 +402,7 @@
 
       location_featured_content: {
         type: String,
-        computed: "_computeLocation('content/featured_',  svg)"
+        computed: "_computeLocation('content/featured/featured_',  svg)"
       },
 
       featured: {
@@ -454,7 +454,7 @@
 
     prepare: function(svg, featured, dataSet){
       if(Object.keys(dataSet) == 0){ return; }
-      
+
       var color = '';
 
       if (svg == 'youth_engagement') {
