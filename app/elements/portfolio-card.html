@@ -526,10 +526,9 @@
       }
     },
     _getCategoryIconPath: function(category) {
-      if (!category) {
-        return '';
+      if (category) {
+        return '/images/icons/' + category + '.svg';
       }
-      return '/images/icons/' + category + '.svg';
     }
   });
 </script>

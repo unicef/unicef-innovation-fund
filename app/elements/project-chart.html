@@ -45,6 +45,11 @@ Polymer({
     index: {
       type: String,
       value: ''
+    },
+    drawChart: {
+      type: Object,
+      value: null,
+      notify: true
     }
   },
 
@@ -102,7 +107,7 @@ Polymer({
   _runGoogleChart: function() {
     var self = this;
 
-    function drawChart() {
+    self.drawChart = function() {
       var datasets = self.data.datasets[0] || self.data.datasets['0'];
       var controlId = 'control_div'+self.index;
       var chartId = 'chart_div'+self.index;
@@ -173,7 +178,7 @@ Polymer({
           width: '100%'
         }
       });
-
+      self.chart = {};
       self.chart = chart;
 
       function setOptions(wrapper) {
@@ -190,25 +195,35 @@ Polymer({
         google.visualization.events.removeListener(self.dashboard, 'ready');
         google.visualization.events.addListener(self.dashboard, 'ready', self._dashboardReady.bind(self));
       }
-    }
-    drawChart();
 
-    if (this.index == 0) {
-      $(window).off('project-view-tab-name-selected');
-      $(window).off('project-view-modal-opened');
-      $(window).off('resize');
     }
 
-    $(window).on('project-view-tab-name-selected', function() {
-      drawChart();
-    });
+    /* The code beneath probably needs deeper refactor - there are many events, in which the graph should be refreshed, but
+    there is a better way of doing that - one is applying Promises in order to provide a better synchronisation of events, listeners,
+    handlers and observers */
 
-    $(window).on('project-view-modal-opened', function() {
-      drawChart();
-    });
+    self.drawChart();
 
-    $(window).on('resize', function(){
-      drawChart();
+    var eventsToListenArray = [
+      'project-view-tab-name-selected',
+      'project-view-modal-opened',
+      'paper-dialog-modal-opened'
+    ];
+
+    if (self.index == 0) {
+      for (var e in eventsToListenArray) {
+        $(window).off(eventsToListenArray[e]);
+      }
+    }
+
+    for (var e in eventsToListenArray) {
+      $(window).on(eventsToListenArray[e], function() {
+        setTimeout(self.drawChart(), 100);
+      });
+    }
+
+    $(window).on('resize', function() {
+      setTimeout(self.drawChart(), 100);
     });
   },
 

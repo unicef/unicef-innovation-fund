@@ -979,10 +979,9 @@
         selected.classList.toggle('accordion__content--toggle');
     },
     _getCategoryIconPath: function(category) {
-      if ((category === '') || (category === 0) || (category === false) || (category === null) || (category === undefined)) {
-        return '';
+      if (category) {
+        return '/images/icons/' + category + '.svg';
       }
-      return '/images/icons/' + category + '.svg';
     },
   })
   </script>

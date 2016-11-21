@@ -92,9 +92,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     .spacer {
       -ms-flex: 1 1 0.000000001px;
-      -webkit-flex: 1;
       flex: 1;
-      -webkit-flex-basis: 0.000000001px;
       flex-basis: 0.000000001px;
     }
 
@@ -358,6 +356,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       $('.app-name').on('click', function() {
         var overlay = document.querySelector('overlay-intro');
         overlay.showOverlay(0);
+      });
+
+      projectModal.addEventListener('iron-overlay-opened', function() {
+        $(window).trigger('paper-dialog-modal-opened');
       })
     });
 
@@ -400,6 +402,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         page_change(menu);
       }
     };
+
 
   </script>
   <script src="utility.js"></script>

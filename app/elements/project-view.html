@@ -554,7 +554,6 @@
                     return this.chartData;
                 },
                 _handleGeoData: function(geoData) {
-
                     if (Object.keys(geoData).length < 1) {
                         return;
                     }
@@ -578,35 +577,33 @@
                     this.chartDataArray = [];
                     this.tabName = '';
 
-                    if (!Object.keys(data).length) {
-                        return;
-                    }
+                    if (Object.keys(data).length) {
+                        var chartDataArray = [];
 
-                    var chartDataArray = [];
+                        for (var repo in data) {
+                            var project = data[repo];
 
-                    for (var repo in data) {
-                        var project = data[repo];
+                            var color = this._getChartColor(project);
+                            var points_labels = gitPointsAndLabels(data, repo);
+                            var labels = points_labels.labels;
+                            var points = points_labels.points;
+                            var dates = points_labels.dates;
+                            var label = project.label;
 
-                        var color = this._getChartColor(project);
-                        var points_labels = gitPointsAndLabels(data, repo);
-                        var labels = points_labels.labels;
-                        var points = points_labels.points;
-                        var dates = points_labels.dates;
-                        var label = project.label;
+                            var chartData = getDataForLineChart(label, labels, points, color, dates);
 
-                        var chartData = getDataForLineChart(label, labels, points, color, dates);
+                            chartDataArray.push(chartData);
+                        }
 
-                        chartDataArray.push(chartData);
-                    }
+                        if (chartDataArray.length) {
+                            this.chartData = chartDataArray[0];
+                            this.tabName = "graph-0";
+                        }
 
-                    if (chartDataArray.length) {
-                        this.chartData = chartDataArray[0];
-                        this.tabName = "graph-0";
-                    }
+                        this.chartDataArray = chartDataArray;
 
-                    this.chartDataArray = chartDataArray;
-
-                    return this.chartData;
+                        return this.chartData;
+                    }  
                 },
                 _handleType: function() {
                     this.updateStyles();
@@ -651,22 +648,19 @@
                         return null;
                     }
                 },
-
                 _changeProjectAdditional: function(){
-                    if(Object.keys(this.chartData).length == 0){
-                        return;
+                    if(Object.keys(this.chartData).length) {
+
+                        // -1 because of 'all' at the begining
+                        var dataIndex = this.additionalRange - 1;
+                        if(dataIndex === -1){
+                            var ds = this.chartData.datasets[0].data;
+                            this.currentUsers = ds[ds.length -1];
+                            return;
+                        }
+
+                        this.currentUsers = this.chartData.datasets[0].data[dataIndex];
                     }
-
-                    // -1 because of 'all' at the begining
-                    var dataIndex = this.additionalRange - 1;
-                    if(dataIndex === -1){
-                        var ds = this.chartData.datasets[0].data;
-                        this.currentUsers = ds[ds.length -1];
-                        return;
-                    }
-
-                    this.currentUsers = this.chartData.datasets[0].data[dataIndex];
-
                 },
                 _onDomChange: function() {
                     if (typeof this.onDomChange == 'function') {
