@@ -23,13 +23,18 @@ Polymer({
   properties: {
     data: {
       type: Object,
-      observer: '_dataChange'
+      observer: '_dataChange',
+      notify: true
     },
     googleLabels: {
       type: Array,
       value: []
     },
     control: {
+      type: Object,
+      value: {}
+    },
+    chart: {
       type: Object,
       value: {}
     },
@@ -44,8 +49,33 @@ Polymer({
   },
 
   _dataChange: function(){
+    this.resetChart();
+
     if(Object.keys(this.data).length >0){
        this._runGoogleChart();
+    }
+  },
+
+  resetChart: function() {
+    if (!$.isEmptyObject(this.chart)) {
+      if (this.chart.visualization) {
+        this.chart.visualization.clearChart();
+      }
+      this.chart = {};
+    }
+    if (!$.isEmptyObject(this.control)) {
+      if (this.control.visualization) {
+        this.control.visualization.dispose();
+      }
+      this.control = {};
+    }
+    if (!$.isEmptyObject(this.dashboard)) {
+      this.dashboard.dispose();
+    }
+    this.dashboard = {};
+
+    if (this.googleLabels.length) {
+      this.googleLabels.length = 0;
     }
   },
 
@@ -71,6 +101,12 @@ Polymer({
 
     function drawChart() {
       var datasets = self.data.datasets[0] || self.data.datasets['0'];
+      var controlId = 'control_div'+self.index;
+      var chartId = 'chart_div'+self.index;
+
+      if ((!datasets) || (!($(self).find('#'+controlId))) || (!($(self).find('#'+chartId)))) {
+        console.log('drawChart: dataset, control or chart empty');
+      }
       var labels = self.data.labels;
       var googleLabels = self._prepareGoogleLabels(labels);
 
@@ -92,7 +128,7 @@ Polymer({
 
       var control = new google.visualization.ControlWrapper({
         controlType: 'DateRangeFilter',
-        containerId: 'control_div'+self.index,
+        containerId: controlId,
 
         options: {
           filterColumnIndex: 0,
@@ -113,11 +149,12 @@ Polymer({
 
       self.googleLabels = googleLabels;
       self.control = control;
+      google.visualization.events.removeListener(self.control, 'statechange');
       google.visualization.events.addListener(self.control, 'statechange', self._controlUpdate.bind(self));
 
       var chart = new google.visualization.ChartWrapper({
         chartType: 'AreaChart',
-        containerId: 'chart_div'+self.index,
+        containerId: chartId,
         options: {
           pointSize: 5,
           chartArea: {
@@ -150,12 +187,23 @@ Polymer({
       self.dashboard = dash;
       if (!self.dashboard.initiated) {
         self.dashboard.initiated = true;
+        google.visualization.events.removeListener(self.dashboard, 'ready');
         google.visualization.events.addListener(self.dashboard, 'ready', self._dashboardReady.bind(self));
       }
     }
     drawChart();
 
+    if (this.index == 0) {
+      $(window).off('project-view-tab-name-selected');
+      $(window).off('project-view-modal-opened');
+      $(window).off('resize');
+    }
+
     $(window).on('project-view-tab-name-selected', function() {
+      drawChart();
+    });
+
+    $(window).on('project-view-modal-opened', function() {
       drawChart();
     });
 

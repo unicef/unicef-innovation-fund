@@ -41,6 +41,7 @@ function prepareUreport(dataSet, featured, color){
         labels = humanize_labels(labels)
         return {
             labels: labels,
+            label: featured,
             datasets:[
                 {
                     label: featured,
@@ -71,9 +72,10 @@ function prepare(svg, featured, dataSet){
 
 function getDataForLineChart(label, labels, points, color, data){
     return {
-    data: data,
-    labels: labels,
-    datasets: [
+        label: label,
+        data: data,
+        labels: labels,
+        datasets: [
             {
                 label: label,
                 backgroundColor: color,

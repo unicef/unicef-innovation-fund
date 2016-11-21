@@ -251,6 +251,8 @@
       projectView.onDomChange = (function(){
         $(this).css({marginBottom: projectView.offsetHeight + 8});
       }).bind(this);
+
+      $(window).trigger('project-view-modal-opened', this.item);
     },
     _getProjectStatus: function(status) {
       switch(status) {

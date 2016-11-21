@@ -59,7 +59,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript">
     google.charts.load('current', {
-      'packages': ['geochart', 'controls', 'corechart']
+      'packages': ['geochart', 'controls', 'corechart'], mapsApiKey: 'AIzaSyCM6pjCYVevJY_kW7STox1s8GUzMBYFvg8'
     });
 
     function humanize_label(label) {
@@ -91,7 +91,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
 
     .spacer {
-      @apply(--layout-flex);
+      -ms-flex: 1 1 0.000000001px;
+      -webkit-flex: 1;
+      flex: 1;
+      -webkit-flex-basis: 0.000000001px;
+      flex-basis: 0.000000001px;
     }
 
     neon-animated-pages .iron-selected {

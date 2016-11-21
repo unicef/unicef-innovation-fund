@@ -170,7 +170,7 @@
     <div class$="project-card__container mdl-shadow--4dp {{ _hasSelectedClass(selected) }} {{ _isActiveClass(selected, svg) }}">
       <div class-name="project-card__edge edge edge--{{svg}}"></div>
       <div class="project-card__body">
-        <img class="project-card__icon" src="/images/icons/{{svg}}.svg" />
+        <img class="project-card__icon" src$="{{ _getSVGIconPath(svg) }}">
         <span class-name="project-card__counter fade-in delayed-1-2 counter--{{svg}}">{{ _getNewProjectsCount(projects) }}</span>
         <div style='project-card__content'>
           <h4 class="project-card__title">{{phrase}}</h4>
@@ -321,6 +321,12 @@
       } else if (count > 1) {
         return count + " new projects!";
       }
-    }
+    },
+    _getSVGIconPath: function(svg) {
+      if ((svg === '') || (svg === 0) || (svg === false) || (svg === null) || (svg === undefined)) {
+        return '';
+      }
+      return '/images/icons/' + svg + '.svg';
+    },
   })
 </script>

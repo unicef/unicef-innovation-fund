@@ -359,12 +359,12 @@
         </div>
         <div class="mdl-grid news__section fade-in" id="newsPageCards">
             <div class="mdl-layout-spacer"></div>
-            <template is="dom-repeat" items=[[newProjects]]>
+            <template is="dom-repeat" items="{{ newProjects }}">
                 <div class="mdl-cell shadow-card">
                     <div class="news__card">
                         <div class="news__card--box">
                             <span class$="edge--{{__getNewProjectCategory(newProjects, index)}} news__card--label" on-tap="_handleTap" data-taplink$="{{__getNewProjectSlug(newProjects, index)}}" data-taplink-category$="{{__getNewProjectCategory(newProjects, index)}}">VIEW PROJECT</span>
-                            <img src$="{{__getNewProjectImage(newProjects, index)}}">
+                            <img src$="{{ __getNewProjectImage(newProjects, index) }}">
                         </div>
                         <div class="news__card--text">
                             <p class="more">{{__getNewProjectDescription(newProjects, index)}}</p>
@@ -436,10 +436,12 @@
                 properties: {
                     projects: {
                         type: Object,
-                        observer: "_fetchNewProjects"
+                        observer: "_fetchNewProjects",
+                        notify: true
                     },
                     newProjects: {
-                        type: Array
+                        type: Array,
+                        notify: true
                     }
                 },
                 attached: function() {
@@ -461,7 +463,10 @@
                     $(projectModal.node).removeClass("dialog-type-real_time_information");
                     $(projectModal.node).removeClass("dialog-type-youth_engagement");
                     $(projectModal.node).addClass('dialog-type-' + projectType);
+
                     projectModal.node.open();
+
+                    $(window).trigger('project-view-modal-opened', project);
                 },
                 _getElementFromArray: function(array, index) {
                     if ((array instanceof Array) && (array.length > index)) {
@@ -475,7 +480,7 @@
                 },
                 _fetchNewProjects: function() {
                     var self = this;
-                    self.newProjects = []
+                    var newProjects = [];
                     var categories = Object.keys(self.projects);
                     for(var c in categories) {
                         var projects_hash = self.projects[categories[c]].projects_hash;
@@ -485,30 +490,39 @@
                             }
                             if (projects_hash[p].new_investment) {
                                 projects_hash[p].category = categories[c];
-                                self.newProjects.push(projects_hash[p]);
+                                newProjects.push(projects_hash[p]);
                             }
                         }
                     }
-                    this.newProjects = self.newProjects;
+                    this.newProjects = newProjects;
                 },
                 __getNewProjectCategory: function(array, index) {
-                    return array[index].category;
+                    if (array[index]) return array[index].category;
+                    return null;
                 },
                 __getNewProjectImage: function(array, index) {
-                    var projectImage = array[index].graph_format;
-                    if (projectImage == '') projectImage = array[index].image;
-                    return projectImage;
+                    if (array[index]) {
+                        var projectImage = array[index].graph_format;
+                        if (projectImage == '') projectImage = array[index].image;
+                        return projectImage;
+                    }
+                    return null;
                 },
                 __getNewProjectDescription: function(array, index) {
-                    var projectDescription = array[index].announcement_blurb;
-                    if (projectDescription == '') projectDescription = array[index].description;
-                    return projectDescription;
+                    if (array[index]) {
+                        var projectDescription = array[index].announcement_blurb;
+                        if (projectDescription == '') projectDescription = array[index].description;
+                        return projectDescription;
+                    }
+                    return null;
                 },
                 __getNewProjectLink: function(array, index) {
-                    return array[index].link_href;
+                    if (array[index]) return array[index].link_href;
+                    return null;
                 },
                 __getNewProjectSlug: function(array, index) {
-                    return array[index].slug;
+                    if (array[index]) return array[index].slug;
+                    return null;
                 }
             });
         })();

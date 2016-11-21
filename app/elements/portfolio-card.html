@@ -194,6 +194,14 @@
       .new-project.hide {
         display: none;
       }
+
+      .svgIcon {
+        padding-left:16px;
+      }
+
+      .mdl-grid .title_card {
+        text-align: left;
+      }
     </style>
 
     <iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query>
@@ -208,9 +216,9 @@
         </ul>
         <div data-content="description" class="project__section js-active">
           <div class='top_container_in_card hidden--tablet'>
-            <img src="/images/icons/{{svg}}.svg" width="80" style='padding-left:16px;'>
+            <img class="svgIcon" src$="{{ _getSVGIconPath(svg) }}" width="80">
             <div class='mdl-grid'>
-              <div class='mdl-cell mdl-cell--12-col title_card' style='text-align: left;'>
+              <div class='mdl-cell mdl-cell--12-col title_card'>
                 <span class$='portfolio_card_title'>{{phrase}}</span>
                 <div class="portfolio-card__icon">
                   <i id="tooltip" class="icon-info"></i>
@@ -357,6 +365,7 @@
       $(projectModal.node).addClass('dialog-type-' + projectType);
 
       projectModal.node.open();
+      $(window).trigger('project-view-modal-opened', project);
     },
     toggleSection: function (event) {
         var activeMenuItemClass = 'is-active';
@@ -433,11 +442,11 @@
 
       url: {
         computed: 'computeUrl(svg)'
-    },
+      },
 
-    lead: {
+      lead: {
         type: String
-    }
+      }
     },
 
     _content_arrived: function(obj){
@@ -508,6 +517,12 @@
       } else {
         return 'hide';
       }
+    },
+    _getSVGIconPath: function(svg) {
+      if ((svg === '') || (svg === 0) || (svg === false) || (svg === null) || (svg === undefined)) {
+        return '';
+      }
+      return '/images/icons/' + svg + '.svg';
     }
   });
 </script>

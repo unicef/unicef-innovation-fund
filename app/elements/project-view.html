@@ -79,28 +79,16 @@
                 border-color: #33cccc;
             }
 
-            .project-view__container--real_time_information {
+            .project-view__container--real_time_information paper-tabs {
                 --paper-tabs-selection-bar-color: #ff3366;
             }
 
-            .project-view__container--real_time_information #selectionBar {
-                background-color: #ff3366;
-            }
-
-            .project-view__container--infrastructure {
+            .project-view__container--infrastructure paper-tabs{
                 --paper-tabs-selection-bar-color: #66cc66;
             }
 
-            .project-view__container--infrastructure #selectionBar {
-                background-color: #ff3366;
-            }
-
-            .project-view__container--knowledge_products {
+            .project-view__container--knowledge_products paper-tabs {
                 --paper-tabs-selection-bar-color: #33cccc;
-            }
-
-            .project-view__container--knowledge_products #selectionBar {
-                background-color: #ff3366;
             }
 
             .project-view__col--main:not(.mdl-cell--12-col) {
@@ -141,6 +129,10 @@
                 font-size: 18px;
                 font-weight: 400;
                 margin: 16px 0;
+            }
+
+            .page--blue .project-view__amount {
+                display: none;
             }
 
             .project-view__amount-value {
@@ -211,7 +203,6 @@
                 }
             }
 
-
             .project-view__chart-dropdown {
                 text-align: right;
                 padding: 0 32px 0 16px;
@@ -275,44 +266,34 @@
             data="{{geoDataSet}}">
         </firebase-document>
 
-        <firebase-document
-            id='geoData'
-            app-name="unicef-innovation-fund"
-            path="chart_data/[[ project.slug ]]"
-            data="{{gitDataSet}}">
-        </firebase-document>
-
         <div class$="project-view__container project-view__container--{{ type }} {{ _getColorClass(type) }}">
             <div class="mdl-grid">
                 <div class$="mdl-cell [[ _getMainColClass(chartData, geoData) ]] mdl-cell--12-col-tablet project-view__col--main">
                     <h3 class="title--small">[[ _getProjectName(project) ]]</h3>
-                    <template is="dom-if" if="[[gitDataArray.length]]">
-                        <paper-tabs class="project-view__tabs" attr-for-selected="tab-name" selected={{tabName}}>
-                            <template is="dom-repeat" items$="{{gitDataArray}}" as="Git">
-                                <paper-tab tab-name$="graph-{{index}}">{{Git.label}}</paper-tab>
-                            </template>
-                            <template is="dom-if" if="[[geoData.length]]">
-                                <paper-tab tab-name="map">MAP</paper-tab>
-                            </template>
-                        </paper-tabs>
-                        <paper-tabs style="display:none"></paper-tabs>
-                    </template>
+                    <paper-tabs class="project-view__tabs" attr-for-selected="tab-name" selected={{tabName}}>
+                        <template is="dom-repeat" items$="{{chartDataArray}}" as="Git">
+                            <paper-tab tab-name$="graph-{{index}}">{{Git.label}}</paper-tab>
+                        </template>
+                        <template is="dom-if" if="[[geoData.length]]">
+                            <paper-tab tab-name="map">MAP</paper-tab>
+                        </template>
+                    </paper-tabs>
                     <div class="project-view__divider project-view__divider--left"></div>
                     <neon-animated-pages class$="project-view__chart-container {{ _getChartContainerClass(chartData, geoData) }}" selected={{tabName}} attr-for-selected="tab-name" exit-animation="fade-out-animation" entry-animation="fade-in-animation">
                         <template is="dom-repeat" items$="{{chartDataArray}}" as="projectChart">
                             <neon-animatable tab-name$="graph-{{index}}">
                                 <div class="project-view__chart-dropdown">
                                     <paper-dropdown-menu label="Year">
-                                        <paper-listbox id="chartYearSelect" class="dropdown-content" attr-for-selected="value" selected="{{chartYear}}">
+                                        <paper-listbox id$="chartYearSelect-{{index}}" class="dropdown-content" attr-for-selected="value" selected="{{chartYear}}" on-iron-select="_paperListBoxYearSelected" label$="{{index}}">
                                             <paper-item value="0" class="project-view__item">All</paper-item>
-                                            <template is="dom-repeat" items="{{_getChartYears(projectChart)}}">
+                                            <template is="dom-repeat" items="{{ _getChartYears(projectChart) }}">
                                                 <paper-item value="{{item}}" class="project-view__item">{{item}}</paper-item>
                                             </template>
                                         </paper-listbox>
                                     </paper-dropdown-menu>
                                 </div>
                                 <div class="project-view__chart">
-                                    <project-chart data="[[ projectChart ]]" options="[[ opt ]]" index="[[ index ]]" id="projectChart-{{index}}"></project-chart>
+                                    <project-chart data="[[ projectChart ]]" options="[[ opt ]]" index="[[ index ]]" id="projectChart-[[index]]"></project-chart>
                                 </div>
                             </neon-animatable>
                         </template>
@@ -356,11 +337,14 @@
                 properties: {
                     project: {
                         type: Object,
-                        value: {}
+                        value: {},
+                        notify: true
                     },
                     type: {
                         type: String,
-                        value: null
+                        value: null,
+                        observer: '_handleType',
+                        notify: true
                     },
                     chartData: {
                         type: Object,
@@ -384,14 +368,6 @@
                         observer: '_handleGeoData',
                         notify: true
                     },
-                    gitDataSet: {
-                        type: Object,
-                        observer: '_fetchGitData',
-                        notify: true
-                    },
-                    gitDataArray: {
-                        type: Array,
-                    },
                     opt: {
                         type: Object,
                         value: {
@@ -411,7 +387,7 @@
                     chartYear: {
                         type: Number,
                         value: 0,
-                        observer: '_changeChartYear'
+                        notify: true
                     },
                     tabName: {
                         type: String,
@@ -436,7 +412,7 @@
                     if(this.tabName == 'map'){
                         this._handleGeoData(this.geoDataSet);
                     }
-                    $(window).trigger('project-view-tab-name-selected',this.tabName)
+                    $(window).trigger('project-view-tab-name-selected', this.tabName)
                 },
                 _getColorClass: function(type) {
                     if(type == 'youth_engagement') {
@@ -539,6 +515,12 @@
                     }
                 },
                 _handleChartData: function(data) {
+                    this.chartData = {};
+                    this.chartDataArray = [];
+                    this.tabName = '';
+
+                    var chartDataArray = [];
+
                     if (!Array.isArray(data)) {
                         return this._handleGitChartData(data);
                     }
@@ -562,7 +544,14 @@
                     });
 
                     var label = "Number of registered users"// + document.getElementById('portfolio_project_country').innerHTML;
-                    this.chartData = getDataForLineChart(label, labels, points, color, data);
+                    var chartData = getDataForLineChart(label, labels, points, color, data);
+                    chartDataArray.push(chartData);
+
+                    this.chartDataArray = chartDataArray;
+                    this.chartData = chartDataArray[0];
+                    this.tabName = "graph-0";
+
+                    return this.chartData;
                 },
                 _handleGeoData: function(geoData) {
 
@@ -584,21 +573,10 @@
                     this.geoData = data;
                     this._drawGeoChart(this.geoData);
                 },
-                _fetchGitData: function (data) {
-                    var self = this;
-                    var gitArray = [];
-
-                    if (Object.keys(data).length > 0 && data.constructor === Object) {
-                        for (var repo in data) {
-                            gitArray.push(data[repo]);
-                        }
-                    }
-
-                    return self.gitDataArray = gitArray;
-                },
                 _handleGitChartData: function(data) {
                     this.chartData = {};
                     this.chartDataArray = [];
+                    this.tabName = '';
 
                     if (!Object.keys(data).length) {
                         return;
@@ -629,6 +607,9 @@
                     this.chartDataArray = chartDataArray;
 
                     return this.chartData;
+                },
+                _handleType: function() {
+                    this.updateStyles();
                 },
                 _drawGeoChart: function(data) {
                     var element = this.$.geoChart;
@@ -708,8 +689,17 @@
                     }
                     return years;
                 },
-                _changeChartYear: function(year) {
-                    var chart = document.getElementById('projectChart');
+                _getChartContainerClass: function(chartData, geoData) {
+                    if ((!chartData || !Object.keys(chartData).length) && (!geoData || !geoData.length)) {
+                        return '';
+                    }
+                    return 'has-chart';
+                },
+                _paperListBoxYearSelected: function(event, object, c){
+                    var index = event.target.attributes.label.value;
+                    var year = object.item.value;
+
+                    var chart = document.getElementById('projectChart-' + index);
                     if (!chart) {
                         return;
                     }
@@ -718,12 +708,6 @@
                         chart.filterByYear(year);
                     else
                         chart.resetFilter();
-                },
-                _getChartContainerClass: function(chartData, geoData) {
-                    if ((!chartData || !Object.keys(chartData).length) && (!geoData || !geoData.length)) {
-                        return '';
-                    }
-                    return 'has-chart';
                 }
             });
         })();
