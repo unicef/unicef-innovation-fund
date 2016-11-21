@@ -2,156 +2,514 @@
 <link rel="import" href="../bower_components/paper-styles/typography.html">
 
 <dom-module id="news-page" >
-  <template bind>
-    <style include="style-fade-in">
-      .about__content {
-        text-align: left;
-      }
+    <template bind>
+        <style include="style-fade-in">
+            .about__content {
+                text-align: left;
+            }
 
-      .fade-in {
-        -webkit-animation-delay: 0.625s;
-        animation-delay: 0.625s;
-      }
+            .section__header {
+                text-align: center;
+                font-size: 30px;
+                font-weight: bold;
+                padding: 0;
+            }
 
-      .about__description {
-        font-size: 1.2rem;
-        letter-spacing: 0.02rem;
-        line-height: 1.8;
-      }
+            .section__header.cta {
+                font-size: 50px;
+                font-weight: 500;
+                color: #5d5d5d;
+            }
 
-      .about__divider {
-        border: 2px solid #3366CB;
-        height: 0;
-        margin: 2.3rem auto;
-        max-width: 70px;
-      }
+            .fade-in {
+                -webkit-animation-delay: 0.625s;
+                animation-delay: 0.625s;
+            }
 
-      .about__tile {
-        display: inline-block;
-        width: 33%;
-      }
+            .about__description {
+                font-size: 1.2rem;
+                letter-spacing: 0.02rem;
+                line-height: 1.8;
+            }
 
-      .about__name {
-        display: block;
-        font-size: 1.3rem;
-        text-transform: uppercase;
-      }
+            .news__divider,
+            .news__content--bottom .news__divider {
+                border: 1px solid #3366CB;
+                height: 0;
+                margin: 2.3rem auto;
+                max-width: 70px;
+            }
 
-      .about__image {
-        max-width: 150px;
-      }
+            #newsResources hr {
+                margin: 30px 0 30px 0;
+            }
 
-      @media (min-width: 1920px) {
-        .about__content {
-          width: 50%;
-        }
-      }
+            #newsResources {
+                margin: 0 16px 0 16px;
+            }
 
-      @media (min-width: 1600px) and (max-width: 1920px) {
-        .about__content {
-          width: 41%;
-        }
-      }
+            #newsResources p {
+                padding-top: 30px;
+            }
 
-      @media (min-width: 920px) {
-        .about__content {
-          padding: 3.5rem 0 6.5rem;
-        }
+            hr {
+                margin: 5% 5% 1.5% 5%;
+                border-top: 1px solid #333;
+            }
 
-        .about__description {
-          margin-bottom: 0.75rem;
-          margin-top: 3rem;
-        }
+            .news__content--bottom hr {
+                margin: 20px 16px 5px 16px;
+            }
 
-        .about__description:last-of-type {
-          margin-bottom: 3.3rem;
-        }
+            .mdl-cell--bottom:first-child {
+                display:none;
+            }
 
-        .about__image {
-          margin-bottom: 1.4rem;
-          max-width: 130px;
-        }
-      }
+            .news__content--bottom:first-child {
+                display: none;
+            }
 
-      @media (min-width: 820px) {
-        .about__description--narrow {
-          margin-left: auto;
-          margin-right: auto;
-          width: 50%;
-        }
-      }
+            .news__tile {
+                display: inline-block;
+                width: 33%;
+            }
 
-      @media (max-width: 640px) {
-          .about__tile {
-            display: block;
-            text-align: center;
-            width: 100%;
-          }
-      }
+            .about__name {
+                display: block;
+                font-size: 1.3rem;
+                text-transform: uppercase;
+            }
 
-    </style>
-    <div class="hello_holder">
-      <hello-news></hello-news>
+            .about__image {
+                max-width: 150px;
+            }
 
-      <div class="mdl-grid about__section fade-in">
-        <div class="mdl-layout-spacer" ></div>
-        <div class="mdl-cell--bottom mdl-cell--10-col mdl-cell--8-col-tablet about__content">
-          <p class="about__description">{{paragraph_1}}
-          </p>
+            .news__button {
+                text-align: center;
+                color: #3366CB;
+                background-color: #efefef;
+                border: 2px solid #3366CB;
+                display: block;
+                height: 48px;
+                width: 164px;
+                font-size: 20px;
+                margin: 0 auto;
+                padding: 10px 10px 10px 10px;
+                margin-bottom: 40px;
+                cursor: pointer;
+            }
 
-          <p class="about__description">{{paragraph_2}}</p>
-          <div class="about__tiles">
-              <div class="about__tile">
-                  <strong class="about__name">Products for youth</strong>
-                  <img src="../images/icons/youth_engagement.svg" alt="Youth engagement" class="about__image">
-              </div>
-              <div class="about__tile">
-                  <strong class="about__name">Infrastructure</strong>
-                  <img src="../images/icons/infrastructure.svg" alt="Infrastructure" class="about__image">
-              </div>
-              <div class="about__tile">
-                  <strong class="about__name">Real-time information</strong>
-                  <img src="../images/icons/real_time_information.svg" alt="Real time information" class="about__image">
-              </div>
-          </div>
-          <p class="about__description">{{paragraph_3}}</p>
+            .news__button--anchor {
+                text-decoration: none;
+            }
 
-          <hr class="about__divider">
+            .news__section-entry--title {
+                float: left;
+                font-size: 21px;
+                color: black;
+                font-weight: bold;
+            }
 
-          <p class="about__description">{{paragraph_4}}</p>
+            .news__section-entry--link {
+                float: right;
+                font-size: 21px;
+                color: rgb(68,138,255);
+                text-decoration: none;
+            }
+
+            .news__section-entry--description {
+                clear: both;
+            }
+
+            .news__card img {
+                max-width: 100% ;
+            }
+
+            .news__card {
+                background-color: #fff;
+                min-height: 300px;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                max-height: 400px;
+                display: inline-block;
+                position: relative;
+                bottom: 0;
+                margin: 0 auto;
+                margin-bottom: 0;
+                transition: all .175s ease-in;
+            }
+
+            .news__card--box {
+                height: 75%;
+                overflow: hidden;
+            }
+
+            .news__card--box img {
+                object-fit: cover;
+                min-height: 100%;
+            }
+
+            .news__card--text {
+                height: 25%;
+            }
+
+            .shadow-card {
+                background-color: white;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+                transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+            }
+
+            .shadow-card:hover {
+                box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+            }
+
+            .news__card p {
+                display: -webkit-box; /* Fallback for non-webkit */
+                padding: 1.5% 1.5% 0 1.5%;
+                height: 50; /* Fallback for non-webkit */
+                margin: 0 auto;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: 14px;
+            }
+
+            @media (max-width: 820px) {
+                .news__card p {
+                    font-size: 16px;
+                }
+
+                .moreellipses {
+                    display: none;
+                }
+
+                .news__card--extra h2 {
+                    font-size: 35px;
+                }
+
+                .news__card--extra > p {
+                    font-size: 12px;
+                }
+            }
+
+            @media (max-width: 410px) {
+                .news__card p {
+                    font-size: 18px;
+                }
+            }
+
+            .news__card--extra a {
+                cursor: pointer;
+                text-decoration: none;
+            }
+
+            .news__card--extra h2 {
+                text-align: center;
+                color: #3366CA;
+                margin: 11% 0 3% 0;
+                font-size: 35px;
+            }
+
+            .news__card--extra a p {
+                width: 85%;
+                padding-left: 5%;
+                padding-right: 5%;
+                text-align: center;
+                display: block;
+                overflow: hidden;
+                font-size: 14px;
+                margin: 0 auto;
+            }
+
+            .morelink {
+                font-weight: 500;
+                text-decoration: none;
+                font-weight: 600;
+                line-height: 19px;
+                font-size: 16px;
+                text-decoration: none;
+                position: absolute;
+                bottom: 5px;
+                right: 5px;
+            }
+
+            @media (max-width: 820px) {
+                .morelink {
+                    line-height: 3vh;
+                    font-size: 1.5vh;
+                }
+            }
+
+            .news__card--extra .icon {
+                margin: 0 auto;
+                width: 80px;
+                background: url('../images/icons/news-submit.svg');
+                background-repeat: no-repeat;
+                background-size: 80px 80px;
+                height: 80px;
+                margin-top: 15%;
+            }
+
+
+            @media (max-width: 820px) {
+                .news__card--extra .icon {
+                     width: 80px;
+                     height: 80px;
+                }
+            }
+
+            @media (max-width: 410px) {
+                .news__card--extra .icon {
+                    margin-top: 10%;
+                }
+            }
+
+            .news__card--extra .icon p {
+                color: white;
+                font-size: 16px;
+                text-align: center;
+                padding-top: 30px;
+            }
+
+            .news__card--label {
+                position: absolute;
+                top: 20px;
+                padding: 5px 15px 5px 35px;
+                z-index: 10;
+                font-size: 18px;
+                cursor: pointer;
+            }
+
+            #newsPageCards {
+                padding: 0 5% 0 5%;
+            }
+
+            #newsResources hr:first-child {
+                display:none;
+            }
+
+            @media (min-width: 1920px) {
+                .about__content {
+                    width: 50%;
+                }
+                .news__content--bottom {
+                    width: 75%;
+                }
+            }
+
+            @media (min-width: 1600px) and (max-width: 1920px) {
+                .about__content {
+                    width: 41%;
+                }
+                .news__content--bottom {
+                    width: 65%;
+                }
+
+            }
+
+            @media (min-width: 920px) {
+                .about__content {
+                    padding: 3.5rem 0 6.5rem;
+                }
+
+                .about__description {
+                    margin-bottom: 0.75rem;
+                    margin-top: 3rem;
+                }
+
+                .about__description:last-of-type {
+                    margin-bottom: 3.3rem;
+                }
+
+                .about__image {
+                    margin-bottom: 1.4rem;
+                    max-width: 130px;
+                }
+            }
+
+            @media (min-width: 820px) {
+                .about__description--narrow {
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 50%;
+                }
+            }
+
+            @media (max-width: 640px) {
+                .news__tile {
+                    display: block;
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+
+        </style>
+        <div class="hello_holder">
+            <hello-news></hello-news>
+            <div class="mdl-grid news__section fade-in">
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-cell--bottom mdl-cell--8-col mdl-cell--8-col-tablet news__content">
+                    <h3 class="section__header">{{news.news_section1_title.0}}</h3>
+                    <p class="news__description">{{news.news_section1_description.0}}</p>
+                </div>
+                <div class="mdl-layout-spacer"></div>
+            </div>
         </div>
-        <div class="mdl-layout-spacer"></div>
-      </div>
-    </div>
-    <firebase-document
-      app-name="unicef-innovation-fund"
-      path='/content/about_paragraph_1'
-      data="{{paragraph_1}}">
-    </firebase-document>
-    <firebase-document
-      app-name="unicef-innovation-fund"
-      path='/content/about_paragraph_2'
-      data="{{paragraph_2}}">
-    </firebase-document>
-    <firebase-document
-      app-name="unicef-innovation-fund"
-      path='/content/about_paragraph_3'
-      data="{{paragraph_3}}">
-    </firebase-document>
-    <firebase-document
-      app-name="unicef-innovation-fund"
-      path='/content/about_paragraph_4'
-      data="{{paragraph_4}}">
-    </firebase-document>
-  </template>
+        <div class="mdl-grid news__section fade-in" id="newsPageCards">
+            <div class="mdl-layout-spacer"></div>
+            <template is="dom-repeat" items=[[newProjects]]>
+                <div class="mdl-cell shadow-card">
+                    <div class="news__card">
+                        <div class="news__card--box">
+                            <span class$="edge--{{__getNewProjectCategory(newProjects, index)}} news__card--label" on-tap="_handleTap" data-taplink$="{{__getNewProjectSlug(newProjects, index)}}" data-taplink-category$="{{__getNewProjectCategory(newProjects, index)}}">VIEW PROJECT</span>
+                            <img src$="{{__getNewProjectImage(newProjects, index)}}">
+                        </div>
+                        <div class="news__card--text">
+                            <p class="more">{{__getNewProjectDescription(newProjects, index)}}</p>
+                            <a href$="{{__getNewProjectLink(newProjects, index)}}" class="morelink" target="_blank"> READ MORE</a>
+                        </div>
+                    </div>
+                </div>
+            </template>
 
-  <script>
-    (function() {
-      'use strict';
+            <div class="mdl-cell shadow-card">
+                <div class="news__card news__card--extra">
+                    <a href="#" data-menu="submit" class="internal-link">
+                        <div class="icon"></div>
+                        <h2> {{news.news_eoi_title}}</h2>
+                        <p> {{news.news_eoi_text}}</p>
+                    </a>
+                </div>
+            </div>
 
-      Polymer({
-        is: 'news-page'
-      });
-    })();
-  </script>
+            <div class="mdl-layout-spacer"></div>
+
+        </div>
+        <div class="mdl-grid news__section fade-in">
+            <div class="mdl-layout-spacer"></div>
+            <div class="mdl-cell--bottom mdl-cell--10-col mdl-cell--8-col-tablet news__content--bottom">
+                <hr>
+                <h3 class="section__header">{{news.news_section2_title}}</h3>
+                <div id="newsResources">
+
+                    <template is="dom-repeat" items={{news.news_section2_entry_titles}}>
+                        <hr>
+                        <span></span>
+                        <span class="news__section-entry--title">{{_getElementFromArray(news.news_section2_entry_titles, index)}}</span>
+                        <a class="news__section-entry--link" target="_blank" href="[[_getElementFromArray(news.news_section2_entry_link, index)]]">LINK {{_getIndex(index)}}</a>
+                        <p class="news__section-entry--description">
+                            <echo-html html$="{{_getElementFromArray(news.news_section2_entry_description, index)}}"></echo-html>
+                        </p>
+                    </template>
+                </div>
+
+                <hr class="news__divider">
+                <h1 class="section__header cta">{{news.news_cta_text}}</h1>
+                <a class="news__button--anchor internal-link" href="#" target="_blank" data-menu="submit">
+                    <button class="news__button">{{news.news_cta_button}}</button>
+                </a>
+            </div>
+            <div class="mdl-layout-spacer"></div>
+        </div>
+
+        <firebase-document
+            app-name="unicef-innovation-fund"
+            path="/content/news"
+            data="{{news}}">
+        </firebase-document>
+
+         <firebase-document
+            app-name="unicef-innovation-fund"
+            path='/portfolio_projects'
+            data="{{projects}}">
+        </firebase-document>
+    </template>
+
+    <script>
+        (function() {
+            'use strict';
+
+            Polymer({
+                is: 'news-page',
+                properties: {
+                    projects: {
+                        type: Object,
+                        observer: "_fetchNewProjects"
+                    },
+                    newProjects: {
+                        type: Array
+                    }
+                },
+                attached: function() {
+                    $('.internal-link').on('click', function(event) {
+                        menu_navigate(this, event)
+                    });
+                },
+                _handleTap:function(event){
+                    var slug = event.target.attributes['data-taplink'].value;
+                    var project = $.grep(this.newProjects, function(e) { return e.slug == slug })[0];
+                    var projectType = event.target.attributes['data-taplink-category'].value
+                    var projectView = Polymer.dom(document.getElementById('projectView'));
+                    var projectModal = Polymer.dom(document.getElementById('projectModal'));
+
+                    projectView.node.project = project;
+                    projectView.node.type = projectType;
+                    $(projectModal.node).removeClass("dialog-type-infrastructure");
+                    $(projectModal.node).removeClass("dialog-type-real_time_information");
+                    $(projectModal.node).removeClass("dialog-type-youth_engagement");
+                    $(projectModal.node).addClass('dialog-type-' + projectType);
+                    projectModal.node.open();
+                },
+                _getElementFromArray: function(array, index) {
+                    if ((array instanceof Array) && (array.length > index)) {
+                        return array[index];
+                    } else {
+                        return '';
+                    }
+                },
+                _getIndex: function(index) {
+                    return (1+index);
+                },
+                _fetchNewProjects: function() {
+                    var self = this;
+                    self.newProjects = []
+                    var categories = Object.keys(self.projects);
+                    for(var c in categories) {
+                        var projects_hash = self.projects[categories[c]].projects_hash;
+                        for(var p in projects_hash) {
+                            if (!projects_hash.hasOwnProperty(p)) {
+                                continue;
+                            }
+                            if (projects_hash[p].new_investment) {
+                                projects_hash[p].category = categories[c];
+                                self.newProjects.push(projects_hash[p]);
+                            }
+                        }
+                    }
+                    this.newProjects = self.newProjects;
+                },
+                __getNewProjectCategory: function(array, index) {
+                    return array[index].category;
+                },
+                __getNewProjectImage: function(array, index) {
+                    var projectImage = array[index].graph_format;
+                    if (projectImage == '') projectImage = array[index].image;
+                    return projectImage;
+                },
+                __getNewProjectDescription: function(array, index) {
+                    var projectDescription = array[index].announcement_blurb;
+                    if (projectDescription == '') projectDescription = array[index].description;
+                    return projectDescription;
+                },
+                __getNewProjectLink: function(array, index) {
+                    return array[index].link_href;
+                },
+                __getNewProjectSlug: function(array, index) {
+                    return array[index].slug;
+                }
+            });
+        })();
+    </script>
 </dom-module>

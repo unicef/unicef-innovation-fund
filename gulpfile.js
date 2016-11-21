@@ -56,7 +56,7 @@ var styleTask = function(stylesPath, srcs) {
     .pipe($.changed(stylesPath, {extension: '.css'}))
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe(gulp.dest('.tmp/' + stylesPath))
-    .pipe($.minifyCss())
+    .pipe($.cleanCss())
     .pipe(gulp.dest(dist(stylesPath)))
     .pipe($.size({title: stylesPath}));
 };
@@ -87,21 +87,17 @@ var imageOptimizeTask = function(src, dest) {
 };
 
 var optimizeHtmlTask = function(src, dest) {
-  var assets = $.useref.assets({
-    searchPath: ['.tmp', 'app']
-  });
-
   return gulp.src(src)
-    .pipe(assets)
     // Concatenate and minify JavaScript
     .pipe($.if('*.js', $.uglify({
       preserveComments: 'some'
     })))
     // Concatenate and minify styles
     // In case you are still using useref build blocks
-    .pipe($.if('*.css', $.minifyCss()))
-    .pipe(assets.restore())
-    .pipe($.useref())
+    .pipe($.if('*.css', $.cleanCss()))
+    .pipe($.useref({
+      searchPath: ['.tmp', 'app']
+    }))
     // Minify any HTML
     .pipe($.if('*.html', $.minifyHtml({
       quotes: true,
@@ -173,7 +169,7 @@ gulp.task('fonts', function() {
 // Scan your HTML for assets & optimize them
 gulp.task('html', function() {
   return optimizeHtmlTask(
-    ['app/**/*.html', '!app/{elements,test,bower_components}/**/*.html'],
+    ['app/**/*.{html,js}', 'app/*.{html,js}', '!app/{elements,test,bower_components}/**/*.{html,js}'],
     dist());
 });
 
@@ -232,7 +228,7 @@ gulp.task('clean', function() {
 // Watch files for changes & reload
 gulp.task('serve', ['styles','firebase'], function() {
   browserSync({
-    port: 5000,
+    port: 5005,
     notify: false,
     logPrefix: 'PSK',
     snippetOptions: {

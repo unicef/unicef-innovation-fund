@@ -2,12 +2,13 @@
   <template>
     <style is="custom-style">
     .container {
-      max-width: 1030px;
+      max-width: 795px;
       position: relative;
       text-align: center;
     }
 
     .container--wide {
+      margin: 0 auto;
       max-width: 1920px;
     }
 
@@ -19,6 +20,7 @@
 
     .submit__office {
         text-align: left;
+        padding-top: 40px;
     }
 
     .button__container {
@@ -26,7 +28,8 @@
     }
 
     .button__text {
-      margin-bottom: 35px;
+        font-size: 1.35rem;
+        margin-bottom: 35px;
     }
 
     .button__image {
@@ -52,22 +55,33 @@
       display: block;
     }
 
-    .section__header {
-      color: #0099FF;
-      font-size: 1.57rem;
-      line-height: 4rem;
-    }
-
     .section__description {
       color: #5D5D5D;
       font-size: 1.595rem;
       line-height: 1.5;
       margin-bottom: 0;
       margin-top: 1rem;
+      text-align: center;
     }
 
-    .section__description-startup {
-        margin-top: 3.7rem;
+    .section__description-startup, .section__description-startup p, .section__subheader-startup p {
+        margin-top: 0;
+        font-size: 1.35rem;
+        font-weight: 400;
+        line-height: 1.85;
+        text-align: left;
+    }
+
+    .section__description-startup br {
+        line-height: 3.3;
+    }
+
+    .section__description b {
+        display: inline;
+        font-size: 1.35rem;
+        font-weight: 700;
+        line-height: 1.8;
+        margin-top: 1rem;
         text-align: left;
     }
 
@@ -77,11 +91,11 @@
 
     .section__submit-link {
       background-color: #0099FF;
-      /* Overwrite MDL default style */
+      color: white;
       font-size: 1.15rem;
       font-weight: 400;
       height: 44px;
-      line-height: 44px;
+      line-height: 2.75;
       margin-top: 2.5rem;
       max-width: 260px;
       text-transform: uppercase;
@@ -113,6 +127,22 @@
       margin: 4rem 0 4.75rem;
     }
 
+    .section__break--short {
+        display: block;
+        margin-top: 6.7rem;
+        margin-bottom: 3.5rem;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        width: 20%;
+    }
+
+    .section__break--thin {
+        border-color: black;
+        margin-bottom: 3.5rem;
+        margin-top: 4.5rem;
+    }
+
     .section__subheader {
       font-size: 2.3rem;
       font-weight: 500;
@@ -120,13 +150,22 @@
       margin-bottom: 2.5rem;
     }
 
+    .section__subheader-startup {
+        color: #5D5D5D;
+        font-size: 2rem;
+        letter-spacing: 0;
+        margin-top: 3.5rem;
+        margin-bottom: 0;
+        text-align: left;
+    }
+
     .section__icon {
       width: 15%;
     }
 
     .section__icon--wide {
-        margin-bottom: 1rem;
-        margin-top: 4.3rem;
+        margin-bottom: 0.9rem;
+        margin-top: 2rem;
         width: 90%;
     }
 
@@ -252,6 +291,8 @@
     }
 
     .accordion__number {
+        text-align: center;
+        width: 30px;
         border: 3px solid #33B8B8;
         border-radius: 50%;
         color: #33B8B8;
@@ -380,7 +421,7 @@
     }
 
     .faq__name {
-        color: #7ADEDE;
+        color: #000000;
         font-size: 2rem;
         font-weight: 800;
         line-height: 0.45;
@@ -392,13 +433,6 @@
         font-size: 1.465rem;
     }
 
-    .faq__sub-description {
-        color: #5D5D5D;
-        display: block;
-        font-size: 1.4rem;
-        letter-spacing: 0.02rem;
-    }
-
     .faq__requirement {
         font-size: 1.46rem;
         list-style-type: disc;
@@ -407,12 +441,8 @@
         word-spacing: 0.155rem;
     }
 
-    .faq__requirement--unstyled {
-        list-style-type: none;
-    }
-
-    .faq__link {
-        color: #7ADEDE;
+    .faq a {
+        color: #333399;
         text-decoration: none;
     }
 
@@ -426,20 +456,20 @@
         font-size: 1.5rem;
         font-weight: 400;
         height: 55px;
-        line-height: 55px;
+        line-height: 2.65;
         margin-top: 2.5rem;
         max-width: 245px;
         text-transform: uppercase;
         width: 100%;
     }
 
-    .faq__emphasis {
+    .faq em, .faq i {
         word-spacing: normal;
     }
 
     .faq__button {
-        border: 2px solid #7ADEDE;
-        color: #7ADEDE;
+        border: 2px solid #2EAFAC;
+        color: #2EAFAC;
         display: table;
         font-weight: 800;
         margin: 1rem 0;
@@ -447,20 +477,15 @@
         text-decoration: none;
     }
 
-    .section__break--thin {
-        color: #7ADEDE;
-        margin: 4rem 0 3.5rem 4.2rem;
-    }
-
     .summary {
         align-items: flex-start;
         display: flex;
-        margin-left: 5.6rem;
+        margin-top: 4.3rem;
     }
 
     .summary__icon {
         padding-top: 0.8rem;
-        width: 14%;
+        width: 17%;
     }
 
     .summary__content {
@@ -476,26 +501,26 @@
         margin: 0;
     }
 
-    .summary__description {
+    .summary__content--container {
+        display: inline-block;
         font-size: 1.45rem;
+        margin-bottom: 1.15rem;
     }
 
-    .summary__emphassis {
+    .summary__content em, .summary__content i {
         display: block;
-        margin-bottom: 0.8rem;
     }
 
-    .summary__link {
-        border: 2px solid #7ADEDE;
-        color: #7ADEDE;
+    .summary__content a {
+        border: 2px solid #2EAFAC;
+        color: #2EAFAC;
         display: table;
-        font-size: 1.7rem;
-        font-weight: 500;
+        font-size: 1.5rem;
+        font-weight: 700;
         margin-top: 2.2rem;
         padding: 0.7rem 3.9rem;
         text-decoration: none;
     }
-
 
     @media (max-width: 1200px) {
       .submit__container {
@@ -508,7 +533,7 @@
       }
 
       [data-target="startup"] .section__back {
-          top: 2.5%;
+          top: 1.5%;
       }
 
       [data-target="office"] .section__back {
@@ -608,7 +633,7 @@
           text-align: center;
       }
 
-      .summary__icon, .summary__link {
+      .summary__icon {
           display: none;
       }
     }
@@ -656,11 +681,12 @@
     <style is="custom-style" include="style-fade-in"></style>
     <firebase-document
       app-name="unicef-innovation-fund"
-      path="/summary/portfolios/invested_youth_engagement"
-      data="{{emails}}">
+      path="/content/submit_content"
+      data="{{submit}}">
     </firebase-document>
+
     <header class='page__header page__header--dark'>
-      <div class='mdl-grid container' style='position:relative;'>
+      <div class='mdl-grid container'>
         <div class="mdl-layout-spacer"></div>
         <div class="mdl-cell mdl-cell--10-col">
           <h1 class='title--big hello__title fade-in'>Submit</h1>
@@ -687,8 +713,8 @@
       <button on-tap="changeSection" class="section__back" id="back-from-office" data-display="main" data-hide="office">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="container mdl-cell mdl-cell--12-col">
-        <p class="section__description">Please submit your email address to continue</p>
         <p class$="section__auth-alert [[errorMessageClass]]">[[errorMessage]]</p>
+          <p class="section__description"><echo-html html$="{{submit.country_offices.submit_email_text}}"></echo-html></p>
         <form is="iron-form" class="section__form" on-submit="submitEmail">
           <input type="text" class$="section__input [[inputAuthClass]]" placeholder="email address" on-input="checkAuth">
           <button type="submit" class="section__confirm-email" data-display="office-submited" data-hide="office">continue</button>
@@ -700,95 +726,41 @@
       <button on-tap="changeSection" class="section__back" data-display="main" data-hide="office-submited">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="submit__office container mdl-cell mdl-cell--12-col">
-        <p class="section__description">The Innovation Fund invests in open-source solutions that are being developed and piloted by Country Offices</p>
-        <p class="section__description">The Fund is looking to invest in emerging technologies that hold significant potential to bring results for children. These may include blockchain, 3D printing, data, personal/social communications networks, satellites, wearables and sensors, mobile devices, UAVs, artificial intelligence and renewable energy</p>
+        <p class="section__description">
+            <echo-html html$="{{submit.country_offices.text}}"></echo-html>
+        </p>
         <div class="section__submit">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank">Submission Form</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank"><echo-html html$="{{submit.country_offices.submit_button_text}}"></echo-html></a>
         </div>
         <hr class="section__break">
-        <h3 class="section__subheader">What is the application process?</h3>
+        <h3 class="section__subheader"><echo-html html$="{{submit.country_offices.steps_title}}"></echo-html></h3>
         <ol class="accordion">
-            <li class="accordion__section">
-                <h4 class="accordion__header" data-open="eligibility" on-tap="accordionOpen">
-                    <p class="accordion__number">1</p>CHECK ELIGIBILITY (3 minutes)
-                    <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
-                </h4>
-                <div class="accordion__content accordion__content--toggle" data-accordion="eligibility">
-                    <p class="accordion__summary">Country office meets the following criteria:</p>
-                    <ul class="description__list">
-                        <li class="description__item">Is developing and piloting a new open source solution.</li>
-                        <li class="description__item">Solution has completed initial prototyping and small scale piloting with promising results Lacks su icient evidence or resources to scale further.</li>
-                        <li class="description__item">Has matching co-funding to support the project.</li>
-                        <li class="description__item">Senior management supports the application and project itself</li>
-                        <li class="description__item">Can submit as many applications as they have projects (e.g. 4,5, 6 etc).</li>
-                        <li class="description__item">Are able to spend the investment within 12 months</li>
-                    </ul>
-                </div>
-            </li>
-            <li class="accordion__section">
-                <h4 class="accordion__header" data-open="submit" on-tap="accordionOpen">
-                    <p class="accordion__number">2</p>SUBMIT (50 minutes)
-                    <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
-                </h4>
-                <div class="accordion__content accordion__content--toggle" data-accordion="submit">
-                    <p class="accordion__summary">Apply on a rolling basis through a simple application form found here.There is no deadline for submission.</p>
-                    <ul class="description__list">
-                        <li class="description__item">Alignment with UNICEF’s Innovation Principles and UNICEF’s global priorities for children</li>
-                        <li class="description__item">Placement within one of the Fund’s three portfolio areas</li>
-                        <li class="description__item">Size of the market opportunity and relevance across geographic locations</li>
-                        <li class="description__item">Suitability of the team to implement the project</li>
-                        <li class="description__item">Creation of open source, public goods</li>
-                        <li class="description__item">Results able to be measured and monitored in real time</li>
-                    </ul>
-                </div>
-            </li>
-            <li class="accordion__section">
-                <h4 class="accordion__header" data-open="iterate" on-tap="accordionOpen">
-                    <p class="accordion__number">3</p>ITERATE AND IMPROVE
-                    <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
-                </h4>
-                <div class="accordion__content accordion__content--toggle" data-accordion="iterate">
-                    <p class="accordion__summary--gray">We encourage you to submit applications, as the process includes feedback andapplications can be improved on, if there are gaps.</p>
-                    <ul class="description__list">
-                        <li class="description__item">Await feedback on how best to enhance your application, or answer clarifying questions.</li>
-                        <li class="description__item">If applicable, iterate and improve your application.</li>
-                        <li class="description__item">We aim to review applications and communicate funding decisions within two weeks.</li>
-                    </ul>
-                </div>
-            </li>
-            <li class="accordion__section">
-                <h4 class="accordion__header" data-open="decision" on-tap="accordionOpen">
-                    <p class="accordion__number">4</p>DECISION
-                    <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
-                </h4>
-                <div class="accordion__content accordion__content--toggle" data-accordion="decision">
-                    <p class="accordion__summary--gray">Once the application is complete, projects will be assessed by the Innovation Fund Board (Chris Fabian, Erica Kochi and Tanya Accone) for a final decision. Approved investments are transferred to Country Offices through budget reallocations.</p>
-                </div>
-            </li>
+            <template is="dom-repeat" items="{{submit.country_offices.steps_content}}" as="step">
+                <li class="accordion__section">
+                    <h4 class="accordion__header" data-open$="accordion-{{index}}" on-tap="accordionOpen">
+                        <p class="accordion__number">{{stepIndex(index)}}</p><echo-html html$="{{step.name}}"></echo-html>
+                        <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
+                    </h4>
+                    <div class="accordion__content accordion__content--toggle" data-accordion$="accordion-{{index}}">
+                        <p class="accordion__summary"><echo-html html$="{{step.description}}"></echo-html></p>
+                        <ul class="description__list">
+                            <template is="dom-repeat" items="{{step.requirements}}" as="requirement">
+                                <li class="description__item"><echo-html html$="{{requirement}}"></echo-html></li>
+                            </template>
+                        </ul>
+                    </div>
+                </li>
+            </template>
         </ol>
         <hr class="section__break">
-        <h3 class="section__subheader">What is the role of the country office once the investment is approved?</h3>
+        <h3 class="section__subheader"><echo-html html$="{{submit.country_offices.role_title}}"></echo-html></h3>
         <ul class="role__list">
-            <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/real-time.svg" alt="Real-time information" class="role__image">REAL-TIME INFORMATION</h4>
-                <p class="role__description">Once the Country Office receives funding, we ask you to submit real-time data points that show the progress of the project. Data points include, activity on github, number of users per time period etc.<br>The Office of Innovation provides support to identify suitable real-time data sources for each project. All projects and related data are featured on the real-time reporting website of the Fund.</p>
-            </li>
-            <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/implement.svg" alt="Implement" class="role__image">IMPLEMENT</h4>
-                <p class="role__description">Country Offies may receive technical assistance from a global team of experts in the Office of Innovation.</p>
-            </li>
-            <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/report.svg" alt="Report" class="role__image">Report</h4>
-                <p class="role__description">Focal points for each project are required to submit 2 reports during the funding period. A report is due after 6 months and after 12 months</p>
-            </li>
-            <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/spend.svg" alt="Spend" class="role__image">Spend</h4>
-                <p class="role__description">Funding awarded has to be spent within 12 months.</p>
-            </li>
-            <li class="role__item">
-                <h4 class="role__name"><img src="../images/icons/share.svg" alt="Share" class="role__image">Share</h4>
-                <p class="role__description">As projects and solutions generate new solutions and lessons learned, we ask you to share your experiences through unicefstories.org and dedicated networking opportunities with other COs.</p>
-            </li>
+            <template is="dom-repeat" items="{{submit.country_offices.role_content}}" as="role">
+                <li class="role__item">
+                    <h4 class="role__name"><img src="../images/icons/{{role.icon_name}}.svg" alt="Real-time information" class="role__image"><echo-html html$="{{role.name}}"></echo-html></h4>
+                    <p class="role__description"><echo-html html$="{{role.description}}"></echo-html></p>
+                </li>
+            </template>
         </ul>
       </div>
       <div class="mdl-layout-spacer"></div>
@@ -797,64 +769,51 @@
       <button on-tap="changeSection" class="section__back" data-display="main" data-hide="startup">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="container mdl-cell mdl-cell--12-col">
-        <p class="section__description section__description-startup">The purpose of the Innovation Fund is to support new solutions from small businesses in markets that many companies or investors consider risky while UNICEF sees these markets as sources of opportunity. UNICEF will support companies registered in these markets in UNICEF’s programme countries- with a small amount of money to move solutions to the stage where these are proven to be workable and can be implemented.</p>
+            <h3 class="section__subheader section__subheader-startup">
+                <echo-html html$="{{submit.startups.title}}"></echo-html>
+            </h3>
+            <p class="section__description section__description-startup">
+                <echo-html html$="{{submit.startups.description}}"></echo-html>
+            </p>
+            <img src="../images/icons/startups_steps.svg" alt="Steps for startup" class="section__icon--wide">
+            <h3 class="section__subheader section__subheader-startup">
+                <echo-html html$="{{submit.startups.process_title}}"></echo-html>
+            </h3>
+            <p class="section__description section__description-startup">
+                <echo-html html$="{{submit.startups.process_description}}"></echo-html>
+            </p>
         <img src="../images/icons/startups_steps.svg" alt="Steps for startup" class="section__icon--wide">
+        <p class="section__description section__subheader-startup"></p>
         <ol class="faq faq__list">
-            <li class="faq__step">
-                <h3 class="faq__name">Step 1</h3>
-                <strong class="faq__description">Check Eligibility</strong>
-                <strong class="faq__sub-description">Check that your company/institution and project meet all the eligibility requirements</strong>
-                <ul class="faq__list">
-                    <li class="faq__requirement">Your company/institution must be registered in a UNICEF programme country (<a href="http://unicefstories.org/" class="faq__link">see list here</a>)</li>
-                    <li class="faq__requirement">You’re working on open source technology solutions or willing to be open source under the following licenses:<br>
-                        <strong>Software:</strong>  BSD, AGPL, LGPL<br>
-                        <strong>Content and designs:</strong> Content and designs:
-                    </li>
-                    <li class="faq__requirement">Your project generates publicly-exposed real-time data that can be/is measured</li>
-                </ul>
-            </li>
-            <li class="faq__step">
-                <h3 class="faq__name">Step 2</h3>
-                <strong class="faq__description">Read the full request for Expression of Interest document</strong>
-                <ul class="faq__list">
-                    <li class="faq__requirement">Read the full <a href="http://unicefstories.org/" class="faq__link">Request for Expressions of Interest (REOI)</a> document to understand the submission process and to learn more about the kinds of projects that qualify and how the scoring will be done.</li>
-                </ul>
-            </li>
-            <li class="faq__step">
-                <h3 class="faq__name">Step 3</h3>
-                <strong class="faq__description">Any questions?</strong>
-                <ul class="faq__list">
-                    <li class="faq__requirement">Read our <a href="http://unicefstories.org/" class="faq__link">FAQ’s</a> about the process</li>
-                    <li class="faq__requirement"><a href="http://unicefstories.org/" class="faq__link">Submit any questions you may have.</a> Responses will be posted regularly.<br>
-                        <em class="faq__emphasis">Please note that the period to submit questions for the REOI closes on 16 February, 2016.</em>
-                        <a href="" class="faq__button">Ask now</a>
-                        See the <a href="http://unicefstories.org/" class="faq__link">answers</a> to what others have asked <a href="http://unicefstories.org/" class="faq__link">&#8594;</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="faq__step">
-                <h3 class="faq__name">Step 4</h3>
-                <strong class="faq__description">Submit</strong>
-                <ul class="faq__list">
-                    <li class="faq__requirement faq__requirement--unstyled">
-                        <a href="http://unicefstories.org/" class="faq__link">Submit</a> your expression of interest by completing the form.<br>
-                        Preview the questions to prepare your submission, <a href="http://unicefstories.org/" class="faq__link">preview questions</a>
-                    </li>
-                </ul>
-            </li>
+            <template is="dom-repeat" items="{{submit.startups.steps}}" as="step">
+                <li class="faq__step">
+                    <h3 class="faq__name"><echo-html html$="{{step.name}}"></echo-html></h3>
+                    <strong class="faq__description"><echo-html html$="{{step.description}}"></echo-html></strong>
+                    <ul class="faq__list">
+                        <template is="dom-repeat" items="{{step.requirements}}" as="requirement">
+                            <li class="faq__requirement">
+                                <echo-html html$="{{requirement}}"></echo-html>
+                            </li>
+                        </template>
+                    </ul>
+                </li>
+            </template>
         </ol>
         <div class="faq__submit">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="faq__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank">Submission Form</a>
+            <a href="https://form.jotform.com/62704508221145" class="faq__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank">
+                <echo-html html$="{{submit.startups.submit_button_text}}"></echo-html>
+            </a>
         </div>
         <hr class="section__break--thin">
         <div class="summary">
             <img src="../images/icons/country_offices-alt.svg" alt="" class="summary__icon">
             <div class="summary__content">
-                <h3 class="summary__title">Got questions?</h3>
-                <p class="summary__description">Responses will be posted regularly.</p>
-                <em class="summary__description summary__emphassis">Please note that the period to submit questions for the REOI closes on DD MONTH, YYYY.</em>
-                <p class="summary__description">UNICEF will not answer any questions submitted after this date.</p>
-                <a href="http://unicefstories.org/" class="summary__link">Ask now</a>
+                <h3 class="summary__title"><echo-html html$="{{submit.startups.additional_info_title}}"></echo-html></h3>
+                <template is="dom-repeat" items="{{submit.startups.additional_info}}" as="info">
+                    <span class="summary__content--container">
+                        <echo-html html$="{{info}}"></echo-html>
+                    </span>
+                </template>
             </div>
         </div>
       </div>
@@ -868,10 +827,6 @@
         countryOfficesAuthenticated: {
             type: Boolean,
             value: false
-        },
-        emailVerificationMessage: {
-            type: String,
-            value: "Please submit your email address to continue"
         },
         errorMessageClass: {
             type: String,
@@ -888,10 +843,19 @@
         sectionName: {
             type: String,
             value: ''
+        },
+        startups: {
+            type: Object
+        },
+        submit: {
+            type: Object
         }
     },
     listeners: {
       'iron-form-submit': 'submitEmail'
+    },
+    stepIndex: function (index) {
+        return index + 1;
     },
     ready: function () {
         var self = this;
@@ -918,6 +882,23 @@
                 self.errorMessage = 'Email is not valid';
             }
         });
+    },
+    attached: function() {
+        var self = this;
+        self.initScrollReveal();
+        $(document).on('page-changed', function(e, page_id) {
+          if (page_id == 'submit') {
+            self.initScrollReveal();
+          }
+        });
+    },
+    initScrollReveal: function() {
+        var config = { container: '#mainContainer' };
+        if (!window.scrollReveal) {
+          window.scrollReveal = new ScrollReveal();
+        }
+        window.scrollReveal.reveal('.accordion__section, .role__list, .section__subheader:not(:first-child), .faq__step, '
+            + '.faq__submit, .summary', config);
     },
     checkAuth: function (event) {
         var regxTest = /.{1,}@unicef\.org$/gi;
