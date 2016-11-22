@@ -6,7 +6,7 @@
         -moz-box-sizing: border-box;
         box-sizing: border-box;
       }
-      
+
       .overlay {
         position: fixed;
         width: 100%;
@@ -20,11 +20,11 @@
         transition: opacity .3s;
         overflow: auto;
       }
-      
+
       .overlay__scroll-content {
         position: relative;
       }
-      
+
       .overlay__container {
         width: 100%;
         max-width: 960px;
@@ -33,7 +33,7 @@
         margin: 0 auto;
         position: relative;
       }
-      
+
       .overlay__content {
         font-size: 40px;
         color: #fff;
@@ -42,7 +42,7 @@
         margin-top: 100px;
         position: relative;
       }
-      
+
       .overlay__content p {
         font-size: 22px;
         line-height: 1.22em;
@@ -58,12 +58,12 @@
       .overlay__content p:empty {
         display: none;
       }
-      
+
       .overlay__content[mobile-layout] p {
         font-size: 20px;
         line-height: 30px;
       }
-      
+
       .overlay__list {
         position: relative;
         width: 85%;
@@ -73,11 +73,11 @@
         padding-left: 0;
         list-style: none;
       }
-      
+
       .overlay__list[mobile-layout] {
         margin-top: 40px;
       }
-      
+
       .overlay__item {
         float: left;
         width: 33.3333%;
@@ -85,7 +85,7 @@
         text-align: center;
         vertical-align: bottom;
       }
-      
+
       .overlay__list[mobile-layout] .overlay__item {
         width: 100%;
         float: none;
@@ -93,27 +93,27 @@
         text-align: center;
         margin-bottom: 20px;
       }
-      
+
       .overlay__icon {
         display: inline-block;
         height: 90px;
         width: auto;
       }
-      
+
       .overlay__item:nth-child(1) .overlay__icon {
         height: 90px;
       }
-      
+
       .overlay__item:nth-child(2) .overlay__icon {
         height: 80px;
         margin-top: 10px;
       }
-      
+
       .overlay__item:nth-child(3) .overlay__icon {
         height: 86px;
         margin-top: 4px;
       }
-      
+
       .overlay__label {
         color: #fff;
         font-size: 14px;
@@ -123,7 +123,7 @@
         -webkit-font-smoothing: antialiased;
         margin-top: 10px;
       }
-      
+
       .overlay__arrow {
         position: relative;
         width: 200px;
@@ -138,7 +138,7 @@
         outline: none;
         cursor: pointer;
       }
-      
+
       .overlay__arrow[mobile-layout] {
         position: relative;
         width: 200px;
@@ -150,7 +150,7 @@
         bottom: auto;
         display: block;
       }
-      
+
       .overlay__arrow img {
         position: relative;
         display: inline-block;
@@ -190,8 +190,8 @@
     <firebase-document
       id="firebase-content"
       app-name="unicef-innovation-fund"
-      path='content'
-      data="{{content}}">
+      path="/content/overlay"
+      data="{{overlay}}">
     </firebase-document>
     <iron-media-query query="(max-width: 767px)" query-matches="{{wide}}"></iron-media-query>
     <iron-media-query full query="print" query-matches="{{print}}"></iron-media-query>
@@ -202,12 +202,12 @@
             <i class="material-icons">close</i>
           </button>
           <div class="overlay__content" mobile-layout$="{{wide}}">
-            <p class="welcome"><echo-html html$="{{content.overlay_p1}}"
+            <p class="welcome"><echo-html html$="{{overlay.overlay_p1}}"
               startvalue="<strong>UNICEF Innovation Fund.</strong> <br> Welcome."></echo-html>
             </p>
-            <p><echo-html html$="{{content.overlay_p2}}"></echo-html></p>
-            <p><echo-html html$="{{content.overlay_p3}}"></echo-html></p>
-            <p><echo-html html$="{{content.overlay_p4}}"></echo-html></p>
+            <p><echo-html html$="{{overlay.overlay_p2}}"></echo-html></p>
+            <p><echo-html html$="{{overlay.overlay_p3}}"></echo-html></p>
+            <p><echo-html html$="{{overlay.overlay_p4}}"></echo-html></p>
           </div>
           <ul class="overlay__list" mobile-layout$="{{wide}}">
             <li class="overlay__item">
@@ -234,31 +234,24 @@
   Polymer({
     is: "overlay-intro",
     properties: {
-      content: {
+      overlay: {
         type: Object,
-        observer: 'contentChanged'
+        observer: 'contentChanged',
+        notify: true
       }
     },
     attached: function() {
-      this.showOverlay(500);
+      this.showOverlay(300);
     },
     contentChanged: function (newData, oldData) {
-      if (this._isObjectEmpty(newData) == false) {
+      if (!($.isEmptyObject(newData))) {
         this.startCounter();
         this.addOverlayLinks();
-      }
-    },
-    _isObjectEmpty: function(obj) {
-      for(var prop in obj) {
-        if(obj.hasOwnProperty(prop)) {
-          return false;
-        }
       }
     },
     showOverlay: function(delay) {
       var self = this;
 
-      self.startCounter();
       setTimeout(function() {
         $('.overlay').css({
           display: 'block',
@@ -266,7 +259,9 @@
         })
         $('.overlay').stop().animate({
           opacity: 1
-        }, 300, function() {});
+        }, 300, function() {
+          self.startCounter();
+        });
       }, delay);
     },
     hideOverlay: function() {

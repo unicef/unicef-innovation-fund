@@ -59,6 +59,12 @@
         font-weight: 400;
       }
 
+      .card__info-value,
+      .card__info-value span {
+        font-size: 19px;
+        font-weight: 400;
+      }
+
       .project-card__container.has-selected .project-card__info {
         height: 0;
       }
@@ -155,7 +161,7 @@
 
     <firebase-document
       app-name="unicef-innovation-fund"
-      path="{{ _getPath(svg) }}"
+      path="{{ _getPath(category) }}"
       data="{{ projects }}">
     </firebase-document>
 
@@ -167,15 +173,15 @@
 
      <firebase-document
       app-name="unicef-innovation-fund"
-      path="/content/{{tooltip_target}}"
+      path="/content/db/{{tooltip_target}}"
       data="{{db_tooltip}}">
      </firebase-document>
 
-    <div class$="project-card__container mdl-shadow--4dp {{ _hasSelectedClass(selected) }} {{ _isActiveClass(selected, svg) }}">
-      <div class-name="project-card__edge edge edge--{{svg}}"></div>
+    <div class$="project-card__container mdl-shadow--4dp {{ _hasSelectedClass(selected) }} {{ _isActiveClass(selected, category) }}">
+      <div class-name="project-card__edge edge edge--{{category}}"></div>
       <div class="project-card__body">
-        <img class="project-card__icon" src="/images/icons/{{svg}}.svg" />
-        <span class-name="project-card__counter fade-in delayed-1-2 counter--{{svg}}">{{ _getNewProjectsCount(projects) }}</span>
+        <img class="project-card__icon" src$="{{ _getCategoryIconPath(category) }}">
+        <span class-name="project-card__counter fade-in delayed-1-2 counter--{{category}}">{{ _getNewProjectsCount(projects) }}</span>
         <div style='project-card__content'>
           <h4 class="project-card__title">{{phrase}}</h4>
           <span class="description__text--small">{{content}}</span>
@@ -199,7 +205,7 @@
           <div class="vcenter">
             <div class="project-card__progress">
               <template id="cardProgressContainer" is="dom-if" if="[[ _canShowProgress(financials, type) ]]">
-                <circular-progress id="cardProgress" class="project-card__progress-item" value="[[ _getProgressValue(financials, type) ]]" max="[[ _getProgressMax(financials, type) ]]" type="[[ svg ]]">
+                <circular-progress id="cardProgress" class="project-card__progress-item" value="[[ _getProgressValue(financials, type) ]]" max="[[ _getProgressMax(financials, type) ]]" type="[[ category ]]">
                   <span class="project-card__progress-value">{{ _getProgressContent(financials, type) }}</span>
                 </circular-progress>
                 <span class="project-card__progress-subtitle">Invested</span>
@@ -224,7 +230,7 @@
         type: String,
         value: ""
       },
-      svg: {
+      category: {
         value: '',
         notify: true
       },
@@ -243,8 +249,8 @@
     ready: function() {
       var that = this;
     },
-    _getPath: function(svg) {
-      return 'portfolio_projects/' + svg + '/projects_hash';
+    _getPath: function(category) {
+      return 'portfolio_projects/' + category + '/projects_hash';
     },
     _isObjectEmpty: function(obj) {
       for(var prop in obj) {
@@ -256,16 +262,16 @@
       return JSON.stringify(obj) === JSON.stringify({});
     },
     _handleTap: function(e){
-      if (this.selected != this.svg) {
-        this.set('selected', this.svg);
+      if (this.selected != this.category) {
+        this.set('selected', this.category);
       } else {
         this.set('selected', null);
         var projectList = document.getElementById('projectList');
         projectList.classList.remove('is-loaded');
       }
     },
-    _isActiveClass: function(selected, svg) {
-      return selected == svg ? 'is-active' : ''
+    _isActiveClass: function(selected, category) {
+      return selected == category ? 'is-active' : ''
     },
     _hasSelectedClass: function(selected) {
       return selected ? 'has-selected' : ''
@@ -325,6 +331,11 @@
       } else if (count > 1) {
         return count + " new projects!";
       }
-    }
+    },
+    _getCategoryIconPath: function(category) {
+      if (category) {
+        return '/images/icons/' + category + '.svg';
+      }
+    },
   })
 </script>

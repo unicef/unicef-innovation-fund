@@ -8,6 +8,13 @@
         flex: 1;
         align-items: stretch;
         justify-content: space-between;
+
+      }
+
+      @media screen and (min-width: 840px) {
+        :host {
+          min-height: 770px;
+        }
       }
 
       :host hr {
@@ -42,73 +49,79 @@
       }
 
       .card_title {
-         height: 30px;
-         line-height: 30px;
-         padding-left:5px;
-       }
+        height: 30px;
+        line-height: 30px;
+        padding-left:5px;
+      }
 
-       circular-progress {
-         display: inline-block;
-       }
+      circular-progress {
+        display: inline-block;
+      }
 
-       .portfolio-card__progress {
-         text-align: center;
-         margin-bottom: 32px;
-         margin-top: 16px;
-       }
+      chart-line {
+        width: 95%;
+        font-size: 30px;
+        padding-left: 5px;
+      }
 
-       .portfolio-card__progress-info {
-         position: relative;
-         margin-bottom: 16px;
-       }
+      .portfolio-card__progress {
+        text-align: center;
+        margin-bottom: 32px;
+        margin-top: 16px;
+      }
 
-       .portfolio-card__progress-info::before {
-         display: inline-block;
-         content: '';
-         width: 3px;
-         height: 18px;
-         background-color: #ffcc33;
-         position: absolute;
-         left: 49%;
-         bottom: -16px;
-       }
+      .portfolio-card__progress-info {
+        position: relative;
+        margin-bottom: 16px;
+      }
 
-       .portfolio-card__progress-info--real_time_information::before {
-         background-color: #ff3366;
-       }
+      .portfolio-card__progress-info::before {
+        display: inline-block;
+        content: '';
+        width: 3px;
+        height: 18px;
+        background-color: #ffcc33;
+        position: absolute;
+        left: 49%;
+        bottom: -16px;
+      }
 
-       .portfolio-card__progress-info--infrastructure::before {
-         background-color: #66cc66;
-       }
+      .portfolio-card__progress-info--real_time_information::before {
+        background-color: #ff3366;
+      }
 
-       .portfolio-card__progress-info--knowledge_products::before {
-         background-color: #33cccc;
-       }
+      .portfolio-card__progress-info--infrastructure::before {
+        background-color: #66cc66;
+      }
 
-       .portfolio-card__progress-subtitle, .portfolio-card__progress-info {
-         text-transform: uppercase;
-         font-size: 14px;
-         color: black;
-         font-weight: 600;
-         line-height: 1.3em;
-       }
+      .portfolio-card__progress-info--knowledge_products::before {
+        background-color: #33cccc;
+      }
 
-       .portfolio-card__progress-subtitle {
-         display: block;
-         margin-top: 0.3em;
-       }
+      .portfolio-card__progress-subtitle, .portfolio-card__progress-info {
+        text-transform: uppercase;
+        font-size: 14px;
+        color: black;
+        font-weight: 600;
+        line-height: 1.3em;
+      }
 
-       .portfolio-card__icon {
-         float: right;
-       }
+      .portfolio-card__progress-subtitle {
+        display: block;
+        margin-top: 0.3em;
+      }
 
-       .portfolio-card__icon i {
-         vertical-align: -1px;
-       }
+      .portfolio-card__icon {
+        float: right;
+      }
 
-       .icon-info {
+      .portfolio-card__icon i {
+        vertical-align: -1px;
+      }
+
+      .icon-info {
         color: #3366CB;
-       }
+      }
 
     </style>
 
@@ -171,6 +184,7 @@
           margin-bottom: 16px;
         }
       }
+
       .project__mini-chart{
         cursor: pointer;
       }
@@ -188,6 +202,14 @@
       .new-project.hide {
         display: none;
       }
+
+      .categoryIcon {
+        padding-left:16px;
+      }
+
+      .mdl-grid .title_card {
+        text-align: left;
+      }
     </style>
 
     <iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query>
@@ -202,9 +224,9 @@
         </ul>
         <div data-content="description" class="project__section js-active">
           <div class='top_container_in_card hidden--tablet'>
-            <img src="/images/icons/{{svg}}.svg" width="80" style='padding-left:16px;'>
+            <img class="categoryIcon" src$="{{ _getCategoryIconPath(category) }}" width="80">
             <div class='mdl-grid'>
-              <div class='mdl-cell mdl-cell--12-col title_card' style='text-align: left;'>
+              <div class='mdl-cell mdl-cell--12-col title_card'>
                 <span class$='portfolio_card_title'>{{phrase}}</span>
                 <div class="portfolio-card__icon">
                   <i id="tooltip" class="icon-info"></i>
@@ -216,18 +238,18 @@
             </div>
           </div>
           <div class="portfolio-card__progress">
-            <div class$="portfolio-card__progress-info portfolio-card__progress-info--{{ svg }}">
+            <div class$="portfolio-card__progress-info portfolio-card__progress-info--{{ category }}">
               {{ _getProgressValue(progress.0) }}<br/>
               available
             </div>
-            <circular-progress id="progressBar" value="[[ progress.1 ]]" max="[[ progress.0 ]]" type="[[ svg ]]">
+            <circular-progress id="progressBar" value="[[ progress.1 ]]" max="[[ progress.0 ]]" type="[[ category ]]">
                 {{ _getProgressValue(progress.1) }}
                 <span class="portfolio-card__progress-subtitle">Invested</span>
             </circular-progress>
           </div>
           <hr/>
           <div style='text-align:left;'>
-            <div class$='featured {{svg}}'>
+            <div class$='featured {{category}}'>
               Featured Project
             </div>
             <div class="featured_project">
@@ -250,13 +272,13 @@
       <div data-content="graph" class="project__section js-hidden">
         <div class="project__mini-chart"  on-tap="_handleTap">
           <div class='growth_rate pc_left'>
-            {{chart_description}}
+            {{ prepareChartDescription(dataSet, featured_slug) }}
           </div>
-          <chart-line  data="[[prepare(svg, featured, dataSet)]]" options=[[_prepareChartOptions()]] style='width:95%; font-size:30px;padding-left:5px;'></chart-line>
+          <chart-line data="[[prepare(category, featured, dataSet)]]" options=[[_prepareChartOptions()]]></chart-line>
         </div>
         <firebase-document
           app-name="unicef-innovation-fund"
-          path="/content/{{tooltip_target}}"
+          path="/content/db/{{tooltip_target}}"
           data="{{db_tooltip}}">
         </firebase-document>
 
@@ -268,7 +290,7 @@
 
         <firebase-document
           app-name="unicef-innovation-fund"
-          path="/portfolio_projects/{{svg}}/projects_hash/{{featured_slug}}"
+          path="/portfolio_projects/{{category}}/projects_hash/{{featured_slug}}"
           data="{{featured_project}}">
         </firebase-document>
 
@@ -338,17 +360,20 @@
     },
     _handleTap:function(){
       var project = this.featured_project;
-      var projectType = this.svg;
+      var projectType = this.category;
       var projectView = Polymer.dom(document.getElementById('projectView'));
       var projectModal = Polymer.dom(document.getElementById('projectModal'));
 
       projectView.node.project = project;
       projectView.node.type = projectType;
+
       $(projectModal.node).removeClass("dialog-type-infrastructure");
       $(projectModal.node).removeClass("dialog-type-real_time_information");
       $(projectModal.node).removeClass("dialog-type-youth_engagement");
       $(projectModal.node).addClass('dialog-type-' + projectType);
+
       projectModal.node.open();
+      $(window).trigger('project-view-modal-opened', project);
     },
     toggleSection: function (event) {
         var activeMenuItemClass = 'is-active';
@@ -379,12 +404,7 @@
         notify: true
       },
 
-      svg: {
-        value: '',
-        notify: true
-      },
-
-      featured_source: {
+      category: {
         value: '',
         notify: true
       },
@@ -396,13 +416,13 @@
 
       location_featured_data: {
         type: String,
-        computed: "_computeLocation(featured_source)"
+        computed: "_computeLocation(featured_slug)"
       },
 
 
       location_featured_content: {
         type: String,
-        computed: "_computeLocation('content/featured_',  svg)"
+        computed: "_computeLocation('content/featured/featured_',  category)"
       },
 
       featured: {
@@ -424,12 +444,12 @@
       },
 
       url: {
-        computed: 'computeUrl(svg)'
-    },
+        computed: 'computeUrl(category)'
+      },
 
-    lead: {
+      lead: {
         type: String
-    }
+      }
     },
 
     _content_arrived: function(obj){
@@ -439,7 +459,7 @@
 
     },
 
-    // target is 'svg' which is one of the portfolio names
+    // target is 'category' which is one of the portfolio names
     _computeLocation: function(route, target) {
 
       route = target ? route + target : route
@@ -452,14 +472,14 @@
       }
     },
 
-    prepare: function(svg, featured, dataSet){
+    prepare: function(category, featured, dataSet){
       if(Object.keys(dataSet) == 0){ return; }
-      
+
       var color = '';
 
-      if (svg == 'youth_engagement') {
+      if (category == 'youth_engagement') {
         color = "rgba(255, 204, 51, 0.2)";
-      } else if(svg == 'real_time_information') {
+      } else if(category == 'real_time_information') {
         color = "rgba(255, 143, 171, 0.2)";
       } else {
         color = "rgba(133, 214, 133, 0.2)";
@@ -468,12 +488,23 @@
       return prepareGitCommits(dataSet, featured, color );
     },
 
+    prepareChartDescription: function(dataSet, featured_slug){
+      var repos = Object.keys(dataSet);
+      if(repos.length == 0){ return; }
+
+      var repo = repos[0];
+      if ((repo) && (dataSet[repo])) {
+        return dataSet[repo].label;
+      }
+      return '';
+    },
+
     to_mil: function(num){
       return(cleanToMil(num))
     },
 
-    computeUrl: function(svg){
-      if(svg){return "/line_chart/" + svg}
+    computeUrl: function(category){
+      if(category){return "/line_chart/" + category}
     },
 
     _computeClass: function(wide) {
@@ -499,6 +530,11 @@
         return 'show';
       } else {
         return 'hide';
+      }
+    },
+    _getCategoryIconPath: function(category) {
+      if (category) {
+        return '/images/icons/' + category + '.svg';
       }
     }
   });

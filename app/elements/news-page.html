@@ -351,20 +351,20 @@
             <div class="mdl-grid news__section fade-in">
                 <div class="mdl-layout-spacer"></div>
                 <div class="mdl-cell--bottom mdl-cell--8-col mdl-cell--8-col-tablet news__content">
-                    <h3 class="section__header">{{content.news_section1_title.0}}</h3>
-                    <p class="news__description">{{content.news_section1_description.0}}</p>
+                    <h3 class="section__header">{{news.news_section1_title.0}}</h3>
+                    <p class="news__description">{{news.news_section1_description.0}}</p>
                 </div>
                 <div class="mdl-layout-spacer"></div>
             </div>
         </div>
         <div class="mdl-grid news__section fade-in" id="newsPageCards">
             <div class="mdl-layout-spacer"></div>
-            <template is="dom-repeat" items=[[newProjects]]>
+            <template is="dom-repeat" items="{{ newProjects }}">
                 <div class="mdl-cell shadow-card">
                     <div class="news__card">
                         <div class="news__card--box">
                             <span class$="edge--{{__getNewProjectCategory(newProjects, index)}} news__card--label" on-tap="_handleTap" data-taplink$="{{__getNewProjectSlug(newProjects, index)}}" data-taplink-category$="{{__getNewProjectCategory(newProjects, index)}}">VIEW PROJECT</span>
-                            <img src$="{{__getNewProjectImage(newProjects, index)}}">
+                            <img src$="{{ __getNewProjectImage(newProjects, index) }}">
                         </div>
                         <div class="news__card--text">
                             <p class="more">{{__getNewProjectDescription(newProjects, index)}}</p>
@@ -378,8 +378,8 @@
                 <div class="news__card news__card--extra">
                     <a href="#" data-menu="submit" class="internal-link">
                         <div class="icon"></div>
-                        <h2> {{content.news_eoi_title}}</h2>
-                        <p> {{content.news_eoi_text}}</p>
+                        <h2> {{news.news_eoi_title}}</h2>
+                        <p> {{news.news_eoi_text}}</p>
                     </a>
                 </div>
             </div>
@@ -391,24 +391,24 @@
             <div class="mdl-layout-spacer"></div>
             <div class="mdl-cell--bottom mdl-cell--10-col mdl-cell--8-col-tablet news__content--bottom">
                 <hr>
-                <h3 class="section__header">{{content.news_section2_title}}</h3>
+                <h3 class="section__header">{{news.news_section2_title}}</h3>
                 <div id="newsResources">
 
-                    <template is="dom-repeat" items={{content.news_section2_entry_titles}}>
+                    <template is="dom-repeat" items={{news.news_section2_entry_titles}}>
                         <hr>
                         <span></span>
-                        <span class="news__section-entry--title">{{_getElementFromArray(content.news_section2_entry_titles, index)}}</span>
-                        <a class="news__section-entry--link" target="_blank" href="[[_getElementFromArray(content.news_section2_entry_link, index)]]">LINK {{_getIndex(index)}}</a>
+                        <span class="news__section-entry--title">{{_getElementFromArray(news.news_section2_entry_titles, index)}}</span>
+                        <a class="news__section-entry--link" target="_blank" href="[[_getElementFromArray(news.news_section2_entry_link, index)]]">LINK {{_getIndex(index)}}</a>
                         <p class="news__section-entry--description">
-                            <echo-html html$="{{_getElementFromArray(content.news_section2_entry_description, index)}}""></echo-html>
+                            <echo-html html$="{{_getElementFromArray(news.news_section2_entry_description, index)}}"></echo-html>
                         </p>
                     </template>
                 </div>
 
                 <hr class="news__divider">
-                <h1 class="section__header cta">{{content.news_cta_text}}</h1>
+                <h1 class="section__header cta">{{news.news_cta_text}}</h1>
                 <a class="news__button--anchor internal-link" href="#" target="_blank" data-menu="submit">
-                    <button class="news__button">{{content.news_cta_button}}</button>
+                    <button class="news__button">{{news.news_cta_button}}</button>
                 </a>
             </div>
             <div class="mdl-layout-spacer"></div>
@@ -416,8 +416,8 @@
 
         <firebase-document
             app-name="unicef-innovation-fund"
-            path="/content"
-            data="{{content}}">
+            path="/content/news"
+            data="{{news}}">
         </firebase-document>
 
          <firebase-document
@@ -436,10 +436,12 @@
                 properties: {
                     projects: {
                         type: Object,
-                        observer: "_fetchNewProjects"
+                        observer: "_fetchNewProjects",
+                        notify: true
                     },
                     newProjects: {
-                        type: Array
+                        type: Array,
+                        notify: true
                     }
                 },
                 attached: function() {
@@ -456,11 +458,15 @@
 
                     projectView.node.project = project;
                     projectView.node.type = projectType;
+
                     $(projectModal.node).removeClass("dialog-type-infrastructure");
                     $(projectModal.node).removeClass("dialog-type-real_time_information");
                     $(projectModal.node).removeClass("dialog-type-youth_engagement");
                     $(projectModal.node).addClass('dialog-type-' + projectType);
+
                     projectModal.node.open();
+
+                    $(window).trigger('project-view-modal-opened', project);
                 },
                 _getElementFromArray: function(array, index) {
                     if ((array instanceof Array) && (array.length > index)) {
@@ -474,7 +480,7 @@
                 },
                 _fetchNewProjects: function() {
                     var self = this;
-                    self.newProjects = []
+                    var newProjects = [];
                     var categories = Object.keys(self.projects);
                     for(var c in categories) {
                         var projects_hash = self.projects[categories[c]].projects_hash;
@@ -484,30 +490,39 @@
                             }
                             if (projects_hash[p].new_investment) {
                                 projects_hash[p].category = categories[c];
-                                self.newProjects.push(projects_hash[p]);
+                                newProjects.push(projects_hash[p]);
                             }
                         }
                     }
-                    this.newProjects = self.newProjects;
+                    this.newProjects = newProjects;
                 },
                 __getNewProjectCategory: function(array, index) {
-                    return array[index].category;
+                    if (array[index]) return array[index].category;
+                    return null;
                 },
                 __getNewProjectImage: function(array, index) {
-                    var projectImage = array[index].graph_format;
-                    if (projectImage == '') projectImage = array[index].image;
-                    return projectImage;
+                    if (array[index]) {
+                        var projectImage = array[index].graph_format;
+                        if (projectImage == '') projectImage = array[index].image;
+                        return projectImage;
+                    }
+                    return null;
                 },
                 __getNewProjectDescription: function(array, index) {
-                    var projectDescription = array[index].announcement_blurb;
-                    if (projectDescription == '') projectDescription = array[index].description;
-                    return projectDescription;
+                    if (array[index]) {
+                        var projectDescription = array[index].announcement_blurb;
+                        if (projectDescription == '') projectDescription = array[index].description;
+                        return projectDescription;
+                    }
+                    return null;
                 },
                 __getNewProjectLink: function(array, index) {
-                    return array[index].link_href;
+                    if (array[index]) return array[index].link_href;
+                    return null;
                 },
                 __getNewProjectSlug: function(array, index) {
-                    return array[index].slug;
+                    if (array[index]) return array[index].slug;
+                    return null;
                 }
             });
         })();

@@ -198,7 +198,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .page--blue .portfolio-project.description__text--amount,
-.page--blue .project-filter__menu.amount-filter {
+.page--blue .project-filter__menu.amount-filter,
+.page--blue .project-view__amount {
   display: none;
 }
 

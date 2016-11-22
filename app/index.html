@@ -59,7 +59,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript">
     google.charts.load('current', {
-      'packages': ['geochart', 'controls', 'corechart']
+      'packages': ['geochart', 'controls', 'corechart'], mapsApiKey: 'AIzaSyCM6pjCYVevJY_kW7STox1s8GUzMBYFvg8'
     });
 
     function humanize_label(label) {
@@ -91,7 +91,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
 
     .spacer {
-      @apply(--layout-flex);
+      -ms-flex: 1 1 0.000000001px;
+      flex: 1;
+      flex-basis: 0.000000001px;
     }
 
     neon-animated-pages .iron-selected {
@@ -354,6 +356,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       $('.app-name').on('click', function() {
         var overlay = document.querySelector('overlay-intro');
         overlay.showOverlay(0);
+      });
+
+      projectModal.addEventListener('iron-overlay-opened', function() {
+        $(window).trigger('paper-dialog-modal-opened');
       })
     });
 
@@ -396,6 +402,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         page_change(menu);
       }
     };
+
 
   </script>
   <script src="utility.js"></script>

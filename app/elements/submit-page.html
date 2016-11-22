@@ -522,6 +522,10 @@
         text-decoration: none;
     }
 
+    .submit__container .container .section__form {
+      padding-bottom: 40px;
+    }
+
     @media (max-width: 1200px) {
       .submit__container {
         padding-top: 3rem;
@@ -757,7 +761,10 @@
         <ul class="role__list">
             <template is="dom-repeat" items="{{submit.country_offices.role_content}}" as="role">
                 <li class="role__item">
-                    <h4 class="role__name"><img src="../images/icons/{{role.icon_name}}.svg" alt="Real-time information" class="role__image"><echo-html html$="{{role.name}}"></echo-html></h4>
+                    <h4 class="role__name">
+                      <img src$="{{ _getCategoryIconPath(role.icon_name) }}" alt="Real-time information" class="role__image">
+                      <echo-html html$="{{role.name}}"></echo-html>
+                    </h4>
                     <p class="role__description"><echo-html html$="{{role.description}}"></echo-html></p>
                 </li>
             </template>
@@ -970,7 +977,12 @@
 
         arrow.classList.toggle('accordion__arrow--toggle')
         selected.classList.toggle('accordion__content--toggle');
-    }
+    },
+    _getCategoryIconPath: function(category) {
+      if (category) {
+        return '/images/icons/' + category + '.svg';
+      }
+    },
   })
   </script>
 </dom-module>
