@@ -284,12 +284,6 @@
 
         <firebase-document
           app-name="unicef-innovation-fund"
-          path="{{location_featured_content}}"
-          data="{{featured_content}}">
-        </firebase-document>
-
-        <firebase-document
-          app-name="unicef-innovation-fund"
           path="/portfolio_projects/{{category}}/projects_hash/{{featured_slug}}"
           data="{{featured_project}}">
         </firebase-document>
@@ -417,12 +411,6 @@
       location_featured_data: {
         type: String,
         computed: "_computeLocation(featured_slug)"
-      },
-
-
-      location_featured_content: {
-        type: String,
-        computed: "_computeLocation('content/featured/featured_',  category)"
       },
 
       featured: {

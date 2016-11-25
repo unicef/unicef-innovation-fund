@@ -132,6 +132,10 @@
         z-index: 10;
       }
 
+      .card__project-number {
+          font-size: 1.35rem;
+      }
+
       .card__icon {
         float: right;
         margin-right: 10%;
@@ -187,7 +191,7 @@
         <div class="vcenter__container">
           <div class="vcenter">
             <div class="card__info-value">
-              <span>{{ _getProjectInfoValue(projects) }}</span>
+              <span class="card__project-number">{{ _getProjectInfoValue(projects) }}</span>
               <template id="projectTooltip" is="dom-if" if="{{!_isObjectEmpty(db_tooltip)}}">
                 <div class="card__icon">
                   <i id="tooltipIcon" class="icon-info"></i>
