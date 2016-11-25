@@ -454,10 +454,7 @@
                         return null;
                     }
 
-                    if (project.slug.match(/u_report/i)) {
-                        var country = project.country.replace(/\s+/g, "").toLowerCase();
-                        return 'ureport/' + country;
-                    } else if (project.slug.match(/iogt/i)) {
+                    if (project.slug.match(/iogt/i)) {
                         return 'iogt';
                     } else {
                         return 'chart_data/' + project.slug;
@@ -603,7 +600,7 @@
                         this.chartDataArray = chartDataArray;
 
                         return this.chartData;
-                    }  
+                    }
                 },
                 _handleType: function() {
                     this.updateStyles();
