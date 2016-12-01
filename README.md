@@ -23,7 +23,7 @@
 - gulp serve
 
 ## Data Source
-Data is served to browsers from a [Firebase](firebase.google.com)  account using [Polymerfire](https://github.com/firebase/polymerfire). 
+Data is served to browsers from a [Firebase](firebase.google.com)  account using [Polymerfire](https://github.com/firebase/polymerfire).
 
 ## Firebase Credentials
 The Firebase credentials are kept in the firebase.json file. By using gulp the {app,dist}/config/firebase-config.html file is created, to be used by the web application:
@@ -37,6 +37,7 @@ The Firebase credentials are kept in the firebase.json file. By using gulp the {
 
 ## Firebase deployment
 > Deploy to [staging server](https://innovation-fund2.firebaseapp.com/) hosted on [Firebase](firebase.google.com)
+> [Deploy to multiple environments with Firebase Hosting](https://firebase.googleblog.com/2016/07/deploy-to-multiple-environments-with.html)
 
 > Requires Google account with access to Firebase project
 
