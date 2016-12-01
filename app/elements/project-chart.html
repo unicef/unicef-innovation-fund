@@ -207,6 +207,7 @@ Polymer({
     handlers and observers */
 
     self.drawChart();
+    setTimeout(function() {self.drawChart();}, 300);
 
     var eventsToListenArray = [
       'project-view-tab-name-selected',
