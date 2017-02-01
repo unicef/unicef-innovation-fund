@@ -782,14 +782,9 @@
             <p class="section__description section__description-startup">
                 <echo-html html$="{{submit.startups.description}}"></echo-html>
             </p>
-            <img src="../images/icons/startups_steps.svg" alt="Steps for startup" class="section__icon--wide">
-            <h3 class="section__subheader section__subheader-startup">
-                <echo-html html$="{{submit.startups.process_title}}"></echo-html>
-            </h3>
             <p class="section__description section__description-startup">
-                <echo-html html$="{{submit.startups.process_description}}"></echo-html>
+              <echo-html html$="{{submit.startups.process_description}}"></echo-html>
             </p>
-        <img src="../images/icons/startups_steps.svg" alt="Steps for startup" class="section__icon--wide">
         <p class="section__description section__subheader-startup"></p>
         <ol class="faq faq__list">
             <template is="dom-repeat" items="{{submit.startups.steps}}" as="step">
@@ -807,11 +802,6 @@
             </template>
         </ol>
         <p>
-          <div class="faq__submit">
-              <a href="https://www.jotform.com/62704508221145" class="faq__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank">
-                <echo-html html$="{{submit.startups.submit_button_text}}"></echo-html>
-              </a>
-          </div>
         </p>
         <br />
         <br />
