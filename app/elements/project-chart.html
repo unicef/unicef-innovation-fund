@@ -96,14 +96,16 @@ Polymer({
     return 'rgb('+ red +', '+ green +', '+ blue + ')';
   },
 
-  _prepareGoogleLabels: function(labels){
+  _prepareGoogleLabels: function(labels) {
+    console.log(labels)
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     var labs =  labels.map(function(l, i){
-      var split = l.split(" ");
+      var split = l.split(/\s+/);
       var monthIdx = months.indexOf(split[0])+1;
-      var month = ((monthIdx) < 10) ? ('0'+monthIdx):(monthIdx);
+      var month = ((monthIdx) < 10) ? ('0'+monthIdx) : (monthIdx);
       var year = split[1];
-      var date = new Date(new Date(year + '-' + month).getTime() + (new Date().getTimezoneOffset() * 60 * 1000)) ;
+      var date = new Date(new Date(year + '-' + month).getTime() + (new Date(year + '-' + month).getTimezoneOffset() * 60 * 1000)) ;
+      console.log(year + '-' + month, date)
       // new Date(new Date(timestampStr).getTime() + (new Date().getTimezoneOffset() * 60 * 1000));
       // If date's month is current month
       // Return todays date
@@ -113,7 +115,6 @@ Polymer({
       }
       return date;
     })
-    console.log(labs);
     return labs
   },
 
