@@ -806,17 +806,23 @@
                 </li>
             </template>
         </ol>
-        <p>
-          <div class="faq__submit">
-              <a href="https://www.jotform.com/62704508221145" class="faq__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank">
+        <div class="faq__submit">
+            <a href="https://www.jotform.com/62704508221145" class="faq__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank">
                 <echo-html html$="{{submit.startups.submit_button_text}}"></echo-html>
-              </a>
-          </div>
-        </p>
-        <br />
-        <br />
-        <br />
-        <br />
+            </a>
+        </div>
+        <hr class="section__break--thin">
+        <div class="summary">
+            <img src="../images/icons/country_offices-alt.svg" alt="" class="summary__icon">
+            <div class="summary__content">
+                <h3 class="summary__title"><echo-html html$="{{submit.startups.additional_info_title}}"></echo-html></h3>
+                <template is="dom-repeat" items="{{submit.startups.additional_info}}" as="info">
+                    <span class="summary__content--container">
+                        <echo-html html$="{{info}}"></echo-html>
+                    </span>
+                </template>
+            </div>
+        </div>
       </div>
       <div class="mdl-layout-spacer"></div>
     </div>
