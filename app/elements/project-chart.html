@@ -97,22 +97,22 @@ Polymer({
   },
 
   _prepareGoogleLabels: function(labels) {
-    console.log(labels)
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    var labs =  labels.map(function(l, i){
+    var labs =  labels.map(function(l, i) {
       var split = l.split(/\s+/);
       var monthIdx = months.indexOf(split[0])+1;
       var month = ((monthIdx) < 10) ? ('0'+monthIdx) : (monthIdx);
       var year = split[1];
       var date = new Date(new Date(year + '-' + month).getTime() + (new Date(year + '-' + month).getTimezoneOffset() * 60 * 1000)) ;
-      console.log(year + '-' + month, date)
+
       // new Date(new Date(timestampStr).getTime() + (new Date().getTimezoneOffset() * 60 * 1000));
       // If date's month is current month
       // Return todays date
       // console.log(new Date().getMonth(),  date.getMonth(), new Date().getYear())
-      if (new Date().getMonth() === date.getMonth() && new Date().getYear()) {
+      if (new Date().getMonth() === date.getMonth() && new Date().getYear() === date.getYear()) {
         date =  new Date();
       }
+
       return date;
     })
     return labs
@@ -127,17 +127,17 @@ Polymer({
       var controlId = 'control_div'+'-'+self.parentid+'-'+self.index;
       var chartId = 'chart_div'+'-'+self.parentid+'-'+self.index;
       var labels = self.data.labels;
-      var googleLabels = self._prepareGoogleLabels(labels);
 
+      var googleLabels = self._prepareGoogleLabels(labels);
       var data = new google.visualization.DataTable();
       data.addColumn('date', 'date');
       data.addColumn('number', datasets.label);
 
       datasets.googleBgColor = self._convertRgbaToRgb(datasets.backgroundColor);
-
       //first loop for labels then for thatasets to support multi columns...
       for(var x = 0; x < datasets.data.length; x++){
         var d = datasets.data[x];
+
         data.addRow([googleLabels[x], d]);
       }
       // THIS does not appear to be used.
