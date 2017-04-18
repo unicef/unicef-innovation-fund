@@ -801,14 +801,16 @@
             <p class="section__description section__description-startup">
                 <echo-html html$="{{submit.startups.description}}"></echo-html>
             </p>
-            <img src="../images/icons/startups_steps.svg" alt="Steps for startup" class="section__icon--wide">
+            <br />
+            <br />
+            <!-- <img src="../images/icons/startups_steps.svg" alt="Steps for startup" class="section__icon--wide"> -->
             <p class="section__description section__description-startup">
                 <echo-html html$="{{submit.startups.process_description}}"></echo-html>
-                <img src="../images/icons/startup_submit_tech.svg" alt="Submissions by country offices" class="section__icon--wide"/>
+                <img src="../images/icons/startup_submit-line_3.svg" alt="Submissions by country offices" class="section__icon--wide"/>
                 <br />
                 <echo-html html$="{{submit.startups.process_description_2}}"></echo-html>
                 <br />
-                <img src="../images/icons/startup_submit-line.svg" alt="Submissions by country offices" class="button__image"/>
+                <img src="../images/icons/startup_submit-line_3.svg" alt="Submissions by country offices" class="section__icon--wide"/>
                 <br />
                 <echo-html html$="{{submit.startups.process_description_3}}"></echo-html>
                 <br />
@@ -818,17 +820,19 @@
             </p>
         <br />
         <br />
+        <p class="section__description section__description-startup">
+          <img src="../images/icons/startup_submit-line_3.svg" alt="Submissions by country offices" class="section__icon--wide"/>
+        </p>
 
-                <img src="../images/icons/startup_submit-line.svg" alt="Submissions by country offices" class="button__image"/>
         <h3 class="section__subheader section__subheader-startup">
             <echo-html html$="{{submit.startups.process_title}}"></echo-html>
         </h3>
-        <img src="../images/icons/startups_steps.svg" alt="Steps for startup" class="section__icon--wide">
+        <img src="../images/icons/startup_submit_steps.svg" alt="Steps for startup" class="section__icon--wide">
         <p class="section__description section__subheader-startup"></p>
         <ol class="accordion">
               <li class="accordion__section">
-                <h1 class="accordion__header" style='text-align:center;position:relative;top:-30px;left:-40px;' data-open$="accordion-{{stepIndex2(index)}}" on-tap="accordionOpenStartUp">
-                  <div style='color:#6A1E74; border:solid #6A1E74 3px;padding:20px 20px 20px 50px;display:inline;'>
+                <h1 class="accordion__header" style='text-align:center;position:relative;top:-30px;left:-70px;' data-open$="accordion-{{stepIndex2(index)}}" on-tap="accordionOpenStartUp">
+                  <div style='color:#6A1E74; border:solid #6A1E74 3px;padding:15px 20px 15px 50px; display:inline;'>
                     VIEW STEPS
                     <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow_startup" style='postion:relative;display:inline;width:40px;'>
                   </div>
