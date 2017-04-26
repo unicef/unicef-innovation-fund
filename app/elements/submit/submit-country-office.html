@@ -508,7 +508,7 @@
               if (!window.scrollReveal) {
                   window.scrollReveal = new ScrollReveal();
               }
-              window.scrollReveal.reveal('.accordion__section, .role__list, .section__text ,  .section__subheader:not(:first-child), .faq__step, '
+              window.scrollReveal.reveal('.accordion__section, .role__list, .section__text:not(:first-of-type) ,  .section__subheader:not(:first-child), .faq__step, '
                   + '.faq__submit, .summary', config);
           },
           checkAuth: function (event) {
