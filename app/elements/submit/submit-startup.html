@@ -1,4 +1,4 @@
-<dom-module id="submit-page">
+<dom-module id="submit-startup">
   <template>
     <style is="custom-style">
       .container {
@@ -7,52 +7,8 @@
         text-align: center;
       }
 
-      .container--wide {
-        margin: 0 auto;
-        max-width: 1920px;
-      }
-
-      .button:hover {
-        background-color: #FFFFFF;
-        box-shadow: 2px 2px 10px 0 #999999;
-        z-index: 1;
-      }
-
-      .submit__office {
-        text-align: left;
-        padding-top: 40px;
-      }
-
-      .button__container {
-        font-size: 0;
-      }
-
-      .button__text {
-        font-size: 1.35rem;
-        margin-bottom: 35px;
-      }
-
-      .button__image {
-        max-height: 80px;
-      }
-
-      .button--big {
-        background-color: #FFFFFF;
-        color: #0099FF;
-        display: inline-block;
-        font-size: 1.2rem;
-        height: 252px;
-        padding: 0;
-        text-transform: none;
-        width: 50%;
-      }
-
       .submit__container {
         position: relative;
-      }
-
-      .submit__icon {
-        display: block;
       }
 
       .section__description {
@@ -85,58 +41,6 @@
         text-align: left;
       }
 
-      .section__submit {
-        text-align: center;
-      }
-
-      .section__submit-link {
-        background-color: #0099FF;
-        color: white;
-        font-size: 1.15rem;
-        font-weight: 400;
-        height: 44px;
-        line-height: 2.75;
-        margin-top: 2.5rem;
-        max-width: 260px;
-        text-transform: uppercase;
-        width: 100%;
-      }
-
-      .section__submit-link:link {
-        background-color: #0099FF;
-      }
-
-      .section__submit-link:visited {
-        background-color: #0099FF;
-      }
-
-      .section__submit-link:hover {
-        background-color: #77C2E2;
-      }
-
-      .section__submit-link:active {
-        background-color: #0099FF;
-      }
-
-      .section__submit-link:focus {
-        background-color: #0099FF;
-      }
-
-      .section__break {
-        border-top: 3px solid #727272;
-        margin: 4rem 0 4.75rem;
-      }
-
-      .section__break--short {
-        display: block;
-        margin-top: 6.7rem;
-        margin-bottom: 3.5rem;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
-        width: 20%;
-      }
-
       .section__break--thin {
         border-color: black;
         margin-bottom: 3.5rem;
@@ -164,18 +68,11 @@
         font-size: 3rem;
         line-height: 50px;
       }
-      .section__icon {
-        width: 15%;
-      }
 
       .section__icon--wide {
         margin-bottom: 0.9rem;
         margin-top: 2rem;
         width: 90%;
-      }
-
-      .section__link {
-        text-decoration: none;
       }
 
       .section__back {
@@ -193,57 +90,12 @@
         top: 1.75%;
       }
 
-      .section__input {
-        border: 2px solid #BABCBD;
-        color: #0099FF;
-        display: block;
-        font-size: 1.1rem;
-        margin: 0 auto;
-        padding: 1.1rem;
-        width: 228px;
+      [data-target="office-entry-form"] .section__back {
+        top: 8%;
       }
 
-      .section__input--authenticated {
-        background: url('../images/confirm.svg') no-repeat 97% center;
-        background-size: 7%;
-      }
-
-      .section__input:focus {
-        outline: none
-      }
-
-      .section__confirm-email {
-        background-color: #0099FF;
-        border: none;
-        color: #FFFFFF;
-        cursor: pointer;
-        font-size: 0.93rem;
-        font-weight: 400;
-        margin-top: 0.8rem;
-        padding: 1.0375rem 0;
-        text-transform: uppercase;
-        width: 260px;
-      }
-
-      .section__confirm-email:disabled {
-        background-color: #BABCBD;
-        color: #5D5D5D;
-      }
-
-      .section__auth-alert {
-        color: red;
-        font-size: 1.1rem;
-        margin-bottom: 0.5rem;
-        opacity: 0;
-        transition: opacity 0.25s;
-      }
-
-      .is-visible {
-        opacity: 1;
-      }
-
-      .js-visible {
-        display: block;
+      [data-target="office-submission-form"] .section__back {
+        top: 0.75%;
       }
 
       .js-hidden {
@@ -256,10 +108,6 @@
 
       button.fade-in{
         animation-delay: 0.525s !important;
-      }
-
-      .is-alert {
-        color: red !important;
       }
 
       .accordion {
@@ -288,39 +136,6 @@
         color: #33B8B8;
       }
 
-      .accordion__number {
-        text-align: center;
-        width: 30px;
-        border: 3px solid #33B8B8;
-        border-radius: 50%;
-        color: #33B8B8;
-        display: inline-block;
-        font-weight: 600;
-        font-size: 1.5em;
-        left: -6.75rem;
-        line-height: 0.50;
-        padding: 1.65rem;
-        position: absolute;
-        transform: translateY(-25%);
-      }
-
-      .accordion__arrow {
-        position: absolute;
-        width: 50px;
-        right: 1%;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-
-      .accordion__arrow--toggle {
-        transform: translateY(-50%) scaleY(-1);
-      }
-
-
-      .accordion__arrow_startup--toggle {
-        transform: translateY(0%) scaleY(-1);
-      }
-
       .accordion__content {
         opacity: 1;
         padding-bottom: 3.3rem;
@@ -335,74 +150,7 @@
         transform: translateY(-5%);
       }
 
-      .accordion__summary {
-        font-size: 1.3rem;
-        font-weight: 600;
-        letter-spacing: 0.0625rem;
-        margin-bottom: 0.5rem;
-      }
-
-      .accordion__summary--gray {
-        color: #5D5D5D;
-        font-size: 1.25rem;
-        font-weight: 600;
-        letter-spacing: 0.0625rem;
-        line-height: 1.7;
-        margin-bottom: 2rem;
-      }
-
-      .description__list {
-        color: #5D5D5D;
-        list-style-type: none;
-        padding-left: 0;
-      }
-
-      .description__item {
-        font-size: 1.3rem;
-        line-height: 1.7;
-      }
-
-      .role__list {
-        list-style-type: none;
-        margin-bottom: 5rem;
-        padding-left: 0;
-        padding-top: 1rem;
-      }
-
-      .role__item {
-        padding: 1.3rem 0 3rem 6.75rem;
-      }
-
-      .role__info {
-        padding-left: 4rem;
-        text-align: left;
-      }
-
-      .role__name {
-        color: #000000;
-        font-weight: 600;
-        font-size: 1.5rem;
-        margin-bottom: 0;
-        position: relative;
-        text-transform: uppercase;
-      }
-
-      .role__image {
-        left: -5rem;
-        margin-bottom: 0;
-        max-width: 35px;
-        position: absolute;
-        top: 100%;
-        transform: translate(-50%, -50%);
-      }
-
-      .role__description {
-        color: #5D5D5D;
-        font-size: 1.5rem;
-        line-height: 1.5;
-      }
-
-      /*Submit startups*/
+      /* Submit startups */
       .faq {
         margin-top: 5.8rem;
         list-style-type: none;
@@ -470,16 +218,6 @@
         word-spacing: normal;
       }
 
-      .faq__button {
-        border: 2px solid #2EAFAC;
-        color: #2EAFAC;
-        display: table;
-        font-weight: 800;
-        margin: 1rem 0;
-        padding: 0.2rem 4.25rem;
-        text-decoration: none;
-      }
-
       .summary {
         align-items: flex-start;
         display: flex;
@@ -525,10 +263,6 @@
         text-decoration: none;
       }
 
-      .submit__container .container .section__form {
-        padding-bottom: 40px;
-      }
-
       @media (max-width: 1200px) {
         .submit__container {
           padding-top: 3rem;
@@ -542,12 +276,13 @@
         [data-target="startup"] .section__back {
           top: 1.5%;
         }
-      }
 
-      @media (max-width: 1120px) {
-        .button--big {
-          font-size: 2rem;
-          height: 250px;
+        [data-target="office-entry-form"] .section__back {
+          top: 9%;
+        }
+
+        [data-target="office-submission-form"] .section__back {
+          top: 1%;
         }
       }
 
@@ -573,59 +308,15 @@
         }
       }
 
-      @media (min-width: 680px) {
-        .button:first-of-type:after {
-          border-right: 2px solid #58595B;
-          content: '';
-          height: 60%;
-          position: absolute;
-          right: 0;
-          top: 50%;
-          transform: translateY(-50%);
-        }
-      }
-
       @media (max-width: 680px) {
-        .button--big {
-          display: block;
-          float: none;
-          width: 100%;
-        }
-
         .accordion {
           margin-bottom: 0;
           padding-left: 4.5rem;
         }
 
-        .accordion__number {
-          border-width: 2px;
-          left: -4.25rem;
-          line-height: 0.55;
-          padding: 1.1rem;
-          top: 50%;
-          transform: translateY(-50%);
-        }
-
         .section__subheader {
           font-size: 2rem;
           margin-bottom: 0;
-        }
-
-        .role__item {
-          padding: 1rem 0 0 3.75rem;
-        }
-
-        .role__image {
-          left: -2rem;
-          max-width: 30px;
-        }
-
-        .role__description {
-          font-size: 1.2rem;
-        }
-
-        .faq__button {
-          margin: 1rem auto;
         }
 
         .summary {
@@ -638,32 +329,12 @@
       }
 
       @media (max-width: 480px) {
-        .page__header--type {
-          font-size: 2rem;
-        }
-
-        .section__input {
-          width: 91%;
-        }
-
-        .section__confirm-email {
-          width: 100%;
-        }
-
         .section__icon--wide {
           display: none;
         }
       }
 
       @media (max-width: 380px) {
-        .page__header--type {
-          font-size: 1.75rem;
-        }
-
-        .section__input {
-          width: 88%;
-        }
-
         .accordion {
           padding-left: 0;
         }
@@ -671,16 +342,6 @@
         .accordion__header {
           font-size: 1.2rem;
         }
-
-        .accordion__number {
-          display: none;
-        }
-      }
-      .submit_separator {
-        width:120px;
-        height:4px;
-        background-color:#6A1E74;
-        position:relative; left:320px;
       }
     </style>
     <style is="custom-style" include="style-fade-in"></style>
@@ -690,40 +351,96 @@
       data="{{submit}}">
     </firebase-document>
 
-    <header class='page__header page__header--dark'>
-      <div class='mdl-grid container'>
-        <div class="mdl-layout-spacer"></div>
-        <div class="mdl-cell mdl-cell--10-col">
-          <h1 class='title--big hello__title fade-in'>Submit</h1>
-          <p class="page__header--type">[[sectionName]]</p>
+    <button on-tap="changeSection" class="section__back" data-display="main" data-hide="startup">Back</button>
+    <div class="mdl-layout-spacer"></div>
+    <div class="container mdl-cell mdl-cell--12-col" style='padding:50px;'>
+      <h3 class="section__subheader section__subheader-startup">
+            <span>
+              <echo-html html$="{{submit.startups.title}}"></echo-html>
+            </span>
+
+      </h3>
+      <p class="section__description section__description-startup">
+        <echo-html html$="{{submit.startups.description}}"></echo-html>
+      </p>
+      <br />
+      <br />
+      <p class="section__description section__description-startup">
+        <echo-html html$="{{submit.startups.process_description}}"></echo-html>
+        <img src="../../images/icons/startup_submit-line_3.svg" alt="Submissions by country offices" class="section__icon--wide"/>
+        <br />
+        <echo-html html$="{{submit.startups.process_description_2}}"></echo-html>
+        <br />
+        <img src="../../images/icons/startup_submit-line_3.svg" alt="Submissions by country offices" class="section__icon--wide"/>
+        <br />
+        <echo-html html$="{{submit.startups.process_description_3}}"></echo-html>
+        <br />
+        <br />
+
+        <echo-html html$="{{submit.startups.process_description_4}}"></echo-html>
+      </p>
+      <br />
+      <br />
+      <p class="section__description section__description-startup">
+        <img src="../../images/icons/startup_submit-line_3.svg" alt="Submissions by country offices" class="section__icon--wide"/>
+      </p>
+
+      <h3 class="section__subheader section__subheader-startup">
+        <echo-html html$="{{submit.startups.process_title}}"></echo-html>
+      </h3>
+      <img src="../../images/icons/startup_submit_steps.svg" alt="Steps for startup" class="section__icon--wide">
+      <p class="section__description section__subheader-startup"></p>
+      <ol class="accordion">
+        <li class="accordion__section">
+          <h1 class="accordion__header" style='text-align:center;position:relative;top:-30px;left:-70px;' data-open$="accordion-{{stepIndex(index)}}" on-tap="accordionOpenStartUp">
+            <div style='color:#6A1E74; border:solid #6A1E74 3px;padding:15px 20px 15px 50px; display:inline;'>
+              VIEW STEPS
+              <img src="../../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow_startup" style='postion:relative;display:inline;width:40px;'>
+            </div>
+
+          </h1>
+          <div class="accordion__content accordion__content--toggle" data-accordion$="accordion-{{stepIndex(index)}}">
+            <ol class="faq faq__list">
+              <template is="dom-repeat" items="{{submit.startups.steps}}" as="step">
+                <li class="faq__step">
+                  <h3 class="faq__name"><echo-html html$="{{step.name}}"></echo-html></h3>
+                  <strong class="faq__description"><echo-html html$="{{step.description}}"></echo-html></strong>
+                  <ul class="faq__list">
+                    <template is="dom-repeat" items="{{step.requirements}}" as="requirement">
+                      <li class="faq__requirement">
+                        <echo-html html$="{{requirement}}"></echo-html>
+                      </li>
+                    </template>
+                  </ul>
+                </li>
+              </template>
+            </ol>
+            <div class="faq__submit">
+              <a href="https://www.jotform.us/70894154871162" class="faq__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank">
+                <echo-html html$="{{submit.startups.submit_button_text}}"></echo-html>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ol>
+      <hr class="section__break--thin">
+      <div class="summary">
+        <img src="../../images/icons/country_offices-alt.svg" alt="" class="summary__icon">
+        <div class="summary__content">
+          <h3 class="summary__title"><echo-html html$="{{submit.startups.additional_info_title}}"></echo-html></h3>
+          <template is="dom-repeat" items="{{submit.startups.additional_info}}" as="info">
+                  <span class="summary__content--container">
+                      <echo-html html$="{{info}}"></echo-html>
+                  </span>
+          </template>
         </div>
-        <div class="mdl-layout-spacer"></div>
       </div>
-    </header>
-    <div class="mdl-grid js-visible submit__container" data-target="main">
-      <div class="mdl-layout-spacer"></div>
-      <div class="button__container container--wide mdl-cell mdl-cell--12-col">
-        <button on-tap="changeSection" class="button button--big mdl-button mdl-js-button mdl-js-ripple-effect fade-in" data-display="country-office" data-hide="main">
-          <p class="button__text">Submissions by UNICEF country offices</p>
-          <img src="../images/icons/country_offices.svg" alt="Submissions by country offices" class="button__image"/>
-        </button>
-        <button on-tap="changeSection" class="button button--big mdl-button mdl-js-button mdl-js-ripple-effect fade-in" data-display="startup" data-hide="main">
-          <p class="button__text">Submissions by start-ups</p>
-          <img src="../images/icons/startups.svg" alt="Submissions by country offices" class="button__image"/>
-        </button>
-      </div>
-      <div class="mdl-layout-spacer"></div>
     </div>
-    <div class="mdl-grid js-hidden submit__container" data-target="country-office">
-      <submit-country-office />
-    </div>
-    <div class="mdl-grid js-hidden submit__container" data-target="startup">
-      <submit-startup />
-    </div>
+    <div class="mdl-layout-spacer"></div>
   </template>
   <script>
       Polymer({
-          is: "submit-page",
+          is: "submit-startup",
           properties: {
               countryOfficesAuthenticated: {
                   type: Boolean,
@@ -812,24 +529,7 @@
               toShow.classList.add(visibleClass);
           },
           changeSection: function(event) {
-              var hide = event.target.dataset.hide || event.target.parentElement.dataset.hide;
-              var target = event.target.dataset.display || event.target.parentElement.dataset.display;
-
-              switch (target) {
-                  case "country-office":
-                      this.sectionName = "UNICEF country offices";
-                      break;
-                  case "startup":
-                      this.sectionName = "Start-ups";
-                      break;
-                  default:
-                      this.sectionName = "Country offices and start-ups";
-              }
-
-              var toHide = this.$$("[data-target='" + hide + "']");
-              var toShow = this.$$("[data-target='" + target + "']");
-
-              this.toggleVisible(toHide, toShow);
+              this.domHost.changeSection(event);
           },
           submitEmail: function(event) {
               event.preventDefault();
