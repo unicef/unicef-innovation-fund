@@ -1,6 +1,6 @@
 {
   "projects": {
-    "staging": "innovation-fund2",
-    "production": "unicef-innovation-fund"
+    "staging": "unicef-skygate-sandbox",
+    "production": "unicef-skygate-sandbox"
   }
 }

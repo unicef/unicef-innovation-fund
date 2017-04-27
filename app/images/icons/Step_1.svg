@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 88.44 91.44"
+   version="1.1"
+   id="svg10282"
+   sodipodi:docname="Step_1.svg"
+   inkscape:version="0.92.1 15371">
+  <metadata
+     id="metadata10286">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1855"
+     inkscape:window-height="1056"
+     id="namedview10284"
+     showgrid="false"
+     inkscape:snap-page="false"
+     inkscape:zoom="10.323709"
+     inkscape:cx="54.08008"
+     inkscape:cy="44.138608"
+     inkscape:window-x="1431"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Layer_2" />
+  <defs
+     id="defs10234">
+    <style
+       id="style10232">.cls-1{fill:#70c168;}.cls-2{fill:none;}.cls-3{fill:#55bb6e;}</style>
+  </defs>
+  <title
+     id="title10236">steps_1</title>
+  <g
+     id="Layer_2"
+     data-name="Layer 2">
+    <path
+       style="fill:#70c168"
+       inkscape:connector-curvature="0"
+       id="path10238"
+       d="M 46.11,49.5 A 16.28,16.28 0 1 1 62.39,33.22 16.3,16.3 0 0 1 46.11,49.5 Z m 0,-28.7 A 12.42,12.42 0 1 0 58.53,33.22 12.43,12.43 0 0 0 46.11,20.81 Z"
+       class="cls-1" />
+    <path
+       style="fill:none"
+       inkscape:connector-curvature="0"
+       id="path10240"
+       d="m 70.45,64.73 a 24.28,24.28 0 0 0 -2.7,-11.1 H 67.6 a 17,17 0 0 0 -17,17 c 0,0 0,0.06 0,0.08 h 19.85 z"
+       class="cls-2" />
+    <path
+       style="fill:none"
+       inkscape:connector-curvature="0"
+       id="path10242"
+       d="M 74.3,74.54 H 51.1 a 17,17 0 1 0 21.18,-20.25 28.1,28.1 0 0 1 2,10.44 z"
+       class="cls-2" />
+    <path
+       style="fill:#70c168"
+       inkscape:connector-curvature="0"
+       id="path10244"
+       d="m 21.77,70.68 v -6 A 24.39,24.39 0 0 1 36.14,42.52 L 34.56,39 A 28.25,28.25 0 0 0 17.91,64.73 v 9.82 h 29.23 a 20.84,20.84 0 0 1 -0.38,-3.86 z"
+       class="cls-1" />
+    <path
+       style="fill:#70c168"
+       inkscape:connector-curvature="0"
+       id="path10246"
+       d="M 70.08,49.92 A 28.19,28.19 0 0 0 57.66,39 l -1.58,3.52 a 24.31,24.31 0 0 1 9.3,7.36 19.63,19.63 0 0 1 4.7,0 z"
+       class="cls-1" />
+    <path
+       style="fill:#70c168;fill-opacity:1"
+       inkscape:connector-curvature="0"
+       id="path10248"
+       d="m 50.62,70.6 a 17,17 0 0 1 17,-17 h 0.14 A 24.45,24.45 0 0 0 65.39,49.86 20.87,20.87 0 0 0 46.76,70.6 c 0,0 0,0.06 0,0.08 h 3.86 c 0,0 0,-0.05 0,-0.08 z"
+       class="cls-3" />
+    <path
+       style="fill:#70c168;fill-opacity:1"
+       inkscape:connector-curvature="0"
+       id="path10250"
+       d="m 70.08,49.92 a 28.3,28.3 0 0 1 2.2,4.37 17,17 0 1 1 -21.18,20.25 h -4 A 20.84,20.84 0 1 0 70.08,49.92 Z"
+       class="cls-3" />
+    <path
+       style="fill:#70c168;fill-opacity:1"
+       inkscape:connector-curvature="0"
+       id="path10252"
+       d="m 50.62,70.68 h -3.86 a 20.84,20.84 0 0 0 0.38,3.86 h 4 a 16.92,16.92 0 0 1 -0.52,-3.86 z"
+       class="cls-3" />
+    <path
+       style="fill:#70c168;fill-opacity:1"
+       inkscape:connector-curvature="0"
+       id="path10254"
+       d="m 72.28,54.29 a 28.3,28.3 0 0 0 -2.2,-4.37 19.63,19.63 0 0 0 -4.7,0 24.45,24.45 0 0 1 2.37,3.74 16.9,16.9 0 0 1 4.53,0.63 z"
+       class="cls-3" />
+    <polygon
+       style="fill:#70c168"
+       id="polygon10256"
+       points="60.16,68.78 65.25,73.47 76.53,62.18 79.26,64.91 65.36,78.81 57.54,71.62 "
+       class="cls-1" />
+    <rect
+       style="fill:#70c168"
+       id="rect10258"
+       transform="rotate(-45)"
+       height="11.28"
+       width="3.8599999"
+       y="16.615747"
+       x="-0.21107961"
+       class="cls-1" />
+    <rect
+       style="fill:#70c168"
+       id="rect10260"
+       transform="rotate(-45)"
+       height="3.8599999"
+       width="11.28"
+       y="20.315748"
+       x="-3.9210796"
+       class="cls-1" />
+    <rect
+       style="fill:#70c168"
+       id="rect10262"
+       transform="rotate(-45)"
+       height="11.28"
+       width="3.8599999"
+       y="63.663448"
+       x="34.148746"
+       class="cls-1" />
+    <rect
+       style="fill:#70c168"
+       id="rect10264"
+       transform="rotate(-45)"
+       height="3.8599999"
+       width="11.28"
+       y="67.359306"
+       x="30.438749"
+       class="cls-1" />
+    <rect
+       style="fill:#70c168"
+       id="rect10266"
+       transform="rotate(-45)"
+       height="11.28"
+       width="3.8599999"
+       y="42.711224"
+       x="37.176517"
+       class="cls-1" />
+    <rect
+       style="fill:#70c168"
+       id="rect10268"
+       transform="rotate(-45)"
+       height="3.8599999"
+       width="11.28"
+       y="46.421223"
+       x="33.466518"
+       class="cls-1" />
+    <rect
+       style="fill:#70c168"
+       id="rect10270"
+       transform="rotate(-45)"
+       height="11.28"
+       width="3.8599999"
+       y="41.043427"
+       x="-41.057014"
+       class="cls-1" />
+    <rect
+       style="fill:#70c168"
+       id="rect10272"
+       transform="rotate(-45)"
+       height="3.8599999"
+       width="11.28"
+       y="44.753429"
+       x="-44.752872"
+       class="cls-1" />
+    <polygon
+       style="fill:#70c168"
+       id="polygon10274"
+       points="33.13,4.81 34.92,6.61 41.53,0 44.26,2.73 34.92,12.07 30.4,7.54 "
+       class="cls-1" />
+    <polygon
+       style="fill:#70c168"
+       id="polygon10276"
+       points="76.74,38.29 78.54,40.08 85.15,33.48 87.88,36.2 78.54,45.54 74.01,41.02 "
+       class="cls-1" />
+    <polygon
+       style="fill:#70c168"
+       id="polygon10278"
+       points="10.07,36.23 11.87,38.03 18.48,31.42 21.21,34.15 11.87,43.49 7.34,38.96 "
+       class="cls-1" />
+  </g>
+</svg>
