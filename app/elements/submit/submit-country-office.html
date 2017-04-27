@@ -401,17 +401,8 @@
           <hr class="section__break">
           <sidebar-container
               title-text$="{{submit.country_offices.role_title}}"
-              content-text$="{{submit.country_offices.seeking_content}}"
-              paragraphs$="{{submit.country_offices.role_content}}"></sidebar-container>
-          <h3 class="section__subheader"><echo-html html$="{{submit.country_offices.role_title}}"></echo-html></h3>
-          <ul class="role__list">
-              <template is="dom-repeat" items="{{submit.country_offices.role_content}}" as="role">
-                  <sidebar-icon-container icon-alt="{{ role.icon_name }}"
-                      icon$="{{ _getCategoryIconPath(role.icon_name) }}"
-                      name$="{{role.name.0}}"
-                      paragraphs="{{role.description}}"></sidebar-icon-container>
-              </template>
-          </ul>
+              paragraphs$="{{ _getRoleParagraphs(submit.country_offices.role_content) }}"></sidebar-container>
+          <hr class="section__break">
           <h3 class="section__subheader">
               <echo-html html$="{{submit.country_offices.steps_title}}"></echo-html>
           </h3>
@@ -597,11 +588,24 @@
               arrow.classList.toggle('accordion__arrow--toggle')
               selected.classList.toggle('accordion__content--toggle');
           },
-          _getCategoryIconPath: function(category) {
+          _getCategoryIconPath: function (category) {
               if (category) {
                   return '/images/icons/' + category + '.svg';
               }
           },
+          _getRoleParagraphs: function (roles) {
+              if (!roles) return '';
+              var paragraphs = roles.map( function (role) {
+                  var roleHtml = "<h3>" + role.name[0] + "</h3>";
+                  if (!!role.description) {
+                      role.description.forEach( function (item) {
+                        roleHtml += "<p>" + item + "</p>";
+                      });
+                  }
+                  return roleHtml;
+              })
+              return paragraphs;
+          }
       })
   </script>
 </dom-module>
