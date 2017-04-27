@@ -381,20 +381,18 @@
       <button on-tap="changeSection" class="section__back" data-display="main" data-hide="country-office">Back</button>
       <div class="mdl-layout-spacer"></div>
       <div class="submit__office container mdl-cell mdl-cell--12-col">
-        <h3 class="section__subheader"><echo-html html$="{{submit.country_offices.looking_title}}"></echo-html></h3>
-        <p class="section__text">
-          <echo-html html$="{{submit.country_offices.looking_content}}"></echo-html>
-        </p>
-        <h3 class="section__subheader"><echo-html html$="{{submit.country_offices.seeking_title}}"></echo-html></h3>
-        <p class="section__text">
-          <echo-html html$="{{submit.country_offices.seeking_content}}"></echo-html>
-        </p>
+        <submit-sidebar-container
+          title-text$="{{submit.country_offices.looking_title}}"
+          content-text="{{submit.country_offices.looking_content}}" ></submit-sidebar-container>
+        <submit-sidebar-container
+          title-text$="{{submit.country_offices.seeking_title}}"
+          content-text$="{{submit.country_offices.seeking_content}}" ></submit-sidebar-container>
         <h3 class="section__subheader"><echo-html html$="{{submit.country_offices.role_title}}"></echo-html></h3>
         <ul class="role__list">
           <template is="dom-repeat" items="{{submit.country_offices.role_content}}" as="role">
             <li class="role__item">
               <h4 class="role__name">
-                <img src$="{{ _getCategoryIconPath(role.icon_name) }}" alt="Real-time information" class="role__image">
+                <img src$="{{ _getCategoryIconPath(role.icon_name) }}" alt="{{role.name}}" class="role__image">
                 <echo-html html$="{{role.name}}"></echo-html>
               </h4>
               <p class="role__description"><echo-html html$="{{role.description}}"></echo-html></p>

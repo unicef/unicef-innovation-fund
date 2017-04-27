@@ -1,0 +1,73 @@
+<dom-module id="submit-paragraph-with-icon">
+  <template>
+    <style is="custom-style">
+      .submit__sidebar {
+        flex: 2.1;
+      }
+      .submit__sidebar--container {
+        display: flex;
+      }
+      .submit__sidebar--title {
+        margin-top: 0;
+        font-weight: bold;
+        color: #7348B3;
+        margin-right: 15px;
+      }
+      .submit__sidebar--main {
+        flex: 3;
+      }
+    </style>
+    <style is="custom-style" include="style-fade-in"></style>
+    <div class="startup__step__container">
+      <div class="accordion startup__steps">
+       <template is="dom-repeat" items="{{submit.startups.steps}}" as="step">
+         <div class="startup__step__section">
+           <div class="startup__step__wrapper">
+             <div class="startup__step__img">
+               <img class="startup__icon" src="../images/icons/Step_{{stepIndex(index)}}.svg" alt="Step for startup">
+             </div>
+             <div class="startup__step__details">
+               <span class="startup__step__counter">{{step.name}}</span>
+                 <h3 class="startup__step__description">{{step.description}}</h3>
+               <ul class$="startup__step{{stepIndex(index)}}__requirements startup__step__requirements">
+                 <template is="dom-repeat" items="{{step.requirements}}" as="requirement">
+                   <li>
+                     <p><echo-html html$="{{requirement}}"></echo-html></p>
+                   </li>
+                 </template>
+               </ul>
+               <template is="dom-if" if="{{isLastItem(index, 3)}}">
+                 <p>
+                   <strong>Please note:</strong> Submissions will be reviewed on a regular basis.
+                   Shortlisted companies will be notified within threemonths after submission.
+                   Only shortlisted vendors will be contacted and thereaer included in the next stage of the process.
+                 </p>
+                 <a target="_blank" href="https://www.jotform.us/70894154871162"><button class="startup__continue__button">SUBMIT</button></a>
+               </template>
+             </div>
+           </div>
+           <div>
+             <template is="dom-if" if="{{isNotLastItem(index, 3)}}">
+               <hr>
+             </template>
+           </div>
+         <div>
+         </template>
+       </div>
+      </div>
+  <script>
+      Polymer({
+          is: "submit-paragraph-with-icon",
+          properties: {
+              contentText: {
+                  type: String,
+                  value: ''
+              },
+              titleText: {
+                  type: String,
+                  value: ''
+              }
+          }
+      })
+  </script>
+</dom-module>
