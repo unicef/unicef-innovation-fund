@@ -2,7 +2,7 @@
   <template>
     <style is="custom-style">
       .container {
-        max-width: 795px;
+        width: 100%
         position: relative;
         text-align: center;
       }
@@ -38,7 +38,7 @@
 
       .button--big {
         background-color: #FFFFFF;
-        color: #0099FF;
+        color: #0068EA;
         display: inline-block;
         font-size: 1.2rem;
         height: 252px;
@@ -90,7 +90,7 @@
       }
 
       .section__submit-link {
-        background-color: #0099FF;
+        background-color: #7348B3;
         color: white;
         font-size: 1.15rem;
         font-weight: 400;
@@ -103,11 +103,11 @@
       }
 
       .section__submit-link:link {
-        background-color: #0099FF;
+        background-color: #7348B3;
       }
 
       .section__submit-link:visited {
-        background-color: #0099FF;
+        background-color: #7348B3;
       }
 
       .section__submit-link:hover {
@@ -115,11 +115,11 @@
       }
 
       .section__submit-link:active {
-        background-color: #0099FF;
+        background-color: #7348B3;
       }
 
       .section__submit-link:focus {
-        background-color: #0099FF;
+        background-color: #7348B3;
       }
 
       .section__break {
@@ -179,14 +179,9 @@
       }
 
       .section__back {
-        background-color: transparent;
-        border: none;
         cursor: pointer;
-        font-size: 0.9rem;
-        left: 1.5%;
-        position: absolute;
-        text-decoration: underline;
-        text-transform: uppercase;
+        font-size: 45px;
+        line-height: 1.2;
       }
 
       [data-target="startup"] .section__back {
@@ -195,7 +190,7 @@
 
       .section__input {
         border: 2px solid #BABCBD;
-        color: #0099FF;
+        color: #7348B3;
         display: block;
         font-size: 1.1rem;
         margin: 0 auto;
@@ -213,7 +208,7 @@
       }
 
       .section__confirm-email {
-        background-color: #0099FF;
+        background-color: #7348B3;
         border: none;
         color: #FFFFFF;
         cursor: pointer;
@@ -454,7 +449,7 @@
       }
 
       .faq__submit-link {
-        background-color: #0099FF;
+        background-color: #7348B3;
         color: #FFFFFF !important;
         font-size: 1.5rem;
         font-weight: 400;
@@ -705,11 +700,11 @@
       <div class="button__container container--wide mdl-cell mdl-cell--12-col">
         <button on-tap="changeSection" class="button button--big mdl-button mdl-js-button mdl-js-ripple-effect fade-in" data-display="country-office" data-hide="main">
           <p class="button__text">Submissions by UNICEF country offices</p>
-          <img src="../../images/icons/country_offices.svg" alt="Submissions by country offices" class="button__image"/>
+          <img src="../../images/icons/country_offices_2017.svg" alt="Submissions by country offices" class="button__image"/>
         </button>
         <button on-tap="changeSection" class="button button--big mdl-button mdl-js-button mdl-js-ripple-effect fade-in" data-display="startup" data-hide="main">
-          <p class="button__text">Submissions by start-ups</p>
-          <img src="../../images/icons/startups.svg" alt="Submissions by country offices" class="button__image"/>
+          <p class="button__text">Submissions by startups</p>
+          <img src="../../images/icons/startups_2017.svg" alt="Submissions by country offices" class="button__image"/>
         </button>
       </div>
       <div class="mdl-layout-spacer"></div>
@@ -743,7 +738,7 @@
               },
               sectionName: {
                   type: String,
-                  value: 'Country offices and start-ups'
+                  value: 'Country offices and startups'
               },
               startups: {
                   type: Object
@@ -820,10 +815,10 @@
                       this.sectionName = "UNICEF country offices";
                       break;
                   case "startup":
-                      this.sectionName = "Start-ups";
+                      this.sectionName = "Startups";
                       break;
                   default:
-                      this.sectionName = "Country offices and start-ups";
+                      this.sectionName = "Country offices and startups";
               }
 
               var toHide = this.$$("[data-target='" + hide + "']");

@@ -2,7 +2,7 @@
   <template>
     <style is="custom-style">
       .container {
-        max-width: 795px;
+        max-width: 1000px;
         position: relative;
         text-align: center;
       }
@@ -84,6 +84,12 @@
         position: absolute;
         text-decoration: underline;
         text-transform: uppercase;
+      }
+
+      .section__back i {
+          color: #55bb6e;
+          font-size: 45px;
+          line-height: 1.2;
       }
 
       [data-target="startup"] .section__back {
@@ -351,7 +357,9 @@
       data="{{submit}}">
     </firebase-document>
 
-    <button on-tap="changeSection" class="section__back" data-display="main" data-hide="startup">Back</button>
+    <button on-tap="changeSection" class="section__back" data-display="main" data-hide="startup">
+        <i class="material-icons">arrow_back</i>
+    </button>
     <div class="mdl-layout-spacer"></div>
     <div class="container mdl-cell mdl-cell--12-col" style='padding:50px;'>
       <h3 class="section__subheader section__subheader-startup">
@@ -460,7 +468,7 @@
               },
               sectionName: {
                   type: String,
-                  value: 'Country offices and start-ups'
+                  value: 'Country offices and startups'
               },
               startups: {
                   type: Object

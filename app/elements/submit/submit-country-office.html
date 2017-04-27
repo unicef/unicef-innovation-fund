@@ -1,430 +1,445 @@
 <dom-module id="submit-country-office">
   <template>
     <style is="custom-style">
-      .container {
-        max-width: 795px;
-        position: relative;
-        text-align: center;
-      }
-      .submit__office {
-        text-align: left;
-        padding-top: 40px;
-      }
-      .section__confirm-email {
-        cursor: pointer;
-      }
-      .submit__container {
-        position: relative;
-      }
-      .section__description, .section__text {
-        color: #5D5D5D;
-      }
-      .section__description {
-        text-align: center;
-        font-size: 1.595rem;
-        line-height: 1.5;
-        margin-bottom: 1rem;
-        margin-top: 1rem;
-      }
-      .section__description-startup p, .section__subheader-startup p {
-        margin-top: 0;
-        font-size: 1.35rem;
-        font-weight: 400;
-        line-height: 1.85;
-        text-align: left;
-      }
-      .section__description-startup br {
-        line-height: 3.3;
-      }
-      .section__description b {
-        display: inline;
-        font-size: 1.35rem;
-        font-weight: 700;
-        line-height: 1.8;
-        margin-top: 1rem;
-        text-align: left;
-      }
-      .section__submit {
-        text-align: center;
-        margin-bottom: 100px;
-      }
-      .section__submit-link {
-        background-color: #0099FF;
-        color: white;
-        font-size: 1.15rem;
-        font-weight: 400;
-        height: 44px;
-        line-height: 2.75;
-        margin-top: 2.5rem;
-        max-width: 260px;
-        text-transform: uppercase;
-        width: 100%;
-      }
-      .section__submit-link:link {
-        background-color: #0099FF;
-      }
-      .section__submit-link:visited {
-        background-color: #0099FF;
-      }
-      .section__submit-link:hover {
+        .container {
+            width: calc(100% - 2*226px);
+            max-width: 1100px;
+            position: relative;
+            text-align: center;
+        }
+        .submit__office {
+            text-align: left;
+            padding-top: 40px;
+        }
+        .section__confirm-email {
+            cursor: pointer;
+        }
+        .submit__container {
+            position: relative;
+        }
+        .section__description, .section__text {
+            color: #5D5D5D;
+        }
+        .section__description {
+            text-align: center;
+            font-size: 1.595rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+        }
+        .section__description-startup p, .section__subheader-startup p {
+            margin-top: 0;
+            font-size: 1.35rem;
+            font-weight: 400;
+            line-height: 1.85;
+            text-align: left;
+        }
+        .section__description-startup br {
+            line-height: 3.3;
+        }
+        .section__description b {
+            display: inline;
+            font-size: 1.35rem;
+            font-weight: 700;
+            line-height: 1.8;
+            margin-top: 1rem;
+            text-align: left;
+        }
+        .section__submit {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+        .section__submit-link {
+            background-color: #7348B3;
+            color: white;
+            font-size: 1.15rem;
+            font-weight: 400;
+            height: 44px;
+            line-height: 2.75;
+            margin-top: 2.5rem;
+            max-width: 260px;
+            text-transform: uppercase;
+            width: 100%;
+        }
+        .section__submit-link:link {
+            background-color: #7348B3;
+        }
+        .section__submit-link:visited {
+            background-color: #7348B3;
+        }
+        .section__submit-link:hover {
         box-shadow: 2px 2px 10px 0 #999999;
         z-index: 1;
-      }
-      .section__submit-link:active {
-        background-color: #0099FF;
-      }
-      .section__submit-link:focus {
-        background-color: #0099FF;
-      }
-      .section__text, .container .section__text {
-        font-size: 1.35rem;
-        font-weight: 400;
-        line-height: 1.85;
-        text-align: left;
-      }
-      .section__break {
-        border-top: 3px solid #727272;
-        margin: 4rem 0 4.75rem;
-      }
-      .section__subheader {
-        font-size: 2.3rem;
-        font-weight: 500;
-        letter-spacing: 0.0325rem;
-        margin-bottom: 2.5rem;
-      }
-      .section__subheader-startup span {
-        font-weight: bold;
-        font-size: 3rem;
-        line-height: 50px;
-      }
-      .section__back {
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        font-size: 0.9rem;
-        left: 1.5%;
-        position: absolute;
-        text-decoration: underline;
-        text-transform: uppercase;
-      }
-      [data-target="startup"] .section__back {
-        top: 1.75%;
-      }
-      [data-target="office-entry-form"] .section__back {
-        top: 8%;
-      }
-      [data-target="office-submission-form"] .section__back {
-        top: 0.75%;
-      }
-      .section__input {
-        border: 2px solid #BABCBD;
-        color: #0099FF;
-        display: block;
-        font-size: 1.1rem;
-        margin: 0 auto;
-        padding: 1.1rem;
-        width: 228px;
-      }
-      .section__input--authenticated {
-        background: url('../../images/confirm.svg') no-repeat 97% center;
-        background-size: 7%;
-      }
-      .section__input:focus {
-        outline: none
-      }
-      .section__confirm-email {
-        background-color: #0099FF;
-        border: none;
-        color: #FFFFFF;
-        font-size: 0.93rem;
-        font-weight: 400;
-        margin-top: 0.8rem;
-        padding: 1.0375rem 0;
-        text-transform: uppercase;
-        width: 260px;
-      }
-      .section__auth-alert {
-        color: red;
-        font-size: 1.1rem;
-        margin-bottom: 0.5rem;
-        opacity: 0;
-        transition: opacity 0.25s;
-      }
-      .section__confirm-email:disabled {
-        background-color: #BABCBD;
-        color: #5D5D5D;
-      }
-      .is-visible {
-        opacity: 1;
-      }
-      .js-visible {
-        display: block;
-      }
-      .js-hidden {
-        display: none;
-      }
-      [data-target="main"].js-hidden {
-        position: relative;
-      }
-      .accordion {
-        list-style-type: none;
-        margin: 3rem 0 6rem auto;
-        padding-left: 6.7rem;
-        text-align: left;
-      }
-      .accordion__section:not(:last-of-type) {
-        border-bottom: 1px solid black;
-      }
-      .accordion__header {
-        cursor: pointer;
-        font-size: 1.35rem;
-        font-weight: 600;
-        letter-spacing: 0.06rem;
-        margin: 0;
-        padding: 3.3rem 0;
-        position: relative;
-        transition: all 0.5s;
-      }
-      .accordion__header:hover {
-        color: #33B8B8;
-      }
-      .accordion__number {
-        text-align: center;
-        width: 30px;
-        border: 3px solid #33B8B8;
-        border-radius: 50%;
-        color: #33B8B8;
-        display: inline-block;
-        font-weight: 600;
-        font-size: 1.5em;
-        left: -6.75rem;
-        line-height: 0.50;
-        padding: 1.65rem;
-        position: absolute;
-        transform: translateY(-25%);
-      }
-      .accordion__arrow {
-        position: absolute;
-        width: 50px;
-        right: 1%;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-      .accordion__content {
-        opacity: 1;
-        padding-bottom: 3.3rem;
-        position: relative;
-        transform: translateY(0);
-        transition: position 0.5s, opacity 0.5s, transform 0.5s;
-      }
-      .accordion__content--toggle {
-        opacity: 0;
-        position: absolute;
-        transform: translateY(-5%);
-      }
-      .accordion__summary {
-        font-size: 1.3rem;
-        font-weight: 600;
-        letter-spacing: 0.0625rem;
-        margin-bottom: 0.5rem;
-      }
-      .description__list {
-        color: #5D5D5D;
-        list-style-type: none;
-        padding-left: 0;
-      }
-      .description__item {
-        font-size: 1.3rem;
-        line-height: 1.7;
-      }
-      .role__list {
-        list-style-type: none;
-        margin-bottom: 5rem;
-        padding-left: 0;
-        padding-top: 1rem;
-      }
-      .role__item {
-        padding: 1.3rem 0 3rem 6.75rem;
-      }
-      .role__name {
-        color: #000000;
-        font-weight: 600;
-        font-size: 1.5rem;
-        margin-bottom: 0;
-        position: relative;
-        text-transform: uppercase;
-      }
-      .role__image {
-        left: -5rem;
-        margin-bottom: 0;
-        max-width: 35px;
-        position: absolute;
-        top: 100%;
-        transform: translate(-50%, -50%);
-      }
-      .role__description {
-        color: #5D5D5D;
-        font-size: 1.5rem;
-        line-height: 1.5;
-      }
-      .faq a {
-        color: #333399;
-        text-decoration: none;
-      }
-      .faq em, .faq i {
-        word-spacing: normal;
-      }
-      .summary__content em, .summary__content i {
-        display: block;
-      }
-      .summary__content a {
-        border: 2px solid #2EAFAC;
-        color: #2EAFAC;
-        display: table;
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-top: 2.2rem;
-        padding: 0.7rem 3.9rem;
-        text-decoration: none;
-      }
-      .submit__container .container .section__form {
-        padding-bottom: 40px;
-      }
-      @media (max-width: 1200px) {
-        .submit__container {
-          padding-top: 3rem;
         }
-        .section__back {
-          left: 50%;
-          transform: translateX(-50%);
+        .section__submit-link:active {
+            background-color: #7348B3;
         }
-        [data-target="startup"] .section__back {
-          top: 1.5%;
+        .section__submit-link:focus {
+            background-color: #7348B3;
         }
-        [data-target="office"] .section__back {
-          top: 9%;
+        .section__text, .container .section__text {
+            font-size: 1.35rem;
+            font-weight: 400;
+            line-height: 1.85;
+            text-align: left;
         }
-        [data-target="office-submited"] .section__back {
-          top: 1%;
-        }
-      }
-      @media (max-width: 920px) {
-        .section__back {
-          float: none;
-        }
-      }
-      @media (max-width: 680px) {
-        .accordion {
-          margin-bottom: 0;
-          padding-left: 4.5rem;
-        }
-        .accordion__number {
-          border-width: 2px;
-          left: -4.25rem;
-          line-height: 0.55;
-          padding: 1.1rem;
-          top: 50%;
-          transform: translateY(-50%);
+        .section__break {
+            border-top: 3px solid #727272;
+            margin: 4rem 0 4.75rem;
         }
         .section__subheader {
-          font-size: 2rem;
-          margin-bottom: 0;
+            font-size: 2.3rem;
+            font-weight: 500;
+            letter-spacing: 0.0325rem;
+            margin-bottom: 2.5rem;
         }
-        .role__item {
-          padding: 1rem 0 0 3.75rem;
+        .section__subheader-startup span {
+            font-weight: bold;
+            font-size: 3rem;
+            line-height: 50px;
         }
-        .role__image {
-          left: -2rem;
-          max-width: 30px;
+        .section__back {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            left: 1.5%;
+            position: absolute;
+            text-decoration: underline;
+            text-transform: uppercase;
         }
-        .role__description {
-          font-size: 1.2rem;
+        .section__back i {
+            color: #55bb6e;
+            font-size: 45px;
+            line-height: 1.2;
         }
-      }
-      @media (max-width: 480px) {
+        [data-target="startup"] .section__back {
+            top: 1.75%;
+        }
+        [data-target="office-entry-form"] .section__back {
+            top: 8%;
+        }
+        [data-target="office-submission-form"] .section__back {
+            top: 0.75%;
+        }
+        .section__input {
+            border: 2px solid #BABCBD;
+            color: #7348B3;
+            display: block;
+            font-size: 1.1rem;
+            margin: 0 auto;
+            padding: 1.1rem;
+            width: 228px;
+        }
+        .section__input--authenticated {
+            background: url('../../images/confirm.svg') no-repeat 97% center;
+            background-size: 7%;
+        }
+        .section__input:focus {
+            outline: none
+        }
         .section__confirm-email {
-          width: 100%;
+            background-color: #7348B3;
+            border: none;
+            color: #FFFFFF;
+            font-size: 0.93rem;
+            font-weight: 400;
+            margin-top: 0.8rem;
+            padding: 1.0375rem 0;
+            text-transform: uppercase;
+            width: 260px;
         }
-      }
-      @media (max-width: 380px) {
+        .section__auth-alert {
+            color: red;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+        .section__confirm-email:disabled {
+            background-color: #BABCBD;
+            color: #5D5D5D;
+        }
+        .is-visible {
+            opacity: 1;
+        }
+        .js-visible {
+            display: block;
+        }
+        .js-hidden {
+            display: none;
+        }
+        [data-target="main"].js-hidden {
+            position: relative;
+        }
         .accordion {
-          padding-left: 0;
+            list-style-type: none;
+            margin: 3rem 0 6rem auto;
+            padding-left: 6.7rem;
+            text-align: left;
+        }
+        .accordion__section:not(:last-of-type) {
+            border-bottom: 1px solid black;
         }
         .accordion__header {
-          font-size: 1.2rem;
+            cursor: pointer;
+            font-size: 1.35rem;
+            font-weight: 600;
+            letter-spacing: 0.06rem;
+            margin: 0;
+            padding: 3.3rem 0;
+            position: relative;
+            transition: all 0.5s;
+        }
+        .accordion__header:hover {
+            color: #33B8B8;
         }
         .accordion__number {
-          display: none;
+            text-align: center;
+            width: 30px;
+            border: 3px solid #33B8B8;
+            border-radius: 50%;
+            color: #33B8B8;
+            display: inline-block;
+            font-weight: 600;
+            font-size: 1.5em;
+            left: -6.75rem;
+            line-height: 0.50;
+            padding: 1.65rem;
+            position: absolute;
+            transform: translateY(-25%);
         }
-      }
+        .accordion__arrow {
+            position: absolute;
+            width: 50px;
+            right: 1%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .accordion__content {
+            opacity: 1;
+            padding-bottom: 3.3rem;
+            position: relative;
+            transform: translateY(0);
+            transition: position 0.5s, opacity 0.5s, transform 0.5s;
+        }
+        .accordion__content--toggle {
+            opacity: 0;
+            position: absolute;
+            transform: translateY(-5%);
+        }
+        .accordion__summary {
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 0.0625rem;
+            margin-bottom: 0.5rem;
+        }
+        .description__list {
+            color: #5D5D5D;
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .description__item {
+            font-size: 1.3rem;
+            line-height: 1.7;
+        }
+        .role__list {
+            list-style-type: none;
+            margin-bottom: 5rem;
+            padding-left: 0;
+            padding-top: 1rem;
+        }
+        .role__item {
+            padding: 1.3rem 0 3rem 6.75rem;
+        }
+        .role__name {
+            color: #000000;
+            font-weight: 600;
+            font-size: 1.5rem;
+            margin-bottom: 0;
+            position: relative;
+            text-transform: uppercase;
+        }
+        .role__image {
+            left: -5rem;
+            margin-bottom: 0;
+            max-width: 35px;
+            position: absolute;
+            top: 100%;
+            transform: translate(-50%, -50%);
+        }
+        .role__description {
+            color: #5D5D5D;
+            font-size: 1.5rem;
+            line-height: 1.5;
+        }
+        .faq a {
+            color: #333399;
+            text-decoration: none;
+        }
+        .faq em, .faq i {
+         word-spacing: normal;
+        }
+        .summary__content em, .summary__content i {
+            display: block;
+        }
+        .summary__content a {
+            border: 2px solid #2EAFAC;
+            color: #2EAFAC;
+            display: table;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 2.2rem;
+            padding: 0.7rem 3.9rem;
+            text-decoration: none;
+        }
+        .submit__container .container .section__form {
+            padding-bottom: 40px;
+        }
+        @media (max-width: 1200px) {
+            .submit__container {
+                padding-top: 3rem;
+            }
+            .section__back {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            [data-target="startup"] .section__back {
+                top: 1.5%;
+            }
+            [data-target="office"] .section__back {
+                top: 9%;
+            }
+            [data-target="office-submited"] .section__back {
+                top: 1%;
+            }
+        }
+        @media (max-width: 920px) {
+            .section__back {
+                float: none;
+            }
+        }
+        @media (max-width: 680px) {
+            .accordion {
+              margin-bottom: 0;
+              padding-left: 4.5rem;
+            }
+            .accordion__number {
+              border-width: 2px;
+              left: -4.25rem;
+              line-height: 0.55;
+              padding: 1.1rem;
+              top: 50%;
+              transform: translateY(-50%);
+            }
+            .section__subheader {
+              font-size: 2rem;
+              margin-bottom: 0;
+            }
+            .role__item {
+              padding: 1rem 0 0 3.75rem;
+            }
+            .role__image {
+              left: -2rem;
+              max-width: 30px;
+            }
+            .role__description {
+              font-size: 1.2rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .section__confirm-email {
+                width: 100%;
+            }
+        }
+        @media (max-width: 380px) {
+            .accordion {
+                padding-left: 0;
+            }
+            .accordion__header {
+                font-size: 1.2rem;
+            }
+            .accordion__number {
+                display: none;
+            }
+        }
     </style>
     <style is="custom-style" include="style-fade-in"></style>
     <firebase-document
-      app-name="unicef-innovation-fund"
-      path="/content/submit_content"
-      data="{{submit}}">
+        app-name="unicef-innovation-fund"
+        path="/content/submit_content"
+        data="{{submit}}">
     </firebase-document>
     <div class="mdl-grid js-visible submit__container" data-target="office-entry-form">
-      <button on-tap="changeSection" class="section__back" id="back-from-office" data-display="main" data-hide="country-office">Back</button>
-      <div class="mdl-layout-spacer"></div>
-      <div class="container mdl-cell mdl-cell--12-col">
-        <p class$="section__auth-alert [[errorMessageClass]]">[[errorMessage]]</p>
-        <p class="section__description"><echo-html html$="{{submit.country_offices.submit_email_text}}"></echo-html></p>
-        <form is="iron-form" class="section__form" on-submit="submitEmail">
-          <input type="text" class$="section__input [[inputAuthClass]]" placeholder="email address" on-input="checkAuth">
-          <button type="submit" class="section__confirm-email" data-display="office-submission-form" data-hide="office-entry-form">continue</button>
-        </form>
-      </div>
+        <button on-tap="changeSection" class="section__back" id="back-from-office" data-display="main" data-hide="country-office">
+            <i class="material-icons">arrow_back</i>
+        </button>
+        <div class="mdl-layout-spacer"></div>
+        <div class="container mdl-cell mdl-cell--12-col">
+            <p class$="section__auth-alert [[errorMessageClass]]">[[errorMessage]]</p>
+            <p class="section__description"><echo-html html$="{{submit.country_offices.submit_email_text}}"></echo-html></p>
+            <form is="iron-form" class="section__form" on-submit="submitEmail">
+                <input type="text" class$="section__input [[inputAuthClass]]" placeholder="email address" on-input="checkAuth">
+                <button type="submit" class="section__confirm-email" data-display="office-submission-form" data-hide="office-entry-form">continue</button>
+            </form>
+        </div>
       <div class="mdl-layout-spacer"></div>
     </div>
     <div class="mdl-grid js-hidden submit__container" data-target="office-submission-form">
-      <button on-tap="changeSection" class="section__back" data-display="main" data-hide="country-office">Back</button>
+      <button on-tap="changeSection" class="section__back" data-display="main" data-hide="country-office">
+          <i class="material-icons">arrow_back</i>
+      </button>
       <div class="mdl-layout-spacer"></div>
       <div class="submit__office container mdl-cell mdl-cell--12-col">
-        <submit-sidebar-container
-          title-text$="{{submit.country_offices.looking_title}}"
-          content-text="{{submit.country_offices.looking_content}}" ></submit-sidebar-container>
-        <submit-sidebar-container
-          title-text$="{{submit.country_offices.seeking_title}}"
-          content-text$="{{submit.country_offices.seeking_content}}" ></submit-sidebar-container>
-        <h3 class="section__subheader"><echo-html html$="{{submit.country_offices.role_title}}"></echo-html></h3>
-        <ul class="role__list">
-          <template is="dom-repeat" items="{{submit.country_offices.role_content}}" as="role">
-            <li class="role__item">
-              <h4 class="role__name">
-                <img src$="{{ _getCategoryIconPath(role.icon_name) }}" alt="{{role.name}}" class="role__image">
-                <echo-html html$="{{role.name}}"></echo-html>
-              </h4>
-              <p class="role__description"><echo-html html$="{{role.description}}"></echo-html></p>
-            </li>
-          </template>
-        </ul>
-        <h3 class="section__subheader"><echo-html html$="{{submit.country_offices.steps_title}}"></echo-html></h3>
-        <ol class="accordion">
-          <template is="dom-repeat" items="{{submit.country_offices.steps_content}}" as="step">
-            <li class="accordion__section">
-              <h4 class="accordion__header" data-open$="accordion-{{index}}" on-tap="accordionOpen">
-                <p class="accordion__number">{{stepIndex(index)}}</p><echo-html html$="{{step.name}}"></echo-html>
-                <img src="../../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
-              </h4>
-              <div class="accordion__content accordion__content--toggle" data-accordion$="accordion-{{index}}">
-                <p class="accordion__summary"><echo-html html$="{{step.description}}"></echo-html></p>
-                <ul class="description__list">
-                  <template is="dom-repeat" items="{{step.requirements}}" as="requirement">
-                    <li class="description__item"><echo-html html$="{{requirement}}"></echo-html></li>
-                  </template>
-                </ul>
-              </div>
-            </li>
-          </template>
-        </ol>
-        <h3 class="section__subheader"><echo-html html$="{{submit.country_offices.questions_title}}"></echo-html></h3>
-        <p class="section__text">
-          <echo-html html$="{{submit.country_offices.questions_content}}"></echo-html>
-        </p>
-        <div class="section__submit">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank"><echo-html html$="{{submit.country_offices.submit_button_text}}"></echo-html></a>
-        </div>
+          <sidebar-container
+              title-text$="{{submit.country_offices.looking_title}}"
+              content-text="{{submit.country_offices.looking_content}}" ></sidebar-container>
+          <hr class="section__break">
+          <sidebar-container
+              title-text$="{{submit.country_offices.seeking_title}}"
+              content-text$="{{submit.country_offices.seeking_content}}" ></sidebar-container>
+          <hr class="section__break">
+          <sidebar-container
+              title-text$="{{submit.country_offices.role_title}}"
+              content-text$="{{submit.country_offices.seeking_content}}"
+              paragraphs$="{{submit.country_offices.role_content}}"></sidebar-container>
+          <h3 class="section__subheader"><echo-html html$="{{submit.country_offices.role_title}}"></echo-html></h3>
+          <ul class="role__list">
+              <template is="dom-repeat" items="{{submit.country_offices.role_content}}" as="role">
+                  <sidebar-icon-container icon-alt="{{ role.icon_name }}"
+                      icon$="{{ _getCategoryIconPath(role.icon_name) }}"
+                      name$="{{role.name.0}}"
+                      paragraphs="{{role.description}}"></sidebar-icon-container>
+              </template>
+          </ul>
+          <h3 class="section__subheader">
+              <echo-html html$="{{submit.country_offices.steps_title}}"></echo-html>
+          </h3>
+          <ol class="accordion">
+              <template is="dom-repeat" items="{{submit.country_offices.steps_content}}" as="step">
+                  <li class="accordion__section">
+                      <h4 class="accordion__header" data-open$="accordion-{{index}}" on-tap="accordionOpen">
+                          <p class="accordion__number">{{stepIndex(index)}}</p><echo-html html$="{{step.name}}"></echo-html>
+                          <img src="../../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
+                      </h4>
+                      <div class="accordion__content accordion__content--toggle" data-accordion$="accordion-{{index}}">
+                          <p class="accordion__summary"><echo-html html$="{{step.description}}"></echo-html></p>
+                          <ul class="description__list">
+                              <template is="dom-repeat" items="{{step.requirements}}" as="requirement">
+                                <li class="description__item"><echo-html html$="{{requirement}}"></echo-html></li>
+                              </template>
+                          </ul>
+                      </div>
+                  </li>
+              </template>
+          </ol>
+          <h3 class="section__subheader"><echo-html html$="{{submit.country_offices.questions_title}}"></echo-html></h3>
+          <p class="section__text">
+              <echo-html html$="{{submit.country_offices.questions_content}}"></echo-html>
+          </p>
+          <div class="section__submit">
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank"><echo-html html$="{{submit.country_offices.submit_button_text}}"></echo-html></a>
+          </div>
       </div>
       <div class="mdl-layout-spacer"></div>
     </div>
@@ -451,7 +466,7 @@
               },
               sectionName: {
                   type: String,
-                  value: 'Country offices and start-ups'
+                  value: 'Country offices and startups'
               },
               startups: {
                   type: Object
@@ -463,6 +478,10 @@
           listeners: {
               'iron-form-submit': 'submitEmail'
           },
+
+
+
+
           stepIndex: function (index) {
               return index + 1;
           },
