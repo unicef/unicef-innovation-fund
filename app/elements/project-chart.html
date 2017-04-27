@@ -59,7 +59,6 @@ Polymer({
 
   _dataChange: function(){
     this.resetChart();
-
     if ((Object.keys(this.data).length) && (this.parentid)) {
        this._runGoogleChart();
     }
@@ -97,41 +96,52 @@ Polymer({
     return 'rgb('+ red +', '+ green +', '+ blue + ')';
   },
 
-  _prepareGoogleLabels: function(labels){
+  _prepareGoogleLabels: function(labels) {
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    return labels.map(function(l){
-      var split = l.split(" ");
+    var labs =  labels.map(function(l, i) {
+      var split = l.split(/\s+/);
       var monthIdx = months.indexOf(split[0])+1;
-      var month = ((monthIdx) < 10) ? ('0'+monthIdx):(monthIdx);
+      var month = ((monthIdx) < 10) ? ('0'+monthIdx) : (monthIdx);
       var year = split[1];
-      return new Date(year + '-' + month);
+      var date = new Date(new Date(year + '-' + month).getTime() + (new Date(year + '-' + month).getTimezoneOffset() * 60 * 1000)) ;
+
+      // new Date(new Date(timestampStr).getTime() + (new Date().getTimezoneOffset() * 60 * 1000));
+      // If date's month is current month
+      // Return todays date
+      // console.log(new Date().getMonth(),  date.getMonth(), new Date().getYear())
+      if (new Date().getMonth() === date.getMonth() && new Date().getYear() === date.getYear()) {
+        date =  new Date();
+      }
+
+      return date;
     })
+    return labs
   },
 
   _runGoogleChart: function() {
     var self = this;
 
     self.drawChart = function() {
+
       var datasets = self.data.datasets[0] || self.data.datasets['0'];
       var controlId = 'control_div'+'-'+self.parentid+'-'+self.index;
       var chartId = 'chart_div'+'-'+self.parentid+'-'+self.index;
-
       var labels = self.data.labels;
-      var googleLabels = self._prepareGoogleLabels(labels);
 
+      var googleLabels = self._prepareGoogleLabels(labels);
       var data = new google.visualization.DataTable();
       data.addColumn('date', 'date');
       data.addColumn('number', datasets.label);
 
       datasets.googleBgColor = self._convertRgbaToRgb(datasets.backgroundColor);
-
       //first loop for labels then for thatasets to support multi columns...
       for(var x = 0; x < datasets.data.length; x++){
         var d = datasets.data[x];
+
         data.addRow([googleLabels[x], d]);
       }
-
-      var minRange = googleLabels[1].getTime() - googleLabels[0].getTime();
+      // THIS does not appear to be used.
+      //var minRange = googleLabels[1].getTime() - googleLabels[0].getTime();
 
       var dash = new google.visualization.Dashboard(document.getElementById('dashboard'+'-'+self.parentid+'-'+self.index));
 

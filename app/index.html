@@ -28,7 +28,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <meta name="msapplication-TileColor" content="#3372DF">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="UNICEF Innovation Fund">  
+  <meta name="application-name" content="UNICEF Innovation Fund">
   <link rel="icon" sizes="16x16" href="favicon.ico">
   <link rel="icon" sizes="16x16" href="images/touch/favicon-16x16.png">
   <link rel="icon" sizes="32x32" href="images/touch/favicon-32x32.png">
@@ -336,6 +336,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     app.selected = 0;
 
     window.addEventListener('WebComponentsReady', function(e) {
+      // A very hacking alternative to a router.
+      // Check for /#/about
+      // Then click the appropriate tab to view the page
+      var requested_tab = window.location.hash.replace('#/', '');
+      if (requested_tab.match(/[a-zA-Z]/)) {
+        setTimeout(function() {
+          $('paper-tab#' + requested_tab).click()
+        }, 2000)
+      }
+
       $('paper-tabs#main-menu paper-tab').click(function() {
         $('#mainContainer').scrollTop(0);
         app.selected = $('paper-tabs#main-menu paper-tab').index(this);
@@ -364,10 +374,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     });
 
     function page_change(page_id) {
+      // Roll your own routing hack.
+      // When menu tab is clicked, add "/#/" + page_id (about)
+      window.location.href = "/#/" + page_id
       $(document).trigger('page-changed', page_id);
-      var ar = ['dashboard', 'all_projects', 'news', 'about', 'submit'];
-
-      ar.forEach(function(e) {
+      // Hardcoding arrays is not good.
+      // var ar = ['dashboard', 'all_projects', 'news', 'about', 'submit'];
+      // This should be a better way to iterate through tabs
+      var tab_names = Array.prototype.slice.call($('paper-tab')).map(function(e) {return e.id})
+      tab_names.forEach(function(e) {
         $('#mainToolbar').removeClass(e);
         $('#drawer').removeClass(e);
         $('.link').removeClass(e);

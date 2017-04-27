@@ -159,6 +159,11 @@
         text-align: left;
     }
 
+    .section__subheader-startup span {
+      font-weight: bold;
+      font-size: 3rem;
+      line-height: 50px;
+    }
     .section__icon {
       width: 15%;
     }
@@ -316,6 +321,11 @@
 
     .accordion__arrow--toggle {
         transform: translateY(-50%) scaleY(-1);
+    }
+
+
+    .accordion__arrow_startup--toggle {
+        transform: translateY(0%) scaleY(-1);
     }
 
     .accordion__content {
@@ -681,6 +691,12 @@
             display: none;
         }
     }
+    .submit_separator {
+      width:120px;
+      height:4px;
+      background-color:#6A1E74;
+      position:relative; left:320px;
+    }
     </style>
     <style is="custom-style" include="style-fade-in"></style>
     <firebase-document
@@ -775,42 +791,77 @@
     <div class="mdl-grid js-hidden submit__container" data-target="startup">
       <button on-tap="changeSection" class="section__back" data-display="main" data-hide="startup">Back</button>
       <div class="mdl-layout-spacer"></div>
-      <div class="container mdl-cell mdl-cell--12-col">
+      <div class="container mdl-cell mdl-cell--12-col" style='padding:50px;'>
             <h3 class="section__subheader section__subheader-startup">
+              <span>
                 <echo-html html$="{{submit.startups.title}}"></echo-html>
+              </span>
+
             </h3>
             <p class="section__description section__description-startup">
                 <echo-html html$="{{submit.startups.description}}"></echo-html>
             </p>
-            <img src="../images/icons/startups_steps.svg" alt="Steps for startup" class="section__icon--wide">
-            <h3 class="section__subheader section__subheader-startup">
-                <echo-html html$="{{submit.startups.process_title}}"></echo-html>
-            </h3>
+            <br />
+            <br />
+            <!-- <img src="../images/icons/startups_steps.svg" alt="Steps for startup" class="section__icon--wide"> -->
             <p class="section__description section__description-startup">
                 <echo-html html$="{{submit.startups.process_description}}"></echo-html>
+                <img src="../images/icons/startup_submit-line_3.svg" alt="Submissions by country offices" class="section__icon--wide"/>
+                <br />
+                <echo-html html$="{{submit.startups.process_description_2}}"></echo-html>
+                <br />
+                <img src="../images/icons/startup_submit-line_3.svg" alt="Submissions by country offices" class="section__icon--wide"/>
+                <br />
+                <echo-html html$="{{submit.startups.process_description_3}}"></echo-html>
+                <br />
+                <br />
+
+                <echo-html html$="{{submit.startups.process_description_4}}"></echo-html>
             </p>
-        <img src="../images/icons/startups_steps.svg" alt="Steps for startup" class="section__icon--wide">
+        <br />
+        <br />
+        <p class="section__description section__description-startup">
+          <img src="../images/icons/startup_submit-line_3.svg" alt="Submissions by country offices" class="section__icon--wide"/>
+        </p>
+
+        <h3 class="section__subheader section__subheader-startup">
+            <echo-html html$="{{submit.startups.process_title}}"></echo-html>
+        </h3>
+        <img src="../images/icons/startup_submit_steps.svg" alt="Steps for startup" class="section__icon--wide">
         <p class="section__description section__subheader-startup"></p>
-        <ol class="faq faq__list">
-            <template is="dom-repeat" items="{{submit.startups.steps}}" as="step">
-                <li class="faq__step">
-                    <h3 class="faq__name"><echo-html html$="{{step.name}}"></echo-html></h3>
-                    <strong class="faq__description"><echo-html html$="{{step.description}}"></echo-html></strong>
-                    <ul class="faq__list">
-                        <template is="dom-repeat" items="{{step.requirements}}" as="requirement">
-                            <li class="faq__requirement">
-                                <echo-html html$="{{requirement}}"></echo-html>
-                            </li>
-                        </template>
-                    </ul>
-                </li>
-            </template>
+        <ol class="accordion">
+              <li class="accordion__section">
+                <h1 class="accordion__header" style='text-align:center;position:relative;top:-30px;left:-70px;' data-open$="accordion-{{stepIndex2(index)}}" on-tap="accordionOpenStartUp">
+                  <div style='color:#6A1E74; border:solid #6A1E74 3px;padding:15px 20px 15px 50px; display:inline;'>
+                    VIEW STEPS
+                    <img src="../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow_startup" style='postion:relative;display:inline;width:40px;'>
+                  </div>
+
+                </h1>
+                <div class="accordion__content accordion__content--toggle" data-accordion$="accordion-{{stepIndex2(index)}}">
+                  <ol class="faq faq__list">
+                      <template is="dom-repeat" items="{{submit.startups.steps}}" as="step">
+                          <li class="faq__step">
+                              <h3 class="faq__name"><echo-html html$="{{step.name}}"></echo-html></h3>
+                              <strong class="faq__description"><echo-html html$="{{step.description}}"></echo-html></strong>
+                              <ul class="faq__list">
+                                  <template is="dom-repeat" items="{{step.requirements}}" as="requirement">
+                                      <li class="faq__requirement">
+                                          <echo-html html$="{{requirement}}"></echo-html>
+                                      </li>
+                                  </template>
+                              </ul>
+                          </li>
+                      </template>
+                  </ol>
+                  <div class="faq__submit">
+                      <a href="https://www.jotform.us/70894154871162" class="faq__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank">
+                          <echo-html html$="{{submit.startups.submit_button_text}}"></echo-html>
+                      </a>
+                  </div>
+                </div>
+              </li>
         </ol>
-        <div class="faq__submit">
-            <a href="https://form.jotform.com/62704508221145" class="faq__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank">
-                <echo-html html$="{{submit.startups.submit_button_text}}"></echo-html>
-            </a>
-        </div>
         <hr class="section__break--thin">
         <div class="summary">
             <img src="../images/icons/country_offices-alt.svg" alt="" class="summary__icon">
@@ -968,6 +1019,16 @@
           this.errorMessageClass = 'is-visible';
       }
 
+    },
+
+    accordionOpenStartUp: function (event) {
+        var target = event.currentTarget;
+        var taped = target.dataset.open;
+        var selected = this.$$("[data-accordion='" + taped + "']");
+        var arrow = target.querySelector('.accordion__arrow_startup');
+
+        arrow.classList.toggle('accordion__arrow_startup--toggle')
+        selected.classList.toggle('accordion__content--toggle');
     },
     accordionOpen: function (event) {
         var target = event.currentTarget;
