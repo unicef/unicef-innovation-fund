@@ -22,12 +22,12 @@
     }
 
     .project__container {
-      box-shadow: 0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.2);
-      transition: all 0.175s ;
+      box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .2);
+      transition: all 0.175s;
     }
 
     .project__container:hover {
-      box-shadow: 0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12),0 5px 5px -3px rgba(0,0,0,.2);
+      box-shadow: 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12), 0 5px 5px -3px rgba(0, 0, 0, .2);
     }
 
     .project-counter {
@@ -81,21 +81,43 @@
           <div class="mdl-cell mdl-cell--8-col-tablet visible--tablet">
             <h4 class="title--tiny dashboard__title dashboard__title--margin">Summary</h4>
           </div>
-          <div class="mdl-card mdl-shadow--3dp mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--4-col-phone db_card">
+          <div
+            class="mdl-card mdl-shadow--3dp mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--4-col-phone db_card">
             <portfolios-summary class='item'></portfolios-summary>
           </div>
           <div class="mdl-cell mdl-cell--8-col-tablet visible--tablet">
             <h4 class="title--tiny dashboard__title dashboard__title--margin">Portfolios</h4>
           </div>
-          <div class="mdl-card mdl-shadow--3dp mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--4-col-phone db_card project__container">
-            <portfolio-card class="portfolio-card--youth_engagement" progress="{{_financial(financials, 'youth_engagement')}}" tooltip_target='db_tooltip_youth_engagement' phrase='Products For Youth' featured='{{featuredProjects.youth_engagement.name}}' featured_content='{{featuredProjects.youth_engagement.featured_description}}' featured_slug='{{featuredProjects.youth_engagement.slug}}' category="youth_engagement" rgb='255, 204, 51, 0.2'>
+          <div
+            class="mdl-card mdl-shadow--3dp mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--4-col-phone db_card project__container">
+            <portfolio-card class="portfolio-card--youth_engagement"
+                            progress="{{_financial(financials, 'youth_engagement')}}"
+                            tooltip_target='db_tooltip_youth_engagement' phrase='Products For Youth'
+                            featured='{{featuredProjects.youth_engagement.name}}'
+                            featured_content='{{featuredProjects.youth_engagement.featured_description}}'
+                            featured_slug='{{featuredProjects.youth_engagement.slug}}' category="youth_engagement"
+                            rgb='255, 204, 51, 0.2'>
           </div>
-          <div class="mdl-card mdl-shadow--3dp mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--4-col-phone db_card project__container">
-            <portfolio-card class="portfolio-card--real-time-information" progress="{{_financial(financials, 'realtime_information')}}" tooltip_target='db_tooltip_real_time_info' phrase='Real-time Information' featured='{{featuredProjects.real_time_information.name}}' featured_content='{{featuredProjects.real_time_information.featured_description}}' featured_slug='{{featuredProjects.real_time_information.slug}}' category="real_time_information" rgb='255, 204, 51, 0.2'>
+          <div
+            class="mdl-card mdl-shadow--3dp mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--4-col-phone db_card project__container">
+            <portfolio-card class="portfolio-card--real-time-information"
+                            progress="{{_financial(financials, 'realtime_information')}}"
+                            tooltip_target='db_tooltip_real_time_info' phrase='Real-time Information'
+                            featured='{{featuredProjects.real_time_information.name}}'
+                            featured_content='{{featuredProjects.real_time_information.featured_description}}'
+                            featured_slug='{{featuredProjects.real_time_information.slug}}'
+                            category="real_time_information" rgb='255, 204, 51, 0.2'>
             </portfolio-card>
           </div>
-          <div class="mdl-card mdl-shadow--3dp mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--4-col-phone db_card project__container" >
-            <portfolio-card class="portfolio-card--infrastructure" progress="{{_financial(financials, 'infrastructure')}}" tooltip_target='db_tooltip_infrastructure' phrase='Infrastructure' featured='{{featuredProjects.infrastructure.name}}' featured_content='{{featuredProjects.infrastructure.featured_description}}' featured_slug='{{featuredProjects.infrastructure.slug}}' category="infrastructure" rgb='255, 204, 51, 0.2'>
+          <div
+            class="mdl-card mdl-shadow--3dp mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--4-col-phone db_card project__container">
+            <portfolio-card class="portfolio-card--infrastructure"
+                            progress="{{_financial(financials, 'infrastructure')}}"
+                            tooltip_target='db_tooltip_infrastructure' phrase='Infrastructure'
+                            featured='{{featuredProjects.infrastructure.name}}'
+                            featured_content='{{featuredProjects.infrastructure.featured_description}}'
+                            featured_slug='{{featuredProjects.infrastructure.slug}}' category="infrastructure"
+                            rgb='255, 204, 51, 0.2'>
             </portfolio-card>
           </div>
         </div>
@@ -143,7 +165,7 @@
         notify: true
       }
     },
-    _handleProjects: function() {
+    _handleProjects: function () {
       if (!Object.keys(this.projects).length) {
         return;
       }
@@ -151,20 +173,20 @@
       this.featuredProjects = this._computeFeaturedProjects();
       this.displayProjectCounter(projectCount);
     },
-    _handleChartData: function() {
+    _handleChartData: function () {
       return true;
     },
-    displayProjectCounter: function(projectCount) {
+    displayProjectCounter: function (projectCount) {
       var counterElement = $('.project-counter');
 
       if (projectCount > 0) {
         counterElement.find('strong').html(projectCount);
         counterElement.find('span').html(
-          'NEW Project' + ((projectCount > 1)?'s':'')
+          'NEW Project' + ((projectCount > 1) ? 's' : '')
         );
         counterElement.removeClass('fade-in');
         counterElement.addClass('fade-in');
-        counterElement.on('click', function(event) {
+        counterElement.on('click', function (event) {
           menu_navigate(this, event)
         });
       } else {
@@ -172,21 +194,21 @@
         counterElement.find('span').html('');
       }
     },
-    _financial: function(budget, kind){
-      if(budget.spents){
+    _financial: function (budget, kind) {
+      if (budget.spents) {
         return [budget.totals[kind], budget.spents[kind]]
       }
     },
-    _computeClasses: function(wide) {
-       return (!wide) ? 'layout vertical': 'layout';
+    _computeClasses: function (wide) {
+      return (!wide) ? 'layout vertical' : 'layout';
     },
-    _computeNewProjectsCount: function() {
+    _computeNewProjectsCount: function () {
       var self = this;
       var projectCount = 0;
       var categories = Object.keys(self.projects);
-      for(var c in categories) {
+      for (var c in categories) {
         var projects_hash = self.projects[categories[c]].projects_hash;
-        for(var p in projects_hash) {
+        for (var p in projects_hash) {
           if (!projects_hash.hasOwnProperty(p)) {
             continue;
           }
@@ -200,7 +222,7 @@
       $(document).trigger('new-projects-count-computed', projectCount);
       return projectCount;
     },
-    _computeFeaturedProjects: function() {
+    _computeFeaturedProjects: function () {
       var self = this;
       if (!Object.keys(self.projects)) {
         return false;
@@ -211,7 +233,9 @@
       for (var c in selectedCategories) {
         var selectedCategory = selectedCategories[c];
         var selectedProjects = self.projects[selectedCategory].projects_hash;
-        var featuredProjectSlugs = Object.keys(selectedProjects).filter(function(slug){return (selectedProjects[slug].featured == 1);});
+        var featuredProjectSlugs = Object.keys(selectedProjects).filter(function (slug) {
+          return (selectedProjects[slug].featured == 1);
+        });
         if ((featuredProjectSlugs) && (featuredProjectSlugs.length)) {
           var slug = featuredProjectSlugs[0];
           featuredProjects[selectedCategory] = selectedProjects[slug];

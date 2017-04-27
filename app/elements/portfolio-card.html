@@ -18,8 +18,8 @@
       }
 
       :host hr {
-        width:90%;
-        margin:16px auto 8px;
+        width: 90%;
+        margin: 16px auto 8px;
       }
 
       :host.portfolio-card--real-time-information {
@@ -43,7 +43,7 @@
         font-size: 18px;
       }
 
-      .pc_left{
+      .pc_left {
         padding-left: 16px;
         padding-right: 16px;
       }
@@ -51,7 +51,7 @@
       .card_title {
         height: 30px;
         line-height: 30px;
-        padding-left:5px;
+        padding-left: 5px;
       }
 
       circular-progress {
@@ -129,18 +129,18 @@
       :root {
         --paper-tooltip: {
           font-size: 14px;
-          width:auto;
+          width: auto;
         };
       }
 
       .project__switch {
-          cursor: pointer;
-          display: inline-block;
-          font-size: 0.85rem;
-          list-style-type: none;
-          margin-right: 2.5rem;
-          transition: all 0.5s;
-          text-transform: uppercase;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 0.85rem;
+        list-style-type: none;
+        margin-right: 2.5rem;
+        transition: all 0.5s;
+        text-transform: uppercase;
       }
 
       .project__section {
@@ -149,16 +149,16 @@
 
       @media (max-width: 840px) {
         .project__header {
-            background-color: #F1F2F2;
-            box-shadow: 0 -10px 0 0 var(--portfolio-card-lead-color);
-            margin: 10px 0 0;
-            padding-bottom: 0.6rem;
-            padding-left: 1.5rem;
-            padding-top: 1rem;
+          background-color: #F1F2F2;
+          box-shadow: 0 -10px 0 0 var(--portfolio-card-lead-color);
+          margin: 10px 0 0;
+          padding-bottom: 0.6rem;
+          padding-left: 1.5rem;
+          padding-top: 1rem;
         }
 
         .is-active {
-            box-shadow: 0 2px 0 0 var(--portfolio-card-lead-color);
+          box-shadow: 0 2px 0 0 var(--portfolio-card-lead-color);
         }
 
         .js-active {
@@ -176,8 +176,8 @@
         }
 
         .project__section {
-            padding-bottom: 2rem;
-            padding-top: 2rem;
+          padding-bottom: 2rem;
+          padding-top: 2rem;
         }
 
         .project__description {
@@ -185,18 +185,18 @@
         }
       }
 
-      .project__mini-chart{
+      .project__mini-chart {
         cursor: pointer;
       }
 
       .new-project {
         background-color: #3366CA;
         font-size: 14px;
-        color:white;
+        color: white;
         display: block;
         width: 30px;
         padding: 1px 4px 1px 4px;
-        margin-left:15px;
+        margin-left: 15px;
       }
 
       .new-project.hide {
@@ -204,7 +204,7 @@
       }
 
       .categoryIcon {
-        padding-left:16px;
+        padding-left: 16px;
       }
 
       .mdl-grid .title_card {
@@ -216,58 +216,60 @@
     <iron-media-query full query="print" query-matches="{{print}}"></iron-media-query>
 
 
-      <div class$="{{_computeClass(wide)}}">
-        <ul class="mdl-layout__cell mdl-cell--hide-desktop project__header">
-            <h2 class="title--medium">{{phrase}}</h2>
-            <li on-tap="toggleSection" class="project__switch is-active" data-active="description" data-hide="graph">Description</li>
-            <li on-tap="toggleSection" class="project__switch" data-active="graph" data-hide="description">Graph</li>
-        </ul>
-        <div data-content="description" class="project__section js-active">
-          <div class='top_container_in_card hidden--tablet'>
-            <img class="categoryIcon" src$="{{ _getCategoryIconPath(category) }}" width="80">
-            <div class='mdl-grid'>
-              <div class='mdl-cell mdl-cell--12-col title_card'>
-                <span class$='portfolio_card_title'>{{phrase}}</span>
-                <div class="portfolio-card__icon">
-                  <i id="tooltip" class="icon-info"></i>
-                </div>
+    <div class$="{{_computeClass(wide)}}">
+      <ul class="mdl-layout__cell mdl-cell--hide-desktop project__header">
+        <h2 class="title--medium">{{phrase}}</h2>
+        <li on-tap="toggleSection" class="project__switch is-active" data-active="description" data-hide="graph">
+          Description
+        </li>
+        <li on-tap="toggleSection" class="project__switch" data-active="graph" data-hide="description">Graph</li>
+      </ul>
+      <div data-content="description" class="project__section js-active">
+        <div class='top_container_in_card hidden--tablet'>
+          <img class="categoryIcon" src$="{{ _getCategoryIconPath(category) }}" width="80">
+          <div class='mdl-grid'>
+            <div class='mdl-cell mdl-cell--12-col title_card'>
+              <span class$='portfolio_card_title'>{{phrase}}</span>
+              <div class="portfolio-card__icon">
+                <i id="tooltip" class="icon-info"></i>
               </div>
-            </div>
-            <div>
-              <paper-tooltip class="custom" for="tooltip" offset="0">{{db_tooltip}}</paper-tooltip>
             </div>
           </div>
-          <div class="portfolio-card__progress">
-            <div class$="portfolio-card__progress-info portfolio-card__progress-info--{{ category }}">
-              {{ _getProgressValue(progress.0) }}<br/>
-              available
-            </div>
-            <circular-progress id="progressBar" value="[[ progress.1 ]]" max="[[ progress.0 ]]" type="[[ category ]]">
-                {{ _getProgressValue(progress.1) }}
-                <span class="portfolio-card__progress-subtitle">Invested</span>
-            </circular-progress>
+          <div>
+            <paper-tooltip class="custom" for="tooltip" offset="0">{{db_tooltip}}</paper-tooltip>
           </div>
-          <hr/>
-          <div style='text-align:left;'>
-            <div class$='featured {{category}}'>
-              Featured Project
+        </div>
+        <div class="portfolio-card__progress">
+          <div class$="portfolio-card__progress-info portfolio-card__progress-info--{{ category }}">
+            {{ _getProgressValue(progress.0) }}<br/>
+            available
+          </div>
+          <circular-progress id="progressBar" value="[[ progress.1 ]]" max="[[ progress.0 ]]" type="[[ category ]]">
+            {{ _getProgressValue(progress.1) }}
+            <span class="portfolio-card__progress-subtitle">Invested</span>
+          </circular-progress>
+        </div>
+        <hr/>
+        <div style='text-align:left;'>
+          <div class$='featured {{category}}'>
+            Featured Project
+          </div>
+          <div class="featured_project">
+            <div class="featured_project_expand" on-tap="_handleTap">
+              <i class="material-icons">&#xE89E;</i>
             </div>
-            <div class="featured_project">
-              <div class="featured_project_expand" on-tap="_handleTap">
-                <i class="material-icons">&#xE89E;</i>
-              </div>
-              <div class$='new-project {{_getClassForNewLabel(featured_project)}} fade-in page__header-content'>NEW!</div>
-              <div class='featured_project_name pc_left' on-tap="_handleTap">
-                {{featured}}
-              </div>
-              <div class='featured_project_blurb pc_left project__description' on-tap="_handleTap"
-                style='cursor:pointer;display:{{display_content}}'>
-                  {{featured_content}}
-              </div>
+            <div class$='new-project {{_getClassForNewLabel(featured_project)}} fade-in page__header-content'>NEW!</div>
+            <div class='featured_project_name pc_left' on-tap="_handleTap">
+              {{featured}}
+            </div>
+            <div class='featured_project_blurb pc_left project__description' on-tap="_handleTap"
+                 style='cursor:pointer;display:{{display_content}}'>
+              {{featured_content}}
             </div>
           </div>
         </div>
       </div>
+    </div>
 
       <div data-content="graph" class="project__section js-hidden">
         <div class="project__mini-chart"  on-tap="_handleTap">
@@ -304,55 +306,63 @@
 
   // Prepare IOGT data for line chart.
   // Show user growth over time.
-  function prepareIOGT(dataSet, featured, color){
-    var labels = dataSet.map(function(ary){return ary[0]});
-    var points = dataSet.map(function(ary){return ary[1]});
+  function prepareIOGT(dataSet, featured, color) {
+    var labels = dataSet.map(function (ary) {
+      return ary[0]
+    });
+    var points = dataSet.map(function (ary) {
+      return ary[1]
+    });
 
-    points.map(function(e, i){
-      if(i > 0){
-        points[i] += points[i-1]
+    points.map(function (e, i) {
+      if (i > 0) {
+        points[i] += points[i - 1]
       }
     });
 
     return {
       labels: humanize_labels(labels.slice(Math.max(labels.length - 10, 1))),
-      datasets:[{
+      datasets: [{
         label: featured,
         backgroundColor: color,
-        borderColor:"rgba(255,255,255)",
-        pointBackgroundColor:"rgba(2255,255,255)",
-        pointBorderColor:"#fff",
-        pointHoverBackgroundColor:"#fff",
-        pointHoverBorderColor:"rgba(220,220,220,1)",
-        data:points.slice(Math.max(points.length - 10, 1))
-      }]}
+        borderColor: "rgba(255,255,255)",
+        pointBackgroundColor: "rgba(2255,255,255)",
+        pointBorderColor: "#fff",
+        pointHoverBackgroundColor: "#fff",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
+        data: points.slice(Math.max(points.length - 10, 1))
+      }]
+    }
   }
 
-  function prepareGitCommits(dataSet, featured, color){
+  function prepareGitCommits(dataSet, featured, color) {
     points_labels = gitPointsAndLabels(dataSet);
-    return {labels: points_labels.labels, datasets:[{
-      label: featured,
-      backgroundColor: color,
-      borderColor:"rgba(255,255,255)",
-      pointBackgroundColor:"rgba(2255,255,255)",
-      pointBorderColor:"#fff",
-      pointHoverBackgroundColor:"#fff",
-      pointHoverBorderColor:"rgba(220,220,220,1)",
-      data:points_labels.points
-    }]}
-  };
+    return {
+      labels: points_labels.labels, datasets: [{
+        label: featured,
+        backgroundColor: color,
+        borderColor: "rgba(255,255,255)",
+        pointBackgroundColor: "rgba(2255,255,255)",
+        pointBorderColor: "#fff",
+        pointHoverBackgroundColor: "#fff",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
+        data: points_labels.points
+      }]
+    }
+  }
+  ;
 
   Polymer({
     is: 'portfolio-card',
 
-    handle_response: function(request){
+    handle_response: function (request) {
       this.data = request.detail.response
     },
 
-    ready: function(){
+    ready: function () {
       var that = this;
     },
-    _handleTap:function(){
+    _handleTap: function () {
       var project = this.featured_project;
       var projectType = this.category;
       var projectView = Polymer.dom(document.getElementById('projectView'));
@@ -370,25 +380,25 @@
       $(window).trigger('project-view-modal-opened', project);
     },
     toggleSection: function (event) {
-        var activeMenuItemClass = 'is-active';
-        var activeSectionClass = 'js-active';
-        var inactiveSectionClass = 'js-hidden';
+      var activeMenuItemClass = 'is-active';
+      var activeSectionClass = 'js-active';
+      var inactiveSectionClass = 'js-hidden';
 
-        var dataset = event.target.dataset;
-        var clickedMenuItem = event.target;
+      var dataset = event.target.dataset;
+      var clickedMenuItem = event.target;
 
-        var toHide = this.$$('[data-content="' + dataset.hide + '"]');
-        var toShow = this.$$('[data-content="' + dataset.active + '"]');
-        var activeMenuItem = this.$$('.is-active');
+      var toHide = this.$$('[data-content="' + dataset.hide + '"]');
+      var toShow = this.$$('[data-content="' + dataset.active + '"]');
+      var activeMenuItem = this.$$('.is-active');
 
-        toHide.classList.remove(activeSectionClass);
-        toHide.classList.add(inactiveSectionClass);
+      toHide.classList.remove(activeSectionClass);
+      toHide.classList.add(inactiveSectionClass);
 
-        toShow.classList.remove(inactiveSectionClass);
-        toShow.classList.add(activeSectionClass);
+      toShow.classList.remove(inactiveSectionClass);
+      toShow.classList.add(activeSectionClass);
 
-        clickedMenuItem.classList.add(activeMenuItemClass);
-        activeMenuItem.classList.remove(activeMenuItemClass);
+      clickedMenuItem.classList.add(activeMenuItemClass);
+      activeMenuItem.classList.remove(activeMenuItemClass);
     },
 
     properties: {
@@ -440,45 +450,49 @@
       }
     },
 
-    _content_arrived: function(obj){
-      if(Object.keys(obj).length > 0){
+    _content_arrived: function (obj) {
+      if (Object.keys(obj).length > 0) {
         this.display_content = 'block';
       }
 
     },
 
     // target is 'category' which is one of the portfolio names
-    _computeLocation: function(route, target) {
+    _computeLocation: function (route, target) {
 
       route = target ? route + target : route
       // Special case for mom connect.
       // Does not have it's own root node in firebase
-      if(target == null) {
+      if (target == null) {
         return '/chart_data/' + route;
       } else {
         return route;
       }
     },
 
-    prepare: function(category, featured, dataSet){
-      if(Object.keys(dataSet) == 0){ return; }
+    prepare: function (category, featured, dataSet) {
+      if (Object.keys(dataSet) == 0) {
+        return;
+      }
 
       var color = '';
 
       if (category == 'youth_engagement') {
         color = "rgba(255, 204, 51, 0.2)";
-      } else if(category == 'real_time_information') {
+      } else if (category == 'real_time_information') {
         color = "rgba(255, 143, 171, 0.2)";
       } else {
         color = "rgba(133, 214, 133, 0.2)";
       }
 
-      return prepareGitCommits(dataSet, featured, color );
+      return prepareGitCommits(dataSet, featured, color);
     },
 
-    prepareChartDescription: function(dataSet, featured_slug){
+    prepareChartDescription: function (dataSet, featured_slug) {
       var repos = Object.keys(dataSet);
-      if(repos.length == 0){ return; }
+      if (repos.length == 0) {
+        return;
+      }
 
       var repo = repos[0];
       if ((repo) && (dataSet[repo])) {
@@ -487,40 +501,42 @@
       return '';
     },
 
-    to_mil: function(num){
-      return(cleanToMil(num))
+    to_mil: function (num) {
+      return (cleanToMil(num))
     },
 
-    computeUrl: function(category){
-      if(category){return "/line_chart/" + category}
+    computeUrl: function (category) {
+      if (category) {
+        return "/line_chart/" + category
+      }
     },
 
-    _computeClass: function(wide) {
-       return (!wide) ? 'screen_narrow': 'screen_wide';
+    _computeClass: function (wide) {
+      return (!wide) ? 'screen_narrow' : 'screen_wide';
     },
 
-    _getProgressValue: function(value) {
+    _getProgressValue: function (value) {
       return cleanToMil(value);
     },
-    _prepareChartOptions: function(){
+    _prepareChartOptions: function () {
       return {
         legend: {
           display: true,
           position: 'top',
-          onClick: function(){
+          onClick: function () {
             return false;
           }
         }
       }
     },
-    _getClassForNewLabel: function(featured_project) {
+    _getClassForNewLabel: function (featured_project) {
       if (featured_project.new_investment) {
         return 'show';
       } else {
         return 'hide';
       }
     },
-    _getCategoryIconPath: function(category) {
+    _getCategoryIconPath: function (category) {
       if (category) {
         return '/images/icons/' + category + '.svg';
       }
