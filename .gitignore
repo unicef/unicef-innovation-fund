@@ -10,3 +10,4 @@ app/config/firebase-config.html
 .vagrant/
 *.retry
 .idea/
+public/
