@@ -1,0 +1,40 @@
+<dom-module id='dashboard-top'>
+    <template>
+        <style>
+        </style>
+
+        <iron-media-query query="(min-width: 600px)" query-matches="{{wide}}"></iron-media-query>
+        <section class='mdl-layout__tab-panel is-active' id='scroll-dashboard'>
+            <div class='mdl-grid'>
+                <div class="mdl-layout-spacer"></div>
+                <dashboard-cards></dashboard-cards>
+                <div class="mdl-layout-spacer"></div>
+            </div>
+
+            <div class='demo-ribbon'>
+                <dashboard-business></dashboard-business>
+                <template is="dom-if" if="{{wide}}">
+                    <dashboard-stories></dashboard-stories>
+                </template>
+                <br /><br />
+            </div>
+
+            <template is="dom-if" if="{{wide}}">
+                <div class='dashboard-ribbon'>
+                </div>
+            </template>
+        </section>
+    </template>
+</dom-module>
+<script>
+    Polymer({
+        is: 'dashboard-top',
+        properties: {
+            active: {
+                type: Boolean,
+                value: false,
+                reflectToAttribute: true
+            }
+        }
+    })
+</script>

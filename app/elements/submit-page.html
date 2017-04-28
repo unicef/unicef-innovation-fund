@@ -977,7 +977,7 @@
     </style>
     <style is="custom-style" include="style-fade-in"></style>
     <firebase-document
-      app-name="unicef-skygate-sandbox"
+      app-name="unicef-innovation-fund"
       path="/content/submit_content"
       data="{{submit}}">
     </firebase-document>
@@ -1139,7 +1139,7 @@
               </div>
             </template>
             <div class="submit__startup__icons">
-              <img src="../images/icons/Step_{{stepIndex(index)}}.svg" class="startup__icon" alt="Steps for startup">
+              <img src="../images/icons/{{_getIconName(index)}}.svg" class="startup__icon" alt="Steps for startup">
             </div>
           </template>
         </div>
@@ -1182,7 +1182,7 @@
             </div>
           </template>
           <div class="submit__startup__icons">
-            <img src="../images/icons/Step_{{stepIndex(index)}}.svg" class="startup__icon" alt="Steps for startup">
+            <img src="../images/icons/{{_getIconName(index)}}.svg" class="startup__icon" alt="Steps for startup">
           </div>
         </template>
       </div>
@@ -1192,7 +1192,7 @@
             <div class="startup__step__section">
               <div class="startup__step__wrapper">
                 <div class="startup__step__img">
-                  <img class="startup__icon" src="../images/icons/Step_{{stepIndex(index)}}.svg" alt="Step for startup">
+                  <img class="startup__icon" src="../images/icons/{{_getIconName(index)}}.svg" alt="Step for startup">
                 </div>
                 <div class="startup__step__details">
                   <span class="startup__step__counter">{{step.name}}</span>
@@ -1206,9 +1206,7 @@
                   </ul>
                   <template is="dom-if" if="{{isLastItem(index, 3)}}">
                     <p>
-                      <strong>Please note:</strong> Submissions will be reviewed on a regular basis.
-                      Shortlisted companies will be notified within threemonths after submission.
-                      Only shortlisted vendors will be contacted and thereaer included in the next stage of the process.
+                      <echo-html html$="{{submit.startups.notification.0}}"></echo-html>
                     </p>
                     <a class="startup__submit__button" target="_blank" href="https://www.jotform.us/70894154871162">
                       <span>SUBMIT</span>
@@ -1257,10 +1255,18 @@
         },
         submit: {
           type: Object
+        },
+        icons: {
+          type: Array,
+          value: ['eligibility', 'read-roi', 'faq', 'submit']
         }
       },
       listeners: {
         'iron-form-submit': 'submitEmail'
+      },
+      _getIconName: function (index) {
+        console.log(this.icons, index)
+        return this.icons[index];
       },
       stepIndex: function (index) {
         return index + 1;

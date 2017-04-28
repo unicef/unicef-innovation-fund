@@ -1,0 +1,27 @@
+<dom-module id="hello-about">
+  <template>
+    <style is="custom-style" include="style-fade-in"></style>
+    <firebase-document
+      app-name="unicef-skygate-sandbox"
+      path="content/about/about_description"
+      data="{{about__description}}">
+    </firebase-document>
+    <header class='page__header page__header--blue'>
+      <div class='mdl-grid container' style='position:relative;'>
+        <div class="mdl-layout-spacer"></div>
+        <div class="mdl-cell mdl-cell--8-col">
+          <h1 class='title--big hello__title fade-in'>About</h1>
+          <div class="page__header-content fade-in">
+            <p class="hello__description">{{about__description}}</p>
+          </div>
+        </div>
+        <div class="mdl-layout-spacer"></div>
+      </div>
+    </header>
+  </template>
+  <script>
+    Polymer({
+      is: "hello-about",
+    })
+  </script>
+</dom-module>

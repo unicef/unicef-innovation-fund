@@ -1,0 +1,90 @@
+
+<dom-module id="progress-bar">
+  <template>
+    <style>
+      #progressBar {
+        width: 300px;
+        height:20px;
+        border-style: solid;
+        border-width:1px;
+        border-radius: 5px;
+        position: relative;
+
+
+      }
+
+
+      #scrubber {
+        width:87px;
+        height:20px;
+        position:absolute;
+        border-radius: 5px 0px 0px 5px;
+        top:0px;
+        left:0px;
+
+      }
+
+      #line {
+        position:relative;
+        left:5px;
+        border-radius: 0px;
+      }
+
+    </style>
+
+  <div style='display:flex;justify-content: center;'>
+    <div id="progressBar" class$="progress-{{category}}" style$="width:{{bar_size}}px;">
+      <div id="scrubber"  class$="scrubber-{{category}}" style$="width:{{progress_length}}px;"></div>
+    </div>
+  </div>
+
+  <div style='display:flex;justify-content: center;'>
+    <div id='line' class$="scrubber-{{category}}" style='width:1px;'>&nbsp;</div>
+  </div>
+
+</template>
+
+  <script>
+    Polymer({
+      is: "progress-bar",
+      properties: {
+        category: {
+          value: '',
+          notify: true
+        },
+
+
+        bar_size: {
+          value: ((14.7/100) * window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth)
+        },
+
+        progress_length: {
+          computed: 'computeProgressLength(total, spent, bar_size)'
+        },
+
+      },
+
+      computeProgressLength: function(total, spent, bar_size){
+        var windowsize = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        percent = (spent / (total * 10)) * 1000
+        return (percent / 100) * bar_size
+      },
+
+      listeners: {
+          'iron-resize': "_resizeHandler"
+      },
+
+      behaviors: [
+          Polymer.IronResizableBehavior
+      ],
+
+      _resizeHandler: function(e) {
+        this.bar_size = ((14.7/100) * window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth)
+        this.progress_length = this.computeProgressLength(this.total, this.spent, this.bar_size)
+      }
+
+      // ready: function() {
+      // }
+    })
+  </script>
+</dom-module>

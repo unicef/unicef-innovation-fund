@@ -1,0 +1,545 @@
+<dom-module id='portfolio-card'>
+  <template>
+    <style include="style-fade-in">
+      :host {
+        border-top: 16px solid #ffcc33;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        align-items: stretch;
+        justify-content: space-between;
+
+      }
+
+      @media screen and (min-width: 840px) {
+        :host {
+          min-height: 770px;
+        }
+      }
+
+      :host hr {
+        width: 90%;
+        margin: 16px auto 8px;
+      }
+
+      :host.portfolio-card--real-time-information {
+        border-color: #ff3366;
+      }
+
+      :host.portfolio-card--infrastructure {
+        border-color: #66cc66;
+      }
+
+      .top_container_in_card {
+        padding-top: 16px;
+      }
+
+      .portfolio_card_title {
+        color: #333333;
+        margin: 0;
+      }
+
+      .material-icons {
+        font-size: 18px;
+      }
+
+      .pc_left {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .card_title {
+        height: 30px;
+        line-height: 30px;
+        padding-left: 5px;
+      }
+
+      circular-progress {
+        display: inline-block;
+      }
+
+      chart-line {
+        width: 95%;
+        font-size: 30px;
+        padding-left: 5px;
+      }
+
+      .portfolio-card__progress {
+        text-align: center;
+        margin-bottom: 32px;
+        margin-top: 16px;
+      }
+
+      .portfolio-card__progress-info {
+        position: relative;
+        margin-bottom: 16px;
+      }
+
+      .portfolio-card__progress-info::before {
+        display: inline-block;
+        content: '';
+        width: 3px;
+        height: 18px;
+        background-color: #ffcc33;
+        position: absolute;
+        left: 49%;
+        bottom: -16px;
+      }
+
+      .portfolio-card__progress-info--real_time_information::before {
+        background-color: #ff3366;
+      }
+
+      .portfolio-card__progress-info--infrastructure::before {
+        background-color: #66cc66;
+      }
+
+      .portfolio-card__progress-info--knowledge_products::before {
+        background-color: #33cccc;
+      }
+
+      .portfolio-card__progress-subtitle, .portfolio-card__progress-info {
+        text-transform: uppercase;
+        font-size: 14px;
+        color: black;
+        font-weight: 600;
+        line-height: 1.3em;
+      }
+
+      .portfolio-card__progress-subtitle {
+        display: block;
+        margin-top: 0.3em;
+      }
+
+      .portfolio-card__icon {
+        float: right;
+      }
+
+      .portfolio-card__icon i {
+        vertical-align: -1px;
+      }
+
+      .icon-info {
+        color: #3366CB;
+      }
+
+    </style>
+
+    <style is="custom-style">
+      :root {
+        --paper-tooltip: {
+          font-size: 14px;
+          width: auto;
+        };
+      }
+
+      .project__switch {
+        cursor: pointer;
+        display: inline-block;
+        font-size: 0.85rem;
+        list-style-type: none;
+        margin-right: 2.5rem;
+        transition: all 0.5s;
+        text-transform: uppercase;
+      }
+
+      .project__section {
+        transition: all 0.5s ease-in-out;
+      }
+
+      @media (max-width: 840px) {
+        .project__header {
+          background-color: #F1F2F2;
+          box-shadow: 0 -10px 0 0 var(--portfolio-card-lead-color);
+          margin: 10px 0 0;
+          padding-bottom: 0.6rem;
+          padding-left: 1.5rem;
+          padding-top: 1rem;
+        }
+
+        .is-active {
+          box-shadow: 0 2px 0 0 var(--portfolio-card-lead-color);
+        }
+
+        .js-active {
+          opacity: 1;
+          position: relative;
+          transform: translateY(0);
+          visibility: visible;
+        }
+
+        .js-hidden {
+          opacity: 0;
+          position: absolute;
+          transform: translateY(10%);
+          visibility: hidden;
+        }
+
+        .project__section {
+          padding-bottom: 2rem;
+          padding-top: 2rem;
+        }
+
+        .project__description {
+          margin-bottom: 16px;
+        }
+      }
+
+      .project__mini-chart {
+        cursor: pointer;
+      }
+
+      .new-project {
+        background-color: #3366CA;
+        font-size: 14px;
+        color: white;
+        display: block;
+        width: 30px;
+        padding: 1px 4px 1px 4px;
+        margin-left: 15px;
+      }
+
+      .new-project.hide {
+        display: none;
+      }
+
+      .categoryIcon {
+        padding-left: 16px;
+      }
+
+      .mdl-grid .title_card {
+        text-align: left;
+      }
+    </style>
+
+    <iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query>
+    <iron-media-query full query="print" query-matches="{{print}}"></iron-media-query>
+
+
+    <div class$="{{_computeClass(wide)}}">
+      <ul class="mdl-layout__cell mdl-cell--hide-desktop project__header">
+        <h2 class="title--medium">{{phrase}}</h2>
+        <li on-tap="toggleSection" class="project__switch is-active" data-active="description" data-hide="graph">
+          Description
+        </li>
+        <li on-tap="toggleSection" class="project__switch" data-active="graph" data-hide="description">Graph</li>
+      </ul>
+      <div data-content="description" class="project__section js-active">
+        <div class='top_container_in_card hidden--tablet'>
+          <img class="categoryIcon" src$="{{ _getCategoryIconPath(category) }}" width="80">
+          <div class='mdl-grid'>
+            <div class='mdl-cell mdl-cell--12-col title_card'>
+              <span class$='portfolio_card_title'>{{phrase}}</span>
+              <div class="portfolio-card__icon">
+                <i id="tooltip" class="icon-info"></i>
+              </div>
+            </div>
+          </div>
+          <div>
+            <paper-tooltip class="custom" for="tooltip" offset="0">{{db_tooltip}}</paper-tooltip>
+          </div>
+        </div>
+        <div class="portfolio-card__progress">
+          <div class$="portfolio-card__progress-info portfolio-card__progress-info--{{ category }}">
+            {{ _getProgressValue(progress.0) }}<br/>
+            available
+          </div>
+          <circular-progress id="progressBar" value="[[ progress.1 ]]" max="[[ progress.0 ]]" type="[[ category ]]">
+            {{ _getProgressValue(progress.1) }}
+            <span class="portfolio-card__progress-subtitle">Invested</span>
+          </circular-progress>
+        </div>
+        <hr/>
+        <div style='text-align:left;'>
+          <div class$='featured {{category}}'>
+            Featured Project
+          </div>
+          <div class="featured_project">
+            <div class="featured_project_expand" on-tap="_handleTap">
+              <i class="material-icons">&#xE89E;</i>
+            </div>
+            <div class$='new-project {{_getClassForNewLabel(featured_project)}} fade-in page__header-content'>NEW!</div>
+            <div class='featured_project_name pc_left' on-tap="_handleTap">
+              {{featured}}
+            </div>
+            <div class='featured_project_blurb pc_left project__description' on-tap="_handleTap"
+                 style='cursor:pointer;display:{{display_content}}'>
+              {{featured_content}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div data-content="graph" class="project__section js-hidden">
+        <div class="project__mini-chart"  on-tap="_handleTap">
+          <div class='growth_rate pc_left'>
+            {{ prepareChartDescription(dataSet, featured_slug) }}
+          </div>
+          <chart-line data="[[prepare(category, featured, dataSet)]]" options=[[_prepareChartOptions()]]></chart-line>
+        </div>
+        <firebase-document
+          app-name="unicef-skygate-sandbox"
+          path="/content/db/{{tooltip_target}}"
+          data="{{db_tooltip}}">
+        </firebase-document>
+
+        <firebase-document
+          app-name="unicef-skygate-sandbox"
+          path="/portfolio_projects/{{category}}/projects_hash/{{featured_slug}}"
+          data="{{featured_project}}">
+        </firebase-document>
+
+        <firebase-document
+          app-name="unicef-skygate-sandbox"
+          path="{{location_featured_data}}"
+          data="{{dataSet}}">
+        </firebase-document>
+      </div>
+    </div>
+
+  </template>
+
+</dom-module>
+
+<script>
+
+  // Prepare IOGT data for line chart.
+  // Show user growth over time.
+  function prepareIOGT(dataSet, featured, color) {
+    var labels = dataSet.map(function (ary) {
+      return ary[0]
+    });
+    var points = dataSet.map(function (ary) {
+      return ary[1]
+    });
+
+    points.map(function (e, i) {
+      if (i > 0) {
+        points[i] += points[i - 1]
+      }
+    });
+
+    return {
+      labels: humanize_labels(labels.slice(Math.max(labels.length - 10, 1))),
+      datasets: [{
+        label: featured,
+        backgroundColor: color,
+        borderColor: "rgba(255,255,255)",
+        pointBackgroundColor: "rgba(2255,255,255)",
+        pointBorderColor: "#fff",
+        pointHoverBackgroundColor: "#fff",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
+        data: points.slice(Math.max(points.length - 10, 1))
+      }]
+    }
+  }
+
+  function prepareGitCommits(dataSet, featured, color) {
+    points_labels = gitPointsAndLabels(dataSet);
+    return {
+      labels: points_labels.labels, datasets: [{
+        label: featured,
+        backgroundColor: color,
+        borderColor: "rgba(255,255,255)",
+        pointBackgroundColor: "rgba(2255,255,255)",
+        pointBorderColor: "#fff",
+        pointHoverBackgroundColor: "#fff",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
+        data: points_labels.points
+      }]
+    }
+  }
+  ;
+
+  Polymer({
+    is: 'portfolio-card',
+
+    handle_response: function (request) {
+      this.data = request.detail.response
+    },
+
+    ready: function () {
+      var that = this;
+    },
+    _handleTap: function () {
+      var project = this.featured_project;
+      var projectType = this.category;
+      var projectView = Polymer.dom(document.getElementById('projectView'));
+      var projectModal = Polymer.dom(document.getElementById('projectModal'));
+
+      projectView.node.project = project;
+      projectView.node.type = projectType;
+
+      $(projectModal.node).removeClass("dialog-type-infrastructure");
+      $(projectModal.node).removeClass("dialog-type-real_time_information");
+      $(projectModal.node).removeClass("dialog-type-youth_engagement");
+      $(projectModal.node).addClass('dialog-type-' + projectType);
+
+      projectModal.node.open();
+      $(window).trigger('project-view-modal-opened', project);
+    },
+    toggleSection: function (event) {
+      var activeMenuItemClass = 'is-active';
+      var activeSectionClass = 'js-active';
+      var inactiveSectionClass = 'js-hidden';
+
+      var dataset = event.target.dataset;
+      var clickedMenuItem = event.target;
+
+      var toHide = this.$$('[data-content="' + dataset.hide + '"]');
+      var toShow = this.$$('[data-content="' + dataset.active + '"]');
+      var activeMenuItem = this.$$('.is-active');
+
+      toHide.classList.remove(activeSectionClass);
+      toHide.classList.add(inactiveSectionClass);
+
+      toShow.classList.remove(inactiveSectionClass);
+      toShow.classList.add(activeSectionClass);
+
+      clickedMenuItem.classList.add(activeMenuItemClass);
+      activeMenuItem.classList.remove(activeMenuItemClass);
+    },
+
+    properties: {
+
+      chart_description: {
+        type: String,
+        notify: true
+      },
+
+      category: {
+        value: '',
+        notify: true
+      },
+
+      featured_slug: { // This is the project for the modal
+        value: '',
+        notify: true,
+      },
+
+      location_featured_data: {
+        type: String,
+        computed: "_computeLocation(featured_slug)"
+      },
+
+      featured: {
+        value: '',
+        notify: true
+      },
+
+      featured_content: {
+        observer: '_content_arrived'
+      },
+
+      phrase: {
+        value: '',
+        notify: true
+      },
+
+      display_content: {
+        value: 'none'
+      },
+
+      url: {
+        computed: 'computeUrl(category)'
+      },
+
+      lead: {
+        type: String
+      }
+    },
+
+    _content_arrived: function (obj) {
+      if (Object.keys(obj).length > 0) {
+        this.display_content = 'block';
+      }
+
+    },
+
+    // target is 'category' which is one of the portfolio names
+    _computeLocation: function (route, target) {
+
+      route = target ? route + target : route
+      // Special case for mom connect.
+      // Does not have it's own root node in firebase
+      if (target == null) {
+        return '/chart_data/' + route;
+      } else {
+        return route;
+      }
+    },
+
+    prepare: function (category, featured, dataSet) {
+      if (Object.keys(dataSet) == 0) {
+        return;
+      }
+
+      var color = '';
+
+      if (category == 'youth_engagement') {
+        color = "rgba(255, 204, 51, 0.2)";
+      } else if (category == 'real_time_information') {
+        color = "rgba(255, 143, 171, 0.2)";
+      } else {
+        color = "rgba(133, 214, 133, 0.2)";
+      }
+
+      return prepareGitCommits(dataSet, featured, color);
+    },
+
+    prepareChartDescription: function (dataSet, featured_slug) {
+      var repos = Object.keys(dataSet);
+      if (repos.length == 0) {
+        return;
+      }
+
+      var repo = repos[0];
+      if ((repo) && (dataSet[repo])) {
+        return dataSet[repo].label;
+      }
+      return '';
+    },
+
+    to_mil: function (num) {
+      return (cleanToMil(num))
+    },
+
+    computeUrl: function (category) {
+      if (category) {
+        return "/line_chart/" + category
+      }
+    },
+
+    _computeClass: function (wide) {
+      return (!wide) ? 'screen_narrow' : 'screen_wide';
+    },
+
+    _getProgressValue: function (value) {
+      return cleanToMil(value);
+    },
+    _prepareChartOptions: function () {
+      return {
+        legend: {
+          display: true,
+          position: 'top',
+          onClick: function () {
+            return false;
+          }
+        }
+      }
+    },
+    _getClassForNewLabel: function (featured_project) {
+      if (featured_project.new_investment) {
+        return 'show';
+      } else {
+        return 'hide';
+      }
+    },
+    _getCategoryIconPath: function (category) {
+      if (category) {
+        return '/images/icons/' + category + '.svg';
+      }
+    }
+  });
+</script>

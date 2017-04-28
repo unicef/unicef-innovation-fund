@@ -1,0 +1,271 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="description" content=""><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Polymer Starter Kit"><title>UNICEF Innovation Fund</title><link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons"><link rel="stylesheet" href="fonts/icomoon/style.css"><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700" rel="stylesheet"><meta name="theme-color" content="#ffffff"><link rel="manifest" href="manifest.json"><meta name="msapplication-TileColor" content="#3372DF"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="UNICEF Innovation Fund"><link rel="icon" sizes="16x16" href="favicon.ico"><link rel="icon" sizes="16x16" href="images/touch/favicon-16x16.png"><link rel="icon" sizes="32x32" href="images/touch/favicon-32x32.png"><link rel="icon" sizes="96x96" href="images/touch/favicon-96x96.png"><link rel="icon" sizes="196x196" href="images/touch/favicon-196x196.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="apple-mobile-web-app-title" content="UNICEF Innovation Fund"><link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png"><link rel="apple-touch-icon" sizes="57x57" href="images/touch/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="images/touch/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="76x76" href="images/touch/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="images/touch/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="images/touch/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="images/touch/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="images/touch/apple-icon-152x152.png"><meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png"><link rel="stylesheet" href="//storage.googleapis.com/code.getmdl.io/1.0.1/material.light_blue-blue.min.css"><link rel="stylesheet" href="styles/main.css"><link rel="stylesheet" href="bower_components/owl.carousel/dist/assets/owl.carousel.min.css"><script src="./polyfill.js"></script><script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script><script src="bower_components/jquery/dist/jquery.min.js"></script><script src="bower_components/owl.carousel/dist/owl.carousel.min.js"></script><script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script><script type="text/javascript" src="https://www.google.com/jsapi"></script><script type="text/javascript">
+    google.charts.load('current', {
+      'packages': ['geochart', 'controls', 'corechart'], mapsApiKey: 'AIzaSyCM6pjCYVevJY_kW7STox1s8GUzMBYFvg8'
+    });
+
+    function humanize_label(label) {
+      var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      month = parseInt(label.split(/-/)[1]);
+      human_month = months[month - 1];
+      year_contraction = label.substr(2, 2);
+      return human_month + " '" + year_contraction;
+    }
+
+
+    function humanize_labels(ary) {
+      var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      return ary.map(function(e) {
+        return humanize_label(e);
+      })
+    }
+  </script><link rel="import" href="elements/elements.html"><style is="custom-style" include="shared-styles"></style><style is="custom-style">
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .spacer {
+      -ms-flex: 1 1 0.000000001px;
+      flex: 1;
+      flex-basis: 0.000000001px;
+    }
+
+    neon-animated-pages .iron-selected {
+      position: static;
+    }
+
+    .owl-nav {
+      display: none;
+    }
+
+    .owl-carousel .item {
+      padding: 1rem;
+      width: 400px;
+      height: 600px;
+    }
+
+    ul {
+      padding: 0;
+      list-style-type: none;
+    }
+
+    .dashboard {
+      background-color: #EDEDED;
+      color: black;
+      height: auto;
+    }
+
+    #mainToolbar .dashboard {
+      background-color: #EDEDED;
+      height: auto;
+    }
+
+    .all_projects {
+      background-color: #3366CB;
+    }
+
+    #mainToolbar .all_projects,
+    #mainToolbar.about,
+    #mainToolbar.news {
+      background-color: #3366CB;
+    }
+
+    #mainToolbar.submit {
+      background-color: #333333;
+    }
+
+    .news,
+    .about,
+    .submit {
+      background-color: #333333;
+    }
+
+    @media only screen and (max-width:720px) {
+      .mainView paper-tabs {
+        display: none;
+      }
+    }
+
+    @media only screen and (min-width:721px) {
+      .mainView paper-tabs {
+        display: inline;
+      }
+    }
+
+    .mainView[wide-layout] paper-tabs {
+      display: inline;
+    }
+
+    .mainView #paperToggle {
+      display: inline;
+    }
+
+    .mainView[wide-layout] #paperToggle {
+      display: none;
+    }
+
+    .menu-item {
+      font-family: Source Sans Pro;
+    }
+
+    .menu-item.iron-selected {
+      background-color: #0099FF;
+      color: white;
+    }
+
+    .project-view__dialog-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      color: #333;
+      font-size: 16px;
+      z-index: 1;
+      margin: 0;
+      padding: 0;
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .project-view__dialog .project-view__dialog-scrollable {
+      margin-bottom: 0 !important;
+    }
+
+    .dialog-type-infrastructure {
+      border-bottom: 5px solid #66cc66;
+    }
+
+    .dialog-type-real_time_information {
+      border-bottom: 5px solid #ff3366;
+    }
+
+    .dialog-type-youth_engagement {
+      border-bottom: 5px solid #ffcc33;
+    }
+
+    .app-name {
+      cursor: pointer;
+    }
+
+    .content {
+      min-height: calc(100vh - 64px);
+      height: auto;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .app-menu .menu-item{
+      margin: 0;
+      padding: 5px 10px;
+      padding-left: 16px;
+    }
+
+    #drawerToolbar .menu-name{
+      font-weight: 400;
+    }
+  </style></head><body unresolved=""><template is="dom-bind" id="app"><iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query><iron-media-query query="(min-width: 400px)" query-matches="{{wide}}"></iron-media-query><iron-media-query query="(min-width: 1040px)" query-matches="{{wide}}"></iron-media-query><div class="mainView" wide-layout$="{{wide}}"><firebase-config></firebase-config><paper-drawer-panel id="paperDrawerPanel" force-narrow="true" drawer-width="320px"><paper-scroll-header-panel drawer="" fixed=""><paper-toolbar id="drawerToolbar"><span class="menu-name">UNICEF INNOVATION FUND</span></paper-toolbar><paper-menu class="app-menu" selected="[[selected]]"><p class="menu-item" id="dashboard"><span>DASHBOARD</span></p><p class="menu-item" id="all_projects"><span>ALL PROJECTS</span></p><p class="menu-item" id="news"><span>NEWS</span></p><p class="menu-item" id="about"><span>ABOUT</span></p><p class="menu-item" id="submit"><span>SUBMIT</span></p></paper-menu></paper-scroll-header-panel><paper-scroll-header-panel main="" id="headerPanelMain" fixed=""><paper-toolbar id="mainToolbar" class="dashboard"><paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle=""></paper-icon-button><span class="space"></span><div class="middle middle-container" style="width:100%"><div class="app-name" on-click="openOverlay">UNICEF INNOVATION FUND</div><div class="spacer"></div><paper-tabs id="main-menu" selected="[[selected]]" class="bottom self-end"><paper-tab id="dashboard">DASHBOARD</paper-tab><paper-tab id="all_projects">ALL PROJECTS</paper-tab><paper-tab id="news">NEWS</paper-tab><paper-tab id="about">ABOUT</paper-tab><paper-tab id="submit">SUBMIT</paper-tab></paper-tabs></div><div class="bottom bottom-container right horizontal layout"></div></paper-toolbar><div class="content"><modal-warning></modal-warning><neon-animated-pages style="z-index:0;" class="flex" selected="[[selected]]" exit-animation="fade-out-animation" entry-animation="slide-from-left-animation"><neon-animatable id="my_dashboard"><dashboard-top></dashboard-top></neon-animatable><neon-animatable><all-projects></all-projects></neon-animatable><neon-animatable><news-page></news-page></neon-animatable><neon-animatable><my-about></my-about></neon-animatable><neon-animatable><submit-page></submit-page></neon-animatable></neon-animated-pages><mdl-footer></mdl-footer></div></paper-scroll-header-panel></paper-drawer-panel><paper-toast id="toast"><span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span></paper-toast><paper-dialog class="project-view__dialog" id="projectModal" entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop=""><button class="project-view__dialog-close" onclick="projectModal.close()"><i class="material-icons">&#xE5CD;</i></button><paper-dialog-scrollable class="project-view__dialog-scrollable container"><project-view id="projectView"></project-view></paper-dialog-scrollable></paper-dialog></div><overlay-intro></overlay-intro></template><script src="scripts/app.js"></script><script>
+    "use strict"
+    var app = document.getElementById('app');
+    app.selected = 0;
+
+    window.addEventListener('WebComponentsReady', function(e) {
+      // A very hacking alternative to a router.
+      // Check for /#/about
+      // Then click the appropriate tab to view the page
+      var requested_tab = window.location.hash.replace('#/', '');
+      if (requested_tab.match(/[a-zA-Z]/)) {
+        setTimeout(function() {
+          $('paper-tab#' + requested_tab).click()
+        }, 2000)
+      }
+
+      $('paper-tabs#main-menu paper-tab').click(function() {
+        $('#mainContainer').scrollTop(0);
+        app.selected = $('paper-tabs#main-menu paper-tab').index(this);
+        app.page_id = this.id;
+        // Update css settings per tab
+        page_change(this.id);
+      });
+
+      $('.app-menu .menu-item').click(function() {
+        app.selected = $('.app-menu .menu-item').index(this);
+        app.page_id = this.id;
+        document.querySelector('paper-drawer-panel').togglePanel();
+        // Update css settings per tab
+        page_change(this.id);
+      });
+
+
+      $('.app-name').on('click', function() {
+        var overlay = document.querySelector('overlay-intro');
+        overlay.showOverlay(0);
+      });
+
+      projectModal.addEventListener('iron-overlay-opened', function() {
+        $(window).trigger('paper-dialog-modal-opened');
+      })
+    });
+
+    function page_change(page_id) {
+      // Roll your own routing hack.
+      // When menu tab is clicked, add "/#/" + page_id (about)
+      window.location.href = "/#/" + page_id
+      $(document).trigger('page-changed', page_id);
+      // Hardcoding arrays is not good.
+      // var ar = ['dashboard', 'all_projects', 'news', 'about', 'submit'];
+      // This should be a better way to iterate through tabs
+      var tab_names = Array.prototype.slice.call($('paper-tab')).map(function(e) {return e.id})
+      tab_names.forEach(function(e) {
+        $('#mainToolbar').removeClass(e);
+        $('#drawer').removeClass(e);
+        $('.link').removeClass(e);
+        $('hello-all-projects').removeClass(e);
+        $('hello-about').removeClass(e);
+        $('hello-news').removeClass(e);
+      });
+
+      $('#mainToolbar').addClass(page_id);
+      $('#drawer').addClass(page_id);
+      $('.link').addClass(page_id);
+      if (page_id == 'all_projects') {
+        $('hello-all-projects').addClass(page_id);
+      }
+      if (page_id == 'about') {
+        $('hello-about').addClass(page_id);
+      }
+      if (page_id == 'news') {
+        $('hello-news').addClass(page_id);
+      }
+    };
+
+    var menu_navigate = function (element, event) {
+      var menu = element.getAttribute('data-menu');
+      var selectedMenu = $('paper-tabs#main-menu paper-tab#'+menu);
+      var app = document.getElementById('app');
+
+      if (menu && selectedMenu) {
+        event.preventDefault();
+        app.selected = $('paper-tabs#main-menu paper-tab').index(selectedMenu);
+        app.page_id = menu;
+        page_change(menu);
+      }
+    };
+
+
+  </script><script src="utility.js"></script><script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-79740312-1', 'auto');
+    ga('send', 'pageview');
+  </script></body></html>

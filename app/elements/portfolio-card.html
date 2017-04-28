@@ -279,19 +279,19 @@
           <chart-line data="[[prepare(category, featured, dataSet)]]" options=[[_prepareChartOptions()]]></chart-line>
         </div>
         <firebase-document
-          app-name="unicef-skygate-sandbox"
+          app-name="unicef-innovation-fund"
           path="/content/db/{{tooltip_target}}"
           data="{{db_tooltip}}">
         </firebase-document>
 
         <firebase-document
-          app-name="unicef-skygate-sandbox"
+          app-name="unicef-innovation-fund"
           path="/portfolio_projects/{{category}}/projects_hash/{{featured_slug}}"
           data="{{featured_project}}">
         </firebase-document>
 
         <firebase-document
-          app-name="unicef-skygate-sandbox"
+          app-name="unicef-innovation-fund"
           path="{{location_featured_data}}"
           data="{{dataSet}}">
         </firebase-document>

@@ -1,0 +1,283 @@
+<dom-module id='portfolio-project'>
+  <template>
+    <style>
+
+      :host {
+        background-color: #fff;
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        transition: all .175s ease-in;
+        margin-bottom: 0;
+        height: 125px;
+        position: relative;
+        bottom: 0;
+      }
+
+      :host.is-expanded {
+        bottom: -16px;
+      }
+
+      :host.is-expanded .portfolio-project__icon {
+        opacity: 0 !important;
+      }
+
+      .portfolio-project--new .portfolio-project__icon {
+          bottom: 0;
+      }
+
+      ul{
+        list-style: none;
+      }
+
+      .portfolio-project__content {
+        padding: 16px 32px;
+        line-height: 1.5;
+        height: 100%;
+        box-sizing: border-box;
+        position: relative;
+      }
+
+      .portfolio-project__container {
+        transition: box-shadow .175s ease-in;
+        cursor: pointer;
+        height: 100%;
+      }
+
+
+      .portfolio-project__status--hidden {
+          display: none;
+      }
+
+      .portfolio-project__status--visible {
+          animation-delay: 1s;
+          animation-duration: 1s;
+          animation-fill-mode: forwards;
+          animation-name: fadeIn;
+          font-weight: 600;
+          position: absolute;
+          opacity: 0;
+          right: 5px;
+          top: 17px;
+      }
+
+      @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
+      }
+
+      .portfolio-project__sub-text {
+        color:gray;
+        padding-left: 18px;
+        position: relative;
+      }
+
+      .portfolio-project__status {
+        color: #3366CB;
+      }
+
+      .portfolio-project__name {
+        text-align: left;
+        margin: 0;
+        padding: 0;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: block;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .portfolio-project__icon {
+        position: absolute;
+        top: 17px;
+        right: 16px;
+        opacity: 0;
+        transition: opacity .175s ease-out;
+      }
+
+      :host:hover .portfolio-project__icon {
+        opacity: 1;
+      }
+
+      .portfolio-project__sub-text.status-active::before, .portfolio-project__sub-text.status-inactive::before {
+        content: '';
+        display: block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: #3366CB;
+        border: 1px solid #3366CB;
+        box-sizing: border-box;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .portfolio-project__sub-text.status-inactive::before {
+        background: transparent;
+      }
+    </style>
+
+    <div class-name='divider divider--{{category}} portfolio-project__container mdl-shadow--4dp' on-tap="_handleTap" on-mouseenter='_onMouseEnter' on-mouseleave='_onMouseLeave'>
+        <strong>{{project}}</strong>
+      <div class$="portfolio-project__content {{ newProjectClass }}">
+       <div class$="{{newProjectTextClass}}">NEW!</div>
+        <div class="portfolio-project__icon">
+          <i class="material-icons">&#xE56B;</i>
+        </div>
+        <div title="{{item.name}}" class='description__title--small portfolio-project__name'>
+          <span data-page="{{category}}"><b>{{item.name}}</b></span>
+        </div>
+        <div class='description__text--small description__text--country'>
+          {{item.country}}
+        </div>
+        <div class='description__text--small description__text--amount'>
+          {{to_mil(item.amount)}}
+        </div>
+        <div class$='portfolio-project__sub-text portfolio-project__status {{ _getStatusClass(item.investment_status) }}'>
+          {{_getProjectStatus(item.investment_status)}}
+        </div>
+      </div>
+    </div>
+
+  </template>
+</dom-module>
+
+<script>
+
+  Polymer({
+    is: 'portfolio-project',
+
+    properties: {
+      category: {
+        value: '',
+        notify: true
+      },
+      newProjectClass: {
+          value: ''
+      },
+      newProjectTextClass: {
+          value: 'portfolio-project__status--hidden'
+      }
+    },
+
+    attributeChanged: function() {
+        if (this.item.new_investment) {
+            this.newProjectClass = 'portfolio-project--new';
+            this.newProjectTextClass = 'portfolio-project__status--visible'
+        }
+    },
+
+    to_mil: function(num){
+      return(cleanToMil(num.replace(/\$|,/g, '')))
+    },
+
+    _onMouseEnter: function(e) {
+      this.$$('.portfolio-project__container').classList.add('mdl-shadow--8dp');
+    },
+
+    _onMouseLeave: function(e) {
+      this.$$('.portfolio-project__container').classList.remove('mdl-shadow--8dp');
+    },
+
+    _handleTap: function(e){
+      var that = this;
+      var projectViewContainer = document.querySelector('#projectListProjectViewContainer');
+
+      if (!this.classList.contains('is-expanded')) {
+        var expandedProjects = document.querySelectorAll('portfolio-project.is-expanded');
+        if (expandedProjects && expandedProjects.length) {
+          var count = 0;
+          for(var i = 0; i < expandedProjects.length; i++){
+            var project = expandedProjects[i];
+            project.deactivate(function(){
+              count++;
+              if (count == expandedProjects.length) {
+                //Delay opening of new project
+                setTimeout(function(){
+                  that.expandProjectView(that);
+                }, 300);
+              }
+            });
+          }
+        } else {
+          this.expandProjectView(this);
+        }
+
+      } else {
+        this.deactivate();
+      }
+    },
+    deactivate: function(callback) {
+      if (!this.classList.contains('is-expanded')) {
+        return;
+      }
+      this.classList.remove('is-expanded');
+      var projectViewContainer = document.querySelector('#projectListProjectViewContainer');
+      var projectView = document.querySelector('#projectListProjectView');
+      projectViewContainer.classList.remove('is-active');
+      projectView.project = {};
+      projectView.type = null;
+      this.style.marginBottom = 0;
+      projectView.onDomChange = null;
+      projectViewContainer.classList.remove('is-active');
+      var removeProjectViewClass;
+      removeProjectViewClass = (function(){
+        if (typeof callback == 'function') {
+          callback();
+        }
+        this.removeEventListener('transitionend', removeProjectViewClass);
+      }).bind(this);
+      this.addEventListener('transitionend', removeProjectViewClass);
+    },
+    expandProjectView: function(relativeElement) {
+      var projectViewContainer = document.querySelector('#projectListProjectViewContainer');
+      var projectView = document.querySelector('#projectListProjectView');
+      var posY = $(relativeElement).position().top + $(relativeElement).height();
+      var posX = $(relativeElement).position().left + $(relativeElement).width() / 2;
+      $(projectViewContainer).css({top: posY, 'transform-origin': posX+'px -130px'});
+
+      var scrollTo = $(relativeElement).position().top + $(this).offsetParent().position().top - 16;
+
+      $('#mainContainer').animate({scrollTop: scrollTo});
+
+      projectView.project = this.item;
+      projectView.type = this.category;
+      this.classList.add('is-expanded');
+      projectViewContainer.classList.add('is-active');
+      $(this).css({marginBottom: projectView.offsetHeight + 8});
+
+      projectView.onDomChange = (function(){
+        $(this).css({marginBottom: projectView.offsetHeight + 8});
+      }).bind(this);
+
+      $(window).trigger('project-view-modal-opened', this.item);
+    },
+    _getProjectStatus: function(status) {
+      switch(status) {
+        case "active":
+          return "Current Investment";
+        case "inactive":
+          return "Past Investment";
+        case "completed":
+          return "Funding Completed";
+        default:
+          return "";
+      }
+    },
+    _getStatusClass: function(status) {
+      switch(status) {
+        case "active":
+          return "status-active";
+        case "inactive":
+          return "status-inactive";
+        case "completed":
+          return "status-completed";
+        default:
+          return "";
+      }
+    }
+  });
+
+</script>

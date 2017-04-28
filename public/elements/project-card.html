@@ -1,0 +1,341 @@
+<dom-module id='project-card'>
+  <template>
+    <style include="style-fade-in">
+      :host {
+        width: 100%;
+        height: 100%;
+      }
+
+      ul{
+        list-style: none;
+      }
+
+      .project-card__container {
+        background-color: #fff;
+        height: 100%;
+        cursor: pointer;
+        position: relative;
+        box-sizing: border-box;
+        padding-bottom: 132px;
+        position: relative;
+        transition: padding .175s ease-out;
+      }
+
+      .project-card__container.has-selected {
+        padding-bottom: 0;
+      }
+
+      .project-card__info {
+        transition: height .175s ease-out;
+        height: 132px;
+        border-top: 1px solid #e9e9e9;
+        position: absolute;
+        bottom: 0;
+        left: 16px;
+        right: 16px;
+        overflow: hidden;
+        padding: 0 16px;
+        margin: 0 -16px;
+      }
+
+      .project-card__info .vcenter__container {
+        height: 100px;
+      }
+
+      .project-card__info::after {
+        height: 32px;
+        content: '\e900';
+        font-family: 'icomoon';
+        display: block;
+        line-height: 32px;
+        text-align: center;
+        font-size: 20px;
+        border-top: 1px solid #e9e9e9;
+        margin: 0 -16px;
+      }
+
+      .project-card__info-value {
+        font-size: 22px;
+        font-weight: 400;
+      }
+
+      .card__info-value,
+      .card__info-value span {
+        font-size: 19px;
+        font-weight: 400;
+      }
+
+      .project-card__container.has-selected .project-card__info {
+        height: 0;
+      }
+
+      .project-card__body {
+        padding: 16px;
+        position: relative;
+      }
+
+      .project-card__title {
+        margin-top: 16px;
+      }
+
+      .project-card__icon {
+        width:100px;
+        height:100%
+      }
+
+      circular-progress {
+        --circular-progress-width: 60px;
+        --circular-progress-height: 60px;
+        --circular-progress-padding: 10px;
+      }
+
+      .project-card__progress-value {
+        font-size: 16px;
+        display: block;
+        line-height: 1em;
+      }
+
+      .project-card__progress-subtitle {
+        font-size: 10px;
+        color: #333;
+        display: block;
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: -0.33em;
+      }
+
+      .project-card__counter {
+          display: block;
+          font-size: 0.95rem;
+          line-height: 0.95;
+          position: absolute;
+          right: 15px;
+          text-align: right;
+          top: 20px;
+          width: 25%;
+      }
+
+      .project-card__counter::first-letter {
+          font-size: 1.7rem;
+      }
+
+      .card__info-icon {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        left: 50%;
+        margin: 0;
+        opacity: 0;
+        padding: 0.2rem;
+        position: absolute;
+        top: 1%;
+        transition: opacity 0.2s;
+        z-index: 10;
+      }
+
+      .card__project-number {
+          font-size: 1.35rem;
+      }
+
+      .card__icon {
+        float: right;
+        margin-right: 10%;
+        position: relative;
+      }
+
+      .card__icon i {
+        vertical-align: -1px;
+      }
+
+      .is-visible {
+          opacity: 1;
+      }
+    </style>
+
+    <style is="custom-style">
+      :root {
+        --paper-tooltip: {
+          font-size: 11px;
+        };
+      }
+    </style>
+
+    <firebase-document
+      app-name="unicef-skygate-sandbox"
+      path="{{ _getPath(category) }}"
+      data="{{ projects }}">
+    </firebase-document>
+
+    <firebase-document
+      app-name="unicef-skygate-sandbox"
+      path="/budget"
+      data="{{financials}}">
+    </firebase-document>
+
+     <firebase-document
+      app-name="unicef-skygate-sandbox"
+      path="/content/db/{{tooltip_target}}"
+      data="{{db_tooltip}}">
+     </firebase-document>
+
+    <div class$="project-card__container mdl-shadow--4dp {{ _hasSelectedClass(selected) }} {{ _isActiveClass(selected, category) }}">
+      <div class-name="project-card__edge edge edge--{{category}}"></div>
+      <div class="project-card__body">
+        <img class="project-card__icon" src$="{{ _getCategoryIconPath(category) }}">
+        <span class-name="project-card__counter fade-in delayed-1-2 counter--{{category}}">{{ _getNewProjectsCount(projects) }}</span>
+        <div style='project-card__content'>
+          <h4 class="project-card__title">{{phrase}}</h4>
+          <span class="description__text--small">{{content}}</span>
+        </div>
+      </div>
+      <div class="project-card__info">
+        <div class="vcenter__container">
+          <div class="vcenter">
+            <div class="card__info-value">
+              <span class="card__project-number">{{ _getProjectInfoValue(projects) }}</span>
+              <template id="projectTooltip" is="dom-if" if="{{!_isObjectEmpty(db_tooltip)}}">
+                <div class="card__icon">
+                  <i id="tooltipIcon" class="icon-info"></i>
+                </div>
+                <div>
+                  <paper-tooltip class="custom" for="tooltipIcon">{{db_tooltip}}</paper-tooltip>
+                </div>
+              </template>
+            </div>
+          </div>
+          <div class="vcenter">
+            <div class="project-card__progress">
+              <template id="cardProgressContainer" is="dom-if" if="[[ _canShowProgress(financials, type) ]]">
+                <circular-progress id="cardProgress" class="project-card__progress-item" value="[[ _getProgressValue(financials, type) ]]" max="[[ _getProgressMax(financials, type) ]]" type="[[ category ]]">
+                  <span class="project-card__progress-value">{{ _getProgressContent(financials, type) }}</span>
+                </circular-progress>
+                <span class="project-card__progress-subtitle">Invested</span>
+              </template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+</dom-module>
+
+<script>
+
+  Polymer({
+    is: 'project-card',
+    handle_response: function(request){
+      this.data = request.detail.response
+    },
+    properties: {
+      content: {
+        type: String,
+        value: ""
+      },
+      category: {
+        value: '',
+        notify: true
+      },
+      phrase: {
+        value: '',
+        notify: true
+      },
+      selected: {
+        type: String,
+        notify: true
+      }
+    },
+    listeners: {
+      'tap': '_handleTap'
+    },
+    ready: function() {
+      var that = this;
+    },
+    _getPath: function(category) {
+      return 'portfolio_projects/' + category + '/projects_hash';
+    },
+    _isObjectEmpty: function(obj) {
+      for(var prop in obj) {
+        if(obj.hasOwnProperty(prop)) {
+          return false;
+        }
+      }
+
+      return JSON.stringify(obj) === JSON.stringify({});
+    },
+    _handleTap: function(e){
+      if (this.selected != this.category) {
+        this.set('selected', this.category);
+      } else {
+        this.set('selected', null);
+        var projectList = document.getElementById('projectList');
+        projectList.classList.remove('is-loaded');
+      }
+    },
+    _isActiveClass: function(selected, category) {
+      return selected == category ? 'is-active' : ''
+    },
+    _hasSelectedClass: function(selected) {
+      return selected ? 'has-selected' : ''
+    },
+    _canShowProgress: function(financials, type){
+      if(!financials || !financials.spents || !financials.totals || !type) {
+        return false;
+      }
+
+      var spent = financials.spents[type];
+      var total = financials.totals[type];
+
+      if(!spent || !total){
+        return false;
+      }
+
+      return true;
+    },
+    _getProgressValue: function(financials, type) {
+      return financials.spents[type];
+    },
+    _getProgressMax: function(financials, type) {
+      return financials.totals[type];
+    },
+    _getProgressContent: function(financials, type) {
+      return cleanToMil(financials.spents[type]);
+    },
+    _getProjectInfoValue: function(projects) {
+      var projectsArray = [];
+      if (!Array.isArray(projects)) {
+        projectsArray = Object.keys(projects).map(function (key) { return projects[key]; });
+      } else {
+        projectsArray = projects;
+      }
+      if (!projectsArray.length) {
+        return '';
+      }
+      return projectsArray.length + ' project' + (projectsArray.length > 1 ? 's' : '');
+    },
+    _getNewProjectsCount: function (projects) {
+      projectsArray = Object.keys(projects);
+      if (projectsArray.length == 0) {
+        return '';
+      }
+
+      var count = 0;
+
+      for(var p in projectsArray) {
+        var project = projects[projectsArray[p]];
+        if (project.new_investment) {
+          count++;
+        }
+      }
+
+      if (count === 1) {
+        return count + " new project!";
+      } else if (count > 1) {
+        return count + " new projects!";
+      }
+    },
+    _getCategoryIconPath: function(category) {
+      if (category) {
+        return '/images/icons/' + category + '.svg';
+      }
+    },
+  })
+</script>

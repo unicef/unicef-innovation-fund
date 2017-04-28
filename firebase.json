@@ -13,16 +13,16 @@
   },
   "config": {
     "production": {
-      "api_key": "AIzaSyAlcYA8sSa_2i1pf290zs0QquXujrG29jg",
-      "auth_domain": "unicef-skygate-sandbox.firebaseapp.com",
-      "database_url": "https://unicef-skygate-sandbox.firebaseio.com",
-      "name": "unicef-skygate-sandbox"
+      "api_key": "AIzaSyDCAbha2hrDSEMjQEUXLyOSPRR9WLXorJo",
+      "auth_domain": "unicef-innovation-fund.firebaseapp.com",
+      "database_url": "https://unicef-innovation-fund.firebaseio.com",
+      "name": "unicef-innovation-fund"
     },
     "staging": {
-      "api_key": "AIzaSyAlcYA8sSa_2i1pf290zs0QquXujrG29jg",
-      "auth_domain": "unicef-skygate-sandbox.firebaseapp.com",
-      "database_url": "https://unicef-skygate-sandbox.firebaseio.com",
-      "name": "unicef-skygate-sandbox"
+      "api_key": "AIzaSyBoZQn8DD6KfFRAr0tWOUJeK0cNNEMngSk",
+      "auth_domain": "innovation-fund2.firebaseapp.com",
+      "database_url": "https://innovation-fund2.firebaseio.com",
+      "name": "unicef-innovation-fund"
     }
   }
 }
