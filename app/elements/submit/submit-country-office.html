@@ -1,611 +1,700 @@
 <dom-module id="submit-country-office">
-  <template>
-    <style is="custom-style">
-        .container {
-            width: calc(100% - 2*226px);
-            max-width: 1100px;
-            position: relative;
-            text-align: center;
-        }
-        .submit__office {
-            text-align: left;
-            padding-top: 40px;
-        }
-        .section__confirm-email {
-            cursor: pointer;
-        }
-        .submit__container {
-            position: relative;
-        }
-        .section__description, .section__text {
-            color: #5D5D5D;
-        }
-        .section__description {
-            text-align: center;
-            font-size: 1.595rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-            margin-top: 1rem;
-        }
-        .section__description-startup p, .section__subheader-startup p {
-            margin-top: 0;
-            font-size: 1.35rem;
-            font-weight: 400;
-            line-height: 1.85;
-            text-align: left;
-        }
-        .section__description-startup br {
-            line-height: 3.3;
-        }
-        .section__description b {
-            display: inline;
-            font-size: 1.35rem;
-            font-weight: 700;
-            line-height: 1.8;
-            margin-top: 1rem;
-            text-align: left;
-        }
-        .section__submit {
-            text-align: center;
-            margin-bottom: 100px;
-        }
-        .section__submit-link {
-            background-color: #7348B3;
-            color: white;
-            font-size: 1.15rem;
-            font-weight: 400;
-            height: 44px;
-            line-height: 2.75;
-            margin-top: 2.5rem;
-            max-width: 260px;
-            text-transform: uppercase;
-            width: 100%;
-        }
-        .section__submit-link:link {
-            background-color: #7348B3;
-        }
-        .section__submit-link:visited {
-            background-color: #7348B3;
-        }
-        .section__submit-link:hover {
-        box-shadow: 2px 2px 10px 0 #999999;
-        z-index: 1;
-        }
-        .section__submit-link:active {
-            background-color: #7348B3;
-        }
-        .section__submit-link:focus {
-            background-color: #7348B3;
-        }
-        .section__text, .container .section__text {
-            font-size: 1.35rem;
-            font-weight: 400;
-            line-height: 1.85;
-            text-align: left;
-        }
-        .section__break {
-            border-top: 3px solid #727272;
-            margin: 4rem 0 4.75rem;
-        }
-        .section__subheader {
-            font-size: 2.3rem;
-            font-weight: 500;
-            letter-spacing: 0.0325rem;
-            margin-bottom: 2.5rem;
-        }
-        .section__subheader-startup span {
-            font-weight: bold;
-            font-size: 3rem;
-            line-height: 50px;
-        }
-        .section__back {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-            left: 1.5%;
-            position: absolute;
-            text-decoration: underline;
-            text-transform: uppercase;
-        }
-        .section__back i {
-            color: #55bb6e;
-            font-size: 45px;
-            line-height: 1.2;
-        }
-        [data-target="startup"] .section__back {
-            top: 1.75%;
-        }
-        [data-target="office-entry-form"] .section__back {
-            top: 8%;
-        }
-        [data-target="office-submission-form"] .section__back {
-            top: 0.75%;
-        }
-        .section__input {
-            border: 2px solid #BABCBD;
-            color: #7348B3;
-            display: block;
-            font-size: 1.1rem;
-            margin: 0 auto;
-            padding: 1.1rem;
-            width: 228px;
-        }
-        .section__input--authenticated {
-            background: url('../../images/confirm.svg') no-repeat 97% center;
-            background-size: 7%;
-        }
-        .section__input:focus {
-            outline: none
-        }
-        .section__confirm-email {
-            background-color: #7348B3;
-            border: none;
-            color: #FFFFFF;
-            font-size: 0.93rem;
-            font-weight: 400;
-            margin-top: 0.8rem;
-            padding: 1.0375rem 0;
-            text-transform: uppercase;
-            width: 260px;
-        }
-        .section__auth-alert {
-            color: red;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            opacity: 0;
-            transition: opacity 0.25s;
-        }
-        .section__confirm-email:disabled {
-            background-color: #BABCBD;
-            color: #5D5D5D;
-        }
-        .is-visible {
-            opacity: 1;
-        }
-        .js-visible {
-            display: block;
-        }
-        .js-hidden {
-            display: none;
-        }
-        [data-target="main"].js-hidden {
-            position: relative;
-        }
-        .accordion {
-            list-style-type: none;
-            margin: 3rem 0 6rem auto;
-            padding-left: 6.7rem;
-            text-align: left;
-        }
-        .accordion__section:not(:last-of-type) {
-            border-bottom: 1px solid black;
-        }
-        .accordion__header {
-            cursor: pointer;
-            font-size: 1.35rem;
-            font-weight: 600;
-            letter-spacing: 0.06rem;
-            margin: 0;
-            padding: 3.3rem 0;
-            position: relative;
-            transition: all 0.5s;
-        }
-        .accordion__header:hover {
-            color: #33B8B8;
-        }
-        .accordion__number {
-            text-align: center;
-            width: 30px;
-            border: 3px solid #33B8B8;
-            border-radius: 50%;
-            color: #33B8B8;
-            display: inline-block;
-            font-weight: 600;
-            font-size: 1.5em;
-            left: -6.75rem;
-            line-height: 0.50;
-            padding: 1.65rem;
-            position: absolute;
-            transform: translateY(-25%);
-        }
-        .accordion__arrow {
-            position: absolute;
-            width: 50px;
-            right: 1%;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        .accordion__content {
-            opacity: 1;
-            padding-bottom: 3.3rem;
-            position: relative;
-            transform: translateY(0);
-            transition: position 0.5s, opacity 0.5s, transform 0.5s;
-        }
-        .accordion__content--toggle {
-            opacity: 0;
-            position: absolute;
-            transform: translateY(-5%);
-        }
-        .accordion__summary {
-            font-size: 1.3rem;
-            font-weight: 600;
-            letter-spacing: 0.0625rem;
-            margin-bottom: 0.5rem;
-        }
-        .description__list {
-            color: #5D5D5D;
-            list-style-type: none;
-            padding-left: 0;
-        }
-        .description__item {
-            font-size: 1.3rem;
-            line-height: 1.7;
-        }
-        .role__list {
-            list-style-type: none;
-            margin-bottom: 5rem;
-            padding-left: 0;
-            padding-top: 1rem;
-        }
-        .role__item {
-            padding: 1.3rem 0 3rem 6.75rem;
-        }
-        .role__name {
-            color: #000000;
-            font-weight: 600;
-            font-size: 1.5rem;
-            margin-bottom: 0;
-            position: relative;
-            text-transform: uppercase;
-        }
-        .role__image {
-            left: -5rem;
-            margin-bottom: 0;
-            max-width: 35px;
-            position: absolute;
-            top: 100%;
-            transform: translate(-50%, -50%);
-        }
-        .role__description {
-            color: #5D5D5D;
-            font-size: 1.5rem;
-            line-height: 1.5;
-        }
-        .faq a {
-            color: #333399;
-            text-decoration: none;
-        }
-        .faq em, .faq i {
-         word-spacing: normal;
-        }
-        .summary__content em, .summary__content i {
-            display: block;
-        }
-        .summary__content a {
-            border: 2px solid #2EAFAC;
-            color: #2EAFAC;
-            display: table;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-top: 2.2rem;
-            padding: 0.7rem 3.9rem;
-            text-decoration: none;
-        }
-        .submit__container .container .section__form {
-            padding-bottom: 40px;
-        }
-        @media (max-width: 1200px) {
-            .submit__container {
-                padding-top: 3rem;
+    <template>
+        <style is="custom-style">
+            .container {
+                width: calc(100% - 2 * 226px);
+                max-width: 795px;
+                position: relative;
+                text-align: center;
             }
-            .section__back {
-                left: 50%;
-                transform: translateX(-50%);
+
+            .submit__office {
+                text-align: left;
+                padding-top: 40px;
             }
-            [data-target="startup"] .section__back {
-                top: 1.5%;
-            }
-            [data-target="office"] .section__back {
-                top: 9%;
-            }
-            [data-target="office-submited"] .section__back {
-                top: 1%;
-            }
-        }
-        @media (max-width: 920px) {
-            .section__back {
-                float: none;
-            }
-        }
-        @media (max-width: 680px) {
-            .accordion {
-              margin-bottom: 0;
-              padding-left: 4.5rem;
-            }
-            .accordion__number {
-              border-width: 2px;
-              left: -4.25rem;
-              line-height: 0.55;
-              padding: 1.1rem;
-              top: 50%;
-              transform: translateY(-50%);
-            }
-            .section__subheader {
-              font-size: 2rem;
-              margin-bottom: 0;
-            }
-            .role__item {
-              padding: 1rem 0 0 3.75rem;
-            }
-            .role__image {
-              left: -2rem;
-              max-width: 30px;
-            }
-            .role__description {
-              font-size: 1.2rem;
-            }
-        }
-        @media (max-width: 480px) {
+
             .section__confirm-email {
+                cursor: pointer;
+            }
+
+            .submit__container {
+                position: relative;
+            }
+
+            .section__description, .section__text {
+                color: #5D5D5D;
+            }
+
+            .section__description {
+                text-align: center;
+                font-size: 1.595rem;
+                line-height: 1.5;
+                margin-bottom: 1rem;
+                margin-top: 1rem;
+            }
+
+            .section__description-startup p, .section__subheader-startup p {
+                margin-top: 0;
+                font-size: 1.35rem;
+                font-weight: 400;
+                line-height: 1.85;
+                text-align: left;
+            }
+
+            .section__description-startup br {
+                line-height: 3.3;
+            }
+
+            .section__description b {
+                display: inline;
+                font-size: 1.35rem;
+                font-weight: 700;
+                line-height: 1.8;
+                margin-top: 1rem;
+                text-align: left;
+            }
+
+            .section__submit {
+                text-align: center;
+                margin-bottom: 100px;
+            }
+
+            .section__submit-link {
+                background-color: #7348B3;
+                color: white;
+                font-size: 1.15rem;
+                font-weight: 400;
+                height: 44px;
+                line-height: 2.75;
+                margin-top: 2.5rem;
+                max-width: 260px;
+                text-transform: uppercase;
                 width: 100%;
             }
-        }
-        @media (max-width: 380px) {
-            .accordion {
-                padding-left: 0;
+
+            .section__submit-link:link {
+                background-color: #7348B3;
             }
-            .accordion__header {
-                font-size: 1.2rem;
+
+            .section__submit-link:visited {
+                background-color: #7348B3;
             }
-            .accordion__number {
+
+            .section__submit-link:hover {
+                box-shadow: 2px 2px 10px 0 #999999;
+                z-index: 1;
+            }
+
+            .section__submit-link:active {
+                background-color: #7348B3;
+            }
+
+            .section__submit-link:focus {
+                background-color: #7348B3;
+            }
+
+            .section__text, .container .section__text {
+                font-size: 1.35rem;
+                font-weight: 400;
+                line-height: 1.85;
+                text-align: left;
+            }
+
+            .section__break {
+                opacity: 1;
+                height: 1px;
+                margin: 2rem 0 2.75rem;
+                border-top: 0px;
+                background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+            }
+
+            .section__subheader {
+                font-size: 2.3rem;
+                font-weight: 500;
+                letter-spacing: 0.0325rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .section__subheader-startup span {
+                font-weight: bold;
+                font-size: 3rem;
+                line-height: 50px;
+            }
+
+            .section__back {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 0.9rem;
+                left: 1.5%;
+                position: absolute;
+                text-decoration: underline;
+                text-transform: uppercase;
+            }
+
+            .section__back i {
+                color: #55bb6e;
+                font-size: 45px;
+                line-height: 1.2;
+            }
+
+            .section__input {
+                border: 2px solid #BABCBD;
+                color: #7348B3;
+                display: block;
+                font-size: 1.1rem;
+                margin: 0 auto;
+                padding: 1.1rem;
+                width: 228px;
+            }
+
+            .section__input--authenticated {
+                background: url('../../images/confirm.svg') no-repeat 97% center;
+                background-size: 7%;
+            }
+
+            .section__input:focus {
+                outline: none
+            }
+
+            .section__confirm-email {
+                background-color: #7348B3;
+                border: none;
+                color: #FFFFFF;
+                font-size: 0.93rem;
+                font-weight: 400;
+                margin-top: 0.8rem;
+                padding: 1.0375rem 0;
+                text-transform: uppercase;
+                width: 260px;
+            }
+
+            .section__auth-alert {
+                color: red;
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+                opacity: 0;
+                transition: opacity 0.25s;
+            }
+
+            .section__confirm-email:disabled {
+                background-color: #BABCBD;
+                color: #5D5D5D;
+            }
+
+            .is-visible {
+                opacity: 1;
+            }
+
+            .js-visible {
+                display: block;
+            }
+
+            .js-hidden {
                 display: none;
             }
-        }
-    </style>
-    <style is="custom-style" include="style-fade-in"></style>
-    <firebase-document
-        app-name="unicef-innovation-fund"
-        path="/content/submit_content"
-        data="{{submit}}">
-    </firebase-document>
-    <div class="mdl-grid js-visible submit__container" data-target="office-entry-form">
-        <button on-tap="changeSection" class="section__back" id="back-from-office" data-display="main" data-hide="country-office">
-            <i class="material-icons">arrow_back</i>
-        </button>
-        <div class="mdl-layout-spacer"></div>
-        <div class="container mdl-cell mdl-cell--12-col">
-            <p class$="section__auth-alert [[errorMessageClass]]">[[errorMessage]]</p>
-            <p class="section__description"><echo-html html$="{{submit.country_offices.submit_email_text}}"></echo-html></p>
-            <form is="iron-form" class="section__form" on-submit="submitEmail">
-                <input type="text" class$="section__input [[inputAuthClass]]" placeholder="email address" on-input="checkAuth">
-                <button type="submit" class="section__confirm-email" data-display="office-submission-form" data-hide="office-entry-form">continue</button>
-            </form>
+
+            [data-target="main"].js-hidden {
+                position: relative;
+            }
+
+            .accordion {
+                list-style-type: none;
+                margin: 3rem 0 6rem auto;
+                padding-left: 6.7rem;
+                text-align: left;
+            }
+
+            .accordion__section:not(:last-of-type) {
+                border-bottom: 1px solid black;
+            }
+
+            .accordion__header {
+                cursor: pointer;
+                font-size: 1.35rem;
+                font-weight: 600;
+                letter-spacing: 0.06rem;
+                margin: 0;
+                padding: 3.3rem 0;
+                position: relative;
+                transition: all 0.5s;
+            }
+
+            .accordion__header:hover {
+                color: #33B8B8;
+            }
+
+            .accordion__number {
+                text-align: center;
+                width: 30px;
+                border: 3px solid #33B8B8;
+                border-radius: 50%;
+                color: #33B8B8;
+                display: inline-block;
+                font-weight: 600;
+                font-size: 1.5em;
+                left: -6.75rem;
+                line-height: 0.50;
+                padding: 1.65rem;
+                position: absolute;
+                transform: translateY(-25%);
+            }
+
+            .accordion__arrow {
+                position: absolute;
+                width: 50px;
+                right: 1%;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .accordion__content {
+                opacity: 1;
+                padding-bottom: 3.3rem;
+                position: relative;
+                transform: translateY(0);
+                transition: position 0.5s, opacity 0.5s, transform 0.5s;
+            }
+
+            .accordion__content--toggle {
+                opacity: 0;
+                position: absolute;
+                transform: translateY(-5%);
+            }
+
+            .accordion__summary {
+                font-size: 1.3rem;
+                font-weight: 600;
+                letter-spacing: 0.0625rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .description__list {
+                color: #5D5D5D;
+                list-style-type: none;
+                padding-left: 0;
+            }
+
+            .description__item {
+                font-size: 1.3rem;
+                line-height: 1.7;
+            }
+
+            .role__list {
+                list-style-type: none;
+                margin-bottom: 5rem;
+                padding-left: 0;
+                padding-top: 1rem;
+            }
+
+            .role__item {
+                padding: 1.3rem 0 3rem 6.75rem;
+            }
+
+            .role__name {
+                color: #000000;
+                font-weight: 600;
+                font-size: 1.5rem;
+                margin-bottom: 0;
+                position: relative;
+                text-transform: uppercase;
+            }
+
+            .role__image {
+                left: -5rem;
+                margin-bottom: 0;
+                max-width: 35px;
+                position: absolute;
+                top: 100%;
+                transform: translate(-50%, -50%);
+            }
+
+            .role__description {
+                color: #5D5D5D;
+                font-size: 1.5rem;
+                line-height: 1.5;
+            }
+
+            .faq a {
+                color: #333399;
+                text-decoration: none;
+            }
+
+            .faq em, .faq i {
+                word-spacing: normal;
+            }
+
+            .summary__content em, .summary__content i {
+                display: block;
+            }
+
+            .summary__content a {
+                border: 2px solid #2EAFAC;
+                color: #2EAFAC;
+                display: table;
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin-top: 2.2rem;
+                padding: 0.7rem 3.9rem;
+                text-decoration: none;
+            }
+
+            .submit__container .container .section__form {
+                padding-bottom: 40px;
+            }
+
+            @media (max-width: 1200px) {
+                .submit__container {
+                    padding-top: 3rem;
+                }
+
+                .section__back {
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+
+            @media (max-width: 920px) {
+                .section__back {
+                    float: none;
+                }
+            }
+
+            @media (max-width: 680px) {
+                .accordion {
+                    margin-bottom: 0;
+                    padding-left: 4.5rem;
+                }
+
+                .accordion__number {
+                    border-width: 2px;
+                    left: -4.25rem;
+                    line-height: 0.55;
+                    padding: 1.1rem;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+
+                .section__subheader {
+                    font-size: 2rem;
+                    margin-bottom: 0;
+                }
+
+                .role__item {
+                    padding: 1rem 0 0 3.75rem;
+                }
+
+                .role__image {
+                    left: -2rem;
+                    max-width: 30px;
+                }
+
+                .role__description {
+                    font-size: 1.2rem;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .section__confirm-email {
+                    width: 100%;
+                }
+            }
+
+            @media (max-width: 380px) {
+                .accordion {
+                    padding-left: 0;
+                }
+
+                .accordion__header {
+                    font-size: 1.2rem;
+                }
+
+                .accordion__number {
+                    display: none;
+                }
+            }
+        </style>
+        <style is="custom-style" include="style-fade-in"></style>
+        <firebase-document
+            path="/content/submit_content"
+            data="{{submit}}">
+        </firebase-document>
+        <div class="mdl-grid js-visible submit__container" data-target="office-entry-form">
+            <button on-tap="changeSection" class="section__back" id="back-from-office" data-display="main"
+                    data-hide="country-office">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            <div class="mdl-layout-spacer"></div>
+            <div class="container mdl-cell mdl-cell--12-col">
+                <p class$="section__auth-alert [[errorMessageClass]]">[[errorMessage]]</p>
+                <p class="section__description">
+                    <echo-html html$="{{submit.country_offices.submit_email_text}}"></echo-html>
+                </p>
+                <form is="iron-form" class="section__form" on-submit="submitEmail">
+                    <input type="text" class$="section__input [[inputAuthClass]]" placeholder="email address"
+                           on-input="checkAuth">
+                    <button type="submit" class="section__confirm-email" data-display="office-steps"
+                            data-hide="office-entry-form">continue
+                    </button>
+                </form>
+            </div>
+            <div class="mdl-layout-spacer"></div>
         </div>
-      <div class="mdl-layout-spacer"></div>
-    </div>
-    <div class="mdl-grid js-hidden submit__container" data-target="office-submission-form">
-      <button on-tap="changeSection" class="section__back" data-display="main" data-hide="country-office">
-          <i class="material-icons">arrow_back</i>
-      </button>
-      <div class="mdl-layout-spacer"></div>
-      <div class="submit__office container mdl-cell mdl-cell--12-col">
-          <sidebar-container
-              title-text$="{{submit.country_offices.looking_title}}"
-              content-text="{{submit.country_offices.looking_content}}" ></sidebar-container>
-          <hr class="section__break">
-          <sidebar-container
-              title-text$="{{submit.country_offices.seeking_title}}"
-              content-text$="{{submit.country_offices.seeking_content}}" ></sidebar-container>
-          <hr class="section__break">
-          <sidebar-container
-              title-text$="{{submit.country_offices.role_title}}"
-              paragraphs$="{{ _getRoleParagraphs(submit.country_offices.role_content) }}"></sidebar-container>
-          <hr class="section__break">
-          <h3 class="section__subheader">
-              <echo-html html$="{{submit.country_offices.steps_title}}"></echo-html>
-          </h3>
-          <ol class="accordion">
-              <template is="dom-repeat" items="{{submit.country_offices.steps_content}}" as="step">
-                  <li class="accordion__section">
-                      <h4 class="accordion__header" data-open$="accordion-{{index}}" on-tap="accordionOpen">
-                          <p class="accordion__number">{{stepIndex(index)}}</p><echo-html html$="{{step.name}}"></echo-html>
-                          <img src="../../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
-                      </h4>
-                      <div class="accordion__content accordion__content--toggle" data-accordion$="accordion-{{index}}">
-                          <p class="accordion__summary"><echo-html html$="{{step.description}}"></echo-html></p>
-                          <ul class="description__list">
-                              <template is="dom-repeat" items="{{step.requirements}}" as="requirement">
-                                <li class="description__item"><echo-html html$="{{requirement}}"></echo-html></li>
-                              </template>
-                          </ul>
-                      </div>
-                  </li>
-              </template>
-          </ol>
-          <h3 class="section__subheader"><echo-html html$="{{submit.country_offices.questions_title}}"></echo-html></h3>
-          <p class="section__text">
-              <echo-html html$="{{submit.country_offices.questions_content}}"></echo-html>
-          </p>
-          <div class="section__submit">
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form" class="section__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank"><echo-html html$="{{submit.country_offices.submit_button_text}}"></echo-html></a>
-          </div>
-      </div>
-      <div class="mdl-layout-spacer"></div>
-    </div>
-  </template>
-  <script>
-      Polymer({
-          is: "submit-country-office",
-          properties: {
-              countryOfficesAuthenticated: {
-                  type: Boolean,
-                  value: false
-              },
-              errorMessageClass: {
-                  type: String,
-                  value: ''
-              },
-              errorMessage: {
-                  type: String,
-                  value: 'Email is not valid'
-              },
-              inputAuthClass: {
-                  type: String,
-                  value: ''
-              },
-              sectionName: {
-                  type: String,
-                  value: 'Country offices and startups'
-              },
-              startups: {
-                  type: Object
-              },
-              submit: {
-                  type: Object
-              }
-          },
-          listeners: {
-              'iron-form-submit': 'submitEmail'
-          },
+        <div class="mdl-grid js-hidden submit__container" data-target="office-steps">
+            <button on-tap="changeSection" class="section__back" data-display="office-entry-form"
+                    data-hide="office-steps">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            <div class="mdl-layout-spacer"></div>
+            <div class="submit__office container mdl-cell mdl-cell--12-col">
+                <sidebar-container
+                    title-text$="{{submit.country_offices.looking_title}}"
+                    content-text="{{submit.country_offices.looking_content.0}}"></sidebar-container>
+                <hr class="section__break">
+                <sidebar-container
+                    title-text$="{{submit.country_offices.seeking_title}}"
+                    content-text$="{{submit.country_offices.seeking_content.0}}"></sidebar-container>
+                <hr class="section__break">
+                <sidebar-container
+                    title-text$="{{submit.country_offices.role_title}}"
+                    paragraphs$="{{ _getRoleParagraphs(submit.country_offices.role_content) }}"></sidebar-container>
+                <hr class="section__break">
+                <sidebar-container
+                    content-text$="{{ submit.country_offices.instructions_content }}">
+                    <arrow-icon-container
+                        arrow-alt-text="Steps for country office"
+                        icon-alt-text="Steps for country office"
+                        icons="{{ icons }}"
+                        steps="{{ submit.country_offices.steps_content }}">
+                    </arrow-icon-container>
+                    <continue-button button-data-display="office-submit" button-data-hide="office-steps"
+                                     button-text="continue"></continue-button>
+                </sidebar-container>
+            </div>
+        </div>
+        <div class="mdl-grid js-hidden submit__container" data-target="office-submit">
+            <button on-tap="changeSection" class="section__back" data-display="office-steps" data-hide="office-submit">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            <div class="submit__office container mdl-cell mdl-cell--12-col">
+                <h3 class="section__subheader">
+                    <echo-html html$="{{submit.country_offices.steps_title}}"></echo-html>
+                </h3>
+                <ol class="accordion">
+                    <template is="dom-repeat" items="{{submit.country_offices.steps_content}}" as="step">
+                        <li class="accordion__section">
+                            <h4 class="accordion__header" data-open$="accordion-{{index}}" on-tap="accordionOpen">
+                                <p class="accordion__number">{{stepIndex(index)}}</p>
+                                <echo-html html$="{{step.name}}"></echo-html>
+                                <img src="../../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow">
+                            </h4>
+                            <div class="accordion__content accordion__content--toggle"
+                                 data-accordion$="accordion-{{index}}">
+                                <p class="accordion__summary">
+                                    <echo-html html$="{{step.description}}"></echo-html>
+                                </p>
+                                <ul class="description__list">
+                                    <template is="dom-repeat" items="{{step.requirements}}" as="requirement">
+                                        <li class="description__item">
+                                            <echo-html html$="{{requirement}}"></echo-html>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </li>
+                    </template>
+                </ol>
+                <h3 class="section__subheader">
+                    <echo-html html$="{{submit.country_offices.questions_title}}"></echo-html>
+                </h3>
+                <p class="section__text">
+                    <echo-html html$="{{submit.country_offices.questions_content}}"></echo-html>
+                </p>
+                <div class="section__submit">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form"
+                       class="section__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank">
+                        <echo-html html$="{{submit.country_offices.submit_button_text}}"></echo-html>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="mdl-layout-spacer"></div>
+    </template>
+    <script>
+        Polymer({
+            is: "submit-country-office",
+            properties: {
+                countryOfficesAuthenticated: {
+                    type: Boolean,
+                    value: false
+                },
+                errorMessageClass: {
+                    type: String,
+                    value: ''
+                },
+                errorMessage: {
+                    type: String,
+                    value: 'Email is not valid'
+                },
+                icons: {
+                    type: Array,
+                    value: ['eligibility', 'submit', 'iterate-improve', 'decision']
+                },
+                inputAuthClass: {
+                    type: String,
+                    value: ''
+                },
+                sectionName: {
+                    type: String,
+                    value: 'Country offices and startups'
+                },
+                startups: {
+                    type: Object
+                },
+                submit: {
+                    type: Object
+                }
+            },
+            listeners: {
+                'iron-form-submit': 'submitEmail'
+            },
+            stepIndex: function (index) {
+                return index + 1;
+            },
+            ready: function () {
+                var self = this;
+                var visibleClass = "js-visible";
+                var hiddenClass = "js-hidden";
+                $(document).on('page-changed', function (e, page_id) {
+                    if (page_id !== 'submit' && !self.selected) {
+                        var currentElement = self.$$("." + visibleClass);
+                        var mainElement = self.$$("[data-target='main']");
+                        var inputMail = self.$$(".section__input");
+                        var pageHeader = self.$$(".page__header--type");
 
+                        currentElement.classList.remove(visibleClass);
+                        currentElement.classList.add(hiddenClass);
 
+                        mainElement.classList.remove(hiddenClass);
+                        mainElement.classList.add(visibleClass);
 
+                        inputMail.value = '';
+                        pageHeader.innerHTML = '';
+                        self.inputAuthClass = '';
+                        self.errorMessageClass = '';
+                        self.countryOfficesAuthenticated = false;
+                        self.errorMessage = 'Email is not valid';
+                    }
+                });
+            },
+            attached: function () {
+                var self = this;
+                self.initScrollReveal();
+                $(document).on('page-changed', function (e, page_id) {
+                    if (page_id == 'submit') {
+                        self.initScrollReveal();
+                    }
+                });
+            },
+            initScrollReveal: function () {
+                var config = {container: '#mainContainer'};
+                if (!window.scrollReveal) {
+                    window.scrollReveal = new ScrollReveal();
+                }
+                window.scrollReveal.reveal('.accordion__section, .role__list, .section__text:not(:first-of-type) ,  .section__subheader:not(:first-child), .faq__step, '
+                    + '.faq__submit, .summary', config);
+            },
+            checkAuth: function (event) {
+                var regxTest = /.{1,}@unicef\.org$/gi;
+                var inputValue = event.target.value;
 
-          stepIndex: function (index) {
-              return index + 1;
-          },
-          ready: function () {
-              var self = this;
-              var visibleClass = "js-visible";
-              var hiddenClass = "js-hidden";
-              $(document).on('page-changed', function(e, page_id){
-                  if (page_id !== 'submit' && !self.selected) {
-                      var currentElement = self.$$("." + visibleClass);
-                      var mainElement = self.$$("[data-target='main']");
-                      var inputMail = self.$$(".section__input");
-                      var pageHeader = self.$$(".page__header--type");
+                if (regxTest.test(inputValue) === true) {
+                    this.errorMessageClass = '';
+                    this.inputAuthClass = 'section__input--authenticated';
+                    this.countryOfficesAuthenticated = true;
+                } else if (inputValue.indexOf('@') !== -1) {
+                    this.errorMessage = "Your email address is not permitted";
+                } else {
+                    this.errorMessage = "Email address provided is not valid";
+                    this.errorMessageClass = '';
+                    this.inputAuthClass = '';
+                    this.countryOfficesAuthenticated = false;
+                }
+            },
+            toggleVisible: function (toHide, toShow) {
+                var visibleClass = "js-visible";
+                var hiddenClass = "js-hidden";
 
-                      currentElement.classList.remove(visibleClass);
-                      currentElement.classList.add(hiddenClass);
+                if (toHide) {
+                    toHide.classList.remove(visibleClass);
+                    toHide.classList.add(hiddenClass);
+                }
+                if (toShow) {
+                    toShow.classList.remove(hiddenClass);
+                    toShow.classList.add(visibleClass);
+                }
+            },
+            changeSection: function (event) {
+                var hide = event.target.dataset.hide || event.target.parentElement.dataset.hide;
+                var target = event.target.dataset.display || event.target.parentElement.dataset.display;
 
-                      mainElement.classList.remove(hiddenClass);
-                      mainElement.classList.add(visibleClass);
+                var toHide = this.$$("[data-target='" + hide + "']");
+                var toShow = this.$$("[data-target='" + target + "']");
 
-                      inputMail.value = '';
-                      pageHeader.innerHTML = '';
-                      self.inputAuthClass = '';
-                      self.errorMessageClass = '';
-                      self.countryOfficesAuthenticated = false;
-                      self.errorMessage = 'Email is not valid';
-                  }
-              });
-          },
-          attached: function() {
-              var self = this;
-              self.initScrollReveal();
-              $(document).on('page-changed', function(e, page_id) {
-                  if (page_id == 'submit') {
-                      self.initScrollReveal();
-                  }
-              });
-          },
-          initScrollReveal: function() {
-              var config = { container: '#mainContainer' };
-              if (!window.scrollReveal) {
-                  window.scrollReveal = new ScrollReveal();
-              }
-              window.scrollReveal.reveal('.accordion__section, .role__list, .section__text:not(:first-of-type) ,  .section__subheader:not(:first-child), .faq__step, '
-                  + '.faq__submit, .summary', config);
-          },
-          checkAuth: function (event) {
-              var regxTest = /.{1,}@unicef\.org$/gi;
-              var inputValue = event.target.value;
+                this.toggleVisible(toHide, toShow);
 
-              if (regxTest.test(inputValue) === true) {
-                  this.errorMessageClass = '';
-                  this.inputAuthClass = 'section__input--authenticated';
-                  this.countryOfficesAuthenticated = true;
-              } else if (inputValue.indexOf('@') !== -1) {
-                  this.errorMessage = "Your email address is not permitted";
-              } else {
-                  this.errorMessage = "Email address provided is not valid";
-                  this.errorMessageClass = '';
-                  this.inputAuthClass = '';
-                  this.countryOfficesAuthenticated = false;
-              }
-          },
-          toggleVisible: function(toHide, toShow) {
-              var visibleClass = "js-visible";
-              var hiddenClass = "js-hidden";
+                this.domHost.changeSection(event);
+            },
+            submitEmail: function (event) {
+                event.preventDefault();
+                var emailAddress = this.$$(".section__input").value;
+                var submitButton = this.$$('.section__confirm-email');
 
-              toHide.classList.remove(visibleClass);
-              toHide.classList.add(hiddenClass);
+                var toHide = this.$$("[data-target='" + submitButton.dataset.hide + "']");
+                var toShow = this.$$("[data-target='" + submitButton.dataset.display + "']");
 
-              toShow.classList.remove(hiddenClass);
-              toShow.classList.add(visibleClass);
-          },
-          changeSection: function(event) {
-              var toHide = this.$$("[data-target='office-submission-form']");
-              var toShow = this.$$("[data-target='office-entry-form']");
+                if (this.countryOfficesAuthenticated === true) {
+                    this.toggleVisible(toHide, toShow);
+                } else {
+                    this.errorMessageClass = 'is-visible';
+                }
+            },
+            accordionOpenStartUp: function (event) {
+                var target = event.currentTarget;
+                var taped = target.dataset.open;
+                var selected = this.$$("[data-accordion='" + taped + "']");
+                var arrow = target.querySelector('.accordion__arrow_startup');
 
-              this.toggleVisible(toHide, toShow);
+                arrow.classList.toggle('accordion__arrow_startup--toggle')
+                selected.classList.toggle('accordion__content--toggle');
+            },
+            accordionOpen: function (event) {
+                var target = event.currentTarget;
+                var taped = target.dataset.open;
+                var selected = this.$$("[data-accordion='" + taped + "']");
+                var arrow = target.querySelector('.accordion__arrow');
 
-              this.domHost.changeSection(event);
-          },
-          submitEmail: function(event) {
-              event.preventDefault();
-              var emailAddress = this.$$(".section__input").value;
-              var submitButton = this.$$('.section__confirm-email');
-
-              var toHide = this.$$("[data-target='" + submitButton.dataset.hide + "']");
-              var toShow = this.$$("[data-target='" + submitButton.dataset.display + "']");
-
-              if (this.countryOfficesAuthenticated === true) {
-                  this.toggleVisible(toHide, toShow);
-              } else {
-                  this.errorMessageClass = 'is-visible';
-              }
-
-          },
-
-          accordionOpenStartUp: function (event) {
-              var target = event.currentTarget;
-              var taped = target.dataset.open;
-              var selected = this.$$("[data-accordion='" + taped + "']");
-              var arrow = target.querySelector('.accordion__arrow_startup');
-
-              arrow.classList.toggle('accordion__arrow_startup--toggle')
-              selected.classList.toggle('accordion__content--toggle');
-          },
-          accordionOpen: function (event) {
-              var target = event.currentTarget;
-              var taped = target.dataset.open;
-              var selected = this.$$("[data-accordion='" + taped + "']");
-              var arrow = target.querySelector('.accordion__arrow');
-
-              arrow.classList.toggle('accordion__arrow--toggle')
-              selected.classList.toggle('accordion__content--toggle');
-          },
-          _getCategoryIconPath: function (category) {
-              if (category) {
-                  return '/images/icons/' + category + '.svg';
-              }
-          },
-          _getRoleParagraphs: function (roles) {
-              if (!roles) return '';
-              var paragraphs = roles.map( function (role) {
-                  var roleHtml = "<h3>" + role.name[0] + "</h3>";
-                  if (!!role.description) {
-                      role.description.forEach( function (item) {
-                        roleHtml += "<p>" + item + "</p>";
-                      });
-                  }
-                  return roleHtml;
-              })
-              return paragraphs;
-          }
-      })
-  </script>
+                arrow.classList.toggle('accordion__arrow--toggle')
+                selected.classList.toggle('accordion__content--toggle');
+            },
+            _getCategoryIconPath: function (category) {
+                if (category) {
+                    return '/images/icons/' + category + '.svg';
+                }
+            },
+            _getRoleParagraphs: function (roles) {
+                if (!roles) return '';
+                var paragraphs = roles.map(function (role) {
+                    var roleHtml = "<strong>" + role.name[0] + "</strong>";
+                    if (!!role.description) {
+                        role.description.forEach(function (item) {
+                            roleHtml += "<p>" + item + "</p>";
+                        });
+                    }
+                    return roleHtml;
+                });
+                return paragraphs;
+            }
+        })
+    </script>
 </dom-module>

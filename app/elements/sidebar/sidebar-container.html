@@ -1,59 +1,69 @@
 <dom-module id="sidebar-container">
-  <template>
-    <style is="custom-style">
-        .submit__sidebar {
-            flex: 1;
-        }
-        .submit__sidebar--container {
-            display: flex;
-        }
-        .submit__sidebar--title {
-            color: #7348B3;
-            font-size: 28px;
-            font-weight: bold;
-            margin-left: 35px;
-            margin-right: 15px;
-            margin-top: 0;
-            text-align: right;
-        }
-        .submit__sidebar--main {
-            flex: 3;
-        }
-    </style>
-    <style is="custom-style" include="style-fade-in"></style>
-    <div class="submit__sidebar--container">
-        <div class="submit__sidebar">
-            <h3 class="submit__sidebar--title">
-                <echo-html html$="{{titleText}}"></echo-html>
-            </h3>
+    <template>
+        <style is="custom-style">
+            .sidebar {
+                display: flex;
+            }
+            .sidebar--sidebar {
+                flex: 2;
+            }
+            .sidebar--main {
+                flex: 4;
+                padding-left: 2em;
+            }
+            .sidebar--title {
+                color: #7348B3;
+                font-size: 28px;
+                font-weight: bold;
+                text-align: right;
+                margin: 0;
+            }
+            .sidebar--main .paragraph strong {
+                line-height: 1.7;
+            }
+        </style>
+        <style is="custom-style" include="style-fade-in"></style>
+        <div class="sidebar">
+            <div class="sidebar--sidebar">
+                <h3 class="sidebar--title">
+                    <echo-html html$="{{titleText}}"></echo-html>
+                </h3>
+            </div>
+            <div class="sidebar--main">
+                <template is="dom-if" if={{_isEmptyString(contentText)}}">
+                    <p class="content__text">
+                        <echo-html html$="{{contentText}}"></echo-html>
+                    </p>
+                </template>
+                <template is="dom-repeat" items="{{paragraphs}}" as="paragraph">
+                    <div class="paragraph">
+                        <echo-html html$="{{paragraph}}"></echo-html>
+                    </div>
+                </template>
+                <content></content>
+            </div>
         </div>
-        <div class="submit__sidebar--main">
-            <template is="dom-if" if="{{!!contentText}}">
-                <p><echo-html html$="{{contentText}}"></echo-html></p>
-            </template>
-            <template is="dom-repeat" items="{{paragraphs}}" as="paragraph">
-                <p><echo-html html$="{{paragraph}}"></echo-html></p>
-            </template>
-        </div>
-    </div>
-  </template>
-  <script>
-      Polymer({
-          is: "sidebar-container",
-          properties: {
-              contentText: {
-                  type: String,
-                  value: ''
-              },
-              titleText: {
-                  type: String,
-                  value: ''
-              },
-              paragraphs: {
-                  type: Array,
-                  value: []
-              }
-          }
-      })
-  </script>
+    </template>
+    <script>
+        Polymer({
+            is: "sidebar-container",
+            properties: {
+                contentText: {
+                    type: String,
+                    value: ''
+                },
+                titleText: {
+                    type: String,
+                    value: ''
+                },
+                paragraphs: {
+                    type: Array,
+                    value: []
+                }
+            },
+            _isEmptyString: function (textValue) {
+                return ( ( typeof textValue === "string" ) && ( !!textValue.trim() ) );
+            }
+        })
+    </script>
 </dom-module>

@@ -1,0 +1,54 @@
+<dom-module id="continue-button">
+    <template>
+        <style is="custom-style">
+            .continue__button {
+                background-color: #7348B3;
+                background: #7348B3;
+                border: none;
+                color: white;
+                cursor: pointer;
+                display: flex;
+                font-size: 1.3em;
+                font-weight: bold;
+                height: 70px;
+                justify-content: center;
+                letter-spacing: 2px;
+                margin-bottom: 57px;
+                margin-top: 57px;
+                padding: 26px 20px;
+                text-decoration: none;
+                text-transform: uppercase;
+                width: 70%;
+            }
+        </style>
+        <style is="custom-style" include="style-fade-in"></style>
+        <button class="continue__button" data-display$="{{ buttonDataDisplay }}" data-hide$="{{ buttonDataHide }}"
+                on-tap="changeSection" >
+            <span>{{ buttonText }}</span>
+        </button>
+    </template>
+    <script>
+        Polymer({
+            is: "continue-button",
+            properties: {
+                buttonText: {
+                    type: String,
+                    value: ''
+                },
+                buttonDataDisplay: {
+                    type: String,
+                    value: ''
+                },
+                buttonDataHide: {
+                    type: String,
+                    value: ''
+                }
+            },
+            changeSection: function (event) {
+                this.domHost.changeSection(event);
+            }
+        })
+    </script>
+</dom-module>
+
+
