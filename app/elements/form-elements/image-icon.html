@@ -1,0 +1,32 @@
+<dom-module id="image-icon">
+    <template>
+        <style is="custom-style">
+           .image__icon { }
+           .image__icon--icon { }
+        </style>
+        <div class="image__icon">
+            <img src$="{{ _getIconName(iconName) }}" class="image__icon--icon" alt$="{{ iconAltText }}">
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: "image-icon",
+            properties: {
+                iconName: {
+                    type: String
+                },
+                iconAltText: {
+                    type: String
+                }
+            },
+            _getIconName: function(iconName) {
+                if (iconName.trim() !== '') {
+                    return '../../images/icons/' + iconName + '.svg';
+                } else {
+                    // in polymer the dom-if <template> + <img> doesn't work with empty src
+                    return '../../images/close.svg';
+                }
+            }
+        })
+    </script>
+</dom-module>

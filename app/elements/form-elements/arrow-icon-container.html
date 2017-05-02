@@ -44,11 +44,9 @@
                         <img src="../../images/icons/arrow_submit.svg" class="arrow--icon" alt$="{{ arrowAltText }}">
                     </div>
                 </template>
-                <template is="dom-if" if="{{ _isIconName(index) }}">
-                    <div class="arrow__icon--icon arrow__icon--column">
-                        <img src$="{{ _getIconName(index) }}" class="icon" alt$="{{ iconAltText }}">
-                    </div>
-                </template>
+                <div class="arrow__icon--icon arrow__icon--column">
+                    <image-icon icon-name$="{{ _getIconName(index) }}" icon-alt-text$="{{ iconAltText }}"></image-icon>
+                </div>
             </template>
         </div>
         <div class="arrow__icon--labels">
@@ -67,32 +65,20 @@
             is: "arrow-icon-container",
             properties: {
                 arrowAltText: {
-                    type: String,
-                    value: ''
+                    type: String
                 },
                 iconAltText: {
-                    type: String,
-                    value: ''
+                    type: String
                 },
                 icons: {
-                    type: Array,
-                    value: []
+                    type: Array
                 },
                 steps: {
-                    type: Array,
-                    value: []
+                    type: Array
                 }
             },
             _getIconName: function(index) {
-                if (index < this.icons.length) {
-                    return '../../images/icons/' + this.icons[index] + '.svg';
-                } else {
-                    // in polymer the dom-if <template> + <img> doesn't work with empty src
-                    return '../../images/close.svg';
-                }
-            },
-            _isIconName: function(index) {
-                return this._getIconName(index).trim() !== '';
+                return this.icons[index];
             }
         })
     </script>

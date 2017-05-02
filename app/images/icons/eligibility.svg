@@ -2,7 +2,7 @@
     <defs>
         <style>
             .cls-1, .cls-2, .cls-3 { fill:none; stroke-miterlimit:10; stroke-width:3.86px; }
-            .cls-1, .cls-2 { stroke:#6c6; }
+            .cls-1, .cls-2 { stroke:#66cc66; }
             .cls-2, .cls-3 { fill-rule:evenodd; }
             .cls-3 { stroke:#6c6 }
         </style>
