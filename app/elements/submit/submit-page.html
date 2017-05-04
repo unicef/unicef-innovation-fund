@@ -361,30 +361,6 @@
             stepIndex: function (index) {
                 return index + 1;
             },
-            ready: function () {
-                var self = this;
-                var visibleClass = "js-visible";
-                var hiddenClass = "js-hidden";
-                $(document).on('page-changed', function (e, page_id) {
-                    if (page_id !== 'submit' && !self.selected) {
-                        var currentElement = self.$$("." + visibleClass);
-                        var mainElement = self.$$("[data-target='main']");
-                        var pageHeader = self.$$(".page__header--type");
-
-                        currentElement.classList.remove(visibleClass);
-                        currentElement.classList.add(hiddenClass);
-
-                        mainElement.classList.remove(hiddenClass);
-                        mainElement.classList.add(visibleClass);
-
-                        pageHeader.innerHTML = '';
-                        self.inputAuthClass = '';
-                        self.errorMessageClass = '';
-                        self.countryOfficesAuthenticated = false;
-                        self.errorMessage = 'Email is not valid';
-                    }
-                });
-            },
             attached: function () {
                 var self = this;
                 self.initScrollReveal();
