@@ -1,0 +1,603 @@
+<dom-module id="submit-country-office">
+    <template>
+        <style is="custom-style">
+            .container {
+                width: calc(100% - 2 * 226px);
+                max-width: 889px;
+                position: relative;
+                text-align: center;
+            }
+
+            .submit__office {
+                text-align: left;
+                padding-top: 40px;
+            }
+
+            a {
+                color: #7348B3;
+                text-decoration: none;
+                font-weight: 600;
+            }
+
+            .section__confirm-email {
+                cursor: pointer;
+            }
+
+            .submit__container {
+                position: relative;
+            }
+
+            .section__description, .section__text {
+                color: #5D5D5D;
+            }
+
+            .section__description {
+                text-align: center;
+                font-size: 1.595rem;
+                line-height: 1.5;
+                margin-bottom: 1rem;
+                margin-top: 1rem;
+            }
+
+            .section__description-startup p, .section__subheader-startup p {
+                margin-top: 0;
+                font-size: 1.35rem;
+                font-weight: 400;
+                line-height: 1.85;
+                text-align: left;
+            }
+
+            .section__description-startup br {
+                line-height: 3.3;
+            }
+
+            .section__description b {
+                display: inline;
+                font-size: 1.35rem;
+                font-weight: 700;
+                line-height: 1.8;
+                margin-top: 1rem;
+                text-align: left;
+            }
+
+            .section__submit {
+                background-color: #7348B3;
+                background: #7348B3;
+                border: none;
+                color: white;
+                cursor: pointer;
+                display: flex;
+                font-size: 1.3em;
+                font-weight: bold;
+                justify-content: center;
+                letter-spacing: 2px;
+                margin-bottom: 57px;
+                margin-top: 57px;
+                text-decoration: none;
+                text-transform: uppercase;
+                width: 70%;
+            }
+
+            .section__submit--link {
+                color: white;
+                font-weight: 600;
+                padding: 26px 20px;
+                text-align: center;
+                text-decoration: none;
+                width: 100%;
+            }
+
+            .section__submit-link:link, .section__submit-link:visited,
+            .section__submit-link:hover, .section__submit-link:active,
+            .section__submit-link:focus {
+                background-color: #7348B3;
+                color: white;
+                text-decoration: none;
+            }
+
+            .section__submit-link:hover {
+                box-shadow: 2px 2px 10px 0 #999999;
+                z-index: 1;
+            }
+
+            .section__text, .container .section__text {
+                font-size: 1.35rem;
+                font-weight: 400;
+                line-height: 1.85;
+                text-align: left;
+            }
+
+            .section__break {
+                opacity: 1;
+                height: 1px;
+                margin: 2.2rem 0 2.75rem;
+            }
+
+            .section__subheader {
+                font-size: 2.3rem;
+                font-weight: 500;
+                letter-spacing: 0.0325rem;
+                margin-bottom: 2.5rem;
+            }
+
+
+            .section__subheader-startup span {
+                font-weight: bold;
+                font-size: 3rem;
+                line-height: 50px;
+            }
+
+            .section__back {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 0.9rem;
+                left: 1.5%;
+                position: absolute;
+                text-decoration: underline;
+                text-transform: uppercase;
+            }
+
+            .section__back i {
+                color: #55bb6e;
+                font-size: 45px;
+                line-height: 1.2;
+            }
+
+            .section__input {
+                border: 2px solid #BABCBD;
+                color: #7348B3;
+                display: block;
+                font-size: 1.1rem;
+                margin: 0 auto;
+                padding: 1.1rem;
+                width: 228px;
+            }
+
+            .section__input--authenticated {
+                background: url('../../images/confirm.svg') no-repeat 97% center;
+                background-size: 7%;
+            }
+
+            .section__input:focus {
+                outline: none
+            }
+
+            .section__confirm-email {
+                background-color: #7348B3;
+                border: none;
+                color: #FFFFFF;
+                font-size: 0.93rem;
+                font-weight: 400;
+                margin-top: 0.8rem;
+                padding: 1.0375rem 0;
+                text-transform: uppercase;
+                width: 260px;
+            }
+
+            .section__auth-alert {
+                color: red;
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+                opacity: 0;
+                transition: opacity 0.25s;
+            }
+
+            .section__confirm-email:disabled {
+                background-color: #BABCBD;
+                color: #5D5D5D;
+            }
+
+            .fade-in  {
+                transform: translateY(-16px);
+                opacity: 0;
+                animation: fade-in;
+                animation-duration: 0.35s;
+                animation-fill-mode: forwards;
+            }
+
+            .is-visible {
+                opacity: 1;
+            }
+
+            .js-visible {
+                display: block;
+            }
+
+            .js-hidden {
+                display: none;
+            }
+
+            [data-target="main"].js-hidden {
+                position: relative;
+            }
+
+            .description__list {
+                color: #5D5D5D;
+                list-style-type: none;
+                padding-left: 0;
+            }
+
+            .description__item {
+                font-size: 1.3rem;
+                line-height: 1.7;
+            }
+
+            .role__list {
+                list-style-type: none;
+                margin-bottom: 5rem;
+                padding-left: 0;
+                padding-top: 1rem;
+            }
+
+            .role__item {
+                padding: 1.3rem 0 3rem 6.75rem;
+            }
+
+            .role__name {
+                color: #000000;
+                font-weight: 600;
+                font-size: 1.5rem;
+                margin-bottom: 0;
+                position: relative;
+                text-transform: uppercase;
+            }
+
+            .role__image {
+                left: -5rem;
+                margin-bottom: 0;
+                max-width: 35px;
+                position: absolute;
+                top: 100%;
+                transform: translate(-50%, -50%);
+            }
+
+            .role__description {
+                color: #5D5D5D;
+                font-size: 1.5rem;
+                line-height: 1.5;
+            }
+
+            .faq a {
+                color: #333399;
+                text-decoration: none;
+            }
+
+            .faq em, .faq i {
+                word-spacing: normal;
+            }
+
+            .summary__content em, .summary__content i {
+                display: block;
+            }
+
+            .summary__content a {
+                border: 2px solid #2EAFAC;
+                color: #2EAFAC;
+                display: table;
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin-top: 2.2rem;
+                padding: 0.7rem 3.9rem;
+                text-decoration: none;
+            }
+
+            .submit__container .container .section__form {
+                padding-bottom: 40px;
+            }
+            .section__text a {
+                color: #7348B3;
+            }
+            @media (max-width: 1200px) {
+                .container {
+                    width: 80%;
+                }
+
+                .submit__container {
+                    padding: 3rem 0 0 0;
+                    width: 100%;
+                }
+
+                .section__back {
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+
+            @media (max-width: 920px) {
+                .section__back {
+                    float: none;
+                }
+
+                .submit__container {
+                    flex-flow: column;
+                }
+                .container__offices /deep/ .image__icon {
+                    display: flex;
+                    justify-content: center;
+                }
+
+                .section__submit {
+                    width: 100%;
+                }
+
+                .submit__office {
+                    padding-top: 10px;
+                }
+            }
+
+            @media (max-width: 680px) {
+                .section__subheader {
+                    font-size: 2rem;
+                    margin-bottom: 0;
+                }
+
+                .role__item {
+                    padding: 1rem 0 0 3.75rem;
+                }
+
+                .role__image {
+                    left: -2rem;
+                    max-width: 30px;
+                }
+
+                .role__description {
+                    font-size: 1.2rem;
+                }
+
+            }
+        </style>
+        <style is="custom-style" include="style-fade-in"></style>
+        <firebase-document
+            path="/content/submit_content"
+            data="{{submit}}">
+        </firebase-document>
+        <div class="mdl-grid js-visible submit__container fade-in" data-target="office-entry-form">
+            <back-button
+                button-id="back-from-office"
+                button-data-display="main"
+                button-data-hide="country-office">
+            </back-button>
+            <div class="mdl-layout-spacer"></div>
+            <div class="container mdl-cell mdl-cell--12-col">
+                <p class$="section__auth-alert [[errorMessageClass]]">[[errorMessage]]</p>
+                <p class="section__description">
+                    <echo-html html$="{{submit.country_offices.submit_email_text}}"></echo-html>
+                </p>
+                <form is="iron-form" class="section__form" on-submit="submitEmail">
+                    <input type="text" class$="section__input [[inputAuthClass]]" placeholder="email address"
+                           on-input="checkAuth">
+                    <button type="submit" class="section__confirm-email" data-display="office-steps"
+                            data-hide="office-entry-form">continue
+                    </button>
+                </form>
+            </div>
+            <div class="mdl-layout-spacer"></div>
+        </div>
+        <div class="mdl-grid js-hidden submit__container fade-in" data-target="office-steps">
+            <back-button
+                button-id="back-from-office-steps"
+                button-data-display="office-entry-form"
+                button-data-hide="office-steps">
+            </back-button>
+            <div class="mdl-layout-spacer"></div>
+            <div class="submit__office container mdl-cell mdl-cell--12-col">
+                <sidebar-container title-text$="{{submit.country_offices.looking_title}}">
+                    <p><echo-html html$="{{ submit.country_offices.looking_content.0 }}"></echo-html></p>
+                </sidebar-container>
+                <hr class="section__break">
+                <sidebar-container title-text$="{{submit.country_offices.seeking_title}}">
+                    <p><echo-html html$="{{ submit.country_offices.seeking_content.0 }}"></echo-html></p>
+                </sidebar-container>
+                <hr class="section__break">
+                <sidebar-container title-text$="{{submit.country_offices.role_title}}">
+                    <template is="dom-repeat" items="{{submit.country_offices.role_content}}" as="role">
+                        <strong> {{role.name.0}}</strong>
+                        <template is="dom-repeat" items="{{role.description}}" as="item">
+                            <p>{{item}}</p>
+                        </template>
+                    </template>
+                </sidebar-container>
+                <hr class="section__break">
+                <sidebar-container>
+                    <p><echo-html html$="{{ submit.country_offices.instructions_content }}"></echo-html></p>
+                    <arrow-icon-container
+                        arrow-alt-text="Steps for country office"
+                        icon-alt-text="Steps for country office"
+                        icons$="{{ icons }}"
+                        steps="{{ submit.country_offices.steps_content }}">
+                    </arrow-icon-container>
+                    <continue-button button-data-display="office-submit" button-data-hide="office-steps"
+                                     button-text="continue"></continue-button>
+                </sidebar-container>
+            </div>
+        </div>
+        <div class="mdl-grid js-hidden submit__container fade-in" data-target="office-submit">
+            <back-button
+                button-id="back-from-office-steps"
+                button-data-display="office-steps"
+                button-data-hide="office-submit"></back-button>
+            <div class="submit__office container mdl-cell mdl-cell--12-col container__offices">
+                <template is="dom-repeat" items="{{ submit.country_offices.steps_content }}" as="step">
+                    <sidebar-icon-container
+                        icon-name$="{{ arraySelector(icons, index) }}"
+                        icon-alt-text$="{{ arraySelector(icons, index) }}"
+                        requirements="{{step.requirements}}"
+                        step-description="{{step.description}}"
+                        step-name="{{step.name}}"></sidebar-icon-container>
+                    <hr class="section__break">
+                </template>
+                <sidebar-container title-text$="{{ submit.country_offices.questions_title }}">
+                    <p><echo-html html$="{{ submit.country_offices.questions_content }}"></echo-html></p>
+                    <div class="section__submit">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form"
+                           class="section__submit--link" target="_blank">
+                            <echo-html html$="{{submit.country_offices.submit_button_text}}"></echo-html>
+                        </a>
+                    </div>
+                </sidebar-container>
+            </div>
+        </div>
+        <div class="mdl-layout-spacer"></div>
+    </template>
+    <script>
+        Polymer({
+            is: "submit-country-office",
+            properties: {
+                countryOfficesAuthenticated: {
+                    type: Boolean,
+                    value: false
+                },
+                errorMessageClass: {
+                    type: String,
+                    value: ''
+                },
+                errorMessage: {
+                    type: String,
+                    value: 'Email is not valid'
+                },
+                icons: {
+                    type: Array,
+                    value: ['eligibility', 'submit', 'iterate-improve', 'decision']
+                },
+                inputAuthClass: {
+                    type: String,
+                    value: ''
+                },
+                sectionName: {
+                    type: String,
+                    value: 'Country offices and startups'
+                },
+                startups: {
+                    type: Object
+                },
+                submit: {
+                    type: Object
+                }
+            },
+            listeners: {
+                'iron-form-submit': 'submitEmail'
+            },
+            stepIndex: function (index) {
+                return index + 1;
+            },
+            ready: function () {
+                var self = this;
+                var visibleClass = "js-visible";
+                var hiddenClass = "js-hidden";
+                $(document).on('page-changed', function (e, page_id) {
+                    if (page_id !== 'submit' && !self.selected) {
+                        var currentElement = self.$$("." + visibleClass);
+                        var mainElement = self.$$("[data-target='main']");
+                        var inputMail = self.$$(".section__input");
+
+                        currentElement.classList.remove(visibleClass);
+                        currentElement.classList.add(hiddenClass);
+
+                        mainElement.classList.remove(hiddenClass);
+                        mainElement.classList.add(visibleClass);
+
+                        inputMail.value = '';
+                        self.inputAuthClass = '';
+                        self.errorMessageClass = '';
+                        self.countryOfficesAuthenticated = false;
+                        self.errorMessage = 'Email is not valid';
+                    }
+                });
+            },
+            attached: function () {
+                var self = this;
+                self.initScrollReveal();
+                $(document).on('page-changed', function (e, page_id) {
+                    if (page_id == 'submit') {
+                        self.initScrollReveal();
+                    }
+                });
+            },
+            initScrollReveal: function () {
+                var config = {container: '#mainContainer'};
+                if (!window.scrollReveal) {
+                    window.scrollReveal = new ScrollReveal();
+                }
+                window.scrollReveal.reveal('sidebar-container:not(:first-child) > *, ' +
+                    'sidebar-icon-container:not(:first-child) > *, .section__break', config);
+            },
+            checkAuth: function (event) {
+                var regxTest = /.{1,}@unicef\.org$/gi;
+                var inputValue = event.target.value;
+
+                if (regxTest.test(inputValue) === true) {
+                    this.errorMessageClass = '';
+                    this.inputAuthClass = 'section__input--authenticated';
+                    this.countryOfficesAuthenticated = true;
+                } else if (inputValue.indexOf('@') !== -1) {
+                    this.errorMessage = "Your email address is not permitted";
+                } else {
+                    this.errorMessage = "Email address provided is not valid";
+                    this.errorMessageClass = '';
+                    this.inputAuthClass = '';
+                    this.countryOfficesAuthenticated = false;
+                }
+            },
+            toggleVisible: function (toHide, toShow) {
+                var visibleClass = "js-visible";
+                var hiddenClass = "js-hidden";
+
+                if (toHide) {
+                    toHide.classList.remove(visibleClass);
+                    toHide.classList.add(hiddenClass);
+                }
+                if (toShow) {
+                    toShow.classList.remove(hiddenClass);
+                    toShow.classList.add(visibleClass);
+                }
+            },
+            changeSection: function (event) {
+                var hide = event.target.dataset.hide || event.target.parentElement.dataset.hide;
+                var target = event.target.dataset.display || event.target.parentElement.dataset.display;
+
+                var toHide = this.$$("[data-target='" + hide + "']");
+                var toShow = this.$$("[data-target='" + target + "']");
+
+                this.toggleVisible(toHide, toShow);
+
+                this.domHost.changeSection(event);
+            },
+            submitEmail: function (event) {
+                event.preventDefault();
+                var emailAddress = this.$$(".section__input").value;
+                var submitButton = this.$$('.section__confirm-email');
+
+                var toHide = this.$$("[data-target='" + submitButton.dataset.hide + "']");
+                var toShow = this.$$("[data-target='" + submitButton.dataset.display + "']");
+
+                if (this.countryOfficesAuthenticated === true) {
+                    this.toggleVisible(toHide, toShow);
+                } else {
+                    this.errorMessageClass = 'is-visible';
+                }
+            },
+            _getCategoryIconPath: function (category) {
+                if (category) {
+                    return '/images/icons/' + category + '.svg';
+                }
+            },
+            _getRoleParagraphs: function (roles) {
+                if (!roles) return '';
+                var paragraphs = roles.map(function (role) {
+                    var roleHtml = "<strong>" + role.name[0] + "</strong>";
+                    if (!!role.description) {
+                        role.description.forEach(function (item) {
+                            roleHtml += "<p>" + item + "</p>";
+                        });
+                    }
+                    return roleHtml;
+                });
+                return paragraphs;
+            },
+            arraySelector: function(items, index) {
+                return items[index];
+            }
+        })
+    </script>
+</dom-module>

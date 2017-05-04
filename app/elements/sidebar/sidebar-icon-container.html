@@ -1,0 +1,203 @@
+<dom-module id="sidebar-icon-container">
+    <template>
+        <style is="custom-style">
+            .sidebar {
+                display: flex;
+            }
+
+            .sidebar--sidebar {
+                flex: 1;
+                margin-top: 10px;
+            }
+
+            .sidebar--main {
+                flex: 7;
+                padding-left: 2em;
+            }
+
+            a {
+                color: #7348B3;
+                font-weight: 600;
+            }
+
+            .sidebar--icon {
+                max-width: 50px;
+            }
+
+            .step__container a {
+                text-decoration: none;
+                color: #333;
+                cursor: pointer;
+            }
+
+            .steps {
+                padding: 0px;
+            }
+
+            .steps > div:first-child > .step__wrapper > div:last-child {
+                padding-top: 0;
+            }
+
+            .step__container {
+                max-width: 795px;
+                position: relative;
+                margin: 0 auto;
+            }
+
+            .step__counter {
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: 21px;
+                color: #FF9F40;
+            }
+
+            .step__name {
+                color: #7348B3;
+                font-weight: bold;
+                margin: 0;
+                text-transform: uppercase;
+            }
+
+            .step__section {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .step__requirements li::before {
+                content: '• ';
+                color: #7348B3;
+                font-size: 34px;
+                line-height: 10px;
+                margin-left: -30px;
+                margin-right: 14px;
+                position: relative;
+                top: 4px;
+            }
+
+            .step__icon {
+                width: 40px;
+                margin: 0 auto;
+            }
+
+            .step__img {
+                flex: 1;
+                text-align: center;
+            }
+
+            .step__wrapper {
+                display: flex;
+            }
+
+            .step__wrapper p {
+                margin: 0;
+            }
+
+            .step__details {
+                flex: 7;
+                padding-top: 25px;
+            }
+
+            .step__details > ul > li:before {
+                content: "•";
+                color: #7348B3;
+                font-size: 35px;
+                padding-right: 5px;
+                position: absolute;
+            }
+
+            .steps > div:first-child {
+                padding: 0;
+            }
+
+            .step__details ul li p {
+                padding-left: 25px;
+                line-height: 27px;
+            }
+
+            .step__requirements {
+                list-style: none;
+                margin-left: 30px;
+                padding: 0px 18px 5px 0;
+            }
+
+            .step__name {
+                color: #66cc66;
+                font-size: 18px;
+                font-weight: 600;
+                line-height: 1.4;
+            }
+
+            .step__description {
+                color: #7348B3;
+                font-size: 28px;
+                font-weight: 700;
+                line-height: 1.4;
+                margin: 0;
+            }
+
+            @media (max-width: 920px) {
+                .sidebar {
+                    flex-flow: column;
+                }
+
+                .sidebar--main {
+                    padding-left: 0px;
+                }
+            }
+        </style>
+        <style is="custom-style" include="style-fade-in"></style>
+        <div class="sidebar">
+            <div class="sidebar--sidebar">
+                <image-icon icon-class="small" icon-name$="{{ iconName }}"
+                            icon-alt-text$="{{ iconAltText }}"></image-icon>
+            </div>
+            <div class="sidebar--main">
+                <span class="step__name">{{stepName}}</span>
+                <h3 class="step__description">{{stepDescription}}</h3>
+                <template is="dom-repeat" items="{{paragraphs}}" as="paragraph">
+                    <p>
+                        <echo-html html$="{{paragraph}}"></echo-html>
+                    </p>
+                </template>
+                <ul class$="step{{stepIndex(index)}}__requirements step__requirements">
+                    <template is="dom-repeat" items="{{requirements}}" as="requirement">
+                        <li>
+                            <echo-html html$="{{requirement}}"></echo-html>
+                        </li>
+                    </template>
+                </ul>
+                <content></content>
+            </div>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: "sidebar-icon-container",
+            properties: {
+                iconName: {
+                    type: String
+                },
+                iconAltText: {
+                    type: String
+                },
+                items: {
+                    type: Array,
+                    value: []
+                },
+                paragraphs: {
+                    type: Array,
+                    value: []
+                },
+                stepDescription: {
+                    type: String,
+                    value: ''
+                },
+                stepName: {
+                    type: String,
+                    value: ''
+                }
+            }
+        })
+    </script>
+</dom-module>

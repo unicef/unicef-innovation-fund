@@ -1,0 +1,84 @@
+<dom-module id="sidebar-container">
+    <template>
+        <style is="custom-style">
+            .sidebar {
+                display: flex;
+            }
+
+            .sidebar--sidebar {
+                flex: 2;
+            }
+
+            .sidebar--main {
+                flex: 5;
+                padding-left: 2em;
+                margin-top: 5px;
+            }
+
+            .sidebar--title {
+                color: #7348B3;
+                font-size: 28px;
+                font-weight: bold;
+                text-align: right;
+                margin: 0;
+            }
+
+            .sidebar--main a {
+                color: #7348B3;
+                text-decoration: none;
+                font-weight: 600;
+            }
+
+            .sidebar--main strong {
+                line-height: 1.7;
+            }
+
+            @media (max-width: 920px) {
+                .sidebar {
+                    flex-flow: column;
+                }
+
+                .sidebar--title {
+                    text-align: left;
+                }
+
+                .sidebar--main {
+                    padding-left: 0px;
+                }
+            }
+        </style>
+        <style is="custom-style" include="style-fade-in"></style>
+        <div class="sidebar">
+            <div class="sidebar--sidebar">
+                <h3 class="sidebar--title">
+                    <echo-html html$="{{titleText}}"></echo-html>
+                </h3>
+            </div>
+            <div class="sidebar--main">
+                <content></content>
+            </div>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: "sidebar-container",
+            properties: {
+                contentText: {
+                    type: String,
+                    value: ''
+                },
+                titleText: {
+                    type: String,
+                    value: ''
+                },
+                paragraphs: {
+                    type: Array,
+                    value: []
+                }
+            },
+            _isEmptyString: function (textValue) {
+                return ( ( typeof textValue === "string" ) && ( !!textValue.trim() ) );
+            }
+        })
+    </script>
+</dom-module>
