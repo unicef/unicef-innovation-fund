@@ -329,6 +329,19 @@
                 .summary__icon {
                     width: 20%;
                 }
+
+                .startup__step__container /deep/ .image__icon {
+                    display: flex;
+                    justify-content: center;
+                }
+
+                .section__submit {
+                    width: 100%;
+                }
+
+                .startup__step__container {
+                    margin-top: 0px;
+                }
             }
 
             @media (max-width: 680px) {
@@ -346,11 +359,17 @@
                 }
             }
 
+
             @media (max-width: 480px) {
+                .startup__step__container {
+                    margin-top: 0px;
+                }
                 .section__icon--wide {
                     display: none;
                 }
             }
+
+
         </style>
         <style is="custom-style" include="style-fade-in"></style>
         <firebase-document

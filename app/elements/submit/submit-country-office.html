@@ -120,6 +120,7 @@
                 margin-bottom: 2.5rem;
             }
 
+
             .section__subheader-startup span {
                 font-weight: bold;
                 font-size: 3rem;
@@ -311,6 +312,18 @@
                 .submit__container {
                     flex-flow: column;
                 }
+                .container__offices /deep/ .image__icon {
+                    display: flex;
+                    justify-content: center;
+                }
+
+                .section__submit {
+                    width: 100%;
+                }
+
+                .submit__office {
+                    padding-top: 10px;
+                }
             }
 
             @media (max-width: 680px) {
@@ -331,12 +344,7 @@
                 .role__description {
                     font-size: 1.2rem;
                 }
-            }
 
-            @media (max-width: 480px) {
-                .section__confirm-email {
-                    width: 100%;
-                }
             }
         </style>
         <style is="custom-style" include="style-fade-in"></style>
@@ -409,7 +417,7 @@
                 button-id="back-from-office-steps"
                 button-data-display="office-steps"
                 button-data-hide="office-submit"></back-button>
-            <div class="submit__office container mdl-cell mdl-cell--12-col">
+            <div class="submit__office container mdl-cell mdl-cell--12-col container__offices">
                 <template is="dom-repeat" items="{{ submit.country_offices.steps_content }}" as="step">
                     <sidebar-icon-container
                         icon-name$="{{ arraySelector(icons, index) }}"

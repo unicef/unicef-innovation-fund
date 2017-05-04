@@ -1,8 +1,6 @@
 <dom-module id="image-icon">
     <template>
         <style is="custom-style">
-            .image__icon {
-            }
 
             .image__icon--icon {
                 text-align: right;
@@ -19,6 +17,7 @@
                 display: block;
                 clear: both;
             }
+
         </style>
         <div class="image__icon">
             <img src$="{{ _getIconName(iconName) }}" class$="image__icon--icon {{ iconClass }}"
