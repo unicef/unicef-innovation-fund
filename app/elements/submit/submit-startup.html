@@ -51,14 +51,6 @@
                 text-align: left;
             }
 
-            .empty__line {
-                color: transparent;
-            }
-
-            hr.empty__line {
-                border-top: 0px;
-            }
-
             .section__submit {
                 background-color: #7348B3;
                 background: #7348B3;
@@ -155,75 +147,6 @@
                 animation-delay: 0.525s !important;
             }
 
-            /* Submit startups */
-            .faq {
-                margin-top: 5.8rem;
-                list-style-type: none;
-                padding-left: 2rem;
-            }
-
-            .faq__list {
-                color: #5D5D5D;
-                margin-top: 2rem;
-                padding-left: 2.75rem;
-                text-align: left;
-            }
-
-            .faq__step {
-                margin: 5.25rem 0;
-            }
-
-            .faq__step:last-of-type {
-                margin-bottom: 0;
-            }
-
-            .faq__name {
-                color: #000000;
-                font-size: 2rem;
-                font-weight: 800;
-                line-height: 0.45;
-            }
-
-            .faq__description {
-                color: #000000;
-                display: block;
-                font-size: 1.465rem;
-            }
-
-            .faq__requirement {
-                font-size: 1.46rem;
-                list-style-type: disc;
-                line-height: 1.7;
-                padding-left: 0.8rem;
-                word-spacing: 0.155rem;
-            }
-
-            .faq a {
-                color: #333399;
-                text-decoration: none;
-            }
-
-            .faq__submit {
-                text-align: center;
-            }
-
-            .faq__submit-link {
-                background-color: #0099FF;
-                color: #FFFFFF !important;
-                font-size: 1.5rem;
-                font-weight: 400;
-                height: 55px;
-                line-height: 2.65;
-                margin-top: 2.5rem;
-                max-width: 245px;
-                text-transform: uppercase;
-                width: 100%;
-            }
-
-            .faq em, .faq i {
-                word-spacing: normal;
-            }
-
             .summary {
                 align-items: flex-start;
                 display: flex;
@@ -314,10 +237,6 @@
                     flex-flow: column;
                 }
 
-                .faq__list {
-                    padding-left: 0;
-                }
-
                 .section__break--thin {
                     margin-left: 0;
                 }
@@ -359,7 +278,6 @@
                 }
             }
 
-
             @media (max-width: 480px) {
                 .startup__step__container {
                     margin-top: 0px;
@@ -368,8 +286,6 @@
                     display: none;
                 }
             }
-
-
         </style>
         <style is="custom-style" include="style-fade-in"></style>
         <firebase-document
@@ -386,7 +302,7 @@
                     <p><echo-html html$="{{ submit.startups.description.0 }}"></echo-html></p>
                     <p><echo-html html$="{{ submit.startups.process_description.0 }}"></echo-html></p>
                 </sidebar-container>
-                <hr class="section__break empty__line">
+                <hr class="section__break">
                 <sidebar-container title-text$="{{submit.startups.title_1.0}}">
                     <p><echo-html html$="{{ submit.startups.process_description_2.0 }}"></echo-html></p>
                     <p><echo-html html$="{{ submit.startups.process_description_3.0 }}"></echo-html></p>
