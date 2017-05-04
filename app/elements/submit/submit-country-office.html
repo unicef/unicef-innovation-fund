@@ -482,7 +482,6 @@
                         var currentElement = self.$$("." + visibleClass);
                         var mainElement = self.$$("[data-target='main']");
                         var inputMail = self.$$(".section__input");
-                        var pageHeader = self.$$(".page__header--type");
 
                         currentElement.classList.remove(visibleClass);
                         currentElement.classList.add(hiddenClass);
@@ -491,7 +490,6 @@
                         mainElement.classList.add(visibleClass);
 
                         inputMail.value = '';
-                        pageHeader.innerHTML = '';
                         self.inputAuthClass = '';
                         self.errorMessageClass = '';
                         self.countryOfficesAuthenticated = false;

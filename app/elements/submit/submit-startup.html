@@ -155,46 +155,6 @@
                 animation-delay: 0.525s !important;
             }
 
-            .accordion {
-                list-style-type: none;
-                margin: 3rem 0 6rem auto;
-                padding-left: 6.7rem;
-                text-align: left;
-            }
-
-            .accordion__section:not(:last-of-type) {
-                border-bottom: 1px solid black;
-            }
-
-            .accordion__header {
-                cursor: pointer;
-                font-size: 1.35rem;
-                font-weight: 600;
-                letter-spacing: 0.06rem;
-                margin: 0;
-                padding: 3.3rem 0;
-                position: relative;
-                transition: all 0.5s;
-            }
-
-            .accordion__header:hover {
-                color: #33B8B8;
-            }
-
-            .accordion__content {
-                opacity: 1;
-                padding-bottom: 3.3rem;
-                position: relative;
-                transform: translateY(0);
-                transition: position 0.5s, opacity 0.5s, transform 0.5s;
-            }
-
-            .accordion__content--toggle {
-                opacity: 0;
-                position: absolute;
-                transform: translateY(-5%);
-            }
-
             /* Submit startups */
             .faq {
                 margin-top: 5.8rem;
@@ -372,11 +332,6 @@
             }
 
             @media (max-width: 680px) {
-                .accordion {
-                    margin-bottom: 0;
-                    padding-left: 4.5rem;
-                }
-
                 .section__subheader {
                     font-size: 2rem;
                     margin-bottom: 0;
@@ -394,16 +349,6 @@
             @media (max-width: 480px) {
                 .section__icon--wide {
                     display: none;
-                }
-            }
-
-            @media (max-width: 380px) {
-                .accordion {
-                    padding-left: 0;
-                }
-
-                .accordion__header {
-                    font-size: 1.2rem;
                 }
             }
         </style>
@@ -587,32 +532,6 @@
                     this.errorMessageClass = 'is-visible';
                 }
 
-            },
-            accordionOpenStartUp: function (event) {
-                var target = event.currentTarget;
-                var taped = target.dataset.open;
-                var selected = this.$$("[data-accordion='" + taped + "']");
-                var arrow = target.querySelector('.accordion__arrow_startup');
-
-                arrow.classList.toggle('accordion__arrow_startup--toggle')
-                selected.classList.toggle('accordion__content--toggle');
-            },
-            accordionOpen: function (event) {
-                var target = event.currentTarget;
-                var taped = target.dataset.open;
-                var selected = this.$$("[data-accordion='" + taped + "']");
-                var arrow = target.querySelector('.accordion__arrow');
-
-                arrow.classList.toggle('accordion__arrow--toggle')
-                selected.classList.toggle('accordion__content--toggle');
-            },
-            _getCategoryIconPath: function (category) {
-                if (category) {
-                    return '../../images/icons/' + category + '.svg';
-                }
-            },
-            _getIconName: function (index) {
-                return this.icons[index];
             },
             arraySelector: function(items, index) {
                 return items[index];
