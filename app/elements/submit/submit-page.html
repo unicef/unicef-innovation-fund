@@ -526,8 +526,13 @@
             }
 
             @media (max-width: 1200px) {
+                .container {
+                    width: 80%;
+                }
+
                 .submit__container {
-                    padding-top: 3rem;
+                    padding: 3rem 0 3rem 0;
+                    width: 100%;
                 }
 
                 .section__back {
@@ -586,6 +591,7 @@
                     display: block;
                     float: none;
                     width: 100%;
+                    border: 1px solid rgba(0, 0, 0, 0.3);
                 }
 
                 .accordion {
@@ -820,14 +826,18 @@
                 const mainContainer = document.getElementById('mainContainer');
 
                 switch (target) {
+                    case "office-entry-form":
+                    case "office-steps":
                     case "country-office":
                         this.sectionName = "UNICEF Country Office";
                         break;
                     case "office-submit":
+                    case "startup-submit":
                         this.sectionName = "Follow the steps below";
                         mainContainer.scrollTop = 0;
                         break;
                     case "startup":
+                    case "startup-steps":
                         this.sectionName = "Startups";
                         break;
                     default:

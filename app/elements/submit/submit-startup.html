@@ -1,570 +1,622 @@
 <dom-module id="submit-startup">
-  <template>
-    <style is="custom-style">
-      .container {
-        max-width: 1000px;
-        position: relative;
-        text-align: center;
-      }
+    <template>
+        <style is="custom-style">
+            .container {
+                width: calc(100% - 2 * 226px);
+                max-width: 889px;
+                position: relative;
+            }
 
-      .submit__container {
-        position: relative;
-      }
+            .submit__startups {
+                text-align: left;
+                padding-top: 40px;
+            }
 
-      .section__description {
-        color: #5D5D5D;
-        font-size: 1.595rem;
-        line-height: 1.5;
-        margin-bottom: 1rem;
-        margin-top: 1rem;
-        text-align: center;
-      }
+            .submit__container {
+                position: relative;
+            }
 
-      .section__description-startup, .section__description-startup p, .section__subheader-startup p {
-        margin-top: 0;
-        font-size: 1.35rem;
-        font-weight: 400;
-        line-height: 1.85;
-        text-align: left;
-      }
+            a {
+                color: #7348B3;
+                font-weight: 600;
+            }
 
-      .section__description-startup br {
-        line-height: 3.3;
-      }
+            .section__description {
+                color: #5D5D5D;
+                font-size: 1.595rem;
+                line-height: 1.5;
+                margin-bottom: 1rem;
+                margin-top: 1rem;
+                text-align: center;
+            }
 
-      .section__description b {
-        display: inline;
-        font-size: 1.35rem;
-        font-weight: 700;
-        line-height: 1.8;
-        margin-top: 1rem;
-        text-align: left;
-      }
+            .section__description-startup, .section__description-startup p, .section__subheader-startup p {
+                margin-top: 0;
+                font-size: 1.35rem;
+                font-weight: 400;
+                line-height: 1.85;
+                text-align: left;
+            }
 
-      .section__break--thin {
-        border-color: black;
-        margin-bottom: 3.5rem;
-        margin-top: 4.5rem;
-      }
+            .section__description-startup br {
+                line-height: 3.3;
+            }
 
-      .section__subheader {
-        font-size: 2.3rem;
-        font-weight: 500;
-        letter-spacing: 0.0325rem;
-        margin-bottom: 2.5rem;
-      }
+            .section__description b {
+                display: inline;
+                font-size: 1.35rem;
+                font-weight: 700;
+                line-height: 1.8;
+                margin-top: 1rem;
+                text-align: left;
+            }
 
-      .section__subheader-startup {
-        color: #5D5D5D;
-        font-size: 2rem;
-        letter-spacing: 0;
-        margin-top: 3.5rem;
-        margin-bottom: 0;
-        text-align: left;
-      }
+            .empty__line {
+                color: transparent;
+            }
 
-      .section__subheader-startup span {
-        font-weight: bold;
-        font-size: 3rem;
-        line-height: 50px;
-      }
+            hr.empty__line {
+                border-top: 0px;
+            }
 
-      .section__icon--wide {
-        margin-bottom: 0.9rem;
-        margin-top: 2rem;
-        width: 90%;
-      }
+            .section__submit {
+                background-color: #7348B3;
+                background: #7348B3;
+                border: none;
+                color: white;
+                cursor: pointer;
+                display: flex;
+                font-size: 1.3em;
+                font-weight: bold;
+                justify-content: center;
+                letter-spacing: 2px;
+                margin-bottom: 57px;
+                margin-top: 57px;
+                text-decoration: none;
+                text-transform: uppercase;
+                width: 70%;
+            }
 
-      .section__back {
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        font-size: 0.9rem;
-        left: 1.5%;
-        position: absolute;
-        text-decoration: underline;
-        text-transform: uppercase;
-      }
+            .section__submit--link {
+                color: white;
+                font-weight: 600;
+                padding: 26px 20px;
+                text-align: center;
+                text-decoration: none;
+                width: 100%;
+            }
 
-      .section__back i {
-          color: #55bb6e;
-          font-size: 45px;
-          line-height: 1.2;
-      }
+            .section__break {
+                opacity: 0.5;
+                margin-top: 30px;
+                margin-bottom: 40px;
+            }
 
-      .js-hidden {
-        display: none;
-      }
+            .section__break--thin {
+                border-color: black;
+                margin-bottom: 3.5rem;
+                margin-top: 4.5rem;
+            }
 
-      [data-target="main"].js-hidden {
-        position: relative;
-      }
+            .section__subheader {
+                font-size: 2.3rem;
+                font-weight: 500;
+                letter-spacing: 0.0325rem;
+                margin-bottom: 2.5rem;
+            }
 
-      button.fade-in{
-        animation-delay: 0.525s !important;
-      }
+            .section__subheader-startup {
+                color: #5D5D5D;
+                font-size: 2rem;
+                letter-spacing: 0;
+                margin-top: 3.5rem;
+                margin-bottom: 0;
+                text-align: left;
+            }
 
-      .accordion {
-        list-style-type: none;
-        margin: 3rem 0 6rem auto;
-        padding-left: 6.7rem;
-        text-align: left;
-      }
+            .section__subheader-startup span {
+                font-weight: bold;
+                font-size: 3rem;
+                line-height: 50px;
+            }
 
-      .accordion__section:not(:last-of-type) {
-        border-bottom: 1px solid black;
-      }
+            .section__icon--wide {
+                margin-bottom: 0.9rem;
+                margin-top: 2rem;
+                width: 90%;
+            }
 
-      .accordion__header {
-        cursor: pointer;
-        font-size: 1.35rem;
-        font-weight: 600;
-        letter-spacing: 0.06rem;
-        margin: 0;
-        padding: 3.3rem 0;
-        position: relative;
-        transition: all 0.5s;
-      }
+            .section__back {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 0.9rem;
+                left: 1.5%;
+                position: absolute;
+                text-decoration: underline;
+                text-transform: uppercase;
+            }
 
-      .accordion__header:hover {
-        color: #33B8B8;
-      }
+            .section__back i {
+                color: #55bb6e;
+                font-size: 45px;
+                line-height: 1.2;
+            }
 
-      .accordion__content {
-        opacity: 1;
-        padding-bottom: 3.3rem;
-        position: relative;
-        transform: translateY(0);
-        transition: position 0.5s, opacity 0.5s, transform 0.5s;
-      }
+            .js-hidden {
+                display: none;
+            }
 
-      .accordion__content--toggle {
-        opacity: 0;
-        position: absolute;
-        transform: translateY(-5%);
-      }
+            [data-target="main"].js-hidden {
+                position: relative;
+            }
 
-      /* Submit startups */
-      .faq {
-        margin-top: 5.8rem;
-        list-style-type: none;
-        padding-left: 2rem;
-      }
+            button.fade-in {
+                animation-delay: 0.525s !important;
+            }
 
-      .faq__list {
-        color: #5D5D5D;
-        margin-top: 2rem;
-        padding-left: 2.75rem;
-        text-align: left;
-      }
+            .accordion {
+                list-style-type: none;
+                margin: 3rem 0 6rem auto;
+                padding-left: 6.7rem;
+                text-align: left;
+            }
 
-      .faq__step {
-        margin: 5.25rem 0;
-      }
-      .faq__step:last-of-type {
-        margin-bottom: 0;
-      }
+            .accordion__section:not(:last-of-type) {
+                border-bottom: 1px solid black;
+            }
 
-      .faq__name {
-        color: #000000;
-        font-size: 2rem;
-        font-weight: 800;
-        line-height: 0.45;
-      }
+            .accordion__header {
+                cursor: pointer;
+                font-size: 1.35rem;
+                font-weight: 600;
+                letter-spacing: 0.06rem;
+                margin: 0;
+                padding: 3.3rem 0;
+                position: relative;
+                transition: all 0.5s;
+            }
 
-      .faq__description {
-        color: #000000;
-        display: block;
-        font-size: 1.465rem;
-      }
+            .accordion__header:hover {
+                color: #33B8B8;
+            }
 
-      .faq__requirement {
-        font-size: 1.46rem;
-        list-style-type: disc;
-        line-height: 1.7;
-        padding-left: 0.8rem;
-        word-spacing: 0.155rem;
-      }
+            .accordion__content {
+                opacity: 1;
+                padding-bottom: 3.3rem;
+                position: relative;
+                transform: translateY(0);
+                transition: position 0.5s, opacity 0.5s, transform 0.5s;
+            }
 
-      .faq a {
-        color: #333399;
-        text-decoration: none;
-      }
+            .accordion__content--toggle {
+                opacity: 0;
+                position: absolute;
+                transform: translateY(-5%);
+            }
 
-      .faq__submit {
-        text-align: center;
-      }
+            /* Submit startups */
+            .faq {
+                margin-top: 5.8rem;
+                list-style-type: none;
+                padding-left: 2rem;
+            }
 
-      .faq__submit-link {
-        background-color: #0099FF;
-        color: #FFFFFF !important;
-        font-size: 1.5rem;
-        font-weight: 400;
-        height: 55px;
-        line-height: 2.65;
-        margin-top: 2.5rem;
-        max-width: 245px;
-        text-transform: uppercase;
-        width: 100%;
-      }
+            .faq__list {
+                color: #5D5D5D;
+                margin-top: 2rem;
+                padding-left: 2.75rem;
+                text-align: left;
+            }
 
-      .faq em, .faq i {
-        word-spacing: normal;
-      }
+            .faq__step {
+                margin: 5.25rem 0;
+            }
 
-      .summary {
-        align-items: flex-start;
-        display: flex;
-        margin-top: 4.3rem;
-      }
+            .faq__step:last-of-type {
+                margin-bottom: 0;
+            }
 
-      .summary__icon {
-        padding-top: 0.8rem;
-        width: 17%;
-      }
+            .faq__name {
+                color: #000000;
+                font-size: 2rem;
+                font-weight: 800;
+                line-height: 0.45;
+            }
 
-      .summary__content {
-        margin-bottom: 4rem;
-        margin-left: 2rem;
-        text-align: left;
-      }
+            .faq__description {
+                color: #000000;
+                display: block;
+                font-size: 1.465rem;
+            }
 
-      .summary__title {
-        font-size: 2rem;
-        font-weight: 600;
-        line-height: 2;
-        margin: 0;
-      }
+            .faq__requirement {
+                font-size: 1.46rem;
+                list-style-type: disc;
+                line-height: 1.7;
+                padding-left: 0.8rem;
+                word-spacing: 0.155rem;
+            }
 
-      .summary__content--container {
-        display: inline-block;
-        font-size: 1.45rem;
-        margin-bottom: 1.15rem;
-      }
+            .faq a {
+                color: #333399;
+                text-decoration: none;
+            }
 
-      .summary__content em, .summary__content i {
-        display: block;
-      }
+            .faq__submit {
+                text-align: center;
+            }
 
-      .summary__content a {
-        border: 2px solid #2EAFAC;
-        color: #2EAFAC;
-        display: table;
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-top: 2.2rem;
-        padding: 0.7rem 3.9rem;
-        text-decoration: none;
-      }
+            .faq__submit-link {
+                background-color: #0099FF;
+                color: #FFFFFF !important;
+                font-size: 1.5rem;
+                font-weight: 400;
+                height: 55px;
+                line-height: 2.65;
+                margin-top: 2.5rem;
+                max-width: 245px;
+                text-transform: uppercase;
+                width: 100%;
+            }
 
-      @media (max-width: 1200px) {
-        .submit__container {
-          padding-top: 3rem;
-        }
+            .faq em, .faq i {
+                word-spacing: normal;
+            }
 
-        .section__back {
-          left: 50%;
-          transform: translateX(-50%);
-        }
+            .summary {
+                align-items: flex-start;
+                display: flex;
+                margin-top: 4.3rem;
+            }
 
-        [data-target="startup"] .section__back {
-          top: 1.5%;
-        }
+            .summary__icon {
+                padding-top: 0.8rem;
+                width: 17%;
+            }
 
-        [data-target="office-entry-form"] .section__back {
-          top: 9%;
-        }
+            .summary__content {
+                margin-bottom: 4rem;
+                margin-left: 2rem;
+                text-align: left;
+            }
 
-        [data-target="office-submission-form"] .section__back {
-          top: 1%;
-        }
-      }
+            .summary__title {
+                font-size: 2rem;
+                font-weight: 600;
+                line-height: 2;
+                margin: 0;
+            }
 
-      @media (max-width: 920px) {
-        .section__back {
-          float: none;
-        }
+            .summary__content--container {
+                display: inline-block;
+                font-size: 1.45rem;
+                margin-bottom: 1.15rem;
+            }
 
-        .faq__list {
-          padding-left: 0;
-        }
+            .summary__content em, .summary__content i {
+                display: block;
+            }
 
-        .section__break--thin {
-          margin-left: 0;
-        }
+            .summary__content a {
+                border: 2px solid #2EAFAC;
+                color: #2EAFAC;
+                display: table;
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin-top: 2.2rem;
+                padding: 0.7rem 3.9rem;
+                text-decoration: none;
+            }
 
-        .summary, .summary__content {
-          margin-left: 0;
-        }
+            .startup__icons {
+                margin-top: 57px;
+            }
 
-        .summary__icon {
-          width: 20%;
-        }
-      }
+            .startup__step__container {
+                margin-top: 60px;
+            }
 
-      @media (max-width: 680px) {
-        .accordion {
-          margin-bottom: 0;
-          padding-left: 4.5rem;
-        }
+            .startup__step__container .section__break:last-of-type {
+                display: none;
+            }
 
-        .section__subheader {
-          font-size: 2rem;
-          margin-bottom: 0;
-        }
+            .fade-in  {
+                transform: translateY(-16px);
+                opacity: 0;
+                animation: fade-in;
+                animation-duration: 0.35s;
+                animation-fill-mode: forwards;
+            }
 
-        .summary {
-          text-align: center;
-        }
+            @media (max-width: 1200px) {
+                .container {
+                    width: 80%;
+                }
 
-        .summary__icon {
-          display: none;
-        }
-      }
+                .submit__container {
+                    padding: 3rem 0 0 0;
+                    width: 100%;
+                }
 
-      @media (max-width: 480px) {
-        .section__icon--wide {
-          display: none;
-        }
-      }
+                .section__back {
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
 
-      @media (max-width: 380px) {
-        .accordion {
-          padding-left: 0;
-        }
+            @media (max-width: 920px) {
+                .section__back {
+                    float: none;
+                }
 
-        .accordion__header {
-          font-size: 1.2rem;
-        }
-      }
-    </style>
-    <style is="custom-style" include="style-fade-in"></style>
-    <firebase-document
-      path="/content/submit_content"
-      data="{{submit}}">
-    </firebase-document>
+                .submit__container {
+                    flex-flow: column;
+                }
 
-    <button on-tap="changeSection" class="section__back" data-display="main" data-hide="startup">
-        <i class="material-icons">arrow_back</i>
-    </button>
-    <div class="mdl-layout-spacer"></div>
-    <div class="container mdl-cell mdl-cell--12-col" style='padding:50px;'>
-      <h3 class="section__subheader section__subheader-startup">
-            <span>
-              <echo-html html$="{{submit.startups.title}}"></echo-html>
-            </span>
+                .faq__list {
+                    padding-left: 0;
+                }
 
-      </h3>
-      <p class="section__description section__description-startup">
-        <echo-html html$="{{submit.startups.description}}"></echo-html>
-      </p>
-      <br />
-      <br />
-      <p class="section__description section__description-startup">
-        <echo-html html$="{{submit.startups.process_description}}"></echo-html>
-        <img src="../../images/icons/startup_submit-line_3.svg" alt="Submissions by country offices" class="section__icon--wide"/>
-        <br />
-        <echo-html html$="{{submit.startups.process_description_2}}"></echo-html>
-        <br />
-        <img src="../../images/icons/startup_submit-line_3.svg" alt="Submissions by country offices" class="section__icon--wide"/>
-        <br />
-        <echo-html html$="{{submit.startups.process_description_3}}"></echo-html>
-        <br />
-        <br />
+                .section__break--thin {
+                    margin-left: 0;
+                }
 
-        <echo-html html$="{{submit.startups.process_description_4}}"></echo-html>
-      </p>
-      <br />
-      <br />
-      <p class="section__description section__description-startup">
-        <img src="../../images/icons/startup_submit-line_3.svg" alt="Submissions by country offices" class="section__icon--wide"/>
-      </p>
+                .summary, .summary__content {
+                    margin-left: 0;
+                }
 
-      <h3 class="section__subheader section__subheader-startup">
-        <echo-html html$="{{submit.startups.process_title}}"></echo-html>
-      </h3>
-      <img src="../../images/icons/startup_submit_steps.svg" alt="Steps for startup" class="section__icon--wide">
-      <p class="section__description section__subheader-startup"></p>
-      <ol class="accordion">
-        <li class="accordion__section">
-          <h1 class="accordion__header" style='text-align:center;position:relative;top:-30px;left:-70px;' data-open$="accordion-{{stepIndex(index)}}" on-tap="accordionOpenStartUp">
-            <div style='color:#6A1E74; border:solid #6A1E74 3px;padding:15px 20px 15px 50px; display:inline;'>
-              VIEW STEPS
-              <img src="../../images/icons/arrow.svg" alt="open accordion" class="accordion__arrow_startup" style='postion:relative;display:inline;width:40px;'>
+                .summary__icon {
+                    width: 20%;
+                }
+            }
+
+            @media (max-width: 680px) {
+                .accordion {
+                    margin-bottom: 0;
+                    padding-left: 4.5rem;
+                }
+
+                .section__subheader {
+                    font-size: 2rem;
+                    margin-bottom: 0;
+                }
+
+                .summary {
+                    text-align: center;
+                }
+
+                .summary__icon {
+                    display: none;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .section__icon--wide {
+                    display: none;
+                }
+            }
+
+            @media (max-width: 380px) {
+                .accordion {
+                    padding-left: 0;
+                }
+
+                .accordion__header {
+                    font-size: 1.2rem;
+                }
+            }
+        </style>
+        <style is="custom-style" include="style-fade-in"></style>
+        <firebase-document
+            path="/content/submit_content"
+            data="{{submit}}">
+        </firebase-document>
+        <div class="mdl-grid js-visible submit__container fade-in" data-target="startup-steps">
+            <back-button
+                button-id="startup-back-button"
+                button-data-display="main"
+                button-data-hide="startup"></back-button>
+            <div class="submit__startups container mdl-cell mdl-cell--12-col">
+                <sidebar-container title-text$="{{submit.startups.title.0}}">
+                    <p><echo-html html$="{{ submit.startups.description.0 }}"></echo-html></p>
+                    <p><echo-html html$="{{ submit.startups.process_description.0 }}"></echo-html></p>
+                </sidebar-container>
+                <hr class="section__break empty__line">
+                <sidebar-container title-text$="{{submit.startups.title_1.0}}">
+                    <p><echo-html html$="{{ submit.startups.process_description_2.0 }}"></echo-html></p>
+                    <p><echo-html html$="{{ submit.startups.process_description_3.0 }}"></echo-html></p>
+                    <p><echo-html html$="{{ submit.startups.process_description_4.0 }}"></echo-html></p>
+                    <strong>{{ submit.startups.process_title }}</strong>
+                    <p></p>
+                    <div class="startup__icons">
+                        <image-icon icon-name="steps" icon-alt-text$="{{ submit.startups.process_title}}"></image-icon>
+                    </div>
+                    <continue-button button-data-display="startup-submit" button-data-hide="startup-steps"
+                        button-text="continue"></continue-button>
+                </sidebar-container>
             </div>
-
-          </h1>
-          <div class="accordion__content accordion__content--toggle" data-accordion$="accordion-{{stepIndex(index)}}">
-            <ol class="faq faq__list">
-              <template is="dom-repeat" items="{{submit.startups.steps}}" as="step">
-                <li class="faq__step">
-                  <h3 class="faq__name"><echo-html html$="{{step.name}}"></echo-html></h3>
-                  <strong class="faq__description"><echo-html html$="{{step.description}}"></echo-html></strong>
-                  <ul class="faq__list">
-                    <template is="dom-repeat" items="{{step.requirements}}" as="requirement">
-                      <li class="faq__requirement">
-                        <echo-html html$="{{requirement}}"></echo-html>
-                      </li>
-                    </template>
-                  </ul>
-                </li>
-              </template>
-            </ol>
-            <div class="faq__submit">
-              <a href="https://www.jotform.us/70894154871162" class="faq__submit-link mdl-button mdl-js-button mdl-js-ripple-effect" target="_blank">
-                <echo-html html$="{{submit.startups.submit_button_text}}"></echo-html>
-              </a>
-            </div>
-          </div>
-        </li>
-      </ol>
-      <hr class="section__break--thin">
-      <div class="summary">
-        <img src="../../images/icons/country_offices-alt.svg" alt="" class="summary__icon">
-        <div class="summary__content">
-          <h3 class="summary__title"><echo-html html$="{{submit.startups.additional_info_title}}"></echo-html></h3>
-          <template is="dom-repeat" items="{{submit.startups.additional_info}}" as="info">
-                  <span class="summary__content--container">
-                      <echo-html html$="{{info}}"></echo-html>
-                  </span>
-          </template>
         </div>
-      </div>
-    </div>
-    <div class="mdl-layout-spacer"></div>
-  </template>
-  <script>
-      Polymer({
-          is: "submit-startup",
-          properties: {
-              countryOfficesAuthenticated: {
-                  type: Boolean,
-                  value: false
-              },
-              errorMessageClass: {
-                  type: String,
-                  value: ''
-              },
-              errorMessage: {
-                  type: String,
-                  value: 'Email is not valid'
-              },
-              inputAuthClass: {
-                  type: String,
-                  value: ''
-              },
-              sectionName: {
-                  type: String,
-                  value: 'Country offices and startups'
-              },
-              startups: {
-                  type: Object
-              },
-              submit: {
-                  type: Object
-              }
-          },
-          listeners: {
-              'iron-form-submit': 'submitEmail'
-          },
-          stepIndex: function (index) {
-              return index + 1;
-          },
-          ready: function () {
-              var self = this;
-              var visibleClass = "js-visible";
-              var hiddenClass = "js-hidden";
-              $(document).on('page-changed', function(e, page_id){
-                  if (page_id !== 'submit' && !self.selected) {
-                      var currentElement = self.$$("." + visibleClass);
-                      var mainElement = self.$$("[data-target='main']");
-                      var inputMail = self.$$(".section__input");
-                      var pageHeader = self.$$(".page__header--type");
 
-                      currentElement.classList.remove(visibleClass);
-                      currentElement.classList.add(hiddenClass);
+        <div class="mdl-grid js-hidden submit__container fade-in" data-target="startup-submit">
+            <back-button
+                button-id="startup-steps-back-button"
+                button-data-display="startup-steps"
+                button-data-hide="startup-submit"></back-button>
+            <div class="startup__step__container container mdl-cell mdl-cell--12-col">
+                <template is="dom-repeat" items="{{ submit.startups.steps }}" as="step">
+                    <sidebar-icon-container
+                        icon-name$="{{ arraySelector(icons, index) }}"
+                        icon-alt-text$="{{ arraySelector(icons, index) }}"
+                        requirements="{{ step.requirements }}"
+                        step-description="{{ step.description }}"
+                        step-name="{{ step.name }}"></sidebar-icon-container>
+                    <hr class="section__break">
+                </template>
+                <sidebar-icon-container>
+                    <p><echo-html html$="{{ submit.startups.additional_info_title }}"></echo-html></p>
+                    <div class="section__submit">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form"
+                           class="section__submit--link" target="_blank">
+                            <echo-html html$="{{submit.startups.submit_button_text}}"></echo-html>
+                        </a>
+                    </div>
+                </sidebar-icon-container>
+            </div>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: "submit-startup",
+            properties: {
+                countryOfficesAuthenticated: {
+                    type: Boolean,
+                    value: false
+                },
+                errorMessageClass: {
+                    type: String,
+                    value: ''
+                },
+                errorMessage: {
+                    type: String,
+                    value: 'Email is not valid'
+                },
+                icons: {
+                    type: Array,
+                    value: ['eligibility', 'read-roi', 'faq', 'submit']
+                },
+                inputAuthClass: {
+                    type: String,
+                    value: ''
+                },
+                sectionName: {
+                    type: String,
+                    value: 'Country offices and startups'
+                },
+                startups: {
+                    type: Object
+                },
+                submit: {
+                    type: Object
+                }
+            },
+            listeners: {
+                'iron-form-submit': 'submitEmail'
+            },
+            stepIndex: function (index) {
+                return index + 1;
+            },
+            ready: function () {
+                var self = this;
+                var visibleClass = "js-visible";
+                var hiddenClass = "js-hidden";
+                $(document).on('page-changed', function (e, page_id) {
+                    if (page_id !== 'submit' && !self.selected) {
+                        var currentElement = self.$$("." + visibleClass);
+                        var mainElement = self.$$("[data-target='main']");
+                        var inputMail = self.$$(".section__input");
+                        var pageHeader = self.$$(".page__header--type");
 
-                      mainElement.classList.remove(hiddenClass);
-                      mainElement.classList.add(visibleClass);
+                        currentElement.classList.remove(visibleClass);
+                        currentElement.classList.add(hiddenClass);
 
-                      inputMail.value = '';
-                      pageHeader.innerHTML = '';
-                      self.inputAuthClass = '';
-                      self.errorMessageClass = '';
-                      self.countryOfficesAuthenticated = false;
-                      self.errorMessage = 'Email is not valid';
-                  }
-              });
-          },
-          attached: function() {
-              var self = this;
-              self.initScrollReveal();
-              $(document).on('page-changed', function(e, page_id) {
-                  if (page_id == 'submit') {
-                      self.initScrollReveal();
-                  }
-              });
-          },
-          initScrollReveal: function() {
-              var config = { container: '#mainContainer' };
-              if (!window.scrollReveal) {
-                  window.scrollReveal = new ScrollReveal();
-              }
-              window.scrollReveal.reveal('.accordion__section, .role__list, .section__subheader:not(:first-child), .faq__step, '
-                  + '.faq__submit, .summary', config);
-          },
-          toggleVisible: function(toHide, toShow) {
-              var visibleClass = "js-visible";
-              var hiddenClass = "js-hidden";
+                        mainElement.classList.remove(hiddenClass);
+                        mainElement.classList.add(visibleClass);
 
-              toHide.classList.remove(visibleClass);
-              toHide.classList.add(hiddenClass);
+                        inputMail.value = '';
+                        pageHeader.innerHTML = '';
+                        self.inputAuthClass = '';
+                        self.errorMessageClass = '';
+                        self.countryOfficesAuthenticated = false;
+                        self.errorMessage = 'Email is not valid';
+                    }
+                });
+            },
+            attached: function () {
+                var self = this;
+                self.initScrollReveal();
+                $(document).on('page-changed', function (e, page_id) {
+                    if (page_id == 'submit') {
+                        self.initScrollReveal();
+                    }
+                });
+            },
+            initScrollReveal: function () {
+                var config = {container: '#mainContainer'};
+                if (!window.scrollReveal) {
+                    window.scrollReveal = new ScrollReveal();
+                }
+                window.scrollReveal.reveal('sidebar-container:not(:first-child) > *, ' +
+                    'sidebar-icon-container:not(:first-child) > *, .section__break', config);
+            },
+            toggleVisible: function (toHide, toShow) {
+                var visibleClass = "js-visible";
+                var hiddenClass = "js-hidden";
 
-              toShow.classList.remove(hiddenClass);
-              toShow.classList.add(visibleClass);
-          },
-          changeSection: function(event) {
-              this.domHost.changeSection(event);
-          },
-          submitEmail: function(event) {
-              event.preventDefault();
-              var emailAddress = this.$$(".section__input").value;
-              var submitButton = this.$$('.section__confirm-email');
+                if (toHide) {
+                    toHide.classList.remove(visibleClass);
+                    toHide.classList.add(hiddenClass);
+                }
+                if (toShow) {
+                    toShow.classList.remove(hiddenClass);
+                    toShow.classList.add(visibleClass);
+                }
+            },
+            changeSection: function (event) {
+                var hide = event.target.dataset.hide || event.target.parentElement.dataset.hide;
+                var target = event.target.dataset.display || event.target.parentElement.dataset.display;
 
-              var toHide = this.$$("[data-target='" + submitButton.dataset.hide + "']");
-              var toShow = this.$$("[data-target='" + submitButton.dataset.display + "']");
+                var toHide = this.$$("[data-target='" + hide + "']");
+                var toShow = this.$$("[data-target='" + target + "']");
 
-              if (this.countryOfficesAuthenticated === true) {
-                  this.toggleVisible(toHide, toShow);
-              } else {
-                  this.errorMessageClass = 'is-visible';
-              }
+                this.toggleVisible(toHide, toShow);
 
-          },
+                this.domHost.changeSection(event);
+            },
+            submitEmail: function (event) {
+                event.preventDefault();
+                var emailAddress = this.$$(".section__input").value;
+                var submitButton = this.$$('.section__confirm-email');
 
-          accordionOpenStartUp: function (event) {
-              var target = event.currentTarget;
-              var taped = target.dataset.open;
-              var selected = this.$$("[data-accordion='" + taped + "']");
-              var arrow = target.querySelector('.accordion__arrow_startup');
+                var toHide = this.$$("[data-target='" + submitButton.dataset.hide + "']");
+                var toShow = this.$$("[data-target='" + submitButton.dataset.display + "']");
 
-              arrow.classList.toggle('accordion__arrow_startup--toggle')
-              selected.classList.toggle('accordion__content--toggle');
-          },
-          accordionOpen: function (event) {
-              var target = event.currentTarget;
-              var taped = target.dataset.open;
-              var selected = this.$$("[data-accordion='" + taped + "']");
-              var arrow = target.querySelector('.accordion__arrow');
+                if (this.countryOfficesAuthenticated === true) {
+                    this.toggleVisible(toHide, toShow);
+                } else {
+                    this.errorMessageClass = 'is-visible';
+                }
 
-              arrow.classList.toggle('accordion__arrow--toggle')
-              selected.classList.toggle('accordion__content--toggle');
-          },
-          _getCategoryIconPath: function(category) {
-              if (category) {
-                  return '/images/icons/' + category + '.svg';
-              }
-          },
-      })
-  </script>
+            },
+            accordionOpenStartUp: function (event) {
+                var target = event.currentTarget;
+                var taped = target.dataset.open;
+                var selected = this.$$("[data-accordion='" + taped + "']");
+                var arrow = target.querySelector('.accordion__arrow_startup');
+
+                arrow.classList.toggle('accordion__arrow_startup--toggle')
+                selected.classList.toggle('accordion__content--toggle');
+            },
+            accordionOpen: function (event) {
+                var target = event.currentTarget;
+                var taped = target.dataset.open;
+                var selected = this.$$("[data-accordion='" + taped + "']");
+                var arrow = target.querySelector('.accordion__arrow');
+
+                arrow.classList.toggle('accordion__arrow--toggle')
+                selected.classList.toggle('accordion__content--toggle');
+            },
+            _getCategoryIconPath: function (category) {
+                if (category) {
+                    return '../../images/icons/' + category + '.svg';
+                }
+            },
+            _getIconName: function (index) {
+                return this.icons[index];
+            },
+            arraySelector: function(items, index) {
+                return items[index];
+            }
+        })
+    </script>
 </dom-module>

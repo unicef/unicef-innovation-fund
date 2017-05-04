@@ -13,6 +13,12 @@
                 padding-top: 40px;
             }
 
+            a {
+                color: #7348B3;
+                text-decoration: none;
+                font-weight: 600;
+            }
+
             .section__confirm-email {
                 cursor: pointer;
             }
@@ -67,7 +73,6 @@
                 letter-spacing: 2px;
                 margin-bottom: 57px;
                 margin-top: 57px;
-                padding: 26px 20px;
                 text-decoration: none;
                 text-transform: uppercase;
                 width: 70%;
@@ -76,7 +81,10 @@
             .section__submit--link {
                 color: white;
                 font-weight: 600;
+                padding: 26px 20px;
+                text-align: center;
                 text-decoration: none;
+                width: 100%;
             }
 
             .section__submit-link:link, .section__submit-link:visited,
@@ -103,8 +111,6 @@
                 opacity: 1;
                 height: 1px;
                 margin: 2.2rem 0 2.75rem;
-                border-top: 0px;
-                background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
             }
 
             .section__subheader {
@@ -179,6 +185,14 @@
             .section__confirm-email:disabled {
                 background-color: #BABCBD;
                 color: #5D5D5D;
+            }
+
+            .fade-in  {
+                transform: translateY(-16px);
+                opacity: 0;
+                animation: fade-in;
+                animation-duration: 0.35s;
+                animation-fill-mode: forwards;
             }
 
             .is-visible {
@@ -345,8 +359,13 @@
                 color: #7348B3;
             }
             @media (max-width: 1200px) {
+                .container {
+                    width: 80%;
+                }
+
                 .submit__container {
-                    padding-top: 3rem;
+                    padding: 3rem 0 0 0;
+                    width: 100%;
                 }
 
                 .section__back {
@@ -358,6 +377,10 @@
             @media (max-width: 920px) {
                 .section__back {
                     float: none;
+                }
+
+                .submit__container {
+                    flex-flow: column;
                 }
             }
 
@@ -420,11 +443,12 @@
             path="/content/submit_content"
             data="{{submit}}">
         </firebase-document>
-        <div class="mdl-grid js-visible submit__container" data-target="office-entry-form">
-            <button on-tap="changeSection" class="section__back" id="back-from-office" data-display="main"
-                    data-hide="country-office">
-                <i class="material-icons">arrow_back</i>
-            </button>
+        <div class="mdl-grid js-visible submit__container fade-in" data-target="office-entry-form">
+            <back-button
+                button-id="back-from-office"
+                button-data-display="main"
+                button-data-hide="country-office">
+            </back-button>
             <div class="mdl-layout-spacer"></div>
             <div class="container mdl-cell mdl-cell--12-col">
                 <p class$="section__auth-alert [[errorMessageClass]]">[[errorMessage]]</p>
@@ -441,27 +465,33 @@
             </div>
             <div class="mdl-layout-spacer"></div>
         </div>
-        <div class="mdl-grid js-hidden submit__container" data-target="office-steps">
-            <button on-tap="changeSection" class="section__back" data-display="office-entry-form"
-                    data-hide="office-steps">
-                <i class="material-icons">arrow_back</i>
-            </button>
+        <div class="mdl-grid js-hidden submit__container fade-in" data-target="office-steps">
+            <back-button
+                button-id="back-from-office-steps"
+                button-data-display="office-entry-form"
+                button-data-hide="office-steps">
+            </back-button>
             <div class="mdl-layout-spacer"></div>
             <div class="submit__office container mdl-cell mdl-cell--12-col">
-                <sidebar-container
-                    title-text$="{{submit.country_offices.looking_title}}"
-                    content-text="{{submit.country_offices.looking_content.0}}"></sidebar-container>
+                <sidebar-container title-text$="{{submit.country_offices.looking_title}}">
+                    <p><echo-html html$="{{ submit.country_offices.looking_content.0 }}"></echo-html></p>
+                </sidebar-container>
                 <hr class="section__break">
-                <sidebar-container
-                    title-text$="{{submit.country_offices.seeking_title}}"
-                    content-text$="{{submit.country_offices.seeking_content.0}}"></sidebar-container>
+                <sidebar-container title-text$="{{submit.country_offices.seeking_title}}">
+                    <p><echo-html html$="{{ submit.country_offices.seeking_content.0 }}"></echo-html></p>
+                </sidebar-container>
                 <hr class="section__break">
-                <sidebar-container
-                    title-text$="{{submit.country_offices.role_title}}"
-                    paragraphs$="{{ _getRoleParagraphs(submit.country_offices.role_content) }}"></sidebar-container>
+                <sidebar-container title-text$="{{submit.country_offices.role_title}}">
+                    <template is="dom-repeat" items="{{submit.country_offices.role_content}}" as="role">
+                        <strong> {{role.name.0}}</strong>
+                        <template is="dom-repeat" items="{{role.description}}" as="item">
+                            <p>{{item}}</p>
+                        </template>
+                    </template>
+                </sidebar-container>
                 <hr class="section__break">
-                <sidebar-container
-                    content-text$="{{ submit.country_offices.instructions_content }}">
+                <sidebar-container>
+                    <p><echo-html html$="{{ submit.country_offices.instructions_content }}"></echo-html></p>
                     <arrow-icon-container
                         arrow-alt-text="Steps for country office"
                         icon-alt-text="Steps for country office"
@@ -473,10 +503,11 @@
                 </sidebar-container>
             </div>
         </div>
-        <div class="mdl-grid js-hidden submit__container" data-target="office-submit">
-            <button on-tap="changeSection" class="section__back" data-display="office-steps" data-hide="office-submit">
-                <i class="material-icons">arrow_back</i>
-            </button>
+        <div class="mdl-grid js-hidden submit__container fade-in" data-target="office-submit">
+            <back-button
+                button-id="back-from-office-steps"
+                button-data-display="office-steps"
+                button-data-hide="office-submit"></back-button>
             <div class="submit__office container mdl-cell mdl-cell--12-col">
                 <template is="dom-repeat" items="{{ submit.country_offices.steps_content }}" as="step">
                     <sidebar-icon-container
@@ -487,9 +518,8 @@
                         step-name="{{step.name}}"></sidebar-icon-container>
                     <hr class="section__break">
                 </template>
-                <sidebar-container
-                    title-text$="{{ submit.country_offices.questions_title }}"
-                    content-text$="{{ submit.country_offices.questions_content }}">
+                <sidebar-container title-text$="{{ submit.country_offices.questions_title }}">
+                    <p><echo-html html$="{{ submit.country_offices.questions_content }}"></echo-html></p>
                     <div class="section__submit">
                         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form"
                            class="section__submit--link" target="_blank">
@@ -582,8 +612,8 @@
                 if (!window.scrollReveal) {
                     window.scrollReveal = new ScrollReveal();
                 }
-                window.scrollReveal.reveal('.accordion__section, .role__list, .section__text:not(:first-of-type) ,  .section__subheader:not(:first-child), .faq__step, '
-                    + '.faq__submit, .summary', config);
+                window.scrollReveal.reveal('sidebar-container:not(:first-child) > *, ' +
+                    'sidebar-icon-container:not(:first-child) > *, .section__break', config);
             },
             checkAuth: function (event) {
                 var regxTest = /.{1,}@unicef\.org$/gi;

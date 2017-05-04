@@ -4,30 +4,43 @@
             .sidebar {
                 display: flex;
             }
+
             .sidebar--sidebar {
                 flex: 2;
             }
+
             .sidebar--main {
                 flex: 5;
                 padding-left: 2em;
+                margin-top: 10px;
             }
+
             .sidebar--title {
                 color: #7348B3;
                 font-size: 28px;
                 font-weight: bold;
-                text-align: right;
+                text-align: left;
                 margin: 0;
             }
-            .sidebar--main .paragraph strong {
-                line-height: 1.7;
-            }
-            .content__text {
-                margin-top: 10px;
-            }
-            .content__text > a {
+
+            .sidebar--main a {
                 color: #7348B3;
                 text-decoration: none;
                 font-weight: 600;
+            }
+
+            .sidebar--main strong {
+                line-height: 1.7;
+            }
+
+            @media (max-width: 920px) {
+                .sidebar {
+                    flex-flow: column;
+                }
+
+                .sidebar--main {
+                    padding-left: 0px;
+                }
             }
         </style>
         <style is="custom-style" include="style-fade-in"></style>
@@ -38,16 +51,6 @@
                 </h3>
             </div>
             <div class="sidebar--main">
-                <template is="dom-if" if={{_isEmptyString(contentText)}}">
-                    <p class="content__text">
-                        <echo-html html$="{{contentText}}"></echo-html>
-                    </p>
-                </template>
-                <template is="dom-repeat" items="{{paragraphs}}" as="paragraph">
-                    <div class="paragraph">
-                        <echo-html html$="{{paragraph}}"></echo-html>
-                    </div>
-                </template>
                 <content></content>
             </div>
         </div>

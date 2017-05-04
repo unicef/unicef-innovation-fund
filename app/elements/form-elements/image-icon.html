@@ -2,10 +2,21 @@
     <template>
         <style is="custom-style">
            .image__icon { }
-           .image__icon--icon { }
+           .image__icon--icon {
+               text-align: right;
+               float: right;
+               margin-right: 10px;
+           }
+           .small { max-width: 90px; }
+
+           .image__icon::after {
+               content: ' ';
+               display: block;
+               clear: both;
+           }
         </style>
         <div class="image__icon">
-            <img src$="{{ _getIconName(iconName) }}" class="image__icon--icon" alt$="{{ iconAltText }}">
+            <img src$="{{ _getIconName(iconName) }}" class$="image__icon--icon {{ iconClass }}" alt$="{{ iconAltText }}">
         </div>
     </template>
     <script>
@@ -16,6 +27,9 @@
                     type: String
                 },
                 iconAltText: {
+                    type: String
+                },
+                iconClass: {
                     type: String
                 }
             },
