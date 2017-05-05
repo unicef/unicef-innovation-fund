@@ -400,13 +400,8 @@
                 </sidebar-container>
                 <hr class="section__break">
                 <sidebar-container>
-                    <p><echo-html html$="{{ submit.country_offices.instructions_content }}"></echo-html></p>
-                    <arrow-icon-container
-                        arrow-alt-text="Steps for country office"
-                        icon-alt-text="Steps for country office"
-                        icons$="{{ icons }}"
-                        steps="{{ submit.country_offices.steps_content }}">
-                    </arrow-icon-container>
+                    <p><b><echo-html html$="{{ submit.country_offices.instructions_content }}"></echo-html></b></p>
+                    <image-icon icon-name="office_steps"></image-icon>
                     <continue-button button-data-display="office-submit" button-data-hide="office-steps"
                                      button-text="continue"></continue-button>
                 </sidebar-container>
