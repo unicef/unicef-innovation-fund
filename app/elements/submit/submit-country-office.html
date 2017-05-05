@@ -497,14 +497,16 @@
                 var regxTest = /.{1,}@unicef\.org$/gi;
                 var inputValue = event.target.value;
 
-                if (regxTest.test(inputValue) === true) {
+                if (regxTest.test(inputValue)) {
                     this.errorMessageClass = '';
                     this.inputAuthClass = 'section__input--authenticated';
                     this.countryOfficesAuthenticated = true;
                 } else if (inputValue.indexOf('@') !== -1) {
-                    this.errorMessage = "Your email address is not permitted";
+                    this.errorMessage = this.submit.country_offices.submit_email_error;
+                    this.inputAuthClass = '';
+                    this.countryOfficesAuthenticated = false;
                 } else {
-                    this.errorMessage = "Email address provided is not valid";
+                    this.errorMessage = 'Email is not valid';
                     this.errorMessageClass = '';
                     this.inputAuthClass = '';
                     this.countryOfficesAuthenticated = false;
