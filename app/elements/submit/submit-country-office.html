@@ -495,16 +495,19 @@
             },
             checkAuth: function (event) {
                 var regxTest = /.{1,}@unicef\.org$/gi;
+                var regxEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/gi;
                 var inputValue = event.target.value;
 
-                if (regxTest.test(inputValue) === true) {
+                if (regxTest.test(inputValue)) {
                     this.errorMessageClass = '';
                     this.inputAuthClass = 'section__input--authenticated';
                     this.countryOfficesAuthenticated = true;
-                } else if (inputValue.indexOf('@') !== -1) {
-                    this.errorMessage = "Your email address is not permitted";
+                } else if (regxEmail.test(inputValue)) {
+                    this.errorMessage = this.submit.country_offices.submit_email_error;
+                    this.inputAuthClass = '';
+                    this.countryOfficesAuthenticated = false;
                 } else {
-                    this.errorMessage = "Email address provided is not valid";
+                    this.errorMessage = this.submit.country_offices.submit_email_not_valid;
                     this.errorMessageClass = '';
                     this.inputAuthClass = '';
                     this.countryOfficesAuthenticated = false;
@@ -538,6 +541,10 @@
                 event.preventDefault();
                 var emailAddress = this.$$(".section__input").value;
                 var submitButton = this.$$('.section__confirm-email');
+
+                if(!emailAddress){
+                  this.errorMessage = this.submit.country_offices.submit_email_not_valid;
+                }
 
                 var toHide = this.$$("[data-target='" + submitButton.dataset.hide + "']");
                 var toShow = this.$$("[data-target='" + submitButton.dataset.display + "']");
