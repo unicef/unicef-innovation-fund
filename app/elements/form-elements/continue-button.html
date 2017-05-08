@@ -12,7 +12,11 @@
                 font-weight: bold;
                 height: 70px;
                 justify-content: center;
+                -moz-justify-content: center;
+                -webkit-justify-content: center;
+                -ms-justify-content: center;
                 letter-spacing: 2px;
+                margin: auto;
                 margin-bottom: 57px;
                 margin-top: 57px;
                 padding: 26px 20px;
@@ -20,29 +24,31 @@
                 text-transform: uppercase;
                 width: 70%;
             }
-
+            
+            .continue__button > span {
+                margin: auto;
+            }
+            
             @media (max-width: 680px) {
                 .continue__button {
                     width: 100%;
                 }
             }
-
+            
             @media (max-width: 480px) {
                 .continue__button {
                     width: 100%;
                 }
             }
-
+            
             @media (max-width: 320px) {
                 .continue__button {
                     width: 100%;
                 }
             }
-
         </style>
         <style is="custom-style" include="style-fade-in"></style>
-        <button class="continue__button" data-display$="{{ buttonDataDisplay }}" data-hide$="{{ buttonDataHide }}"
-                on-tap="changeSection" >
+        <button class="continue__button" data-display$="{{ buttonDataDisplay }}" data-hide$="{{ buttonDataHide }}" on-tap="changeSection">
             <span>{{ buttonText }}</span>
         </button>
     </template>
@@ -66,5 +72,3 @@
         })
     </script>
 </dom-module>
-
-
