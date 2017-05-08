@@ -1,0 +1,88 @@
+<dom-module id="arrow-icon-container">
+    <template>
+        <style is="custom-style">
+            .arrow__icon--container, .arrow__icon--labels {
+                display: flex;
+            }
+            .arrow__icon--arrow, .arrow__label--spacer {
+                flex: 2;
+            }
+            .arrow__icon--icon, .arrow__label {
+                flex: 3;
+            }
+            .arrow__icon--labels {
+                margin-top: -10px;
+            }
+            .arrow__icon--column {
+                align-self: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                margin: 5px 1px;
+                text-align: center;
+            }
+            .arrow__icon--column > img {
+                max-height: 80px;
+            }
+            .arrow--icon {
+                width: 80%;
+            }
+            .arrow__label {
+                align-self: center;
+            }
+            .arrow__icon--labels .arrow__label--name {
+                color: #7348B3;
+                display: flex;
+                font-weight: bold;
+                justify-content: center;
+                margin-top: 0;
+                text-align: center;
+            }
+        </style>
+        <style is="custom-style" include="style-fade-in"></style>
+        <div class="arrow__icon--container">
+            <template is="dom-repeat" items="{{ steps }}" as="step">
+                <template is="dom-if" if="{{ index }}">
+                    <div class="arrow__icon--arrow arrow__icon--column">
+                        <img src="../../images/icons/arrow_submit.svg" class="arrow--icon" alt$="{{ arrowAltText }}">
+                    </div>
+                </template>
+                <div class="arrow__icon--icon arrow__icon--column">
+                    <image-icon icon-name$="{{ _getIconName(index) }}" icon-alt-text$="{{ iconAltText }}"></image-icon>
+                </div>
+            </template>
+        </div>
+        <div class="arrow__icon--labels">
+            <template is="dom-repeat" items="{{ steps }}" as="step">
+                <template is="dom-if" if="{{index}}">
+                    <div class="arrow__label--spacer"></div>
+                </template>
+                <div class="arrow__label arrow__icon--column">
+                    <p class="arrow__label--name">{{step.name}}</p>
+                </div>
+            </template>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: "arrow-icon-container",
+            properties: {
+                arrowAltText: {
+                    type: String
+                },
+                iconAltText: {
+                    type: String
+                },
+                icons: {
+                    type: Array
+                },
+                steps: {
+                    type: Array
+                }
+            },
+            _getIconName: function(index) {
+                return this.icons[index];
+            }
+        })
+    </script>
+</dom-module>

@@ -1,0 +1,55 @@
+<dom-module id="back-button">
+    <template>
+        <style is="custom-style">
+            .section__back {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 0.9rem;
+                left: 1.5%;
+                position: absolute;
+                text-decoration: underline;
+                text-transform: uppercase;
+            }
+            .section__back i {
+                color: #55bb6e;
+                font-size: 45px;
+                line-height: 1.2;
+            }
+            @media (max-width: 1200px) {
+                .section__back {
+                    position: relative;
+                }
+            }
+        </style>
+        <style is="custom-style" include="style-fade-in"></style>
+        <button class="section__back" button-id="{{ buttonId }}" data-display$="{{ buttonDataDisplay }}" data-hide$="{{ buttonDataHide }}"
+                on-tap="changeSection" >
+            <i class="material-icons">arrow_back</i>
+        </button>
+    </template>
+    <script>
+        Polymer({
+            is: "back-button",
+            properties: {
+                buttonDataDisplay: {
+                    type: String
+                },
+                buttonDataHide: {
+                    type: String
+                },
+                buttonId: {
+                    type: String
+                },
+                buttonText: {
+                    type: String
+                }
+            },
+            changeSection: function (event) {
+                this.domHost.changeSection(event);
+            }
+        })
+    </script>
+</dom-module>
+
+

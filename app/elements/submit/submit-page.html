@@ -1,0 +1,439 @@
+<dom-module id="submit-page">
+    <template>
+        <style is="custom-style">
+            .container {
+                width: 100%;
+                position: relative;
+                text-align: center;
+            }
+
+            .container--wide {
+                margin: 0 auto;
+                max-width: 1920px;
+            }
+
+            .button:hover {
+                background-color: #FFFFFF;
+                box-shadow: 2px 2px 10px 0 #999999;
+                z-index: 1;
+            }
+
+            .submit__office {
+                text-align: left;
+                padding-top: 40px;
+            }
+
+            .button__container {
+                font-size: 0;
+                display: flex;
+                justify-content: center;
+            }
+
+            .button__text {
+                color: #333333;
+                font-size: 1.35rem;
+                margin-bottom: 35px;
+            }
+
+            .button__image {
+                max-height: 80px;
+            }
+
+            .button--big {
+                background-color: #FFFFFF;
+                color: #0068EA;
+                display: inline-block;
+                font-size: 1.2rem;
+                height: 252px;
+                padding: 0;
+                text-transform: none;
+                width: 50%;
+            }
+
+            .submit__container {
+                background-color: #ffffff;
+                position: relative;
+            }
+
+            .section__description {
+                color: #5D5D5D;
+                font-size: 1.595rem;
+                line-height: 1.5;
+                margin-bottom: 1rem;
+                margin-top: 1rem;
+                text-align: center;
+            }
+
+            .section__description-startup, .section__description-startup p, .section__subheader-startup p {
+                margin-top: 0;
+                font-size: 1.35rem;
+                font-weight: 400;
+                line-height: 1.85;
+                text-align: left;
+            }
+
+            .section__description-startup br {
+                line-height: 3.3;
+            }
+
+            .section__description b {
+                display: inline;
+                font-size: 1.35rem;
+                font-weight: 700;
+                line-height: 1.8;
+                margin-top: 1rem;
+                text-align: left;
+            }
+
+            .section__break {
+                border-top: 3px solid #727272;
+                margin: 4rem 0 4.75rem;
+            }
+
+            .section__break--short {
+                display: block;
+                margin-top: 6.7rem;
+                margin-bottom: 3.5rem;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                width: 20%;
+            }
+
+            .section__break--thin {
+                border-color: black;
+                margin-bottom: 3.5rem;
+                margin-top: 4.5rem;
+            }
+
+            .section__subheader {
+                font-size: 2.3rem;
+                font-weight: 500;
+                letter-spacing: 0.0325rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .section__subheader-startup {
+                color: #5D5D5D;
+                font-size: 2rem;
+                letter-spacing: 0;
+                margin-top: 3.5rem;
+                margin-bottom: 0;
+                text-align: left;
+            }
+
+            .section__subheader-startup span {
+                font-weight: bold;
+                font-size: 3rem;
+                line-height: 50px;
+            }
+
+            .section__link {
+                text-decoration: none;
+            }
+
+            .section__auth-alert {
+                color: red;
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+                opacity: 0;
+                transition: opacity 0.25s;
+            }
+
+            .is-visible {
+                opacity: 1;
+            }
+
+            .js-visible {
+                display: block;
+            }
+
+            .js-hidden {
+                display: none;
+            }
+
+            [data-target="main"].js-hidden {
+                position: relative;
+            }
+
+            button.fade-in {
+                animation-delay: 0.525s !important;
+            }
+
+            .is-alert {
+                color: red !important;
+            }
+
+            header .page__header--type {
+                line-height: 1em;
+            }
+
+            .summary {
+                align-items: flex-start;
+                display: flex;
+                margin-top: 4.3rem;
+            }
+
+            .summary__icon {
+                padding-top: 0.8rem;
+                width: 17%;
+            }
+
+            .summary__content {
+                margin-bottom: 4rem;
+                margin-left: 2rem;
+                text-align: left;
+            }
+
+            .summary__title {
+                font-size: 2rem;
+                font-weight: 600;
+                line-height: 2;
+                margin: 0;
+            }
+
+            .summary__content--container {
+                display: inline-block;
+                font-size: 1.45rem;
+                margin-bottom: 1.15rem;
+            }
+
+            .summary__content em, .summary__content i {
+                display: block;
+            }
+
+            .summary__content a {
+                border: 2px solid #2EAFAC;
+                color: #2EAFAC;
+                display: table;
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin-top: 2.2rem;
+                padding: 0.7rem 3.9rem;
+                text-decoration: none;
+            }
+
+            .submit__container .container .section__form {
+                padding-bottom: 40px;
+            }
+
+            @media (max-width: 1200px) {
+                .container {
+                    width: 80%;
+                }
+
+                .submit__container {
+                    padding: 0 0 3rem 0;
+                    width: 100%;
+                }
+            }
+
+            @media (max-width: 1120px) {
+                .button--big {
+                    font-size: 2rem;
+                    height: 250px;
+                }
+            }
+
+            @media (max-width: 920px) {
+
+                .section__break--thin {
+                    margin-left: 0;
+                }
+
+                .summary, .summary__content {
+                    margin-left: 0;
+                }
+
+                .summary__icon {
+                    width: 20%;
+                }
+            }
+
+            @media (min-width: 680px) {
+                .button:first-of-type:after {
+                    border-right: 2px solid #58595B ;
+                    content: '';
+                    height: 60%;
+                    position: absolute;
+                    right: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+
+            @media (max-width: 680px) {
+
+                .button__container {
+                    flex-direction: column;
+                }
+
+                .button--big {
+                    margin: 0;
+                    padding: 0;
+                    width: 100%;
+                    max-width: 100%;
+                    border: 1px solid rgba(0, 0, 0, 0.3);
+                }
+
+                .section__subheader {
+                    font-size: 2rem;
+                    margin-bottom: 0;
+                }
+
+                .summary {
+                    text-align: center;
+                }
+
+                .summary__icon {
+                    display: none;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .page__header--type {
+                    font-size: 2rem;
+                }
+            }
+        </style>
+        <style is="custom-style" include="style-fade-in"></style>
+        <firebase-document
+            path="/content/submit_content"
+            data="{{submit}}">
+        </firebase-document>
+
+        <header class='page__header page__header--dark'>
+            <div class='mdl-grid container'>
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-cell mdl-cell--10-col">
+                    <h1 class='title--big hello__title fade-in'>Submit</h1>
+                    <p class="page__header--type">[[sectionName]]</p>
+                </div>
+                <div class="mdl-layout-spacer"></div>
+            </div>
+        </header>
+        <div class="mdl-grid js-visible submit__container" data-target="main">
+            <div class="mdl-layout-spacer"></div>
+            <div class="button__container container--wide mdl-cell mdl-cell--12-col">
+                <button on-tap="changeSection"
+                        class="button button--big mdl-button mdl-js-button mdl-js-ripple-effect fade-in"
+                        data-display="country-office" data-hide="main">
+                    <p class="button__text">Submissions by UNICEF country offices</p>
+                    <img src="../../images/icons/country_offices_2017.svg" alt="Submissions by country offices"
+                         class="button__image"/>
+                </button>
+                <button on-tap="changeSection"
+                        class="button button--big mdl-button mdl-js-button mdl-js-ripple-effect fade-in"
+                        data-display="startup" data-hide="main">
+                    <p class="button__text">Submissions by startups</p>
+                    <img src="../../images/icons/startups_2017.svg" alt="Submissions by country offices"
+                         class="button__image"/>
+                </button>
+            </div>
+            <div class="mdl-layout-spacer"></div>
+        </div>
+        <div class="mdl-grid js-hidden submit__container" data-target="country-office">
+            <submit-country-office/>
+        </div>
+        <div class="mdl-grid js-hidden submit__container" data-target="startup">
+            <submit-startup/>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: "submit-page",
+            properties: {
+                countryOfficesAuthenticated: {
+                    type: Boolean,
+                    value: false
+                },
+                errorMessageClass: {
+                    type: String,
+                    value: ''
+                },
+                errorMessage: {
+                    type: String,
+                    value: 'Email is not valid'
+                },
+                inputAuthClass: {
+                    type: String,
+                    value: ''
+                },
+                sectionName: {
+                    type: String,
+                    value: 'Country offices and startups'
+                },
+                startups: {
+                    type: Object
+                },
+                submit: {
+                    type: Object
+                }
+            },
+            listeners: {
+                'iron-form-submit': 'submitEmail'
+            },
+            stepIndex: function (index) {
+                return index + 1;
+            },
+            attached: function () {
+                var self = this;
+                self.initScrollReveal();
+                $(document).on('page-changed', function (e, page_id) {
+                    if (page_id == 'submit') {
+                        self.initScrollReveal();
+                    }
+                });
+            },
+            initScrollReveal: function () {
+                var config = {container: '#mainContainer'};
+                if (!window.scrollReveal) {
+                    window.scrollReveal = new ScrollReveal();
+                }
+                window.scrollReveal.reveal('.section__subheader:not(:first-child), '
+                    + '.summary', config);
+            },
+            toggleVisible: function (toHide, toShow) {
+                var visibleClass = "js-visible";
+                var hiddenClass = "js-hidden";
+
+                toHide.classList.remove(visibleClass);
+                toHide.classList.add(hiddenClass);
+
+                toShow.classList.remove(hiddenClass);
+                toShow.classList.add(visibleClass);
+            },
+            changeSection: function (event) {
+                var hide = event.target.dataset.hide || event.target.parentElement.dataset.hide;
+                var target = event.target.dataset.display || event.target.parentElement.dataset.display;
+                const mainContainer = document.getElementById('mainContainer');
+
+                switch (target) {
+                    case "office-entry-form":
+                    case "office-steps":
+                    case "country-office":
+                        this.sectionName = "UNICEF Country Office";
+                        break;
+                    case "office-submit":
+                    case "startup-submit":
+                        this.sectionName = "Follow the steps below";
+                        mainContainer.scrollTop = 0;
+                        break;
+                    case "startup":
+                    case "startup-steps":
+                        this.sectionName = "Startups";
+                        break;
+                    default:
+                        this.sectionName = "Country offices and startups";
+                }
+
+                var toHide = this.$$("[data-target='" + hide + "']");
+                var toShow = this.$$("[data-target='" + target + "']");
+
+                if (!!toHide && !!toShow) {
+                    this.toggleVisible(toHide, toShow);
+                }
+            }
+        })
+    </script>
+</dom-module>
