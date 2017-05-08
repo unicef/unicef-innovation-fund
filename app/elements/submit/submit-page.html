@@ -25,6 +25,8 @@
 
             .button__container {
                 font-size: 0;
+                display: flex;
+                justify-content: center;
             }
 
             .button__text {
@@ -43,13 +45,15 @@
                 display: inline-block;
                 font-size: 1.2rem;
                 height: 252px;
+                margin: 75px 5%;
                 padding: 0;
                 text-transform: none;
-                width: 50%;
+                width: 40%;
+                max-width: 300px;
             }
 
             .submit__container {
-              background-color: #ffffff;
+                background-color: #ffffff;
                 position: relative;
             }
 
@@ -230,6 +234,10 @@
             }
 
             @media (max-width: 920px) {
+                .button--big {
+                    width: 40%;
+                }
+
                 .section__break--thin {
                     margin-left: 0;
                 }
@@ -245,7 +253,7 @@
 
             @media (min-width: 680px) {
                 .button:first-of-type:after {
-                    border-right: 2px solid #58595B;
+
                     content: '';
                     height: 60%;
                     position: absolute;
@@ -256,10 +264,16 @@
             }
 
             @media (max-width: 680px) {
+
+                .button__container {
+                    flex-direction: column;
+                }
+
                 .button--big {
-                    display: block;
-                    float: none;
+                    margin: 0;
+                    padding: 0;
                     width: 100%;
+                    max-width: 100%;
                     border: 1px solid rgba(0, 0, 0, 0.3);
                 }
 
