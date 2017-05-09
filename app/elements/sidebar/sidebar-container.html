@@ -2,14 +2,26 @@
     <template>
         <style is="custom-style">
             .sidebar {
+                display: -webkit-flex;
                 display: flex;
             }
 
             .sidebar--sidebar {
+                display: block;
+                -webkit-flex: 2;
                 flex: 2;
             }
 
+            @media screen and (min-color-index:0) and(-webkit-min-device-pixel-ratio:0) { @media
+            {
+                .sidebar--main {
+                    width: 71.4%;
+                }
+            }}
+
             .sidebar--main {
+                display: block;
+                -webkit-flex: 5;
                 flex: 5;
                 padding-left: 2em;
                 margin-top: 5px;
@@ -37,6 +49,13 @@
                 .sidebar {
                     flex-flow: column;
                 }
+
+                @media screen and (min-color-index:0) and(-webkit-min-device-pixel-ratio:0) { @media
+                {
+                    .sidebar--main {
+                        width: 100%;
+                    }
+                }}
 
                 .sidebar--title {
                     text-align: left;
