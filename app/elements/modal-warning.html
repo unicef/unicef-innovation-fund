@@ -39,7 +39,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <div class='mdl-cell mdl-cell--12-col'>
               <p>
                 <div style='font-size:18px;'>
-                  This website works in Chrome, Firefox, IE 11+/Edge, Safari 7+.<br>More compatibility coming soon.
+                  This website works in Chrome, Firefox, Edge, Safari 7+.<br>More compatibility coming soon.
                 </div>
               </p>
             </div>
@@ -88,7 +88,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 var detectedBrowser;
 
                 var userAgent = navigator.userAgent;
-                var browserData = userAgent.match(/(chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+                var browserData = userAgent.match(/(chrome|safari|firefox|trident(?=\/))\/?\s*(\d+)/i) || [];
 
                 if(/trident/i.test(browserData[1])){
                     temp = /\brv[ :]+(\d+)/g.exec(userAgent) || [];
@@ -113,11 +113,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             var browserName = ["Chrome", "Firefox", "Safari"].indexOf(browser[0]);
 
-            if(/(IE|Edge)/i.test(browser) === false && browserName === -1) { // Detect browser other than IE/Edge/Chrome/Firefox/Safari
+            if(/Edge/i.test(browser) === false && browserName === -1) { // Detect browser other than Edge/Chrome/Firefox/Safari
                 this.$.actions.open();
             } else if (browserName === 2 && browser[2] < 7) { // Detect Safari < 7
-                this.$.actions.open();
-            } else if (/IE/i.test(browser) && /11/.test(browser) === false) { // Detect IE < 11
                 this.$.actions.open();
             }
         }
