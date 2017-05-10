@@ -155,17 +155,21 @@
             <div class="sidebar--main">
                 <span class="step__name">{{stepName}}</span>
                 <h3 class="step__description">{{stepDescription}}</h3>
-                <template is="dom-repeat" items="{{paragraphs}}" as="paragraph">
-                    <p>
-                        <echo-html html$="{{paragraph}}"></echo-html>
-                    </p>
-                </template>
-                <ul class$="step{{stepIndex(index)}}__requirements step__requirements">
-                    <template is="dom-repeat" items="{{requirements}}" as="requirement">
-                        <li>
-                            <echo-html html$="{{requirement}}"></echo-html>
-                        </li>
+                 
+                    <template is="dom-repeat" items="{{paragraphs}}" as="paragraph">
+                        <p>
+                            <echo-html html$="{{paragraph}}"></echo-html>
+                        </p>
                     </template>
+                 
+                <ul class$="step{{stepIndex(index)}}__requirements step__requirements">
+                     
+                        <template is="dom-repeat" items="{{requirements}}" as="requirement">
+                            <li>
+                                <echo-html html$="{{requirement}}"></echo-html>
+                            </li>
+                        </template>
+                     
                 </ul>
                 <content></content>
             </div>

@@ -276,7 +276,7 @@
           <div class='growth_rate pc_left'>
             {{ prepareChartDescription(dataSet, featured_slug) }}
           </div>
-          <chart-line data="[[prepare(category, featured, dataSet)]]" options=[[_prepareChartOptions()]]></chart-line>
+          <!--<chart-line data="[[prepare(category, featured, dataSet)]]" options=[[_prepareChartOptions()]]></chart-line>-->
         </div>
         <firebase-document
           path="/content/db/{{tooltip_target}}"
@@ -333,19 +333,19 @@
   }
 
   function prepareGitCommits(dataSet, featured, color) {
-    points_labels = gitPointsAndLabels(dataSet);
-    return {
-      labels: points_labels.labels, datasets: [{
-        label: featured,
-        backgroundColor: color,
-        borderColor: "rgba(255,255,255)",
-        pointBackgroundColor: "rgba(2255,255,255)",
-        pointBorderColor: "#fff",
-        pointHoverBackgroundColor: "#fff",
-        pointHoverBorderColor: "rgba(220,220,220,1)",
-        data: points_labels.points
-      }]
-    }
+    // points_labels = gitPointsAndLabels(dataSet);
+    // return {
+    //   labels: points_labels.labels, datasets: [{
+    //     label: featured,
+    //     backgroundColor: color,
+    //     borderColor: "rgba(255,255,255)",
+    //     pointBackgroundColor: "rgba(2255,255,255)",
+    //     pointBorderColor: "#fff",
+    //     pointHoverBackgroundColor: "#fff",
+    //     pointHoverBorderColor: "rgba(220,220,220,1)",
+    //     data: points_labels.points
+    //   }]
+    // }
   }
   ;
 
@@ -468,34 +468,34 @@
     },
 
     prepare: function (category, featured, dataSet) {
-      if (Object.keys(dataSet) == 0) {
-        return;
-      }
+      // if (Object.keys(dataSet) == 0) {
+      //   return;
+      // }
 
-      var color = '';
+      // var color = '';
 
-      if (category == 'youth_engagement') {
-        color = "rgba(255, 204, 51, 0.2)";
-      } else if (category == 'real_time_information') {
-        color = "rgba(255, 143, 171, 0.2)";
-      } else {
-        color = "rgba(133, 214, 133, 0.2)";
-      }
+      // if (category == 'youth_engagement') {
+      //   color = "rgba(255, 204, 51, 0.2)";
+      // } else if (category == 'real_time_information') {
+      //   color = "rgba(255, 143, 171, 0.2)";
+      // } else {
+      //   color = "rgba(133, 214, 133, 0.2)";
+      // }
 
-      return prepareGitCommits(dataSet, featured, color);
+      // return prepareGitCommits(dataSet, featured, color);
     },
 
     prepareChartDescription: function (dataSet, featured_slug) {
-      var repos = Object.keys(dataSet);
-      if (repos.length == 0) {
-        return;
-      }
+      // var repos = Object.keys(dataSet);
+      // if (repos.length == 0) {
+      //   return;
+      // }
 
-      var repo = repos[0];
-      if ((repo) && (dataSet[repo])) {
-        return dataSet[repo].label;
-      }
-      return '';
+      // var repo = repos[0];
+      // if ((repo) && (dataSet[repo])) {
+      //   return dataSet[repo].label;
+      // }
+      // return '';
     },
 
     to_mil: function (num) {

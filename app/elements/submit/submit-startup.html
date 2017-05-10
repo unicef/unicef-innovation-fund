@@ -326,15 +326,17 @@
                 button-data-display="startup-steps"
                 button-data-hide="startup-submit"></back-button>
             <div class="startup__step__container container mdl-cell mdl-cell--12-col">
-                <template is="dom-repeat" items="{{ submit.startups.steps }}" as="step">
-                    <sidebar-icon-container
-                        icon-name$="{{ arraySelector(icons, index) }}"
-                        icon-alt-text$="{{ arraySelector(icons, index) }}"
-                        requirements="{{ step.requirements }}"
-                        step-description="{{ step.description }}"
-                        step-name="{{ step.name }}"></sidebar-icon-container>
-                    <hr class="section__break">
-                </template>
+                 
+                    <template is="dom-repeat" items="{{ submit.startups.steps }}" as="step">
+                        <sidebar-icon-container
+                            icon-name$="{{ arraySelector(icons, index) }}"
+                            icon-alt-text$="{{ arraySelector(icons, index) }}"
+                            requirements="{{ step.requirements }}"
+                            step-description="{{ step.description }}"
+                            step-name="{{ step.name }}"></sidebar-icon-container>
+                        <hr class="section__break">
+                    </template>
+                 
                 <sidebar-icon-container>
                     <p><echo-html html$="{{ submit.startups.additional_info_title }}"></echo-html></p>
                     <div class="section__submit">

@@ -189,24 +189,28 @@
           <div class="vcenter">
             <div class="card__info-value">
               <span class="card__project-number">{{ _getProjectInfoValue(projects) }}</span>
-              <template id="projectTooltip" is="dom-if" if="{{!_isObjectEmpty(db_tooltip)}}">
-                <div class="card__icon">
-                  <i id="tooltipIcon" class="icon-info"></i>
-                </div>
-                <div>
-                  <paper-tooltip class="custom" for="tooltipIcon">{{db_tooltip}}</paper-tooltip>
-                </div>
-              </template>
+               
+                <template id="projectTooltip" is="dom-if" if="{{!_isObjectEmpty(db_tooltip)}}">
+                  <div class="card__icon">
+                    <i id="tooltipIcon" class="icon-info"></i>
+                  </div>
+                  <div>
+                    <paper-tooltip class="custom" for="tooltipIcon">{{db_tooltip}}</paper-tooltip>
+                  </div>
+                </template>
+               
             </div>
           </div>
           <div class="vcenter">
             <div class="project-card__progress">
-              <template id="cardProgressContainer" is="dom-if" if="[[ _canShowProgress(financials, type) ]]">
-                <circular-progress id="cardProgress" class="project-card__progress-item" value="[[ _getProgressValue(financials, type) ]]" max="[[ _getProgressMax(financials, type) ]]" type="[[ category ]]">
-                  <span class="project-card__progress-value">{{ _getProgressContent(financials, type) }}</span>
-                </circular-progress>
-                <span class="project-card__progress-subtitle">Invested</span>
-              </template>
+               
+                <template id="cardProgressContainer" is="dom-if" if="[[ _canShowProgress(financials, type) ]]">
+                  <circular-progress id="cardProgress" class="project-card__progress-item" value="[[ _getProgressValue(financials, type) ]]" max="[[ _getProgressMax(financials, type) ]]" type="[[ category ]]">
+                    <span class="project-card__progress-value">{{ _getProgressContent(financials, type) }}</span>
+                  </circular-progress>
+                  <span class="project-card__progress-subtitle">Invested</span>
+                </template>
+               
             </div>
           </div>
         </div>

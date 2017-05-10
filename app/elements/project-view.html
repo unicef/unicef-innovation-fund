@@ -269,32 +269,40 @@
                 <div class$="mdl-cell [[ _getMainColClass(chartData, geoData) ]] mdl-cell--12-col-tablet project-view__col--main">
                     <h3 class="title--small">[[ _getProjectName(project) ]]</h3>
                     <paper-tabs class="project-view__tabs" attr-for-selected="tab-name" selected={{tabName}}>
-                        <template is="dom-repeat" items$="{{chartDataArray}}" as="Git">
-                            <paper-tab tab-name$="graph-{{index}}">{{Git.label}}</paper-tab>
-                        </template>
-                        <template is="dom-if" if="[[geoData.length]]">
-                            <paper-tab tab-name="map">MAP</paper-tab>
-                        </template>
+                         
+                            <template is="dom-repeat" items="{{chartDataArray}}" as="Git">
+                                <paper-tab tab-name$="graph-{{index}}">{{Git.label}}</paper-tab>
+                            </template>
+                         
+                         
+                            <template is="dom-if" if="[[geoData.length]]">
+                                <paper-tab tab-name="map">MAP</paper-tab>
+                            </template>
+                         
                     </paper-tabs>
                     <div class="project-view__divider project-view__divider--left"></div>
                     <neon-animated-pages class$="project-view__chart-container {{ _getChartContainerClass(chartData, geoData) }}" selected={{tabName}} attr-for-selected="tab-name" exit-animation="fade-out-animation" entry-animation="fade-in-animation">
-                        <template is="dom-repeat" items$="{{chartDataArray}}" as="projectChart">
-                            <neon-animatable tab-name$="graph-{{index}}">
-                                <div class="project-view__chart-dropdown">
-                                    <paper-dropdown-menu label="Year">
-                                        <paper-listbox id$="chartYearSelect-{{index}}" class="dropdown-content" attr-for-selected="value" selected="{{chartYear}}" on-iron-select="_paperListBoxYearSelected" label$="{{index}}">
-                                            <paper-item value="0" class="project-view__item">All</paper-item>
-                                            <template is="dom-repeat" items="{{ _getChartYears(projectChart) }}">
-                                                <paper-item value="{{item}}" class="project-view__item">{{item}}</paper-item>
-                                            </template>
-                                        </paper-listbox>
-                                    </paper-dropdown-menu>
-                                </div>
-                                <div class="project-view__chart">
-                                    <project-chart data="[[ projectChart ]]" options="[[ opt ]]" index="[[ index ]]" parentid="[[ id ]]" id="projectChart-[[id]]-[[index]]"></project-chart>
-                                </div>
-                            </neon-animatable>
-                        </template>
+                                 
+                                    <template is="dom-repeat" items="{{chartDataArray}}" as="projectChart">
+                                        <neon-animatable tab-name$="graph-{{index}}">
+                                            <div class="project-view__chart-dropdown">
+                                                <paper-dropdown-menu label="Year">
+                                                    <paper-listbox id$="chartYearSelect-{{index}}" class="dropdown-content" attr-for-selected="value" selected="{{chartYear}}" on-iron-select="_paperListBoxYearSelected" label$="{{index}}">
+                                                        <paper-item value="0" class="project-view__item">All</paper-item>
+                                                         
+                                                            <template is="dom-repeat" items="{{ _getChartYears(projectChart) }}">
+                                                                <paper-item value="{{item}}" class="project-view__item">{{item}}</paper-item>
+                                                            </template>
+                                                         
+                                                    </paper-listbox>
+                                                </paper-dropdown-menu>
+                                            </div>
+                                            <div class="project-view__chart">
+                                                <!--<project-chart data="[[ projectChart ]]" options="[[ opt ]]" index="[[ index ]]" parentid="[[ id ]]" id="projectChart-[[id]]-[[index]]"></project-chart>-->
+                                            </div>
+                                        </neon-animatable>
+                                    </template>
+                                 
                         <neon-animatable tab-name="map">
                             <!-- geo chart -->
                             <div class="project-view__geo-chart">
@@ -308,19 +316,23 @@
                     <div class="project-view__description">
                         <p>[[ project.description ]]</p>
                     </div>
-                    <template is="dom-if" if="[[ _showProjectLink(project) ]]">
-                        <a target="_blank" class="project-view__link" href="[[ project.link_href ]]">[[ project.link_text ]]</a>
-                    </template>
+                     
+                        <template is="dom-if" if="[[ _showProjectLink(project) ]]">
+                            <a target="_blank" class="project-view__link" href="[[ project.link_href ]]">[[ project.link_text ]]</a>
+                        </template>
+                     
                     <div class="project-view__divider"></div>
                     <div class="project-view__amount"><span class="project-view__amount-value">[[ _getProjectAmount(project) ]]</span> Invested</div>
-                    <template is="dom-if" if="[[ _getAdditionalInfo(chartData) ]]">
-                        <div class="project-view__divider"></div>
-                        <div class="project-view__additional">
-                            <div class="project-view__additional-content">
-                                <span class="project-view__additional-value">{{ currentUsers }}</span><span>registered&nbsp;users</span>
+                     
+                        <template is="dom-if" if="[[ _getAdditionalInfo(chartData) ]]">
+                            <div class="project-view__divider"></div>
+                            <div class="project-view__additional">
+                                <div class="project-view__additional-content">
+                                    <span class="project-view__additional-value">{{ currentUsers }}</span><span>registered&nbsp;users</span>
+                                </div>
                             </div>
-                        </div>
-                    </template>
+                        </template>
+                     
                 </div>
             </div>
         </div>
@@ -568,37 +580,37 @@
                     this._drawGeoChart(this.geoData);
                 },
                 _handleGitChartData: function(data) {
-                    this.chartData = {};
-                    this.chartDataArray = [];
-                    this.tabName = '';
+                    // this.chartData = {};
+                    // this.chartDataArray = [];
+                    // this.tabName = '';
 
-                    if (Object.keys(data).length) {
-                        var chartDataArray = [];
+                    // if (Object.keys(data).length) {
+                    //     var chartDataArray = [];
 
-                        for (var repo in data) {
-                            var project = data[repo];
+                    //     for (var repo in data) {
+                    //         var project = data[repo];
 
-                            var color = this._getChartColor(project);
-                            var points_labels = gitPointsAndLabels(data, repo);
-                            var labels = points_labels.labels;
-                            var points = points_labels.points;
-                            var dates = points_labels.dates;
-                            var label = project.label;
+                    //         var color = this._getChartColor(project);
+                    //         var points_labels = gitPointsAndLabels(data, repo);
+                    //         var labels = points_labels.labels;
+                    //         var points = points_labels.points;
+                    //         var dates = points_labels.dates;
+                    //         var label = project.label;
 
-                            var chartData = getDataForLineChart(label, labels, points, color, dates);
+                    //         var chartData = getDataForLineChart(label, labels, points, color, dates);
 
-                            chartDataArray.push(chartData);
-                        }
+                    //         chartDataArray.push(chartData);
+                    //     }
 
-                        if (chartDataArray.length) {
-                            this.chartData = chartDataArray[0];
-                            this.tabName = "graph-0";
-                        }
+                    //     if (chartDataArray.length) {
+                    //         this.chartData = chartDataArray[0];
+                    //         this.tabName = "graph-0";
+                    //     }
 
-                        this.chartDataArray = chartDataArray;
+                    //     this.chartDataArray = chartDataArray;
 
-                        return this.chartData;
-                    }
+                    //     return this.chartData;
+                    // }
                 },
                 _handleType: function() {
                     this.updateStyles();

@@ -1,4 +1,5 @@
 <dom-module id='dashboard-cards'>
+    <template>
   <style include="style-fade-in">
     .mdl-card {
       margin-left: auto;
@@ -54,7 +55,6 @@
     }
   </style>
 
-  <template>
     <div>
       <iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query>
       <iron-media-query full query="print" query-matches="{{print}}"></iron-media-query>

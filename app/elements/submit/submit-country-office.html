@@ -390,12 +390,14 @@
                 </sidebar-container>
                 <hr class="section__break">
                 <sidebar-container title-text$="{{submit.country_offices.role_title}}">
-                    <template is="dom-repeat" items="{{submit.country_offices.role_content}}" as="role">
-                        <strong> {{role.name.0}}</strong>
-                        <template is="dom-repeat" items="{{role.description}}" as="item">
-                            <p>{{item}}</p>
+                     
+                        <template is="dom-repeat" items="{{submit.country_offices.role_content}}" as="role">
+                            <strong> {{role.name.0}}</strong>
+                            <template is="dom-repeat" items="{{role.description}}" as="item">
+                                <p>{{item}}</p>
+                            </template>
                         </template>
-                    </template>
+                     
                 </sidebar-container>
                 <hr class="section__break">
                 <sidebar-container>
@@ -412,15 +414,17 @@
                 button-data-display="office-steps"
                 button-data-hide="office-submit"></back-button>
             <div class="submit__office container mdl-cell mdl-cell--12-col container__offices">
-                <template is="dom-repeat" items="{{ submit.country_offices.steps_content }}" as="step">
-                    <sidebar-icon-container
-                        icon-name$="{{ arraySelector(icons, index) }}"
-                        icon-alt-text$="{{ arraySelector(icons, index) }}"
-                        requirements="{{step.requirements}}"
-                        step-description="{{step.description}}"
-                        step-name="{{step.name}}"></sidebar-icon-container>
-                    <hr class="section__break">
-                </template>
+                 
+                    <template is="dom-repeat" items="{{ submit.country_offices.steps_content }}" as="step">
+                        <sidebar-icon-container
+                            icon-name$="{{ arraySelector(icons, index) }}"
+                            icon-alt-text$="{{ arraySelector(icons, index) }}"
+                            requirements="{{step.requirements}}"
+                            step-description="{{step.description}}"
+                            step-name="{{step.name}}"></sidebar-icon-container>
+                        <hr class="section__break">
+                    </template>
+                 
                 <sidebar-container title-text$="{{ submit.country_offices.questions_title }}">
                     <p><echo-html html$="{{ submit.country_offices.questions_content }}"></echo-html></p>
                     <div class="section__submit">

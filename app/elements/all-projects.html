@@ -398,9 +398,11 @@
                 <paper-dropdown-menu id="statusFilter" class$="project-filter__menu {{ _showStatusFilterClass(projects) }}" label="Investment Status">
                   <paper-listbox id="statusFilterListbox" class="dropdown-content" attr-for-selected="value">
                     <paper-item value="">All</paper-item>
+                     
                     <template is="dom-repeat" id='statusItems' items="{{_getStatusList()}}">
                       <paper-item class$="{{ _getStatusClass(item.label) }}" value="{{item.value}}">{{item.label}}</paper-item>
                     </template>
+                     
                   </paper-listbox>
                 </paper-dropdown-menu>
                 <!-- /status filter -->
@@ -409,9 +411,11 @@
                 <paper-dropdown-menu id="regionFilter" class="project-filter__menu" label="Country">
                   <paper-listbox id="regionFilterListbox" class="dropdown-content" attr-for-selected="value">
                     <paper-item value="">All regions</paper-item>
+                     
                     <template is="dom-repeat" id='regionItems' items="{{_getUniqueRegions(projects)}}">
                       <paper-item value="{{item}}">{{item}}</paper-item>
                     </template>
+                     
                   </paper-listbox>
                 </paper-dropdown-menu>
                 <!-- /region filter -->
@@ -431,11 +435,13 @@
           </div>
         </div>
         <div class="project-list mdl-grid" id="projectList">
+           
           <template is="dom-repeat" id='templateProjects' items="{{projects}}">
             <div class$="project-list__item mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone {{ _getFilterClass(item, index, filterAmountMin, filterAmountMax, filterRegion, filterStatus) }}">
               <portfolio-project data={{projectsData}} index={{index}} category={{selected}} item={{item}} class$="project-list__portfolio {{ _getColorClass(selected) }}"></portfolio-project>
             </div>
           </template>
+           
           <div class="project-list__project-view" id="projectListProjectViewContainer">
             <div class="mdl-cell mdl-cell--12-col">
               <button id="projectViewClose" on-tap="_closeProjectView" class="project-list__project-view-close"><i class="icon-shrink"></i></button>
@@ -798,7 +804,7 @@
     _closeProjectInfo: function() {
       this.selected = null;
       var projectList = this.querySelector('.project-list');
-      projectList.classList.remove('is-loaded');
+      // projectList.classList.remove('is-loaded');
     },
 
     _getStatusList: function() {
@@ -832,7 +838,7 @@
     },
 
     _getStatusClass: function(label) {
-      return slugify(label);
+      // return slugify(label);
     },
 
     _getNewProjectsCount: function (projects) {

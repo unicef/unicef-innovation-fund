@@ -359,20 +359,22 @@
         </div>
         <div class="mdl-grid news__section fade-in" id="newsPageCards">
             <div class="mdl-layout-spacer"></div>
-            <template is="dom-repeat" items="{{ newProjects }}">
-                <div class="mdl-cell shadow-card">
-                    <div class="news__card">
-                        <div class="news__card--box">
-                            <span class$="edge--{{__getNewProjectCategory(newProjects, index)}} news__card--label" on-tap="_handleTap" data-taplink$="{{__getNewProjectSlug(newProjects, index)}}" data-taplink-category$="{{__getNewProjectCategory(newProjects, index)}}">VIEW PROJECT</span>
-                            <img src$="{{ __getNewProjectImage(newProjects, index) }}">
-                        </div>
-                        <div class="news__card--text">
-                            <p class="more">{{__getNewProjectDescription(newProjects, index)}}</p>
-                            <a href$="{{__getNewProjectLink(newProjects, index)}}" class="morelink" target="_blank"> READ MORE</a>
+             
+                <template is="dom-repeat" items="{{ newProjects }}">
+                    <div class="mdl-cell shadow-card">
+                        <div class="news__card">
+                            <div class="news__card--box">
+                                <span class$="edge--{{__getNewProjectCategory(newProjects, index)}} news__card--label" on-tap="_handleTap" data-taplink$="{{__getNewProjectSlug(newProjects, index)}}" data-taplink-category$="{{__getNewProjectCategory(newProjects, index)}}">VIEW PROJECT</span>
+                                <img src$="{{ __getNewProjectImage(newProjects, index) }}">
+                            </div>
+                            <div class="news__card--text">
+                                <p class="more">{{__getNewProjectDescription(newProjects, index)}}</p>
+                                <a href$="{{__getNewProjectLink(newProjects, index)}}" class="morelink" target="_blank"> READ MORE</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </template>
+                </template>
+             
 
             <div class="mdl-cell shadow-card">
                 <div class="news__card news__card--extra">
@@ -393,16 +395,17 @@
                 <hr>
                 <h3 class="section__header">{{news.news_section2_title}}</h3>
                 <div id="newsResources">
-
-                    <template is="dom-repeat" items={{news.news_section2_entry_titles}}>
-                        <hr>
-                        <span></span>
-                        <span class="news__section-entry--title">{{_getElementFromArray(news.news_section2_entry_titles, index)}}</span>
-                        <a class="news__section-entry--link" target="_blank" href="[[_getElementFromArray(news.news_section2_entry_link, index)]]">LINK {{_getIndex(index)}}</a>
-                        <p class="news__section-entry--description">
-                            <echo-html html$="{{_getElementFromArray(news.news_section2_entry_description, index)}}"></echo-html>
-                        </p>
-                    </template>
+                     
+                        <template is="dom-repeat" items={{news.news_section2_entry_titles}}>
+                            <hr>
+                            <span></span>
+                            <span class="news__section-entry--title">{{_getElementFromArray(news.news_section2_entry_titles, index)}}</span>
+                            <a class="news__section-entry--link" target="_blank" href="[[_getElementFromArray(news.news_section2_entry_link, index)]]">LINK {{_getIndex(index)}}</a>
+                            <p class="news__section-entry--description">
+                                <echo-html html$="{{_getElementFromArray(news.news_section2_entry_description, index)}}"></echo-html>
+                            </p>
+                        </template>
+                     
                 </div>
 
                 <hr class="news__divider">

@@ -152,9 +152,9 @@
       this.progress.svg.appendChild(group);
 
       //svg filters are stable only in chrome
-      if(isChrome() && this.progress.svg.classList) {
-        this.progress.svg.classList.add('has-filter');
-      }
+      // if(isChrome() && this.progress.svg.classList) {
+      //   this.progress.svg.classList.add('has-filter');
+      // }
 
       this.progress.animate(progressValue);
     },

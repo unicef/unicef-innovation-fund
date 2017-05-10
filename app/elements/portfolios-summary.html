@@ -1,4 +1,5 @@
 <dom-module id='portfolios-summary'>
+        <template style='max-width:900px;'>
     <style>
         :host {
             padding: 16px 8px;
@@ -133,7 +134,7 @@
         }
     </style>
 
-    <template style='max-width:900px;'>
+
         <iron-media-query query="(min-width: 600px)" query-matches="{{wide}}"></iron-media-query>
         <firebase-document
             path="/summary"
@@ -179,7 +180,7 @@
             <div class="mdl-layout-spacer"></div>
         </div>
         <div class='chart-pie'>
-            <chart-pie data="[[process_for_pie(summary)]]" options="[[options]]"></chart-pie>
+            <!--<chart-pie data="[[process_for_pie(summary)]]" options="[[options]]"></chart-pie>-->
         </div>
         <br>
         <div>
