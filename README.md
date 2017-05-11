@@ -1,4 +1,13 @@
 
+## Upgrade to Polymer 2
+> This is only a proof of concept!
+
+1. clone this repo
+2. run `npm install && bower install`
+3. during bower installation choose dependencies with 2.0-preview suffix
+3. run `npm run start`
+4. page is served at on localhost:5005
+
 ## Quick start with Vagrant
 > Requires Vagrant, Ansible and VirtualBox
 

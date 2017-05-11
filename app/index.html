@@ -230,6 +230,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         #drawerToolbar .menu-name {
             font-weight: 400;
         }
+
+
     </style>
 </head>
 
@@ -240,98 +242,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <dom-bind>
 <template is="dom-bind" id="app">
-    <iron-media-query query="(min-width: 700px)" query-matches="{{wide}}"></iron-media-query>
-    <iron-media-query query="(min-width: 400px)" query-matches="{{wide}}"></iron-media-query>
-    <iron-media-query query="(min-width: 1040px)" query-matches="{{wide}}"></iron-media-query>
+    <iron-media-query query="(min-width: 720px)" query-matches="{{wide}}"></iron-media-query>
     <div class="mainView" wide-layout="{{wide}}">
         <firebase-config></firebase-config>
-        <app-drawer-layout reveals>
+
+        <app-drawer-layout id="paperDrawerPanel" force-narrow>
+
             <app-drawer slot="drawer">
-                <app-scroll-effects drawer fixed>
-                    <app-toolbar id="drawerToolbar">
-                        <span class="menu-name">UNICEF INNOVATION FUND</span>
-                    </app-toolbar>
-                    <paper-menu class="app-menu" selected="[[selected]]">
-                        <p class='menu-item' id='dashboard'>
-                            <span>DASHBOARD</span>
-                        </p>
-                        <p class='menu-item' id='all_projects'>
-                            <span>ALL PROJECTS</span>
-                        </p>
-                        <p class='menu-item' id='news'>
-                            <span>NEWS</span>
-                        </p>
-                        <p class='menu-item' id='about'>
-                            <span>ABOUT</span>
-                        </p>
-                        <p class='menu-item' id='submit'>
-                            <span>SUBMIT</span>
-                        </p>
-                    </paper-menu>
-                </app-scroll-effects>
-            </app-drawer>
-            <app-scroll-effects main id="headerPanelMain" fixed>
-                <app-toolbar id="mainToolbar" class='dashboard'>
-                    <paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button>
-                    <span class="space"></span>
-                    <div class="middle middle-container" style='width:100%'>
-                        <div class="app-name" on-click="openOverlay">UNICEF INNOVATION FUND</div>
-                        <div class="spacer"></div>
-                        <paper-tabs id="main-menu" selected="[[selected]]" class="bottom self-end">
-                            <paper-tab id='dashboard'>DASHBOARD</paper-tab>
-                            <paper-tab id='all_projects'>ALL PROJECTS</paper-tab>
-                            <paper-tab id='news'>NEWS</paper-tab>
-                            <paper-tab id='about'>ABOUT</paper-tab>
-                            <paper-tab id='submit'>SUBMIT</paper-tab>
-                        </paper-tabs>
-                    </div>
-                    <div class="bottom bottom-container right horizontal layout">
-                    </div>
-                </app-toolbar>
-                <div class="content">
-                    <modal-warning></modal-warning>
-                    <neon-animated-pages style='z-index:0;' class="flex" selected="[[selected]]"
-                                         exit-animation="fade-out-animation"
-                                         entry-animation="slide-from-left-animation">
-                        <neon-animatable id='my_dashboard'>
-                            <dashboard-top></dashboard-top>
-                        </neon-animatable>
-                        <neon-animatable>
-                            <all-projects></all-projects>
-                        </neon-animatable>
-                        <neon-animatable>
-                            <news-page></news-page>
-                        </neon-animatable>
-                        <neon-animatable>
-                            <my-about></my-about>
-                        </neon-animatable>
-                        <neon-animatable>
-                            <submit-page></submit-page>
-                        </neon-animatable>
-                    </neon-animated-pages>
-                    <mdl-footer></mdl-footer>
-                </div>
-            </app-scroll-effects>
-            <paper-toast id="toast">
-                <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
-            </paper-toast>
-            <paper-dialog class="project-view__dialog" id="projectModal" entry-animation="scale-up-animation"
-                        exit-animation="fade-out-animation" with-backdrop>
-                <button class="project-view__dialog-close" onclick="projectModal.close()"><i class="material-icons">
-                    &#xE5CD;</i></button>
-                <paper-dialog-scrollable class="project-view__dialog-scrollable container">
-                    <project-view id="projectView"></project-view>
-                </paper-dialog-scrollable>
-            </paper-dialog>
-            <overlay-intro></overlay-intro>
-            </app-drawer-layout>
-        </div>
-        <!--<paper-drawer-panel id="paperDrawerPanel" force-narrow="true" drawer-width="320px">
-            <paper-scroll-header-panel drawer fixed>
-                <paper-toolbar id="drawerToolbar">
+                <app-toolbar id="drawerToolbar">
                     <span class="menu-name">UNICEF INNOVATION FUND</span>
-                </paper-toolbar>
-                <paper-menu class="app-menu" selected="[[selected]]">
+                </app-toolbar>
+
                     <p class='menu-item' id='dashboard'>
                         <span>DASHBOARD</span>
                     </p>
@@ -347,64 +268,58 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <p class='menu-item' id='submit'>
                         <span>SUBMIT</span>
                     </p>
-                </paper-menu>
-            </paper-scroll-header-panel>
-            <paper-scroll-header-panel main id="headerPanelMain" fixed>
-                <paper-toolbar id="mainToolbar" class='dashboard'>
-                    <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
-                    <span class="space"></span>
-                    <div class="middle middle-container" style='width:100%'>
-                        <div class="app-name" on-click="openOverlay">UNICEF INNOVATION FUND</div>
-                        <div class="spacer"></div>
-                        <paper-tabs id="main-menu" selected="[[selected]]" class="bottom self-end">
-                            <paper-tab id='dashboard'>DASHBOARD</paper-tab>
-                            <paper-tab id='all_projects'>ALL PROJECTS</paper-tab>
-                            <paper-tab id='news'>NEWS</paper-tab>
-                            <paper-tab id='about'>ABOUT</paper-tab>
-                            <paper-tab id='submit'>SUBMIT</paper-tab>
-                        </paper-tabs>
-                    </div>
-                    <div class="bottom bottom-container right horizontal layout">
-                    </div>
-                </paper-toolbar>
-                <div class="content">
-                    <modal-warning></modal-warning>
-                    <neon-animated-pages style='z-index:0;' class="flex" selected="[[selected]]"
-                                         exit-animation="fade-out-animation"
-                                         entry-animation="slide-from-left-animation">
-                        <neon-animatable id='my_dashboard'>
-                            <dashboard-top></dashboard-top>
-                        </neon-animatable>
-                        <neon-animatable>
-                            <all-projects></all-projects>
-                        </neon-animatable>
-                        <neon-animatable>
-                            <news-page></news-page>
-                        </neon-animatable>
-                        <neon-animatable>
-                            <my-about></my-about>
-                        </neon-animatable>
-                        <neon-animatable>
-                            <submit-page></submit-page>
-                        </neon-animatable>
-                    </neon-animated-pages>
-                    <mdl-footer></mdl-footer>
-                </div>
-            </paper-scroll-header-panel>
-        </paper-drawer-panel>
-                <paper-toast id="toast">
-            <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
-        </paper-toast>
-        <paper-dialog class="project-view__dialog" id="projectModal" entry-animation="scale-up-animation"
-                      exit-animation="fade-out-animation" with-backdrop>
-            <button class="project-view__dialog-close" onclick="projectModal.close()"><i class="material-icons">
-                &#xE5CD;</i></button>
-            <paper-dialog-scrollable class="project-view__dialog-scrollable container">
-                <project-view id="projectView"></project-view>
-            </paper-dialog-scrollable>
-        </paper-dialog>
+            </app-drawer>
+
+            <app-header-layout main id="headerPanelMain">
+
+                <app-header fixed>
+                    <app-toolbar id="mainToolbar" class='dashboard'>
+                        <paper-icon-button icon="menu" drawer-toggle hidden$='{{wide}}'></paper-icon-button>
+                        <span class="space"></span> 
+                        <div class="middle middle-container" style='width:100%'>
+                            <div class="app-name" on-click="openOverlay">UNICEF INNOVATION FUND</div>
+                            <div class="spacer"></div>
+                            <paper-tabs id="main-menu" selected="0" class="bottom self-end">
+                                <paper-tab data-index="0" id='dashboard'>DASHBOARD</paper-tab>
+                                <paper-tab data-index="1" id='all_projects'>ALL PROJECTS</paper-tab>
+                                <paper-tab data-index="2" id='news'>NEWS</paper-tab>
+                                <paper-tab data-index="3" id='about'>ABOUT</paper-tab>
+                                <paper-tab data-index="4" id='submit'>SUBMIT</paper-tab>
+                            </paper-tabs>
+                        </div>
+                        <div class="bottom bottom-container right horizontal layout"></div>
+                    </app-toolbar>
+                </app-header>
+
+            </app-header-layout>
+
+            <div class="content">
+                <modal-warning></modal-warning>
+                <iron-pages selected="0" class="flex">
+                    <dashboard-top></dashboard-top>
+                    <all-projects></all-projects>
+                    <news-page></news-page>
+                    <my-about></my-about>
+                    <submit-page></submit-page>
+                </iron-pages>
+                <mdl-footer></mdl-footer>
+            </div>
+
+        </app-drawer-layout>
+
+            <paper-toast id="toast">
+                <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
+            </paper-toast>
+            <paper-dialog class="project-view__dialog" id="projectModal" entry-animation="scale-up-animation"
+                        exit-animation="fade-out-animation" with-backdrop>
+                <button class="project-view__dialog-close" onclick="projectModal.close()"><i class="material-icons">
+                    &#xE5CD;</i></button>
+                <paper-dialog-scrollable class="project-view__dialog-scrollable container">
+                    <project-view id="projectView"></project-view>
+                </paper-dialog-scrollable>
+            </paper-dialog>
+            <!--<overlay-intro></overlay-intro>-->
     </div>
-    <overlay-intro></overlay-intro>-->
 </template>
 </dom-bind>
 
@@ -427,9 +342,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
 
         $('paper-tabs#main-menu paper-tab').click(function () {
+            var pages = document.querySelector('iron-pages')
+            var pageIndex = this.dataset.index;
+            pages.selectIndex(pageIndex);
             $('#mainContainer').scrollTop(0);
-            app.selected = $('paper-tabs#main-menu paper-tab').index(this);
-            app.page_id = this.id;
+            // app.selected = $('paper-tabs#main-menu paper-tab').index(this);
+            // app.page_id = this.id;
             // Update css settings per tab
             page_change(this.id);
         });
@@ -442,10 +360,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             page_change(this.id);
         });
 
+        $('paper-tab.menu-section').click(function () {
+            console.log('.menu-section')
+        })
 
         $('.app-name').on('click', function () {
-            var overlay = document.querySelector('overlay-intro');
-            overlay.showOverlay(0);
+            // var overlay = document.querySelector('overlay-intro');
+            // overlay.showOverlay(0);
         });
 
         projectModal.addEventListener('iron-overlay-opened', function () {
