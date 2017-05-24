@@ -61,9 +61,9 @@
         .project-youth_engagement,
         .project-real_time_information,
         .project-infrastructure,
-        .project-technical_assistance,
         .project-fund_management,
-        .project-knowledge_products {
+        .project-technical_assistance,
+        .project-operational_research {
             border-radius: 50%;
             max-width: 20px;
             max-height: 20px;
@@ -81,16 +81,16 @@
             background-color: #66cc66;
         }
 
-        .project-technical_assistance {
+        .project-fund_management {
             background-color: #555555;
         }
 
-        .project-fund_management {
-            background-color: #b1b1b1;
+        .project-technical_assistance {
+            background-color: #666666;
         }
 
-        .project-knowledge_products {
-            background-color: teal;
+        .project-operational_research {
+            background-color: #BBBBBB;
         }
 
         .cell {
@@ -235,14 +235,36 @@
                     </div>
                 </div>
                 <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--2-col project-fund_management">
+                        &nbsp;
+                    </div>
+                    <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--2-col-phone portfolio_name">
+                        {{summary.portfolios.fund_management.label}}
+                    </div>
+                    <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone portfolio_amount">
+                        {{to_mil(summary.portfolios.fund_management.amount)}}
+                    </div>
+                </div>
+                <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--2-col project-technical_assistance">
                         &nbsp;
                     </div>
                     <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--2-col-phone portfolio_name">
-                        {{summary.portfolios.management_and_operational_research.label}}
+                        {{summary.portfolios.technical_assistance.label}}
                     </div>
                     <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone portfolio_amount">
-                        {{to_mil(summary.portfolios.management_and_operational_research.amount)}}
+                        {{to_mil(summary.portfolios.technical_assistance.amount)}}
+                    </div>
+                </div>
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--2-col project-operational_research">
+                        &nbsp;
+                    </div>
+                    <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--2-col-phone portfolio_name">
+                        {{summary.portfolios.operational_research.label}}
+                    </div>
+                    <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone portfolio_amount">
+                        {{to_mil(summary.portfolios.operational_research.amount)}}
                     </div>
                 </div>
             </div>
