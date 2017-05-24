@@ -1,0 +1,28 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78.5 97.45">
+    <defs>
+        <style>
+            .cls-1, .cls-2, .cls-3 { fill:none; stroke-miterlimit:10; stroke-width:3.86px; }
+            .cls-1, .cls-3 { stroke:#66cc66; }
+            .cls-2 { stroke:#66cc66; }
+            .cls-3 { fill-rule:evenodd; }
+        </style>
+    </defs>
+    <title>Step4</title>
+    <rect class="cls-1" x="1775.91" y="1601.53" width="27.99" height="18.66"
+          transform="translate(1829.16 1652.15) rotate(180)"/>
+    <line class="cls-1" x1="48.58" y1="41.12" x2="29.92" y2="41.12"/>
+    <rect class="cls-1" x="1808.57" y="1571.5" width="18.66" height="12.88"
+          transform="translate(1885.14 1586.3) rotate(180)"/>
+    <rect class="cls-1" x="1780.58" y="1571.5" width="18.66" height="12.88"
+          transform="translate(1829.16 1586.3) rotate(180)"/>
+    <rect class="cls-1" x="1752.59" y="1571.5" width="18.66" height="12.88"
+          transform="translate(1773.18 1586.3) rotate(180)"/>
+    <line class="cls-1" x1="39.25" y1="31.96" x2="39.25" y2="14.81"/>
+    <line class="cls-1" x1="39.25" y1="59.2" x2="39.25" y2="51.04"/>
+    <polyline class="cls-1" points="67.24 14.8 67.24 23.75 11.26 23.75 11.26 14.8"/>
+    <line class="cls-1" x1="71.91" y1="8.37" x2="62.58" y2="8.37"/>
+    <line class="cls-1" x1="43.92" y1="8.37" x2="34.59" y2="8.37"/>
+    <line class="cls-1" x1="15.92" y1="8.37" x2="6.59" y2="8.37"/>
+    <circle class="cls-2" cx="38.03" cy="76.61" r="18.91"/>
+    <polyline class="cls-3" points="28.28 78.21 34.73 84.15 47.33 71.55"/>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88.44 91.44">
+    <defs>
+        <style>
+            .cls-1, .cls-2, .cls-3 { fill:none; stroke-miterlimit:10; stroke-width:3.86px; }
+            .cls-1, .cls-2 { stroke:#66cc66; }
+            .cls-2, .cls-3 { fill-rule:evenodd; }
+            .cls-3 { stroke:#6c6 }
+        </style>
+    </defs>
+    <title>Eligibility</title>
+        <g id="eligibility" data-name="eligibility">
+            <circle class="cls-1" cx="46.11" cy="33.22" r="14.35"/>
+            <path class="cls-2" d="M68.34 50.73a26.37 26.37 0 0 0-11.47-10m-21.52.03a26.27 26.27 0 0 0-15.51 24v7.89h29"/>
+            <path class="cls-3" d="M48.79 72.6a19.13 19.13 0 0 1-.1-2 18.9 18.9 0 1 1 .1 2"/>
+            <path class="cls-2" d="M57.85 72.2l6.45 5.94 12.6-12.59"/>
+            <path class="cls-1" d="M12.96 10.53l7.98 7.97m0-7.97l-7.98 7.97m57.56 1l7.97 7.97m0-7.97l-7.97 7.97M57.85 2.55l7.97 7.98m0-7.98l-7.97 7.98M1.36 56.69l7.98 7.97m0-7.97l-7.98 7.97"/>
+            <path class="cls-2" d="M42.9 1.36l-7.98 7.98-3.16-3.17m54.75 28.67l-7.97 7.97-3.16-3.16m-55.54-6.87l-7.97 7.98-3.16-3.16"/>
+        </g>
+</svg>

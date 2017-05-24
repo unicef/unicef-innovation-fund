@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="155.63681mm"
+     height="75.848526mm"
+     viewBox="0 0 155.63681 75.848526"
+     version="1.1"
+     id="svg8">
+    <g id="layer1" transform="translate(-30.067821,-13.629529)" >
+        <path style="fill:#66cc66; fill-opacity:0; stroke:#66cc66; stroke-width:14.06499958; stroke-linecap:butt;
+              stroke-linejoin:miter; stroke-miterlimit:4; stroke-dasharray:none;
+              stroke-opacity:0; filter:url(#filter5534)"
+              d="M 6.9925593,64.639137 H 163.66369" id="path23" />
+        <path style="fill:none; stroke:#66cc66; stroke-width:9; stroke-linecap:butt; stroke-linejoin:miter;
+              stroke-miterlimit:4; stroke-dasharray:none; stroke-opacity:1"
+              d="m 142.73484, 16.886543 17.49944, 16.683409 18.97526, 18.0904 -35.71875, 34.584822"
+              id="path25" />
+        <path style="fill:none; stroke:#66cc66; stroke-width:9; stroke-linecap:butt; stroke-linejoin:miter;
+              stroke-miterlimit:4; stroke-dasharray:none; stroke-opacity:1"
+              d="M 178.80331,51.512938 H 30.067821"
+              id="path5538" />
+    </g>
+</svg>

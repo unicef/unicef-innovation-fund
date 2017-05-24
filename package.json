@@ -42,5 +42,12 @@
   },
   "engines": {
     "node": ">=0.10.0"
-  }
+  },
+  "name": "unicef-innovation-fund",
+  "version": "1.0.1",
+  "description": "UNICEF Innovation Fund Website",
+  "main": "index.js",
+  "repository": "git@github.com:unicef/unicef-innovation-fund.git",
+  "author": "UNICEF Innovation Fund",
+  "license": "MIT"
 }
