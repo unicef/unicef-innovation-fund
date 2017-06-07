@@ -424,7 +424,7 @@
                 <sidebar-container title-text$="{{ submit.country_offices.questions_title }}">
                     <p><echo-html html$="{{ submit.country_offices.questions_content }}"></echo-html></p>
                     <div class="section__submit">
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdL7bKFc-zSzm4R4wK5eKsKRzW_HqQsdPYyA62sCXR84BrF9A/viewform?usp=send_form"
+                        <a href="{{ submit.country_offices.country_offices_submit_link }}"
                            class="section__submit--link" target="_blank">
                             <echo-html html$="{{submit.country_offices.submit_button_text}}"></echo-html>
                         </a>
