@@ -306,7 +306,7 @@
                 <div class$="mdl-cell [[ _getDescColClass(chartData, geoData) ]] mdl-cell--12-col-tablet">
                     <h4 class="title--tiny project-view__description-title">Description</h4>
                     <div class="project-view__description">
-                        <p>[[ project.description ]]</p>
+                        <html-echo-small html="[[ project.description ]]"></html-echo-small>
                     </div>
                     <template is="dom-if" if="[[ _showProjectLink(project) ]]">
                         <a target="_blank" class="project-view__link" href="[[ project.link_href ]]">[[ project.link_text ]]</a>

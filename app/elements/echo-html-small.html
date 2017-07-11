@@ -1,0 +1,36 @@
+
+
+<!--
+`html-echo` dumps HTML bound to a String property directly into the DOM.
+### Example
+```html
+<html-echo html="<b>Hi</b>"></html-echo>
+```
+@demo demo/index.html
+-->
+<dom-module id="html-echo-small">
+</dom-module>
+
+<script>
+(function() {
+	Polymer({
+		is: 'html-echo-small',
+		properties: {
+			/**
+			 * Plain HTML that is directly dumped into the DOM
+			 */
+			html: {
+				type: String,
+				value: '',
+				observer: '_refreshHtml'
+			}
+		},
+		ready: function() {
+			this.innerHTML = this.html;
+		},
+		_refreshHtml: function() {
+			this.innerHTML = this.html;
+		}
+	});
+})();
+</script>
