@@ -480,17 +480,22 @@
                     var self = this;
                     var newProjects = [];
                     var categories = Object.keys(self.projects);
-                    for(var c in categories) {
-                        var projects_hash = self.projects[categories[c]].projects_hash;
-                        for(var p in projects_hash) {
-                            if (!projects_hash.hasOwnProperty(p)) {
-                                continue;
-                            }
-                            if (projects_hash[p].new_investment) {
-                                projects_hash[p].category = categories[c];
-                                newProjects.push(projects_hash[p]);
-                            }
-                        }
+                    // This is quick fix to reorder the news articles in a one time special way.
+                    if (categories.length > 0) {
+                      var categories = ["youth_engagement", "real_time_information", "infrastructure", "knowledge_products"];
+                      for(var c in categories) {
+                          var projects_hash = self.projects[categories[c]].projects_hash;
+                          for(var p in projects_hash) {
+                              if (!projects_hash.hasOwnProperty(p)) {
+                                  continue;
+                              }
+                              if (projects_hash[p].new_investment) {
+                                  projects_hash[p].category = categories[c];
+                                  newProjects.push(projects_hash[p]);
+                              }
+                          }
+                      }
+
                     }
                     this.newProjects = newProjects;
                 },
