@@ -121,7 +121,7 @@
 
     <div class-name='divider divider--{{category}} portfolio-project__container mdl-shadow--4dp' on-tap="_handleTap" on-mouseenter='_onMouseEnter' on-mouseleave='_onMouseLeave'>
         <strong>{{project}}</strong>
-      <div class$="portfolio-project__content {{ newProjectClass }}">
+      <div class$="portfolio-project__content {{ newProjectClass }} {{ startupClasss }}">
        <div class$="{{newProjectTextClass}}">NEW!</div>
         <div class="portfolio-project__icon">
           <i class="material-icons">&#xE56B;</i>
@@ -166,6 +166,10 @@
         if (this.item.new_investment) {
             this.newProjectClass = 'portfolio-project--new';
             this.newProjectTextClass = 'portfolio-project__status--visible'
+        }
+
+        if (this.item.is_startup) {
+          this.startupClasss = 'portfolio-project--new'
         }
     },
 
