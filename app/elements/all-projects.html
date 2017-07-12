@@ -840,7 +840,7 @@
         return '';
       }
       var count = projects.filter(function (project) {
-          return (project.new_investment === 1);
+          return (project.is_startup === 1);
       })
       if (count.length === 1) {
           return count.length + " Startup";
