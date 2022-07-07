@@ -3942,8 +3942,8 @@ mocha@^3.1.2:
     supports-color "3.1.2"
 
 moment@^2.10.6:
-  version "2.18.1"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
+  version "2.29.4"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
 
 ms@0.7.0:
   version "0.7.0"
@@ -5442,9 +5442,10 @@ ternary-stream@^2.0.1:
     merge-stream "^1.0.0"
     through2 "^2.0.1"
 
-"test-fixture@github:polymerelements/test-fixture":
-  version "3.0.0-rc.1"
-  resolved "https://codeload.github.com/polymerelements/test-fixture/tar.gz/26118ef0467501c33c02316e7016a2837baba10f"
+test-fixture@PolymerElements/test-fixture:
+  version "4.0.2"
+  uid b5a0c0bbce9d3ef36ec09d26458b1cfedf89b8c5
+  resolved "https://codeload.github.com/PolymerElements/test-fixture/tar.gz/b5a0c0bbce9d3ef36ec09d26458b1cfedf89b8c5"
 
 text-hex@0.0.x:
   version "0.0.0"
